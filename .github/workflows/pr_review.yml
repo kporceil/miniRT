@@ -1,0 +1,38 @@
+name: Review pull request
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+jobs:
+  norminette-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y libreadline-dev build-essential libcmocka-dev
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Norminette
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install norminette==3.3.55
+
+      - name: Run 'make norm'
+        run: make norm
+
+      - name: compilation check
+        run: make
+
+      - name: test check
+        run: make test
