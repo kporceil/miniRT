@@ -1,4 +1,4 @@
-NAME := minishell
+NAME := miniRT
 
 BONUSNAME := minishell_bonus
 
@@ -18,7 +18,21 @@ override DEPDIR := $(addprefix $(BUILDDIR), deps/)
 
 override BONUSDEPDIR := $(addprefix bonus/, $(DEPDIR))
 
-BASENAME := 
+BASENAME := experiments/main \
+			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product) \
+			$(addprefix color/, color add substract scalar mult) \
+			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm) \
+			$(addprefix matrix/, create comparison mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing) \
+			$(addprefix ray/, create position intersect hit transform) \
+			$(addprefix spheres/, create) \
+			$(addprefix light/, normal reflect point_light material phong) \
+			$(addprefix test/, my_assert \
+				$(addprefix tuples/, create_tests add_tests substract_tests negate_tests scalar_tests magnitude_tests normalizing_tests dot_product_tests cross_product_tests) \
+				$(addprefix color/, create_tests add_tests substract_tests scalar_tests mult_tests) \
+				$(addprefix canvas/, create_tests write_pixel_tests ppm_tests) \
+				$(addprefix matrix/, create_tests comparison_tests mult_tests transposing_tests determinant_tests submatrix_tests minors_tests cofactor_tests larger_determinant_tests inverting_tests translation_tests scaling_tests rotation_tests shearing_tests chaining_tests) \
+				$(addprefix ray/, create_tests position_tests sphere_intersect_tests hit_tests transform_tests) \
+				$(addprefix light/, normal_tests reflection_tests point_light_tests material_tests phong_tests))
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
        $(addprefix $(OBJDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))
@@ -31,9 +45,9 @@ override DEPS := $(addprefix $(DEPDIR), $(addsuffix .d, $(BASENAME)))
 
 override LIBFT := libft/libft.a
 
-override FILTERED_SRCS := $(filter-out $(SRCDIR)tmp_%.c, $(filter-out $(SRCDIR)TEST/%, $(filter-out $(SRCDIR)PRINT/%, $(SRCS)))) $(filter-out includes/tmp_%.h, $(addprefix includes/, $(shell ls includes/))) $(addprefix $(dir $(LIBFT))srcs/, $(shell ls $(dir $(LIBFT))srcs/)) $(addprefix $(dir $(LIBFT))includes/, $(shell ls $(dir $(LIBFT))includes/))
+override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f))))
 
-override LDFLAGS := -lft -lcmocka
+override LDFLAGS := -lft -lcmocka -lm
 
 override LDLIBS := -L libft/
 
