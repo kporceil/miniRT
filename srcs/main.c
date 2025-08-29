@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 14:27:33 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/08/29 20:54:58 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	write_file(char	*name, char	*ppm)
 int	main(void)
 {
 	t_canva		can = canva(2000, 2000);
-	t_color		clr = color(1, 0, 0);
 	t_sphere	s = sphere(0);
 	t_plight	light = point_light(point(-10, 10, -10), color(1, 1, 1));
 
@@ -57,11 +56,14 @@ int	main(void)
 				t_tuple point = ray_position(r, hit->point);
 				t_tuple normal = normal_at(*(hit->s), point);
 				t_tuple eye = tuple_negate(r.direction);
-				clr = lighting(hit->s->material, light, point, (t_tuple[2]){eye, normal});
+				t_color clr = lighting(hit->s->material, light, point, (t_tuple[2]){eye, normal});
 				write_pixel(&can, x, y, clr);
 			}
 		}
 	}
 	char	*ppm = canva_to_ppm(can);
+	free(can.canva);
 	write_file("render/first_spheres.ppm", ppm);
+	free(ppm);
+	return (0);
 }

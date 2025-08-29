@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:50:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/28 22:19:02 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/08/29 21:03:22 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_inter	*inter_hit(t_intersect *inter, size_t size)
 	ret = NULL;
 	while (i < size)
 	{
-		if (inter[i].count == 0 || (inter[i].object[0].point < 0 && inter[i].object[1].point < 0))
+		if (inter[i].count == 0 || (inter[i].object[0].point < 0
+				&& inter[i].object[1].point < 0))
 		{
 			++i;
 			continue ;

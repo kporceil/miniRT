@@ -23,7 +23,7 @@ t_intersect	ray_intersect(t_sphere *s, t_ray r)
 	double	discriminant;
 	double	t1;
 
-	r = ray_transform(r, matrix_invert(s->transformation));
+	r = ray_transform(r, s->inverted);
 	sphere_to_ray = tuple_substract(r.origin, point(0, 0, 0));
 	a = dot(r.direction, r.direction);
 	b = 2 * dot(r.direction, sphere_to_ray);
