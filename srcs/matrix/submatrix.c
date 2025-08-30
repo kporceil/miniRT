@@ -15,28 +15,28 @@
 t_matrix	submatrix(t_matrix m1, int row, int col)
 {
 	t_matrix	ret;
-	int			i_ret;
-	int			i_m1;
-	int			j_ret;
-	int			j_m1;
+	int			i[2];
+	int			j[2];
 
 	ret = matrix_create(m1.size - 1);
-	i_ret = 0;
-	i_m1 = 0;
-	while (i_m1 < m1.size)
+	i[0] = 0;
+	i[1] = 0;
+	while (i[1] < m1.size)
 	{
-		if (i_m1 == row)
-			++i_m1;
-		j_m1 = 0;
-		j_ret = 0;
-		while (j_m1 < m1.size)
+		if (i[1] == row)
+			++i[1];
+		j[1] = 0;
+		j[0] = 0;
+		while (j[1] < m1.size)
 		{
-			if (j_m1 == col)
-				++j_m1;
-			ret.matrix[i_ret][j_ret++] = m1.matrix[i_m1][j_m1++];
+			if (j[1] == col)
+				++j[1];
+			if (j[1] >= m1.size || i[1] >= m1.size)
+				break ;
+			ret.matrix[i[0]][j[0]++] = m1.matrix[i[1]][j[1]++];
 		}
-		++i_ret;
-		++i_m1;
+		++i[0];
+		++i[1];
 	}
 	return (ret);
 }

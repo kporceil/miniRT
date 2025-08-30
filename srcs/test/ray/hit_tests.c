@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:27:39 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/28 21:28:17 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/08/30 23:46:02 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,30 @@ static void	positive_t_hit_test(void **state)
 {
 	t_sphere	s = sphere(0);
 	t_intersect intersections[1] = {ray_intersect(&s, ray(point(0, 0, -2), vector(0, 0, 1)))};
+	t_inter		inters[2] = {intersections[0].object[0], intersections[0].object[1]};
 
 	(void)state;
-	assert_int_equal(intersections[0].object, inter_hit(intersections, 1));
+	assert_int_equal(inters, inter_hit(inters, 2));
 }
 
 static void	negative_positive_t_hit_test(void **state)
 {
 	t_sphere	s = sphere(0);
 	t_intersect intersections[1] = {ray_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)))};
+	t_inter		inters[2] = {intersections[0].object[0], intersections[0].object[1]};
 
 	(void)state;
-	assert_int_equal(intersections[0].object + 1, inter_hit(intersections, 1));
+	assert_int_equal(inters + 1, inter_hit(inters, 2));
 }
 
 static void	negative_t_hit_test(void **state)
 {
 	t_sphere	s = sphere(0);
 	t_intersect intersections[1] = {ray_intersect(&s, ray(point(0, 0, 2), vector(0, 0, 1)))};
+	t_inter		inters[2] = {intersections[0].object[0], intersections[0].object[1]};
 
 	(void)state;
-	assert_int_equal(NULL, inter_hit(intersections, 1));
+	assert_int_equal(NULL, inter_hit(inters, 2));
 }
 
 static void	positive_t_hit_test2(void **state)
@@ -54,7 +57,8 @@ static void	positive_t_hit_test2(void **state)
 	intersections[0].object[1].point = 7;
 	intersections[1].object[0].point = -3;
 	intersections[1].object[1].point = 2;
-	assert_int_equal(intersections[1].object + 1, inter_hit(intersections, 2));
+	t_inter		inters[4] = {intersections[0].object[0], intersections[0].object[1], intersections[1].object[0], intersections[1].object[1]};
+	assert_int_equal(inters + 3, inter_hit(inters, 4));
 }
 
 int	test_ray_hit(void)

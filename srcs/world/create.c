@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.c                                              :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 20:50:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 23:37:54 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/30 15:44:06 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/30 15:44:38 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#include "world.h"
 
-t_inter	*inter_hit(t_inter *inter, size_t size)
+t_world	world_create(void)
 {
-	size_t	i;
-	t_inter	*ret;
-
-	i = 0;
-	ret = NULL;
-	while (i < size)
-	{
-		if (inter[i].point < 0)
-		{
-			++i;
-			continue ;
-		}
-		if (!ret)
-			ret = inter + i;
-		if (inter[i].point < ret->point)
-			ret = inter + i;
-		++i;
-	}
-	return (ret);
+	return ((t_world){NULL, NULL, 0, 0});
 }

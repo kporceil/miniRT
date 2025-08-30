@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.c                                              :+:      :+:    :+:   */
+/*   shade_hit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 20:50:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 23:37:54 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/30 23:13:07 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/30 23:16:54 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#include "light.h"
+#include "world.h"
 
-t_inter	*inter_hit(t_inter *inter, size_t size)
+t_color	shade_hit(t_world world, t_precomp comps)
 {
 	size_t	i;
-	t_inter	*ret;
+	t_color	ret;
 
 	i = 0;
-	ret = NULL;
-	while (i < size)
+	ret = color(0, 0, 0);
+	while (i < world.lights_count)
 	{
-		if (inter[i].point < 0)
-		{
-			++i;
-			continue ;
-		}
-		if (!ret)
-			ret = inter + i;
-		if (inter[i].point < ret->point)
-			ret = inter + i;
+		ret = color_add(ret, lighting(comps.obj->material, world.lights[i],
+				comps.point, (t_tuple[2]){comps.eyev, comps.normalv}));
 		++i;
 	}
 	return (ret);

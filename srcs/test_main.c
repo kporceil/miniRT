@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 13:52:08 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/08/30 23:46:32 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,9 @@ int	main(void)
 	ret += test_point_light();
 	ret += test_material();
 	ret += test_phong();
+	ret += test_create_world();
+	ret += test_world_intersections();
+	ret += test_shading_precomputation();
+	ret += test_world_shading();
 	return (ret);
 }

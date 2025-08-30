@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 13:51:59 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/08/30 23:09:39 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,10 @@ int		test_reflection(void);
 int		test_point_light(void);
 int		test_material(void);
 int		test_phong(void);
+
+int		test_create_world(void);
+int		test_world_intersections(void);
+int		test_shading_precomputation(void);
+int		test_world_shading(void);
 
 #endif

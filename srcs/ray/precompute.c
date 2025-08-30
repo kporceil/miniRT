@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.c                                              :+:      :+:    :+:   */
+/*   precompute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 20:50:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 23:37:54 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/30 22:33:34 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/30 22:46:46 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
+#include "light.h"
 
-t_inter	*inter_hit(t_inter *inter, size_t size)
+t_precomp	precompute(t_inter i, t_ray r)
 {
-	size_t	i;
-	t_inter	*ret;
+	t_precomp	ret;
 
-	i = 0;
-	ret = NULL;
-	while (i < size)
+	ret.t = i.point;
+	ret.obj = i.s;
+	ret.point = ray_position(r, i.point);
+	ret.eyev = tuple_negate(r.direction);
+	ret.normalv = normal_at(*i.s, ret.point);
+	ret.inside = false;
+	if (dot(ret.normalv, ret.eyev) < 0)
 	{
-		if (inter[i].point < 0)
-		{
-			++i;
-			continue ;
-		}
-		if (!ret)
-			ret = inter + i;
-		if (inter[i].point < ret->point)
-			ret = inter + i;
-		++i;
+		ret.inside = true;
+		ret.normalv = tuple_negate(ret.normalv);
 	}
 	return (ret);
 }

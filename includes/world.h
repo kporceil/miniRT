@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.c                                              :+:      :+:    :+:   */
+/*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 20:50:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 23:37:54 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/30 14:04:43 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/30 19:18:05 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#ifndef WORLD_H
+# define WORLD_H
 
-t_inter	*inter_hit(t_inter *inter, size_t size)
+# include "light.h"
+# include "spheres.h"
+# include "ray.h"
+
+typedef struct s_world
 {
-	size_t	i;
-	t_inter	*ret;
+	t_sphere	*objs;
+	t_plight	*lights;
+	size_t		objs_count;
+	size_t		lights_count;
+}				t_world;
 
-	i = 0;
-	ret = NULL;
-	while (i < size)
-	{
-		if (inter[i].point < 0)
-		{
-			++i;
-			continue ;
-		}
-		if (!ret)
-			ret = inter + i;
-		if (inter[i].point < ret->point)
-			ret = inter + i;
-		++i;
-	}
-	return (ret);
-}
+t_world			world_create(void);
+t_intersections	world_intersect(t_world	world, t_ray r);
+
+#endif

@@ -1,6 +1,6 @@
 NAME := libft.a
 
-MODE := normal
+MODE := default
 
 override BUILDDIR := .build/$(MODE)/
 
@@ -92,6 +92,10 @@ endif
 
 ifeq (asan, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fPIE -fsanitize=address
+endif
+
+ifeq (asan, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fPIE -fsanitize=leak
 endif
 
 override CPPFLAGS := -I
