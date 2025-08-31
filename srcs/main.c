@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 19:11:38 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/08/31 15:49:21 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "libft.h"
 #include "ray.h"
 #include "light.h"
+#include "world.h"
+#include "camera.h"
 #include <math.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -38,32 +40,41 @@ void	write_file(char	*name, char	*ppm)
 
 int	main(void)
 {
-	t_canva		can = canva(4000, 4000);
-	t_sphere	s = sphere(0);
-	t_plight	light = point_light(point(-10, 10, -10), color(1, 1, 1));
+	t_world	world = world_create();
 
-	s.material.color = color(1, 0.2, 1);
-	for (size_t	y = 0; y < can.height; ++y) {
-		double	world_y = 3.5 - (7.0 / 4000) * y;
-		for (size_t x = 0; x < can.width; ++x) {
-			double world_x = -3.5 + (7.0 / 4000) * x;
-			t_tuple pos = point(world_x, world_y, 1);
-			t_ray r = ray(point(0, 0, -5), normalize(tuple_substract(pos, point(0, 0, -5))));
-			t_intersect xs = ray_intersect(&s, r);
-			t_inter *hit = inter_hit(&xs, 1);
-			if (hit != NULL)
-			{
-				t_tuple point = ray_position(r, hit->point);
-				t_tuple normal = normal_at(*(hit->s), point);
-				t_tuple eye = tuple_negate(r.direction);
-				t_color clr = lighting(hit->s->material, light, point, (t_tuple[2]){eye, normal});
-				write_pixel(&can, x, y, clr);
-			}
-		}
-	}
-	char	*ppm = canva_to_ppm(can);
-	free(can.canva);
-	write_file("render/first_spheres.ppm", ppm);
-	free(ppm);
-	return (0);
+	world.lights_count = 1;
+	world.objs_count = 6;
+	world.objs = malloc(sizeof(t_sphere) * 6);
+	world.lights = malloc(sizeof(t_plight));
+	world.objs[0] = sphere(0);
+	world.objs[0].material.color = color(1, 0.9, 0.9);
+	world.objs[0].material.specular = 0;
+	sphere_set_matrix(world.objs, matrix_scaling(10, 0.01, 10));
+	world.objs[1] = sphere(1);
+	world.objs[1].material = world.objs[0].material;
+	sphere_set_matrix(world.objs + 1, matrix_mult(matrix_mult(matrix_mult(matrix_translation(0, 0, 5), matrix_y_rotation(-(M_PI / 4))), matrix_x_rotation(M_PI/2)), matrix_scaling(10, 0.1, 10)));
+	world.objs[2] = sphere(2);
+	world.objs[2].material = world.objs[0].material;
+	sphere_set_matrix(world.objs + 2, matrix_mult(matrix_mult(matrix_mult(matrix_translation(0, 0, 5), matrix_y_rotation(M_PI / 4)), matrix_x_rotation(M_PI/2)), matrix_scaling(10, 0.1, 10)));
+	world.objs[3] = sphere(3);
+	world.objs[3].material.color = color(0.1, 1, 0.5);
+	world.objs[3].material.diffuse = 0.7;
+	world.objs[3].material.specular = 0.3;
+	sphere_set_matrix(world.objs + 3, matrix_translation(-0.5, 1, 0.5));
+	world.objs[4] = sphere(4);
+	world.objs[4].material.color = color(0.5, 1, 0.1);
+	world.objs[4].material.diffuse = 0.7;
+	world.objs[4].material.specular = 0.3;
+	sphere_set_matrix(world.objs + 4, matrix_mult(matrix_translation(1.5, 0.5, -0.5), matrix_scaling(0.5, 0.5, 0.5)));
+	world.objs[5] = sphere(5);
+	world.objs[5].material.color = color(1, 0.8, 0.1);
+	world.objs[5].material.diffuse = 0.7;
+	world.objs[5].material.specular = 0.3;
+	sphere_set_matrix(world.objs + 5, matrix_mult(matrix_translation(-1.5, 0.33, -0.75), matrix_scaling(0.33, 0.33, 0.33)));
+	world.lights[0] = point_light(point(-10, 10, -10), color(1, 1, 1));
+	t_camera	cam = camera(1920, 1080, M_PI / 3);
+	camera_set_transform(&cam, view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0)));
+	t_canva		image = render(cam, world);
+	char		*ppm = canva_to_ppm(image);
+	write_file("render/first_scenes.ppm", ppm);
 }

@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 16:00:30 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/27 17:52:15 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/08/31 12:45:09 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ t_matrix	matrix_x_rotation(double rad);
 t_matrix	matrix_y_rotation(double rad);
 t_matrix	matrix_z_rotation(double rad);
 t_matrix	matrix_shearing(double x[2], double y[2], double z[2]);
+t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 #endif
