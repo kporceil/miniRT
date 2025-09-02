@@ -20,7 +20,7 @@ t_precomp	precompute(t_inter i, t_ray r)
 	ret.t = i.point;
 	ret.obj = i.s;
 	ret.point = ray_position(r, i.point);
-	ret.eyev = tuple_negate(r.direction);
+	ret.eyev = tuple_negate(r.dir);
 	ret.normalv = normal_at(*i.s, ret.point);
 	ret.inside = false;
 	if (dot(ret.normalv, ret.eyev) < 0)

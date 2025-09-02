@@ -12,7 +12,7 @@
 
 #include "matrix.h"
 
-t_matrix	matrix_transpose(t_matrix m)
+inline t_matrix	matrix_transpose(t_matrix m)
 {
 	return ((t_matrix){{
 			{m.matrix[0][0],

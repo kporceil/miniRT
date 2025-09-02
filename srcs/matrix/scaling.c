@@ -12,7 +12,7 @@
 
 #include "matrix.h"
 
-t_matrix	matrix_scaling(double x, double y, double z)
+inline t_matrix	matrix_scaling(double x, double y, double z)
 {
 	return ((t_matrix){{{x, 0, 0, 0}, {0, y, 0, 0}, {0, 0, z, 0}, {0, 0, 0, 1}},
 		4});

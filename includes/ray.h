@@ -19,7 +19,7 @@
 typedef struct s_ray
 {
 	t_tuple	origin;
-	t_tuple	direction;
+	t_tuple	dir;
 }				t_ray;
 
 typedef struct s_inter
@@ -52,9 +52,9 @@ typedef struct s_precomp
 
 t_ray		ray(t_tuple origin, t_tuple direction);
 t_tuple		ray_position(t_ray r, double t);
-t_intersect	ray_intersect(t_sphere *s, t_ray r);
+t_intersect	ray_intersect(t_sphere *s, t_ray r)__attribute__((hot));
 t_inter		*inter_hit(t_inter *intersect, size_t size);
-t_ray		ray_transform(t_ray r, t_matrix m);
+t_ray		ray_transform(t_ray r, t_matrix m)__attribute__((hot));
 t_precomp	precompute(t_inter i, t_ray r);
 
 #endif

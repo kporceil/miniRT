@@ -17,22 +17,21 @@
 
 t_intersect	ray_intersect(t_sphere *s, t_ray r)
 {
-	t_tuple	sphere_to_ray;
-	double	a;
-	double	b;
-	double	discriminant;
-	double	t1;
+	t_tuple	const sphere_to_ray = (t_tuple){r.origin.x, r.origin.y, r.origin.z, 0};
+	register double const	a = dot(r.dir, r.dir);
+	register double const	b = 2.0 * dot(r.dir, sphere_to_ray);
+	register double const	discriminant = b * b - 4.0 * a * (dot(sphere_to_ray, sphere_to_ray) - 1.0);
+	register double			t1;
+	register double			sqrt_disc;
+	register double			inv_2a;
 
-	r = ray_transform(r, s->inverted);
-	sphere_to_ray = tuple_substract(r.origin, point(0, 0, 0));
-	a = dot(r.direction, r.direction);
-	b = 2 * dot(r.direction, sphere_to_ray);
-	discriminant = b * b - 4 * a * (dot(sphere_to_ray, sphere_to_ray) - 1);
 	if (discriminant < 0)
 		return ((t_intersect){0, {{s, 0}, {s, 0}}});
-	t1 = (-b - sqrt(discriminant)) / (2 * a);
+	sqrt_disc = sqrt(discriminant);
+	inv_2a = 1.0 / (2.0 * a);
+	t1 = (-b - sqrt_disc) * inv_2a;
 	if (discriminant == 0)
 		return ((t_intersect){2, {{s, t1}, {s, t1}}});
 	return ((t_intersect){2, {{s, t1},
-			{s, (-b + sqrt(discriminant)) / (2 * a)}}});
+			{s, (-b + sqrt_disc) * inv_2a}}});
 }

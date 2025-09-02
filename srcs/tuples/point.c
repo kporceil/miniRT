@@ -12,7 +12,7 @@
 
 #include "tuples.h"
 
-t_tuple	point(double x, double y, double z)
+inline t_tuple	point(double x, double y, double z)
 {
 	return ((t_tuple){x, y, z, 1});
 }

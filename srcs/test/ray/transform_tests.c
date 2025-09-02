@@ -27,7 +27,7 @@ static void	ray_translation_test(void **state)
 
 	(void)state;
 	assert_tuple_equal(r2.origin, point(4, 6, 8));
-	assert_tuple_equal(r2.direction, r.direction);
+	assert_tuple_equal(r2.dir, r.dir);
 }
 
 static void	ray_scaling_test(void **state)
@@ -38,7 +38,7 @@ static void	ray_scaling_test(void **state)
 
 	(void)state;
 	assert_tuple_equal(r2.origin, point(2, 6, 12));
-	assert_tuple_equal(r2.direction, vector(0, 3, 0));
+	assert_tuple_equal(r2.dir, vector(0, 3, 0));
 }
 
 static void	ray_scaled_intersect_test(void **state)

@@ -13,7 +13,7 @@
 #include <stdbool.h>
 #include "matrix.h"
 
-bool	is_matrix_invertible(t_matrix m)
+inline bool	is_matrix_invertible(t_matrix m)
 {
 	return (matrix_determinant(m));
 }

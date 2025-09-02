@@ -12,7 +12,7 @@
 
 #include "matrix.h"
 
-double	matrix_cofactor(t_matrix m, int row, int col)
+inline double	matrix_cofactor(t_matrix m, int row, int col)
 {
 	if ((row + col) % 2)
 		return (-matrix_minor(m, row, col));

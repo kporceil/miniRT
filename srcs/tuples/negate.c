@@ -12,7 +12,7 @@
 
 #include "tuples.h"
 
-t_tuple	tuple_negate(t_tuple t)
+inline t_tuple	tuple_negate(t_tuple t)
 {
 	return (tuple_substract((t_tuple){0, 0, 0, 0}, t));
 }

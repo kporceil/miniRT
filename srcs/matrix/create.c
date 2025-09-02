@@ -13,7 +13,7 @@
 #include "matrix.h"
 #include <stdint.h>
 
-t_matrix	matrix_create(uint_fast8_t	size)
+inline t_matrix	matrix_create(uint_fast8_t	size)
 {
 	return ((t_matrix){{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
 		size});

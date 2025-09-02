@@ -12,7 +12,7 @@
 
 #include "matrix.h"
 
-t_matrix	identity_matrix(uint_fast8_t size)
+inline t_matrix	identity_matrix(uint_fast8_t size)
 {
 	return ((t_matrix){{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}},
 		size});

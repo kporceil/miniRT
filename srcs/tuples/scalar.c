@@ -12,12 +12,13 @@
 
 #include "tuples.h"
 
-t_tuple	tuple_scalar_mult(t_tuple t, double scalar)
+inline t_tuple	tuple_scalar_mult(t_tuple t, double scalar)
 {
 	return ((t_tuple){t.x * scalar, t.y * scalar, t.z * scalar, t.w * scalar});
 }
 
-t_tuple	tuple_scalar_div(t_tuple t, double scalar)
+inline t_tuple	tuple_scalar_div(t_tuple t, double scalar)
 {
-	return ((t_tuple){t.x / scalar, t.y / scalar, t.z / scalar, t.w / scalar});
+	const double	inv_scalar = 1.0 / scalar;
+	return ((t_tuple){t.x / inv_scalar, t.y / inv_scalar, t.z / inv_scalar, t.w / inv_scalar});
 }

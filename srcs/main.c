@@ -75,6 +75,7 @@ int	main(void)
 	t_camera	cam = camera(1920, 1080, M_PI / 3);
 	camera_set_transform(&cam, view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0)));
 	t_canva		image = render(cam, world);
-	char		*ppm = canva_to_ppm(image);
-	write_file("render/first_scenes.ppm", ppm);
+	(void)image;
+	//char		*ppm = canva_to_ppm(image);
+	//write_file("render/first_scenes.ppm", ppm);
 }

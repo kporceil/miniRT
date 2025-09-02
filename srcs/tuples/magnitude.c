@@ -13,7 +13,9 @@
 #include <math.h>
 #include "tuples.h"
 
-double	magnitude(t_tuple v)
+inline double	magnitude(t_tuple v)
 {
+	if (!v.w)
+		return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w));
 }

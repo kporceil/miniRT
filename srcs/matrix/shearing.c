@@ -12,7 +12,7 @@
 
 #include "matrix.h"
 
-t_matrix	matrix_shearing(double x[2], double y[2], double z[2])
+inline t_matrix	matrix_shearing(double x[2], double y[2], double z[2])
 {
 	return ((t_matrix){
 		{{1, x[0], x[1], 0},

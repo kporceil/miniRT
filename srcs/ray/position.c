@@ -12,9 +12,9 @@
 
 #include "ray.h"
 
-t_tuple	ray_position(t_ray r, double t)
+inline t_tuple	ray_position(t_ray r, double t)
 {
-	return ((t_tuple){r.origin.x + r.direction.x * t,
-		r.origin.y + r.direction.y * t,
-		r.origin.z + r.direction.z * t, 1});
+	return ((t_tuple){r.origin.x + r.dir.x * t,
+		r.origin.y + r.dir.y * t,
+		r.origin.z + r.dir.z * t, 1});
 }

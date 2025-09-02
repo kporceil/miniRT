@@ -12,7 +12,7 @@
 
 #include "ray.h"
 
-t_ray	ray(t_tuple origin, t_tuple direction)
+inline t_ray	ray(t_tuple origin, t_tuple direction)
 {
 	return ((t_ray){origin, direction});
 }

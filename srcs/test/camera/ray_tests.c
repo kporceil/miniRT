@@ -27,7 +27,7 @@ static void	camera_ray_test1(void **state)
 
 	(void)state;
 	assert_tuple_equal(r.origin, point(0, 0, 0));
-	assert_tuple_equal(r.direction, vector(0, 0, -1));
+	assert_tuple_equal(r.dir, vector(0, 0, -1));
 }
 
 static void	camera_ray_test2(void **state)
@@ -37,7 +37,7 @@ static void	camera_ray_test2(void **state)
 
 	(void)state;
 	assert_tuple_equal(r.origin, point(0, 0, 0));
-	assert_tuple_equal(r.direction, vector(0.66519, 0.33259, -0.66851));
+	assert_tuple_equal(r.dir, vector(0.66519, 0.33259, -0.66851));
 }
 
 static void	camera_ray_test3(void **state)
@@ -48,7 +48,7 @@ static void	camera_ray_test3(void **state)
 
 	(void)state;
 	assert_tuple_equal(r.origin, point(0, 2, -5));
-	assert_tuple_equal(r.direction, vector(sqrt(2)/2, 0, -(sqrt(2)/2)));
+	assert_tuple_equal(r.dir, vector(sqrt(2)/2, 0, -(sqrt(2)/2)));
 }
 
 int	test_camera_ray(void)

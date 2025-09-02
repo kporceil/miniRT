@@ -13,7 +13,7 @@
 #include "matrix.h"
 #include <math.h>
 
-t_matrix	matrix_x_rotation(double rad)
+inline t_matrix	matrix_x_rotation(double rad)
 {
 	return ((t_matrix){{
 			{1, 0, 0, 0},
@@ -22,7 +22,7 @@ t_matrix	matrix_x_rotation(double rad)
 			{0, 0, 0, 1}}, 4});
 }
 
-t_matrix	matrix_y_rotation(double rad)
+inline t_matrix	matrix_y_rotation(double rad)
 {
 	return ((t_matrix){{
 			{cos(rad), 0, sin(rad), 0},
@@ -31,7 +31,7 @@ t_matrix	matrix_y_rotation(double rad)
 			{0, 0, 0, 1}}, 4});
 }
 
-t_matrix	matrix_z_rotation(double rad)
+inline t_matrix	matrix_z_rotation(double rad)
 {
 	return ((t_matrix){{
 			{cos(rad), -sin(rad), 0, 0},

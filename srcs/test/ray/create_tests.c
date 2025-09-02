@@ -24,7 +24,7 @@ static void	ray_create_test(void **state)
 
 	(void)state;
 	assert_tuple_equal(r.origin, point(1, 2, 3));
-	assert_tuple_equal(r.direction, vector(4, 5, 6));
+	assert_tuple_equal(r.dir, vector(4, 5, 6));
 }
 
 int	test_ray_create(void)

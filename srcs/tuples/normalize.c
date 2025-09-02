@@ -12,9 +12,10 @@
 
 #include "tuples.h"
 
-t_tuple	normalize(t_tuple v)
+inline t_tuple	normalize(t_tuple v)
 {
 	const double	m = magnitude(v);
+	const double	inv_m = 1.0 / m;
 
-	return ((t_tuple){v.x / m, v.y / m, v.z / m, v.w / m});
+	return ((t_tuple){v.x * inv_m, v.y * inv_m, v.z * inv_m, v.w * inv_m});
 }

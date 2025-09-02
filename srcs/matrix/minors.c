@@ -12,7 +12,7 @@
 
 #include "matrix.h"
 
-double	matrix_minor(t_matrix m, int row, int col)
+inline double	matrix_minor(t_matrix m, int row, int col)
 {
 	return (matrix_determinant(submatrix(m, row, col)));
 }

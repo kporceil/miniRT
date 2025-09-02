@@ -53,6 +53,7 @@ static void	adjust_and_sort_inter(t_intersections *inter)
 	adjust_inter(inter);
 }
 
+#include <stdio.h>
 t_intersections	world_intersect(t_world	world, t_ray r)
 {
 	t_intersections	inter;
@@ -71,7 +72,7 @@ t_intersections	world_intersect(t_world	world, t_ray r)
 		return (inter);
 	while (i < world.objs_count)
 	{
-		tmp_inter = ray_intersect(world.objs + i, r);
+		tmp_inter = ray_intersect(world.objs + i, ray_transform(r, world.objs[i].inverted));
 		j = 0;
 		while (j < tmp_inter.count)
 			inter.inters[k++] = tmp_inter.object[j++];

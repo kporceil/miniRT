@@ -23,7 +23,7 @@ t_color	shade_hit(t_world world, t_precomp comps)
 	while (i < world.lights_count)
 	{
 		ret = color_add(ret, lighting(comps.obj->material, world.lights[i],
-				comps.point, (t_tuple[2]){comps.eyev, comps.normalv}));
+					comps.point, (t_tuple[2]){comps.eyev, comps.normalv}));
 		++i;
 	}
 	return (ret);
