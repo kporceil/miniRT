@@ -15,13 +15,13 @@
 #include <stdint.h>
 #include <setjmp.h>
 #include <cmocka.h>
-#include "spheres.h"
+#include "shape.h"
 #include "ray.h"
 #include "tests.h"
 
 static void	shading_precomps_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_precomp	comps = precompute((t_inter){&s, 4}, (t_ray){point(0, 0, -5), vector(0, 0, 1)});
 
 	(void)state;
@@ -35,7 +35,7 @@ static void	shading_precomps_test(void **state)
 
 static void	inside_obj_shading_precomps_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_precomp	comps = precompute((t_inter){&s, 1}, (t_ray){point(0, 0, 0), vector(0, 0, 1)});
 
 	(void)state;

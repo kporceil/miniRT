@@ -20,5 +20,7 @@ inline t_tuple	tuple_scalar_mult(t_tuple t, double scalar)
 inline t_tuple	tuple_scalar_div(t_tuple t, double scalar)
 {
 	const double	inv_scalar = 1.0 / scalar;
-	return ((t_tuple){t.x / inv_scalar, t.y / inv_scalar, t.z / inv_scalar, t.w / inv_scalar});
+
+	return ((t_tuple){t.x * inv_scalar, t.y * inv_scalar, t.z * inv_scalar,
+		t.w * inv_scalar});
 }

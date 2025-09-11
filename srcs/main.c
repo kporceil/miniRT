@@ -6,16 +6,15 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/31 15:49:21 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/03 19:33:14 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
-#include "spheres.h"
+#include "shape.h"
 #include "tuples.h"
 #include "canvas.h"
 #include "libft.h"
-#include "ray.h"
 #include "light.h"
 #include "world.h"
 #include "camera.h"
@@ -23,7 +22,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <stdio.h>
 
 void	tick(t_tuple *env, t_tuple *proj);
 
@@ -44,8 +42,8 @@ int	main(void)
 
 	world.lights_count = 1;
 	world.objs_count = 6;
-	world.objs = malloc(sizeof(t_sphere) * 6);
-	world.lights = malloc(sizeof(t_plight));
+	world.objs = malloc(sizeof(t_shape) * world.objs_count);
+	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.objs[0] = sphere(0);
 	world.objs[0].material.color = color(1, 0.9, 0.9);
 	world.objs[0].material.specular = 0;
@@ -72,10 +70,16 @@ int	main(void)
 	world.objs[5].material.specular = 0.3;
 	sphere_set_matrix(world.objs + 5, matrix_mult(matrix_translation(-1.5, 0.33, -0.75), matrix_scaling(0.33, 0.33, 0.33)));
 	world.lights[0] = point_light(point(-10, 10, -10), color(1, 1, 1));
-	t_camera	cam = camera(1920, 1080, M_PI / 3);
+	t_camera	cam = camera(1280, 720, M_PI / 3);
 	camera_set_transform(&cam, view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0)));
 	t_canva		image = render(cam, world);
+	if (!image.canva)
+		return (1);
 	(void)image;
-	//char		*ppm = canva_to_ppm(image);
-	//write_file("render/first_scenes.ppm", ppm);
+	char		*ppm = canva_to_ppm(image);
+	write_file("render/test.ppm", ppm);
+	free(ppm);
+	free(image.canva);
+	free(world.objs);
+	free(world.lights);
 }

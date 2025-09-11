@@ -236,10 +236,13 @@ char *canva_to_ppm(t_canva c)
     
     for (size_t i = 0; i < canva_size; i++)
     {
+		double max = 1.0;
+		if (c.canva[i].red > 1 || c.canva[i].green > 1 || c.canva[i].blue > 1)
+			max = 1.0 / fmax(fmax(c.canva[i].red, c.canva[i].green), c.canva[i].blue);
         int colors[3] = {
-            color_to_int(c.canva[i].red),
-            color_to_int(c.canva[i].green),
-            color_to_int(c.canva[i].blue)
+            color_to_int(c.canva[i].red * max),
+            color_to_int(c.canva[i].green * max),
+            color_to_int(c.canva[i].blue * max)
         };
         
         for (int j = 0; j < 3; j++)

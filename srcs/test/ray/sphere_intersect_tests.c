@@ -16,12 +16,12 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include "ray.h"
-#include "spheres.h"
+#include "shape.h"
 
 static void	ray_sphere_intersect_test1(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect	intersect = ray_intersect(&s, ray(point(0, 0, -5), vector(0, 0, 1)));
+	t_shape	s = sphere(0);
+	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 0, -5), vector(0, 0, 1)));
 
 	(void)state;
 	assert_int_equal(intersect.count, 2);
@@ -33,8 +33,8 @@ static void	ray_sphere_intersect_test1(void **state)
 
 static void	ray_sphere_tangent_intersect_test(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect	intersect = ray_intersect(&s, ray(point(0, 1, -5), vector(0, 0, 1)));
+	t_shape	s = sphere(0);
+	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 1, -5), vector(0, 0, 1)));
 
 	(void)state;
 	assert_int_equal(intersect.count, 2);
@@ -46,8 +46,8 @@ static void	ray_sphere_tangent_intersect_test(void **state)
 
 static void	ray_sphere_no_intersect_test(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect	intersect = ray_intersect(&s, ray(point(0, 2, -5), vector(0, 0, 1)));
+	t_shape	s = sphere(0);
+	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 2, -5), vector(0, 0, 1)));
 
 	(void)state;
 	assert_int_equal(intersect.count, 0);
@@ -55,8 +55,8 @@ static void	ray_sphere_no_intersect_test(void **state)
 
 static void	ray_inside_sphere_intersect_test(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect	intersect = ray_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)));
+	t_shape	s = sphere(0);
+	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)));
 
 	(void)state;
 	assert_int_equal(intersect.count, 2);
@@ -68,8 +68,8 @@ static void	ray_inside_sphere_intersect_test(void **state)
 
 static void	ray_sphere_intersect_test2(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect	intersect = ray_intersect(&s, ray(point(0, 0, 5), vector(0, 0, 1)));
+	t_shape	s = sphere(0);
+	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 0, 5), vector(0, 0, 1)));
 
 	(void)state;
 	assert_int_equal(intersect.count, 2);

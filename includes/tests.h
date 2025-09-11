@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/31 14:34:44 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/03 19:13:40 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "tuples.h"
 # include "color.h"
 # include "matrix.h"
+
+# ifndef __unused
+#  define __unused __attribute__((unused))
+# endif
 
 void	assert_tuple_equal(t_tuple a, t_tuple b);
 void	assert_color_equal(t_color a, t_color b);
@@ -79,5 +83,9 @@ int		test_view_transformation(void);
 int		test_camera_create(void);
 int		test_camera_ray(void);
 int		test_camera_render(void);
+
+int		test_in_shadow(void);
+int		test_is_shadowed(void);
+int		test_render_shadow(void);
 
 #endif

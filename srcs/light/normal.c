@@ -12,9 +12,9 @@
 
 #include "matrix.h"
 #include "tuples.h"
-#include "spheres.h"
+#include "shape.h"
 
-t_tuple	normal_at(t_sphere s, t_tuple p)
+t_tuple	normal_at(t_shape s, t_tuple p)
 {
 	t_tuple	object_normal;
 	t_tuple	object_point;

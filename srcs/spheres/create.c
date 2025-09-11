@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "spheres.h"
+#include "shape.h"
 
-t_sphere	sphere(size_t id)
+t_shape	sphere(size_t id)
 {
-	return ((t_sphere){identity_matrix(4), identity_matrix(4), material(), id});
+	return ((t_shape){SPHERE, identity_matrix(3), identity_matrix(4),
+		material(), id});
 }

@@ -23,7 +23,7 @@ static void	ray_translation_test(void **state)
 {
 	t_ray	r = ray(point(1, 2, 3), vector(0, 1, 0));
 	t_matrix	m = matrix_translation(3, 4, 5);
-	t_ray	r2 = ray_transform(r, m);
+	t_ray	r2 = ray_transform(&r, &m);
 
 	(void)state;
 	assert_tuple_equal(r2.origin, point(4, 6, 8));
@@ -34,7 +34,7 @@ static void	ray_scaling_test(void **state)
 {
 	t_ray	r = ray(point(1, 2, 3), vector(0, 1, 0));
 	t_matrix	m = matrix_scaling(2, 3, 4);
-	t_ray	r2 = ray_transform(r, m);
+	t_ray	r2 = ray_transform(&r, &m);
 
 	(void)state;
 	assert_tuple_equal(r2.origin, point(2, 6, 12));
@@ -44,12 +44,12 @@ static void	ray_scaling_test(void **state)
 static void	ray_scaled_intersect_test(void **state)
 {
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_intersect	inter;
 	
 	(void)state;
 	sphere_set_matrix(&s, matrix_scaling(2, 2, 2));
-	inter = ray_intersect(&s, r);
+	inter = ray_sphere_intersect(&s, ray_transform(&r, &s.inverted));
 	assert_int_equal(inter.count, 2);
 	assert_double_equal(inter.object[0].point, 3, 0.0001);
 	assert_double_equal(inter.object[1].point, 7, 0.0001);
@@ -58,12 +58,12 @@ static void	ray_scaled_intersect_test(void **state)
 static void	ray_translate_intersect_test(void **state)
 {
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_intersect	inter;
 	
 	(void)state;
 	sphere_set_matrix(&s, matrix_translation(5, 0, 0));
-	inter = ray_intersect(&s, r);
+	inter = ray_sphere_intersect(&s, ray_transform(&r, &s.inverted));
 	assert_int_equal(inter.count, 0);
 }
 

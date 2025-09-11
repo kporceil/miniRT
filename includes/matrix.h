@@ -42,5 +42,6 @@ t_matrix	matrix_y_rotation(double rad);
 t_matrix	matrix_z_rotation(double rad);
 t_matrix	matrix_shearing(double x[2], double y[2], double z[2]);
 t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up);
+t_tuple		matrix_tuple_mult_p(t_matrix *m1, t_tuple *t1);
 
 #endif

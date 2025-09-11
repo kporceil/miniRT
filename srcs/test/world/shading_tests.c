@@ -3,9 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   shading_tests.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 22:58:31 by kporceil          #+#    #+#             */
+/*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */ /*                                                +#+#+#+#+#+   +#+           */ /*   Created: 2025/08/30 22:58:31 by kporceil          #+#    #+#             */
 /*   Updated: 2025/08/30 23:51:42 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
@@ -28,7 +26,7 @@ static int	setup(void **state)
 
 	world->lights_count = 1;
 	world->objs_count = 2;
-	world->objs = malloc(sizeof(t_sphere) * 2);
+	world->objs = malloc(sizeof(t_shape) * 2);
 	world->lights = malloc(sizeof(t_plight));
 	if (!world->objs || !world->lights)
 	{
@@ -79,7 +77,7 @@ static void	inside_shading_intersect_test(void **state)
 	t_precomp	comps = precompute(i, r);
 	t_color		c = shade_hit(*world, comps);
 
-	assert_color_equal(color(0.90498, 0.90498, 0.90498), c);
+	assert_color_equal(color(0.1, 0.1, 0.1), c);
 }
 
 static void	shading_no_hit_test(void **state)
@@ -107,8 +105,8 @@ static void	shading_hit_test(void **state)
 static void	behind_shading_hit_test(void **state)
 {
 	t_world	*world = (t_world *)*state;
-	t_sphere	*outer = world->objs;
-	t_sphere	*inner = world->objs + 1;
+	t_shape	*outer = world->objs;
+	t_shape	*inner = world->objs + 1;
 	outer->material.ambient = 1;
 	inner->material.ambient = 1;
 	t_ray	r = ray(point(0, 0, 0.75), vector(0, 0, -1));

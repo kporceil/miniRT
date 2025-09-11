@@ -13,8 +13,8 @@
 #include "ray.h"
 #include "matrix.h"
 
-inline t_ray	ray_transform(t_ray r, t_matrix m)
+inline t_ray	ray_transform(t_ray *r, t_matrix *m)
 {
-	return ((t_ray){matrix_tuple_mult(m, r.origin),
-		matrix_tuple_mult(m, r.dir)});
+	return ((t_ray){matrix_tuple_mult_p(m, &r->origin),
+		matrix_tuple_mult_p(m, &r->dir)});
 }

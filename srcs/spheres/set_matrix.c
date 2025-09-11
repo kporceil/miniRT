@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "spheres.h"
+#include "shape.h"
 
-void	sphere_set_matrix(t_sphere *s, t_matrix m)
+void	sphere_set_matrix(t_shape *s, t_matrix m)
 {
 	s->transformation = m;
 	s->inverted = m;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_tests.c                                     :+:      :+:    :+:   */
+/*   is_shadowed_tests.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 15:38:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 21:31:06 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/09/03 18:18:57 by kporceil          #+#    #+#             */
+/*   Updated: 2025/09/03 18:28:00 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <stdlib.h>
-#include "light.h"
 #include "tests.h"
+#include "light.h"
 #include "world.h"
-#include "shape.h"
-#include "ray.h"
 
 static int	setup(void **state)
 {
@@ -61,36 +59,37 @@ static int	teardown(void **state)
 	return (0);
 }
 
-static void	create_world_test(void **state)
+static void	no_shadowed_test(void **state)
 {
-	t_world	world = world_create();
-
-	(void)state;
-	assert_int_equal(world.lights, NULL);
-	assert_int_equal(world.lights_count, NULL);
-	assert_int_equal(world.objs, NULL);
-	assert_int_equal(world.objs_count, NULL);
+	t_world	*w = (t_world *)*state;
+	assert_false(is_shadowed(*w, point(0, 10, 0), 0));
 }
 
-static void	world_setup_test(void **state)
+static void	shadowed_test(void **state)
 {
-	t_world	*world = *state;
-
-	assert_int_equal(world->objs_count, 2);
-	assert_int_equal(world->lights_count, 1);
-	assert_double_equal(world->objs[0].material.diffuse, 0.7, 0.0001);
-	assert_double_equal(world->objs[0].material.specular, 0.2, 0.0001);
-	assert_color_equal(world->objs[0].material.color, color(0.8, 1.0, 0.6));
-	assert_matrix_equal(world->objs[1].transformation, matrix_scaling(0.5, 0.5, 0.5));
-	assert_tuple_equal(world->lights[0].pos, point(-10, 10, -10));
-	assert_color_equal(world->lights[0].intensity, color(1, 1, 1));
+	t_world	*w = (t_world *)*state;
+	assert_true(is_shadowed(*w, point(10, -10, 10), 0));
 }
 
-int	test_create_world(void)
+static void	object_behind_light_test(void **state)
 {
-	const struct CMUnitTest	create_world_tests[] = {
-		cmocka_unit_test(create_world_test),
-		cmocka_unit_test_setup_teardown(world_setup_test, setup, teardown),
+	t_world	*w = (t_world *)*state;
+	assert_false(is_shadowed(*w, point(-20, 20, -20), 0));
+}
+
+static void	object_behind_point_test(void **state)
+{
+	t_world	*w = (t_world *)*state;
+	assert_false(is_shadowed(*w, point(-2, 2, -2), 0));
+}
+
+int	test_is_shadowed(void)
+{
+	const struct CMUnitTest	is_shadowed_tests[] = {
+		cmocka_unit_test_setup_teardown(no_shadowed_test, setup, teardown),
+		cmocka_unit_test_setup_teardown(shadowed_test, setup, teardown),
+		cmocka_unit_test_setup_teardown(object_behind_light_test, setup, teardown),
+		cmocka_unit_test_setup_teardown(object_behind_point_test, setup, teardown),
 	};
-	return (cmocka_run_group_tests(create_world_tests, NULL, NULL));
+	return (cmocka_run_group_tests(is_shadowed_tests, NULL, NULL));
 }

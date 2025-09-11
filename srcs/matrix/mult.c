@@ -57,3 +57,23 @@ inline t_tuple	matrix_tuple_mult(t_matrix m1, t_tuple t1)
 			t1.z * m1.matrix[3][2] +
 			t1.w * m1.matrix[3][3]});
 }
+
+inline t_tuple	matrix_tuple_mult_p(t_matrix *m1, t_tuple *t1)
+{
+	return ((t_tuple){t1->x * m1->matrix[0][0] +
+			t1->y * m1->matrix[0][1] +
+			t1->z * m1->matrix[0][2] +
+			t1->w * m1->matrix[0][3],
+			t1->x * m1->matrix[1][0] +
+			t1->y * m1->matrix[1][1] +
+			t1->z * m1->matrix[1][2] +
+			t1->w * m1->matrix[1][3],
+			t1->x * m1->matrix[2][0] +
+			t1->y * m1->matrix[2][1] +
+			t1->z * m1->matrix[2][2] +
+			t1->w * m1->matrix[2][3],
+			t1->x * m1->matrix[3][0] +
+			t1->y * m1->matrix[3][1] +
+			t1->z * m1->matrix[3][2] +
+			t1->w * m1->matrix[3][3]});
+}

@@ -2,7 +2,7 @@ NAME := miniRT
 
 TEST := no
 
-MODE := default
+MODE :=
 
 override SRCDIR := srcs/
 
@@ -24,7 +24,9 @@ TEST_BASENAME :=  $(addprefix test/, my_assert \
 					$(addprefix ray/, create_tests position_tests sphere_intersect_tests hit_tests transform_tests) \
 					$(addprefix light/, normal_tests reflection_tests point_light_tests material_tests phong_tests) \
 					$(addprefix world/, create_tests intersect_tests precomps_tests shading_tests) \
-					$(addprefix camera/, create_tests ray_tests render_tests))
+					$(addprefix camera/, create_tests ray_tests render_tests) \
+					$(addprefix shadow/, in_shadow_tests is_shadowed_tests render_shadow_tests))
+
 endif
 ifeq (no, $(TEST))
 MAIN := main
@@ -37,10 +39,11 @@ BASENAME := $(MAIN) \
 			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm) \
 			$(addprefix matrix/, create comparison mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
-			$(addprefix spheres/, create set_matrix) \
+			$(addprefix spheres/, create set_matrix intersect) \
 			$(addprefix light/, normal reflect point_light material phong shade_hit color_at) \
 			$(addprefix world/, create intersect) \
 			$(addprefix camera/, create ray_for_pixel render) \
+			$(addprefix shadow/, is_shadowed) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -69,7 +72,7 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreach
 endif
 
 ifeq (opti, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -Ofast
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -Ofast -march=native -flto -ffast-math -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
 endif
 
 ifeq (gprof, $(MODE))
@@ -96,8 +99,10 @@ MAKEFLAGS += --no-print-directory
 
 CURRENT_FLAGS := $(MODE)$(CC)$(CFLAGS)$(CPPFLAGS)$(LDFLAGS)$(LDLIBS)$(TEST)
 
+ifdef ($(MODE))
 ifneq ($(shell cat $(FLAGFILE) 2>/dev/null), $(CURRENT_FLAGS))
 $(shell mkdir -p $(BUILDDIR) && echo '$(CURRENT_FLAGS)' > $(FLAGFILE))
+endif
 endif
 
 .PHONY: json
@@ -106,7 +111,27 @@ json:
 
 .PHONY: all
 all:
-	@$(MAKE) MODE="$(MODE)" $(NAME)
+	@$(MAKE) MODE="default" TEST="$(TEST)" $(NAME)
+
+.PHONY: debug
+debug:
+	@$(MAKE) MODE="debug" TEST="$(TEST)" $(NAME)
+
+.PHONY: asan
+asan:
+	@$(MAKE) MODE="asan" TEST="$(TEST)" $(NAME)
+
+.PHONY: lsan
+lsan:
+	@$(MAKE) MODE="lsan" TEST="$(TEST)" $(NAME)
+
+.PHONY: gprof
+gprof:
+	@$(MAKE) MODE="gprof" TEST="$(TEST)" $(NAME)
+
+.PHONY: opti
+opti:
+	@$(MAKE) MODE="opti" TEST="$(TEST)" $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(FLAGFILE)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME)

@@ -14,12 +14,12 @@
 # define WORLD_H
 
 # include "light.h"
-# include "spheres.h"
+# include "shape.h"
 # include "ray.h"
 
 typedef struct s_world
 {
-	t_sphere	*objs;
+	t_shape	*objs;
 	t_plight	*lights;
 	size_t		objs_count;
 	size_t		lights_count;

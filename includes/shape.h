@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spheres.h                                          :+:      :+:    :+:   */
+/*   shape.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPHERES_H
-# define SPHERES_H
+#ifndef SHAPE_H
+# define SHAPE_H
 
 # include <stddef.h>
 # include "matrix.h"
 # include "material.h"
 
-typedef struct s_sphere
+typedef enum e_tshape
 {
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	CUBE,
+}				t_tshape;
+
+typedef struct s_shape
+{
+	t_tshape	type;
 	t_matrix	transformation;
 	t_matrix	inverted;
 	t_material	material;
 	size_t		id;
-}				t_sphere;
+}				t_shape;
 
-t_sphere	sphere(size_t id);
-void		sphere_set_matrix(t_sphere *s, t_matrix m);
+t_shape	sphere(size_t id);
+void		sphere_set_matrix(t_shape *s, t_matrix m);
 
 #endif

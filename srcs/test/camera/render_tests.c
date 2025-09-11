@@ -31,7 +31,7 @@ static int	setup(void **state)
 
 	world->lights_count = 1;
 	world->objs_count = 2;
-	world->objs = malloc(sizeof(t_sphere) * 2);
+	world->objs = malloc(sizeof(t_shape) * 2);
 	world->lights = malloc(sizeof(t_plight));
 	if (!world->objs || !world->lights)
 	{

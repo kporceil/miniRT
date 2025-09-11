@@ -19,8 +19,8 @@
 
 static void	positive_t_hit_test(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect intersections[1] = {ray_intersect(&s, ray(point(0, 0, -2), vector(0, 0, 1)))};
+	t_shape	s = sphere(0);
+	t_intersect intersections[1] = {ray_sphere_intersect(&s, ray(point(0, 0, -2), vector(0, 0, 1)))};
 	t_inter		inters[2] = {intersections[0].object[0], intersections[0].object[1]};
 
 	(void)state;
@@ -29,8 +29,8 @@ static void	positive_t_hit_test(void **state)
 
 static void	negative_positive_t_hit_test(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect intersections[1] = {ray_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)))};
+	t_shape	s = sphere(0);
+	t_intersect intersections[1] = {ray_sphere_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)))};
 	t_inter		inters[2] = {intersections[0].object[0], intersections[0].object[1]};
 
 	(void)state;
@@ -39,8 +39,8 @@ static void	negative_positive_t_hit_test(void **state)
 
 static void	negative_t_hit_test(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect intersections[1] = {ray_intersect(&s, ray(point(0, 0, 2), vector(0, 0, 1)))};
+	t_shape	s = sphere(0);
+	t_intersect intersections[1] = {ray_sphere_intersect(&s, ray(point(0, 0, 2), vector(0, 0, 1)))};
 	t_inter		inters[2] = {intersections[0].object[0], intersections[0].object[1]};
 
 	(void)state;
@@ -49,8 +49,8 @@ static void	negative_t_hit_test(void **state)
 
 static void	positive_t_hit_test2(void **state)
 {
-	t_sphere	s = sphere(0);
-	t_intersect intersections[2] = {ray_intersect(&s, ray(point(0, 0, 6), vector(0, 0, 1))), ray_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)))};
+	t_shape	s = sphere(0);
+	t_intersect intersections[2] = {ray_sphere_intersect(&s, ray(point(0, 0, 6), vector(0, 0, 1))), ray_sphere_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)))};
 
 	(void)state;
 	intersections[0].object[0].point = 5;

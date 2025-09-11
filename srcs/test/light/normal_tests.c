@@ -17,14 +17,14 @@
 #include <cmocka.h>
 #include <math.h>
 #include "matrix.h"
-#include "spheres.h"
+#include "shape.h"
 #include "tuples.h"
 #include "tests.h"
 #include "light.h"
 
 static void	x_axis_normal_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_tuple		n = normal_at(s, point(1, 0, 0));
 
 	(void)state;
@@ -33,7 +33,7 @@ static void	x_axis_normal_test(void **state)
 
 static void	y_axis_normal_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_tuple		n = normal_at(s, point(0, 1, 0));
 
 	(void)state;
@@ -42,7 +42,7 @@ static void	y_axis_normal_test(void **state)
 
 static void	z_axis_normal_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_tuple		n = normal_at(s, point(0, 0, 1));
 
 	(void)state;
@@ -51,7 +51,7 @@ static void	z_axis_normal_test(void **state)
 
 static void	non_axial_normal_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_tuple		n = normal_at(s, point(sqrt(3.0)/3.0, sqrt(3.0)/3.0, sqrt(3.0)/3.0));
 
 	(void)state;
@@ -60,7 +60,7 @@ static void	non_axial_normal_test(void **state)
 
 static void	normalized_normal_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	t_tuple		n = normal_at(s, point(sqrt(3.0)/3.0, sqrt(3.0)/3.0, sqrt(3.0)/3.0));
 
 	(void)state;
@@ -69,7 +69,7 @@ static void	normalized_normal_test(void **state)
 
 static void	translated_sphere_normal_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	sphere_set_matrix(&s, matrix_translation(0, 1, 0));
 	t_tuple		n = normal_at(s, point(0, 1.70711, -0.70711));
 
@@ -79,7 +79,7 @@ static void	translated_sphere_normal_test(void **state)
 
 static void	scaled_sphere_normal_test(void **state)
 {
-	t_sphere	s = sphere(0);
+	t_shape	s = sphere(0);
 	sphere_set_matrix(&s, matrix_mult(matrix_scaling(1, 0.5, 1), matrix_z_rotation(M_PI / 5)));
 	t_tuple		n = normal_at(s, point(0, sqrt(2.0/2.0), -sqrt(2.0/2.0)));
 

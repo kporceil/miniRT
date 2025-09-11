@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/31 14:34:51 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/03 19:13:50 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,8 @@ int	main(void)
 	ret += test_camera_create();
 	ret += test_camera_ray();
 	ret += test_camera_render();
+	ret += test_in_shadow();
+	ret += test_is_shadowed();
+	ret += test_render_shadow();
 	return (ret);
 }
