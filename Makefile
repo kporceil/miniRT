@@ -33,7 +33,7 @@ TEST_BASENAME :=  $(addprefix test/, my_assert \
 
 endif
 ifeq (no, $(TEST))
-MAIN := main
+MAIN := tmp_main
 TEST_BASENAME :=
 endif
 
@@ -145,6 +145,10 @@ gprof:
 .PHONY: opti
 opti:
 	@$(MAKE) MODE="opti" TEST="$(TEST)" $(NAME)
+
+.PHONY: test
+test:
+	@$(MAKE) MODE="default" TEST="yes" $(NAME) && ./miniRT
 
 $(NAME): $(OBJS) $(LIBFT) $(FLAGFILE)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME)

@@ -27,7 +27,7 @@ t_tuple	normal_at(t_shape s, t_tuple p)
 {
 	t_tuple const	object_point = matrix_tuple_mult(s.inverted, p);
 	t_tuple const	object_normal = local_object_normal(s, object_point);
-	t_tuple	normal;
+	t_tuple			normal;
 
 	normal = matrix_tuple_mult(matrix_transpose(s.inverted), object_normal);
 	normal.w = 0;
