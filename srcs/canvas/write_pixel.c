@@ -15,6 +15,6 @@
 
 void	write_pixel(t_canva *c, size_t x, size_t y, t_color color)
 {
-	if (x >= 0 && x <= c->width && y >= 0 && y <= c->height)
+	if (x <= c->width && y <= c->height)
 		c->canva[x + y * c->width] = color;
 }
