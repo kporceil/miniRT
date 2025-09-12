@@ -38,6 +38,6 @@ void	assert_matrix_equal(t_matrix a, t_matrix b)
 {
 	assert_int_equal(a.size, b.size);
 	for (uint_fast8_t	i = 0; i < a.size; ++i)
-		for (uint_fast8_t j = 0; i < a.size; ++i)
+		for (uint_fast8_t j = 0; j < a.size; ++j)
 			assert_double_equal(a.matrix[i][j], b.matrix[i][j], 0.0001);
 }
