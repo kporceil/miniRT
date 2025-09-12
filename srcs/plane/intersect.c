@@ -5,19 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 22:06:03 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/12 13:58:10 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/09/12 13:56:44 by kporceil          #+#    #+#             */
+/*   Updated: 2025/09/12 14:09:14 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
 #include "ray.h"
+#include <math.h>
 
-t_intersect	ray_intersect(t_shape *s, t_ray r)
+t_intersect	ray_plane_intersect(t_shape *s, t_ray r)
 {
-	if (s->type == SPHERE)
-		return (ray_sphere_intersect(s, ray_transform(&r, &s->inverted)));
-	if (s->type == PLANE)
-		return (ray_plane_intersect(s, ray_transform(&r, &s->inverted)));
-	return (ray_sphere_intersect(s, ray_transform(&r, &s->inverted)));
+	double	t;
+
+	if (fabs(r.dir.y) < 0.0001)
+		return ((t_intersect){0, {{s, 0}, {s, 0}}});
+	t = -r.origin.y / r.dir.y;
+	return ((t_intersect){1, {{s, t}, {s, t}}});
 }

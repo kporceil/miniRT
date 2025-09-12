@@ -2,11 +2,14 @@ NAME := miniRT
 
 TEST := no
 
-MODE :=
-
 override SRCDIR := srcs/
 
+ifeq ($(TEST), yes)
+override BUILDDIR := .build/test/$(MODE)/
+endif
+ifeq ($(TEST), no)
 override BUILDDIR := .build/$(MODE)/
+endif
 
 override FLAGFILE := .build/.compile_flags
 
@@ -25,6 +28,7 @@ TEST_BASENAME :=  $(addprefix test/, my_assert \
 					$(addprefix light/, normal_tests reflection_tests point_light_tests material_tests phong_tests) \
 					$(addprefix world/, create_tests intersect_tests precomps_tests shading_tests) \
 					$(addprefix camera/, create_tests ray_tests render_tests) \
+					$(addprefix plane/, intersect_tests) \
 					$(addprefix shadow/, in_shadow_tests is_shadowed_tests render_shadow_tests))
 
 endif
@@ -37,13 +41,14 @@ BASENAME := $(MAIN) \
 			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product) \
 			$(addprefix color/, color add substract scalar mult) \
 			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm) \
-			$(addprefix matrix/, create comparison mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation) \
+			$(addprefix matrix/, create comparison mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
-			$(addprefix spheres/, create set_matrix intersect) \
+			$(addprefix spheres/, create intersect) \
 			$(addprefix light/, normal reflect point_light material phong shade_hit color_at) \
 			$(addprefix world/, create intersect) \
 			$(addprefix camera/, create ray_for_pixel render) \
 			$(addprefix shadow/, is_shadowed) \
+			$(addprefix plane/, plane intersect) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -83,6 +88,10 @@ ifeq (asan, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=address
 endif
 
+ifeq (msan, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=memory
+endif
+
 ifeq (lsan, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=leak
 endif
@@ -99,7 +108,7 @@ MAKEFLAGS += --no-print-directory
 
 CURRENT_FLAGS := $(MODE)$(CC)$(CFLAGS)$(CPPFLAGS)$(LDFLAGS)$(LDLIBS)$(TEST)
 
-ifdef ($(MODE))
+ifneq ($(MODE),)
 ifneq ($(shell cat $(FLAGFILE) 2>/dev/null), $(CURRENT_FLAGS))
 $(shell mkdir -p $(BUILDDIR) && echo '$(CURRENT_FLAGS)' > $(FLAGFILE))
 endif
@@ -124,6 +133,10 @@ asan:
 .PHONY: lsan
 lsan:
 	@$(MAKE) MODE="lsan" TEST="$(TEST)" $(NAME)
+
+.PHONY: msan
+msan:
+	@$(MAKE) MODE="msan" TEST="$(TEST)" $(NAME)
 
 .PHONY: gprof
 gprof:

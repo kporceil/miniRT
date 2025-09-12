@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape.h                                          :+:      :+:    :+:   */
+/*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:49:15 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 20:50:32 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/12 14:14:32 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct s_shape
 	size_t		id;
 }				t_shape;
 
-t_shape	sphere(size_t id);
-void		sphere_set_matrix(t_shape *s, t_matrix m);
+t_shape		plane(size_t id);
+t_shape		sphere(size_t id);
+void		shape_set_matrix(t_shape *s, t_matrix m);
 
 #endif

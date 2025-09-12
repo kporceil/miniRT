@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 23:27:11 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 00:01:27 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/12 13:40:27 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ray_scaled_intersect_test(void **state)
 	t_intersect	inter;
 	
 	(void)state;
-	sphere_set_matrix(&s, matrix_scaling(2, 2, 2));
+	shape_set_matrix(&s, matrix_scaling(2, 2, 2));
 	inter = ray_sphere_intersect(&s, ray_transform(&r, &s.inverted));
 	assert_int_equal(inter.count, 2);
 	assert_double_equal(inter.object[0].point, 3, 0.0001);
@@ -62,7 +62,7 @@ static void	ray_translate_intersect_test(void **state)
 	t_intersect	inter;
 	
 	(void)state;
-	sphere_set_matrix(&s, matrix_translation(5, 0, 0));
+	shape_set_matrix(&s, matrix_translation(5, 0, 0));
 	inter = ray_sphere_intersect(&s, ray_transform(&r, &s.inverted));
 	assert_int_equal(inter.count, 0);
 }

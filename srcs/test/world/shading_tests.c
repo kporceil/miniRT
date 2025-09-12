@@ -40,7 +40,7 @@ static int	setup(void **state)
 	world->objs[0].material.diffuse = 0.7;
 	world->objs[0].material.specular = 0.2;
 	world->objs[0].material.color = color(0.8, 1, 0.6);
-	sphere_set_matrix(world->objs + 1, matrix_scaling(0.5, 0.5, 0.5));
+	shape_set_matrix(world->objs + 1, matrix_scaling(0.5, 0.5, 0.5));
 	world->lights[0].intensity = color(1, 1, 1);
 	world->lights[0].pos = point(-10, 10, -10);
 	*state = world;

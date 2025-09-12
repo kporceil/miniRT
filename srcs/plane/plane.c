@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect.c                                        :+:      :+:    :+:   */
+/*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 22:06:03 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/12 13:58:10 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/09/12 14:15:09 by kporceil          #+#    #+#             */
+/*   Updated: 2025/09/12 14:16:16 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
-#include "ray.h"
 
-t_intersect	ray_intersect(t_shape *s, t_ray r)
+t_shape	plane(size_t id)
 {
-	if (s->type == SPHERE)
-		return (ray_sphere_intersect(s, ray_transform(&r, &s->inverted)));
-	if (s->type == PLANE)
-		return (ray_plane_intersect(s, ray_transform(&r, &s->inverted)));
-	return (ray_sphere_intersect(s, ray_transform(&r, &s->inverted)));
+	return ((t_shape){PLANE, identity_matrix(3), identity_matrix(4),
+		material(), id});
 }

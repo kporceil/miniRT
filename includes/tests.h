@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/03 19:13:40 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/12 14:17:00 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ int		test_camera_render(void);
 int		test_in_shadow(void);
 int		test_is_shadowed(void);
 int		test_render_shadow(void);
+
+int		test_plane_intersect(void);
 
 #endif

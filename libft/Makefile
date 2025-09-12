@@ -94,8 +94,12 @@ ifeq (asan, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=address
 endif
 
-ifeq (asan, $(MODE))
+ifeq (lsan, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=leak
+endif
+
+ifeq (msan, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=memory
 endif
 
 override CPPFLAGS := -I

@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:05:38 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 12:41:07 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/12 13:40:27 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	normalized_normal_test(void **state)
 static void	translated_sphere_normal_test(void **state)
 {
 	t_shape	s = sphere(0);
-	sphere_set_matrix(&s, matrix_translation(0, 1, 0));
+	shape_set_matrix(&s, matrix_translation(0, 1, 0));
 	t_tuple		n = normal_at(s, point(0, 1.70711, -0.70711));
 
 	(void)state;
@@ -80,7 +80,7 @@ static void	translated_sphere_normal_test(void **state)
 static void	scaled_sphere_normal_test(void **state)
 {
 	t_shape	s = sphere(0);
-	sphere_set_matrix(&s, matrix_mult(matrix_scaling(1, 0.5, 1), matrix_z_rotation(M_PI / 5)));
+	shape_set_matrix(&s, matrix_mult(matrix_scaling(1, 0.5, 1), matrix_z_rotation(M_PI / 5)));
 	t_tuple		n = normal_at(s, point(0, sqrt(2.0/2.0), -sqrt(2.0/2.0)));
 
 	(void)state;
