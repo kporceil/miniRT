@@ -6,7 +6,7 @@ on:
     branches:
       - main
 jobs:
-  norminette-and-build:
+  norminette:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,9 +30,32 @@ jobs:
 
       - name: Run 'make norm'
         run: make norm
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y libreadline-dev build-essential libcmocka-dev
 
       - name: compilation check
         run: make
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y libreadline-dev build-essential libcmocka-dev
 
       - name: test check
         run: make test
