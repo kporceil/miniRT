@@ -71,5 +71,5 @@ int	main(void)
 	ret += test_is_shadowed();
 	ret += test_render_shadow();
 	ret += test_plane_intersect();
-	return (1);
+	return (ret);
 }
