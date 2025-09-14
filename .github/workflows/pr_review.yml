@@ -1,4 +1,4 @@
-name: Review pull request
+name: testing pull request
 
 on:
   workflow_dispatch:
