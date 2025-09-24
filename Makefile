@@ -19,8 +19,7 @@ override DEPDIR := $(addprefix $(BUILDDIR), deps/)
 
 ifeq (yes, $(TEST))
 MAIN := test_main
-TEST_BASENAME :=  $(addprefix test/, my_assert \
-					$(addprefix tuples/, create_tests add_tests substract_tests negate_tests scalar_tests magnitude_tests normalizing_tests dot_product_tests cross_product_tests) \
+TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests substract_tests negate_tests scalar_tests magnitude_tests normalizing_tests dot_product_tests cross_product_tests) \
 					$(addprefix color/, create_tests add_tests substract_tests scalar_tests mult_tests) \
 					$(addprefix canvas/, create_tests write_pixel_tests ppm_tests) \
 					$(addprefix matrix/, create_tests comparison_tests mult_tests transposing_tests determinant_tests submatrix_tests minors_tests cofactor_tests larger_determinant_tests inverting_tests translation_tests scaling_tests rotation_tests shearing_tests chaining_tests view_transformation_tests) \

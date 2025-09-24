@@ -21,7 +21,7 @@
 static void	color_creation_test(void **state)
 {
 	(void)state;
-	assert_color_equal(color(-0.5, 0.4, 1.7), (t_color){-0.5, 0.4, 1.7});
+	assert_color_equal(color(-0.5, 0.4, 1.7), ((t_color){-0.5, 0.4, 1.7}));
 }
 
 int	test_color_create(void)

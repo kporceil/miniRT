@@ -93,7 +93,7 @@ static void	matrix_tuple_mult_test(void **state)
 	m1.matrix[3][1] = 0;
 	m1.matrix[3][2] = 0;
 	m1.matrix[3][3] = 1;
-	assert_tuple_equal(matrix_tuple_mult(m1, p), (t_tuple){18, 24, 33, 1});
+	assert_tuple_equal(matrix_tuple_mult(m1, p), ((t_tuple){18, 24, 33, 1}));
 }
 
 int	test_matrix_mult(void)

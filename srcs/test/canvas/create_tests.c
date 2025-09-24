@@ -30,7 +30,7 @@ static void	canva_creation_test(void **state)
 	if (c.canva == NULL) { fail_msg("Malloc error"); }
 	for (size_t i = 0; i < 200; ++i)
 	{
-		assert_color_equal(c.canva[i], (t_color){0, 0, 0});
+		assert_color_equal(c.canva[i], ((t_color){0, 0, 0}));
 	}
 	free(c.canva);
 }
