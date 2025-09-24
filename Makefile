@@ -41,7 +41,7 @@ BASENAME := $(MAIN) \
 			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product) \
 			$(addprefix color/, color add substract scalar mult) \
 			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm) \
-			$(addprefix matrix/, create comparison mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix) \
+			$(addprefix matrix/, create compare mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
 			$(addprefix spheres/, create intersect) \
 			$(addprefix light/, normal reflect point_light material phong shade_hit color_at) \
