@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   position.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/27 21:30:27 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/28 22:18:42 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "ray.h"
 
-void	*ft_bzero(void *s, size_t n)
+inline t_tuple	ray_position(t_ray r, double t)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
-
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
-	{
-		*ptr++ = 0;
-		n--;
-	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+	return ((t_tuple){r.origin.x + r.dir.x * t,
+		r.origin.y + r.dir.y * t,
+		r.origin.z + r.dir.z * t, 1});
 }

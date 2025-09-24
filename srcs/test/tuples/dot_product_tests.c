@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   dot_product_tests.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/21 16:45:26 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/21 16:50:28 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdarg.h>
+#include <stddef.h>
 #include <stdint.h>
+#include <setjmp.h>
+#include <cmocka.h>
+#include "tuples.h"
 
-void	*ft_bzero(void *s, size_t n)
+static void	dot_product_test(void **state)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
+	(void)state;
+	assert_double_equal(dot(vector(1, 2, 3), vector(2, 3, 4)), 20, 0.0001);
+}
 
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
-	{
-		*ptr++ = 0;
-		n--;
-	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+int	test_tuple_dot_product(void)
+{
+	const struct CMUnitTest	dot_product_tests[] = {
+		cmocka_unit_test(dot_product_test),
+	};
+	return (cmocka_run_group_tests(dot_product_tests, NULL, NULL));
 }

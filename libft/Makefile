@@ -1,6 +1,10 @@
 NAME := libft.a
 
-override BUILDDIR := .build/
+MODE := default
+
+override BUILDDIR := .build/$(MODE)/
+
+override FLAGFILE := .build/.compile_flags
 
 override OBJDIR := $(addprefix $(BUILDDIR), objs/)
 
@@ -72,9 +76,31 @@ override DEPS := $(addprefix $(DEPDIR), $(addsuffix .d, $(BASENAME)))
 
 CC := cc
 
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -fPIE
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes
 
-COMPFLAGS :=
+ifeq (debug, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -g3
+endif
+
+ifeq (opti, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -Ofast
+endif
+
+ifeq (gprof, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -pg
+endif
+
+ifeq (asan, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=address
+endif
+
+ifeq (lsan, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=leak
+endif
+
+ifeq (msan, $(MODE))
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=memory
+endif
 
 override CPPFLAGS := -I
 
@@ -90,10 +116,16 @@ override RM := rm -rf
 
 override MAKEFLAGS += --no-print-directory
 
-all:
-	@$(MAKE) COMPFLAGS="$(COMPFLAGS)" $(NAME)
+CURRENT_FLAGS := $(MODE)$(CC)$(CFLAGS)$(CPPFLAGS)$(LDFLAGS)$(LDLIBS)
 
-$(NAME): $(OBJS)
+ifneq ($(shell cat $(FLAGFILE) 2>/dev/null), $(CURRENT_FLAGS))
+$(shell mkdir -p $(BUILDDIR) && echo '$(CURRENT_FLAGS)' > $(FLAGFILE))
+endif
+
+all:
+	@$(MAKE) MODE="$(MODE)" $(NAME)
+
+$(NAME): $(OBJS) $(FLAGFILE)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	@echo ""
 	@echo "libft.a created."
@@ -103,6 +135,9 @@ $(OBJDIR)%.o: $(SRCDIR)%.c | $(OBJDIR) $(DEPDIR)
 
 $(OBJDIR) $(DEPDIR):
 	mkdir -p $@
+
+$(FLAGFILE): | $(BUILDDIR)
+	@echo '$(CURRENT_FLAGS)' > $@
 
 clean:
 	$(RM) $(BUILDDIR)

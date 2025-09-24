@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   translation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/27 14:29:17 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/27 14:30:19 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "matrix.h"
 
-void	*ft_bzero(void *s, size_t n)
+inline t_matrix	matrix_translation(double x, double y, double z)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
-
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
-	{
-		*ptr++ = 0;
-		n--;
-	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+	return ((t_matrix){{{1, 0, 0, x}, {0, 1, 0, y}, {0, 0, 1, z}, {0, 0, 0, 1}},
+		4});
 }

@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   invert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/27 02:02:15 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/27 02:24:19 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "matrix.h"
 
-void	*ft_bzero(void *s, size_t n)
+t_matrix	matrix_invert(t_matrix m)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
+	t_matrix	inverted;
+	double		det;
+	int			i;
+	int			j;
 
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
+	inverted = matrix_create(4);
+	det = matrix_determinant(m);
+	i = 0;
+	while (i < m.size)
 	{
-		*ptr++ = 0;
-		n--;
+		j = 0;
+		while (j < m.size)
+		{
+			inverted.matrix[j][i] = matrix_cofactor(m, i, j) / det;
+			++j;
+		}
+		++i;
 	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+	return (inverted);
 }

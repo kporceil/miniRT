@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/21 18:42:01 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/21 19:05:31 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "color.h"
 
-void	*ft_bzero(void *s, size_t n)
+t_color	color(double red, double green, double blue)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
-
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
-	{
-		*ptr++ = 0;
-		n--;
-	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+	return ((t_color){red, green, blue});
 }

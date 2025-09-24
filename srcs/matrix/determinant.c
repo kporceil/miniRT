@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   determinant.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/26 20:55:57 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/28 22:17:40 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "matrix.h"
 
-void	*ft_bzero(void *s, size_t n)
+double	matrix_determinant(t_matrix m)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
+	double	det;
+	int		i;
 
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
+	if (m.size == 2)
+		return (m.matrix[0][0] * m.matrix[1][1] - m.matrix[0][1]
+				* m.matrix[1][0]);
+	i = 0;
+	det = 0;
+	while (i < m.size)
 	{
-		*ptr++ = 0;
-		n--;
+		det += m.matrix[0][i] * matrix_cofactor(m, 0, i);
+		++i;
 	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+	return (det);
 }

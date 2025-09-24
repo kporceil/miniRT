@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   normalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/21 16:38:59 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/21 16:40:25 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "tuples.h"
 
-void	*ft_bzero(void *s, size_t n)
+inline t_tuple	normalize(t_tuple v)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
+	const double	m = magnitude(v);
+	const double	inv_m = 1.0 / m;
 
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
-	{
-		*ptr++ = 0;
-		n--;
-	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+	return ((t_tuple){v.x * inv_m, v.y * inv_m, v.z * inv_m, v.w * inv_m});
 }

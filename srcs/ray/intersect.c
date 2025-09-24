@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/27 22:06:03 by kporceil          #+#    #+#             */
+/*   Updated: 2025/09/12 13:58:10 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "shape.h"
+#include "ray.h"
 
-void	*ft_bzero(void *s, size_t n)
+void	ray_intersect(t_shape *s, t_ray r, t_intersections *inter)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
-
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
-	{
-		*ptr++ = 0;
-		n--;
-	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+	if (s->type == SPHERE)
+		ray_sphere_intersect(s, ray_transform(&r, &s->inverted), inter);
+	if (s->type == PLANE)
+		ray_plane_intersect(s, ray_transform(&r, &s->inverted), inter);
 }

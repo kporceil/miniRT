@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/22 00:23:04 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/22 13:43:39 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#ifndef CANVAS_H
+# define CANVAS_H
 
-void	*ft_bzero(void *s, size_t n)
+# include <stddef.h>
+# include "color.h"
+
+typedef struct s_canva
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
+	size_t	width;
+	size_t	height;
+	t_color	*canva;
+}				t_canva;
 
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
-	{
-		*ptr++ = 0;
-		n--;
-	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
-}
+t_canva	canva(size_t width, size_t height);
+void	write_pixel(t_canva *c, size_t x, size_t y, t_color color);
+char	*canva_to_ppm(t_canva c);
+
+#endif

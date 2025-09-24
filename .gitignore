@@ -1,0 +1,7 @@
+.build
+*.ppm
+miniRT
+.cache
+*.out
+*.json
+callgrind*

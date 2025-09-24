@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   scalar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/21 15:49:46 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/21 19:21:24 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "tuples.h"
 
-void	*ft_bzero(void *s, size_t n)
+inline t_tuple	tuple_scalar_mult(t_tuple t, double scalar)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
+	return ((t_tuple){t.x * scalar, t.y * scalar, t.z * scalar, t.w * scalar});
+}
 
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
-	{
-		*ptr++ = 0;
-		n--;
-	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+inline t_tuple	tuple_scalar_div(t_tuple t, double scalar)
+{
+	const double	inv_scalar = 1.0 / scalar;
+
+	return ((t_tuple){t.x * inv_scalar, t.y * inv_scalar, t.z * inv_scalar,
+		t.w * inv_scalar});
 }

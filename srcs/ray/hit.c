@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 23:55:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 21:02:32 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/08/28 20:50:22 by kporceil          #+#    #+#             */
+/*   Updated: 2025/08/30 23:37:54 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "ray.h"
 
-void	*ft_bzero(void *s, size_t n)
+t_inter	*inter_hit(t_inter *inter, size_t size)
 {
-	char		*ptr;
-	uint64_t	*word_ptr;
+	size_t	i;
+	t_inter	*ret;
 
-	ptr = (char *)s;
-	while (n && ((uintptr_t)ptr & 7))
+	i = 0;
+	ret = NULL;
+	while (i < size)
 	{
-		*ptr++ = 0;
-		n--;
+		if (inter[i].point < 0)
+		{
+			++i;
+			continue ;
+		}
+		if (!ret)
+			ret = inter + i;
+		if (inter[i].point < ret->point)
+			ret = inter + i;
+		++i;
 	}
-	word_ptr = (uint64_t *)ptr;
-	while (n >= 8)
-	{
-		*word_ptr++ = 0;
-		n -= 8;
-	}
-	ptr = (char *)word_ptr;
-	while (n--)
-		*ptr++ = 0;
-	return (s);
+	return (ret);
 }
