@@ -13,11 +13,10 @@
 #include "shape.h"
 #include "ray.h"
 
-t_intersect	ray_intersect(t_shape *s, t_ray r)
+void	ray_intersect(t_shape *s, t_ray r, t_intersections *inter)
 {
 	if (s->type == SPHERE)
-		return (ray_sphere_intersect(s, ray_transform(&r, &s->inverted)));
+		ray_sphere_intersect(s, ray_transform(&r, &s->inverted), inter);
 	if (s->type == PLANE)
-		return (ray_plane_intersect(s, ray_transform(&r, &s->inverted)));
-	return (ray_sphere_intersect(s, ray_transform(&r, &s->inverted)));
+		ray_plane_intersect(s, ray_transform(&r, &s->inverted), inter);
 }

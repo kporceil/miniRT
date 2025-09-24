@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "tests.h"
+#include <stdio.h>
 
 int	main(void)
 {
@@ -71,5 +72,6 @@ int	main(void)
 	ret += test_is_shadowed();
 	ret += test_render_shadow();
 	ret += test_plane_intersect();
+	printf("Failed %d tests\n", ret);
 	return (ret);
 }

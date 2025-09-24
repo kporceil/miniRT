@@ -15,49 +15,55 @@
 #include <stdint.h>
 #include <setjmp.h>
 #include <cmocka.h>
+#include <stdlib.h>
 #include "shape.h"
 #include "tests.h"
-#include "light.h"
 #include "ray.h"
 
 static void	parallel_ray_plane_test(__unused void **state)
 {
 	t_shape	p = plane(0);
 	t_ray	r = ray(point(0, 10, 0), vector(0, 0, 1));
-	t_intersect	xs = ray_intersect(&p, r);
+	t_intersections	inters = { .inters = NULL, .size = 0};
 	
-	assert_int_equal(xs.count, 0);
+	ray_intersect(&p, r, &inters);
+	assert_int_equal(inters.size, 0);
 }
 
 static void	coplanar_ray_plane_test(__unused void **state)
 {
 	t_shape	p = plane(0);
 	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
-	t_intersect	xs = ray_intersect(&p, r);
-	
-	assert_int_equal(xs.count, 0);
+	t_intersections	inters = {NULL, 0};
+
+	ray_intersect(&p, r, &inters);
+	assert_int_equal(inters.size, 0);
 }
 
 static void	above_ray_plane_test(__unused void **state)
 {
 	t_shape	p = plane(0);
 	t_ray	r = ray(point(0, 1, 0), vector(0, -1, 0));
-	t_intersect	xs = ray_intersect(&p, r);
+	t_intersections	inter = {malloc(sizeof(t_inter)), 0};
 	
-	assert_int_equal(xs.count, 1);
-	assert_double_equal(xs.object[0].point, 1, 0.0001);
-	assert_int_equal(xs.object[0].s, &p);
+	ray_intersect(&p, r, &inter);
+	assert_int_equal(inter.size, 1);
+	assert_double_equal(inter.inters[0].point, 1, 0.0001);
+	assert_int_equal(inter.inters[0].s, &p);
+	free(inter.inters);
 }
 
 static void	below_ray_plane_test(__unused void **state)
 {
 	t_shape	p = plane(0);
 	t_ray	r = ray(point(0, -1, 0), vector(0, 1, 0));
-	t_intersect	xs = ray_intersect(&p, r);
+	t_intersections	inter = {malloc(sizeof(t_inter)), 0};
 	
-	assert_int_equal(xs.count, 1);
-	assert_double_equal(xs.object[0].point, 1, 0.0001);
-	assert_int_equal(xs.object[0].s, &p);
+	ray_intersect(&p, r, &inter);
+	assert_int_equal(inter.size, 1);
+	assert_double_equal(inter.inters[0].point, 1, 0.0001);
+	assert_int_equal(inter.inters[0].s, &p);
+	free(inter.inters);
 }
 
 int	test_plane_intersect(void)

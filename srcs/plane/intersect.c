@@ -13,12 +13,8 @@
 #include "ray.h"
 #include <math.h>
 
-t_intersect	ray_plane_intersect(t_shape *s, t_ray r)
+void	ray_plane_intersect(t_shape *s, t_ray r, t_intersections *inter)
 {
-	double	t;
-
-	if (fabs(r.dir.y) < 0.0001)
-		return ((t_intersect){0, {{s, 0}, {s, 0}}});
-	t = -r.origin.y / r.dir.y;
-	return ((t_intersect){1, {{s, t}, {s, t}}});
+	if (fabs(r.dir.y) >= 0.0001)
+		inter->inters[inter->size++] = (t_inter){s, -r.origin.y / r.dir.y};
 }

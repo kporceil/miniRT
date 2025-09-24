@@ -15,68 +15,72 @@
 #include <stdint.h>
 #include <setjmp.h>
 #include <cmocka.h>
+#include <stdlib.h>
 #include "ray.h"
 #include "shape.h"
+#include "tests.h"
 
-static void	ray_sphere_intersect_test1(void **state)
+static void	ray_sphere_intersect_test1(__unused void **state)
 {
 	t_shape	s = sphere(0);
-	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 0, -5), vector(0, 0, 1)));
-
-	(void)state;
-	assert_int_equal(intersect.count, 2);
-	assert_int_equal(intersect.object[0].s, &s);
-	assert_int_equal(intersect.object[1].s, &s);
-	assert_double_equal(intersect.object[0].point, 4.0, 0.0001);
-	assert_double_equal(intersect.object[1].point, 6.0, 0.0001);
+	t_intersections	inter = {malloc(sizeof(t_inter) * 2), 0};
+	
+	ray_sphere_intersect(&s, ray(point(0, 0, -5), vector(0, 0, 1)), &inter);
+	assert_int_equal(inter.size, 2);
+	assert_int_equal(inter.inters[0].s, &s);
+	assert_int_equal(inter.inters[1].s, &s);
+	assert_double_equal(inter.inters[0].point, 4.0, 0.0001);
+	assert_double_equal(inter.inters[1].point, 6.0, 0.0001);
+	free(inter.inters);
 }
 
-static void	ray_sphere_tangent_intersect_test(void **state)
+static void	ray_sphere_tangent_intersect_test(__unused void **state)
 {
 	t_shape	s = sphere(0);
-	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 1, -5), vector(0, 0, 1)));
+	t_intersections	inter = {malloc(sizeof(t_inter) * 1), 0};
 
-	(void)state;
-	assert_int_equal(intersect.count, 2);
-	assert_int_equal(intersect.object[0].s, &s);
-	assert_int_equal(intersect.object[1].s, &s);
-	assert_double_equal(intersect.object[0].point, 5.0, 0.0001);
-	assert_double_equal(intersect.object[1].point, 5.0, 0.0001);
+	ray_sphere_intersect(&s, ray(point(0, 1, -5), vector(0, 0, 1)), &inter);
+	assert_int_equal(inter.size, 1);
+	assert_int_equal(inter.inters[0].s, &s);
+	assert_double_equal(inter.inters[0].point, 5.0, 0.0001);
+	free(inter.inters);
 }
 
-static void	ray_sphere_no_intersect_test(void **state)
+static void	ray_sphere_no_intersect_test(__unused void **state)
 {
 	t_shape	s = sphere(0);
-	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 2, -5), vector(0, 0, 1)));
+	t_intersections	inter = {NULL, 0};
 
-	(void)state;
-	assert_int_equal(intersect.count, 0);
+	ray_sphere_intersect(&s, ray(point(0, 2, -5), vector(0, 0, 1)), &inter);
+	assert_int_equal(inter.size, 0);
 }
 
-static void	ray_inside_sphere_intersect_test(void **state)
+static void	ray_inside_sphere_intersect_test(__unused void **state)
 {
 	t_shape	s = sphere(0);
-	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)));
+	t_intersections	inter = {malloc(sizeof(t_inter) * 2), 0};
 
-	(void)state;
-	assert_int_equal(intersect.count, 2);
-	assert_int_equal(intersect.object[0].s, &s);
-	assert_int_equal(intersect.object[1].s, &s);
-	assert_double_equal(intersect.object[0].point, -1.0, 0.0001);
-	assert_double_equal(intersect.object[1].point, 1.0, 0.0001);
+	ray_sphere_intersect(&s, ray(point(0, 0, 0), vector(0, 0, 1)), &inter);
+	assert_int_equal(inter.size, 2);
+	assert_int_equal(inter.inters[0].s, &s);
+	assert_int_equal(inter.inters[1].s, &s);
+	assert_double_equal(inter.inters[0].point, -1.0, 0.0001);
+	assert_double_equal(inter.inters[1].point, 1.0, 0.0001);
+	free(inter.inters);
 }
 
-static void	ray_sphere_intersect_test2(void **state)
+static void	ray_sphere_intersect_test2(__unused void **state)
 {
 	t_shape	s = sphere(0);
-	t_intersect	intersect = ray_sphere_intersect(&s, ray(point(0, 0, 5), vector(0, 0, 1)));
+	t_intersections	inter = {malloc(sizeof(t_inter) * 2), 0};
 
-	(void)state;
-	assert_int_equal(intersect.count, 2);
-	assert_int_equal(intersect.object[0].s, &s);
-	assert_int_equal(intersect.object[1].s, &s);
-	assert_double_equal(intersect.object[0].point, -6.0, 0.0001);
-	assert_double_equal(intersect.object[1].point, -4.0, 0.0001);
+	ray_sphere_intersect(&s, ray(point(0, 0, 5), vector(0, 0, 1)), &inter);
+	assert_int_equal(inter.size, 2);
+	assert_int_equal(inter.inters[0].s, &s);
+	assert_int_equal(inter.inters[1].s, &s);
+	assert_double_equal(inter.inters[0].point, -6.0, 0.0001);
+	assert_double_equal(inter.inters[1].point, -4.0, 0.0001);
+	free(inter.inters);
 }
 
 int	test_ray_sphere_intersect(void)

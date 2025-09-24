@@ -57,27 +57,20 @@ static t_intersections	adjust_and_sort_inter(t_intersections *inter)
 t_intersections	world_intersect(t_world	world, t_ray r)
 {
 	t_intersections	inter;
-	t_intersect		tmp_inter;
 	size_t			i;
-	size_t			k;
-	int				j;
 
-	i = 0;
-	k = 0;
+	inter.size = 0;
 	inter.inters = NULL;
 	if (!world.objs_count)
 		return (inter);
+	i = 0;
 	inter.inters = malloc(sizeof(t_inter) * world.objs_count * 2);
 	if (!inter.inters)
 		return (inter);
 	while (i < world.objs_count)
 	{
-		tmp_inter = ray_intersect(world.objs + i, r);
-		j = 0;
-		while (j < tmp_inter.count)
-			inter.inters[k++] = tmp_inter.object[j++];
+		ray_intersect(world.objs + i, r, &inter);
 		++i;
 	}
-	inter.size = k;
 	return (adjust_and_sort_inter(&inter));
 }

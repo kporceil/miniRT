@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <setjmp.h>
 #include <cmocka.h>
+#include <stdlib.h>
 #include "ray.h"
 #include "matrix.h"
 #include "tests.h"
@@ -41,30 +42,30 @@ static void	ray_scaling_test(void **state)
 	assert_tuple_equal(r2.dir, vector(0, 3, 0));
 }
 
-static void	ray_scaled_intersect_test(void **state)
+static void	ray_scaled_intersect_test(__unused void **state)
 {
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_shape	s = sphere(0);
-	t_intersect	inter;
+	t_intersections	inter = {malloc(sizeof(t_inter) * 2), 0};
 	
 	(void)state;
 	shape_set_matrix(&s, matrix_scaling(2, 2, 2));
-	inter = ray_sphere_intersect(&s, ray_transform(&r, &s.inverted));
-	assert_int_equal(inter.count, 2);
-	assert_double_equal(inter.object[0].point, 3, 0.0001);
-	assert_double_equal(inter.object[1].point, 7, 0.0001);
+	ray_sphere_intersect(&s, ray_transform(&r, &s.inverted), &inter);
+	assert_int_equal(inter.size, 2);
+	assert_double_equal(inter.inters[0].point, 3, 0.0001);
+	assert_double_equal(inter.inters[1].point, 7, 0.0001);
+	free(inter.inters);
 }
 
-static void	ray_translate_intersect_test(void **state)
+static void	ray_translate_intersect_test(__unused void **state)
 {
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_shape	s = sphere(0);
-	t_intersect	inter;
+	t_intersections	inter = {NULL, 0};
 	
-	(void)state;
 	shape_set_matrix(&s, matrix_translation(5, 0, 0));
-	inter = ray_sphere_intersect(&s, ray_transform(&r, &s.inverted));
-	assert_int_equal(inter.count, 0);
+	ray_sphere_intersect(&s, ray_transform(&r, &s.inverted), &inter);
+	assert_int_equal(inter.size, 0);
 }
 
 int	test_ray_transformation(void)
