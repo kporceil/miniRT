@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tmp_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/12 15:24:05 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/26 01:39:14 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
+#include "patterns.h"
 #include "shape.h"
 #include "tuples.h"
 #include "canvas.h"
@@ -45,11 +46,15 @@ int	main(void)
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.objs[0] = sphere(0);
+	world.objs[0].material.pat = pattern(GRADIENT, color(0.1, 0.5, 1), color(0.1, 1, 0.5));
+	pattern_set_transform(&world.objs[0].material.pat, matrix_mult(matrix_translation(-1, 0, 0), matrix_scaling(2, 2, 2)));
 	world.objs[0].material.color = color(0.1, 1, 0.5);
 	world.objs[0].material.diffuse = 0.7;
 	world.objs[0].material.specular = 0.3;
 	shape_set_matrix(world.objs, matrix_translation(-0.5, 1, 0.5));
 	world.objs[1] = sphere(1);
+	world.objs[1].material.pat = pattern(RING, color(0.5, 1, 0.1), color(1, 0.5, 0.1));
+	pattern_set_transform(&world.objs[1].material.pat, matrix_mult(matrix_mult(matrix_x_rotation(M_PI/2), matrix_z_rotation(M_PI/1.2)), matrix_scaling(0.1, 0.1, 0.1)));
 	world.objs[1].material.color = color(0.5, 1, 0.1);
 	world.objs[1].material.diffuse = 0.7;
 	world.objs[1].material.specular = 0.3;
@@ -60,10 +65,11 @@ int	main(void)
 	world.objs[2].material.specular = 0.3;
 	shape_set_matrix(world.objs + 2, matrix_mult(matrix_translation(-1.5, 0.33, -0.75), matrix_scaling(0.33, 0.33, 0.33)));
 	world.objs[3] = plane(3);
-	world.objs[3].material.pat = pattern(STRIPED, color(0, 0, 0), color(1, 0.9, 0.9));
-	pattern_set_transform(&world.objs[3].material.pat, matrix_y_rotation(M_PI));
+	world.objs[3].material.pat = pattern(CHECKER, color(0, 0, 0), color(1, 0.9, 0.9));
+	pattern_set_transform(&world.objs[3].material.pat, matrix_mult(matrix_translation(0, 0.00001, 0), matrix_scaling(1, 1, 1)));
 	world.objs[3].material.color = color(1, 0.9, 0.9);
 	world.objs[4] = plane(4);
+	world.objs[4].material.pat = pattern(STRIPED, color(0.1, 0.3, 0.7), color(0.3, 0.7, 0.1));
 	world.objs[4].material.color = color(0.1, 0.3, 0.7);
 	world.objs[4].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 4, matrix_mult(matrix_translation(5, 0, 0), matrix_z_rotation(M_PI/2)));

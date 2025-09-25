@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/25 23:02:39 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/26 00:56:33 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,8 @@ int		test_plane_intersect(void);
 
 int		test_striped_pattern(void);
 int		test_transformed_pattern(void);
+int		test_ring_pattern(void);
+int		test_gradient_pattern(void);
+int		test_checker_pattern(void);
 
 #endif

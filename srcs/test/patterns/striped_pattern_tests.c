@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 17:12:58 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/25 18:11:54 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/26 00:37:29 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	x_pattern_test(__unused void **state)
 void	lighting_pattern_test(__unused void **state)
 {
 	t_material	m = { .pat = pattern(STRIPED, color(1, 1, 1), color(0, 0, 0)), .ambient = 1, .diffuse = 0, .specular = 0};
-	t_lighting	l = { .m = m, .eyev = vector(0, 0, -1), .normalv = vector(0, 0, -1), .light = point_light(point(0, 0, -10), color(1, 1, 1)), .p = point(0.9, 0, 0), .in_shadow = false };
+	t_shape		obj = sphere(0);
+	t_lighting	l = { .m = m, .eyev = vector(0, 0, -1), .normalv = vector(0, 0, -1), .light = point_light(point(0, 0, -10), color(1, 1, 1)), .p = point(0.9, 0, 0), .in_shadow = false, .obj = &obj };
 	t_color		c1 = lighting(l);
 	l.p.x = 1.1;
 	t_color		c2 = lighting(l);
