@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   material.h                                         :+:      :+:    :+:   */
+/*   patterns.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 13:25:16 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 13:30:14 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/09/25 17:08:19 by kporceil          #+#    #+#             */
+/*   Updated: 2025/09/25 18:16:58 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATERIAL_H
-# define MATERIAL_H
+#ifndef PATTERNS_H
+# define PATTERNS_H
 
 # include "color.h"
-# include "patterns.h"
+# include "tuples.h"
 
-typedef struct s_material
+typedef enum e_patype
 {
-	t_pattern	pat;
-	t_color		color;
-	double		ambient;
-	double		diffuse;
-	double		specular;
-	double		shininess;
-}				t_material;
+	NO,
+	STRIPED,
+	GRADIENT,
+	RING,
+	CHECKER,
+}				t_patype;
 
-t_material	material(void);
+typedef struct s_pattern
+{ 
+	t_patype	type;
+	t_color	a;
+	t_color	b;
+}				t_pattern;
+
+static inline t_pattern	pattern(t_patype type, t_color a, t_color b)
+{
+	return ((t_pattern){type, a, b});
+}
+
+t_color	pattern_at(t_pattern pat, t_tuple p);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/12 14:17:20 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/25 18:14:01 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(void)
 	ret += test_is_shadowed();
 	ret += test_render_shadow();
 	ret += test_plane_intersect();
+	ret += test_striped_pattern();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

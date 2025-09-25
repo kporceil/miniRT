@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   material.h                                         :+:      :+:    :+:   */
+/*   stripe_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 13:25:16 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/29 13:30:14 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/09/25 18:00:52 by kporceil          #+#    #+#             */
+/*   Updated: 2025/09/25 18:10:27 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATERIAL_H
-# define MATERIAL_H
+#include "color.h"
+#include "tuples.h"
+#include "patterns.h"
+#include <math.h>
 
-# include "color.h"
-# include "patterns.h"
-
-typedef struct s_material
+static inline t_color	stripe_at(t_pattern pat, t_tuple p)
 {
-	t_pattern	pat;
-	t_color		color;
-	double		ambient;
-	double		diffuse;
-	double		specular;
-	double		shininess;
-}				t_material;
+	if ((int)floor(p.x) % 2)
+		return (pat.b);
+	return (pat.a);
+}
 
-t_material	material(void);
-
-#endif
+t_color	pattern_at(t_pattern pat, t_tuple p)
+{
+	if (pat.type == STRIPED)
+		return (stripe_at(pat, p));
+	return (stripe_at(pat, p));
+}

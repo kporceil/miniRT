@@ -11,18 +11,27 @@
 /* ************************************************************************** */
 
 #include <math.h>
+#include "patterns.h"
 #include "material.h"
 #include "tuples.h"
 #include "light.h"
 #include "color.h"
 
+static inline t_color	set_color(t_lighting l)
+{
+	if (l.m.pat.type != NO)
+		return (pattern_at(l.m.pat, l.p));
+	return (l.m.color);
+}
+
 t_color	lighting(t_lighting l)
 {
-	t_color	ambient;
-	t_color	specular;
-	t_color	diffuse;
+	t_color			ambient;
+	t_color			specular;
+	t_color			diffuse;
+	const t_color	obj_color = set_color(l);
 
-	l.eff_color = color_mult(l.m.color, l.light.intensity);
+	l.eff_color = color_mult(obj_color, l.light.intensity);
 	ambient = color_scalar_mult(l.eff_color, l.m.ambient);
 	if (l.in_shadow)
 		return (ambient);

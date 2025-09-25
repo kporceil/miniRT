@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "patterns.h"
 #include "material.h"
 
 t_material	material(void)
 {
-	return ((t_material){(t_color){1, 1, 1}, 0.1, 0.9, 0.9, 200});
+	return ((t_material){(t_pattern){NO, color(0, 0, 0), color(0, 0, 0)},
+			(t_color){1, 1, 1}, 0.1, 0.9, 0.9, 200});
 }
