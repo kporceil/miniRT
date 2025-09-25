@@ -20,7 +20,7 @@
 static inline t_color	set_color(t_lighting l)
 {
 	if (l.m.pat.type != NO)
-		return (pattern_at(l.m.pat, l.p));
+		return (pattern_at_object(l.m.pat, *l.obj, l.p));
 	return (l.m.color);
 }
 
