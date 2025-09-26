@@ -37,7 +37,7 @@ static inline t_color	gradient_at(t_pattern pat, t_tuple p)
 
 static inline t_color	checker_at(t_pattern pat, t_tuple p)
 {
-	if ((int)(floor(p.x) + floor(p.y) + floor(p.z)) % 2)
+	if ((int)(floor(p.x) + round(p.y) + floor(p.z)) % 2)
 		return (pat.b);
 	return (pat.a);
 }

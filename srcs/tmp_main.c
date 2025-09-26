@@ -66,7 +66,7 @@ int	main(void)
 	shape_set_matrix(world.objs + 2, matrix_mult(matrix_translation(-1.5, 0.33, -0.75), matrix_scaling(0.33, 0.33, 0.33)));
 	world.objs[3] = plane(3);
 	world.objs[3].material.pat = pattern(CHECKER, color(0, 0, 0), color(1, 0.9, 0.9));
-	pattern_set_transform(&world.objs[3].material.pat, matrix_mult(matrix_translation(0, 0.00001, 0), matrix_scaling(1, 1, 1)));
+	pattern_set_transform(&world.objs[3].material.pat, matrix_scaling(1, 1, 1));
 	world.objs[3].material.color = color(1, 0.9, 0.9);
 	world.objs[4] = plane(4);
 	world.objs[4].material.pat = pattern(STRIPED, color(0.1, 0.3, 0.7), color(0.3, 0.7, 0.1));
