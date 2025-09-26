@@ -33,6 +33,7 @@ typedef struct s_lighting
 	t_tuple		normalv;
 	t_tuple		lightv;
 	t_color		eff_color;
+	t_shape		*obj;
 	double		light_dot_norm;
 	double		ref_dot_eye;
 	double		factor;
