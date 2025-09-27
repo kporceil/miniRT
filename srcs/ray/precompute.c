@@ -31,5 +31,6 @@ t_precomp	precompute(t_inter i, t_ray r)
 		ret.inside = true;
 		ret.normalv = tuple_negate(ret.normalv);
 	}
+	ret.reflectv = reflect(r.dir, ret.normalv);
 	return (ret);
 }

@@ -41,6 +41,7 @@ typedef struct s_precomp
 	t_tuple		over_point;
 	t_tuple		eyev;
 	t_tuple		normalv;
+	t_tuple		reflectv;
 	double		t;
 	bool		inside;
 }				t_precomp;
