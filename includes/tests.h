@@ -104,4 +104,6 @@ int		test_render_shadow(void);
 
 int		test_plane_intersect(void);
 
+int	test_cylinder_intersect(void);
+
 #endif

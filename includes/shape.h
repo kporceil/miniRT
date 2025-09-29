@@ -36,6 +36,7 @@ typedef struct s_shape
 
 t_shape		plane(size_t id);
 t_shape		sphere(size_t id);
+t_shape		cylinder(size_t id);
 void		shape_set_matrix(t_shape *s, t_matrix m);
 
 #endif
