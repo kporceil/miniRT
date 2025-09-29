@@ -59,3 +59,13 @@ jobs:
 
       - name: test check
         run: make test
+
+  todo-fixme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check for TODO or FIXME
+        run: ./CI/check.sh
