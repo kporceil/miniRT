@@ -16,6 +16,10 @@
 # include "tuples.h"
 # include "shape.h"
 
+# ifndef MAX_REFLECT
+#  define MAX_REFLECT 5
+# endif
+
 typedef struct s_ray
 {
 	t_tuple	origin;

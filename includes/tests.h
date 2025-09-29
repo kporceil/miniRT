@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/27 02:14:17 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/27 16:15:35 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ int		test_gradient_pattern(void);
 int		test_checker_pattern(void);
 
 int		test_precompute_reflect(void);
+int		test_reflective(void);
 
 #endif
