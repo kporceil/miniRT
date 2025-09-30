@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_tests.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:43:22 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/09/29 14:28:42 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/09/30 11:03:57 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

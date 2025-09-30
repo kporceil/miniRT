@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/29 15:16:03 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/09/30 11:36:15 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(void)
 	world.objs_count = 6;
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
-	world.objs[0] = sphere(0);
+	world.objs[0] = cylinder(0);
 	world.objs[0].material.color = color(0.1, 1, 0.5);
 	world.objs[0].material.diffuse = 0.7;
 	world.objs[0].material.specular = 0.3;

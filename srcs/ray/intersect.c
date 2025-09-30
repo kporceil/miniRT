@@ -19,4 +19,6 @@ void	ray_intersect(t_shape *s, t_ray r, t_intersections *inter)
 		ray_sphere_intersect(s, ray_transform(&r, &s->inverted), inter);
 	if (s->type == PLANE)
 		ray_plane_intersect(s, ray_transform(&r, &s->inverted), inter);
+	if (s->type == CYLINDER)
+		ray_cylinder_intersect(s, ray_transform(&r, &s->inverted), inter);
 }

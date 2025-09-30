@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:31:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/12 13:49:33 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/30 11:33:46 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 		return (tuple_substract(object_point, point(0, 0, 0)));
 	if (s.type == PLANE)
 		return (vector(0, 1, 0));
+	if (s.type == CYLINDER)
+		return (vector(object_point.x, 0, object_point.z));
 	return (tuple_substract(object_point, point(0, 0, 0)));
 }
 
