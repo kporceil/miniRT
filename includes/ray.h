@@ -17,7 +17,7 @@
 # include "shape.h"
 
 # ifndef MAX_REFLECT
-#  define MAX_REFLECT 5
+#  define MAX_REFLECT 50
 # endif
 
 typedef struct s_ray
