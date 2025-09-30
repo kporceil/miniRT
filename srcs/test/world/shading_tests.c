@@ -16,6 +16,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <stdlib.h>
+#include "ray.h"
 #include "world.h"
 #include "color.h"
 #include "tests.h"
@@ -65,7 +66,7 @@ static void	shading_intersect_test(void **state)
 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_inter	i = {world->objs, 4};
 	t_precomp	comps = precompute(i, r);
-	t_color		c = shade_hit(*world, comps);
+	t_color		c = shade_hit(*world, comps, 0);
 
 	assert_color_equal(color(0.38066, 0.47583, 0.2855), c);
 }
@@ -77,7 +78,7 @@ static void	inside_shading_intersect_test(void **state)
 	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
 	t_inter	i = {world->objs + 1, 0.5};
 	t_precomp	comps = precompute(i, r);
-	t_color		c = shade_hit(*world, comps);
+	t_color		c = shade_hit(*world, comps, 0);
 
 	assert_color_equal(color(0.1, 0.1, 0.1), c);
 }
@@ -88,7 +89,7 @@ static void	shading_no_hit_test(void **state)
 	t_ray	r = ray(point(0, 0, -5), vector(0, 1, 0));
 	t_color	c;
 
-	if (color_at(*world, r, &c))
+	if (color_at(*world, r, &c, 0))
 		fail_msg("Malloc_fail");
 	assert_color_equal(color(0, 0, 0), c);
 }
@@ -99,7 +100,7 @@ static void	shading_hit_test(void **state)
 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_color	c;
 
-	if (color_at(*world, r, &c))
+	if (color_at(*world, r, &c, 0))
 		fail_msg("Malloc fail");
 	assert_color_equal(color(0.38066, 0.47583, 0.2855), c);
 }
@@ -114,7 +115,7 @@ static void	behind_shading_hit_test(void **state)
 	t_ray	r = ray(point(0, 0, 0.75), vector(0, 0, -1));
 	t_color	c;
 
-	if (color_at(*world, r, &c))
+	if (color_at(*world, r, &c, 0))
 		fail_msg("Malloc fail");
 	assert_color_equal(inner->material.color, c);
 }

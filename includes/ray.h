@@ -16,6 +16,10 @@
 # include "tuples.h"
 # include "shape.h"
 
+# ifndef MAX_REFLECT
+#  define MAX_REFLECT 50
+# endif
+
 typedef struct s_ray
 {
 	t_tuple	origin;
@@ -41,6 +45,7 @@ typedef struct s_precomp
 	t_tuple		over_point;
 	t_tuple		eyev;
 	t_tuple		normalv;
+	t_tuple		reflectv;
 	double		t;
 	bool		inside;
 }				t_precomp;

@@ -29,7 +29,8 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix camera/, create_tests ray_tests render_tests) \
 					$(addprefix plane/, intersect_tests) \
 					$(addprefix shadow/, in_shadow_tests is_shadowed_tests render_shadow_tests) \
-					$(addprefix patterns/, striped_pattern_tests transform_pattern_tests ring_pattern_tests gradient_pattern_tests checker_pattern_tests))
+					$(addprefix patterns/, striped_pattern_tests transform_pattern_tests ring_pattern_tests gradient_pattern_tests checker_pattern_tests) \
+					$(addprefix reflect/, precompute_reflect_tests reflection_tests))
 
 endif
 ifeq (no, $(TEST))
@@ -50,6 +51,7 @@ BASENAME := $(MAIN) \
 			$(addprefix shadow/, is_shadowed) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix patterns/, pattern_at pattern_at_object) \
+			$(addprefix reflect/, reflected_color) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
