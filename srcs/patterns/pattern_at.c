@@ -17,14 +17,14 @@
 
 static inline t_color	stripe_at(t_pattern pat, t_tuple p)
 {
-	if ((int)p.x % 2)
+	if ((int)floor(p.x) % 2)
 		return (pat.b);
 	return (pat.a);
 }
 
 static inline t_color	ring_at(t_pattern pat, t_tuple p)
 {
-	if ((int)((int)(sqrt(p.x * p.x + p.z * p.z))) % 2)
+	if ((int)(floor(sqrt(p.x * p.x + p.z * p.z))) % 2)
 		return (pat.b);
 	return (pat.a);
 }
