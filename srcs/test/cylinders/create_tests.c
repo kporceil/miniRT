@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 12:46:17 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/09/30 12:56:55 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 12:12:47 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,18 @@ static void	create_cylinder_1_test(__unused void **state)
 	assert_double_equal(cyl.cyl_max, DBL_MAX, EPSILON);
 }
 
+static void	closed_cylinder_1_test(__unused void **state)
+{
+	t_shape	cyl = cylinder(1);
+
+	assert_int_equal(cyl.cyl_closed, 0);
+}
+
 int	test_cylinder_create(void)
 {
 	const struct CMUnitTest	cylinder_create_tests[] = {
 		cmocka_unit_test(create_cylinder_1_test),
+		cmocka_unit_test(closed_cylinder_1_test),
 	};
 	return (cmocka_run_group_tests(cylinder_create_tests, NULL, NULL));
 }

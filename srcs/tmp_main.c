@@ -50,7 +50,8 @@ int	main(void)
 	world.objs[0].material.specular = 0.3;
 	world.objs[0].cyl_min = 1;
 	world.objs[0].cyl_max = 2;
-	//shape_set_matrix(world.objs, matrix_translation(-0.5, 1, 0.5));
+	world.objs[0].cyl_closed = 1;
+	shape_set_matrix(world.objs, matrix_mult(matrix_translation(1, 0, 0), matrix_x_rotation(1.0)));
 	world.objs[1] = sphere(1);
 	world.objs[1].material.color = color(0.5, 1, 0.1);
 	world.objs[1].material.diffuse = 0.7;

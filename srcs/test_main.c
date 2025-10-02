@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/30 12:51:08 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 14:09:41 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	main(void)
 	ret += test_cylinder_intersect();
 	ret += test_cylinder_normal();
 	ret += test_cylinder_truncate();
+	ret += test_end_cap_cylinder_intersect();
+	ret += test_end_cap_cylinder_normal();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

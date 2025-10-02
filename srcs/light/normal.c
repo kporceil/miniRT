@@ -14,6 +14,19 @@
 #include "tuples.h"
 #include "shape.h"
 
+static t_tuple	local_cylinder_normal(t_shape cyl, t_tuple object_point)
+{
+	double const	dist = object_point.x * object_point.x + object_point.z * object_point.z;
+	if (dist < 1)
+	{
+		if (object_point.y >= cyl.cyl_max - 0.0001)
+			return (vector(0, 1, 0));
+		else if (object_point.y <= cyl.cyl_min + 0.0001)
+			return (vector(0, -1, 0));
+	}
+	return (vector(object_point.x, 0, object_point.z));
+}
+
 static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 {
 	if (s.type == SPHERE)
@@ -21,7 +34,7 @@ static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 	if (s.type == PLANE)
 		return (vector(0, 1, 0));
 	if (s.type == CYLINDER)
-		return (vector(object_point.x, 0, object_point.z));
+		return (local_cylinder_normal(s, object_point));
 	return (tuple_substract(object_point, point(0, 0, 0)));
 }
 

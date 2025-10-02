@@ -6,11 +6,12 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/30 13:38:12 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 13:59:34 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
+#include "caps.h"
 #include <math.h>
 
 static int	is_between(double min, double a, double max)
@@ -38,7 +39,7 @@ void	ray_cylinder_intersect(t_shape *cyl, t_ray r, t_intersections *inter)
 	double					t1;
 
 	if (-0.001 <= a && a <= 0.001)
-		return ;
+		return (intersect_caps(cyl, r, inter));
 	b = 2 * r.origin.x * r.dir.x + 2 * r.origin.z * r.dir.z;
 	disc = b * b - 4 * a * (r.origin.x * r.origin.x + r.origin.z * r.origin.z - 1);
 	if (disc >= 0)
@@ -52,4 +53,5 @@ void	ray_cylinder_intersect(t_shape *cyl, t_ray r, t_intersections *inter)
 		if (is_between(cyl->cyl_min, r.origin.y + t1 * r.dir.y, cyl->cyl_max))
 			inter->inters[inter->size++] = (t_inter){cyl, t1};
 	}
+	intersect_caps(cyl, r, inter);
 }
