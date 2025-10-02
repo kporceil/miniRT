@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:49:15 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/12 14:14:32 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/30 12:36:25 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_shape
 	t_matrix	transformation;
 	t_matrix	inverted;
 	t_material	material;
+	double		cyl_min;
+	double		cyl_max;
 	size_t		id;
 }				t_shape;
 

@@ -48,12 +48,14 @@ int	main(void)
 	world.objs[0].material.color = color(0.1, 1, 0.5);
 	world.objs[0].material.diffuse = 0.7;
 	world.objs[0].material.specular = 0.3;
-	shape_set_matrix(world.objs, matrix_translation(-0.5, 1, 0.5));
+	world.objs[0].cyl_min = 1;
+	world.objs[0].cyl_max = 2;
+	//shape_set_matrix(world.objs, matrix_translation(-0.5, 1, 0.5));
 	world.objs[1] = sphere(1);
 	world.objs[1].material.color = color(0.5, 1, 0.1);
 	world.objs[1].material.diffuse = 0.7;
 	world.objs[1].material.specular = 0.3;
-	shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1.5, 0.5, -0.5), matrix_scaling(0.5, 0.5, 0.5)));
+	//shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1.5, 0.5, -0.5), matrix_scaling(0.5, 0.5, 0.5)));
 	world.objs[2] = sphere(2);
 	world.objs[2].material.color = color(1, 0.8, 0.1);
 	world.objs[2].material.diffuse = 0.7;

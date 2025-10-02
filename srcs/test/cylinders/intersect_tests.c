@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:43:22 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/09/30 11:03:57 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/09/30 12:52:42 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static void hit_ray_cylinder_3_test(__unused void **state)
 }
 int	test_cylinder_intersect(void)
 {
-	const struct CMUnitTest	plane_intersect_tests[] = {
+	const struct CMUnitTest	cylinder_intersect_tests[] = {
 		cmocka_unit_test(miss_ray_cylinder_1_test),
 		cmocka_unit_test(miss_ray_cylinder_2_test),
 		cmocka_unit_test(miss_ray_cylinder_3_test),
@@ -115,5 +115,5 @@ int	test_cylinder_intersect(void)
 		cmocka_unit_test(hit_ray_cylinder_2_test),
 		cmocka_unit_test(hit_ray_cylinder_3_test),
 	};
-	return (cmocka_run_group_tests(plane_intersect_tests, NULL, NULL));
+	return (cmocka_run_group_tests(cylinder_intersect_tests, NULL, NULL));
 }
