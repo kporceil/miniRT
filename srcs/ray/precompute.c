@@ -6,16 +6,18 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 22:33:34 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/03 19:26:58 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:34:47 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "light.h"
+#include "refract.h"
+#include <unistd.h>
 
 #define EPS 0.0001
 
-t_precomp	precompute(t_inter i, t_ray r)
+t_precomp	precompute(t_inter i, t_ray r, t_intersections *xs)
 {
 	t_precomp	ret;
 
@@ -32,5 +34,7 @@ t_precomp	precompute(t_inter i, t_ray r)
 		ret.normalv = tuple_negate(ret.normalv);
 	}
 	ret.reflectv = reflect(r.dir, ret.normalv);
+	if (xs)
+		find_nx(&ret, i, *xs);
 	return (ret);
 }

@@ -25,6 +25,8 @@ typedef struct s_material
 	double		specular;
 	double		shininess;
 	double		reflective;
+	double		transparency;
+	double		refractive_index;
 }				t_material;
 
 t_material	material(void);

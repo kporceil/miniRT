@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 23:28:56 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/31 14:38:20 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:38:13 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	color_at(t_world w, t_ray r, t_color *c, size_t remaining)
 		free(inters.inters);
 		return (0);
 	}
-	comps = precompute(*hit, r);
+	comps = precompute(*hit, r, NULL);
 	*c = shade_hit(w, comps, remaining);
 	free(inters.inters);
 	return (0);

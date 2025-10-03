@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:20:40 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/12 14:17:54 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:34:25 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_precomp
 	t_tuple		normalv;
 	t_tuple		reflectv;
 	double		t;
+	double		n1;
+	double		n2;
 	bool		inside;
 }				t_precomp;
 
@@ -57,6 +59,6 @@ void	ray_plane_intersect(t_shape *s, t_ray r, t_intersections *inter)__attribute
 void	ray_intersect(t_shape *s, t_ray r, t_intersections *inter);
 t_inter		*inter_hit(t_inter *intersect, size_t size);
 t_ray		ray_transform(t_ray *r, t_matrix *m)__attribute__((hot));
-t_precomp	precompute(t_inter i, t_ray r);
+t_precomp	precompute(t_inter i, t_ray r, t_intersections *xs);
 
 #endif

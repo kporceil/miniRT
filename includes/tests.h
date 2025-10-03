@@ -113,4 +113,6 @@ int		test_checker_pattern(void);
 int		test_precompute_reflect(void);
 int		test_reflective(void);
 
+int		test_determine_indices(void);
+
 #endif
