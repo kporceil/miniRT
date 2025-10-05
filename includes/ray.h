@@ -43,6 +43,7 @@ typedef struct s_precomp
 	t_shape	*obj;
 	t_tuple		point;
 	t_tuple		over_point;
+	t_tuple		under_point;
 	t_tuple		eyev;
 	t_tuple		normalv;
 	t_tuple		reflectv;

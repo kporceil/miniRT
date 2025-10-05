@@ -80,6 +80,7 @@ int	main(void)
 	ret += test_precompute_reflect();
 	ret += test_reflective();
 	ret += test_determine_indices();
+	ret += test_compute_under_point();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

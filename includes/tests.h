@@ -39,6 +39,13 @@
 									} while (0);
 # endif
 
+# ifndef assert_double_greater
+#  define assert_double_greater(a, b)	do { \
+											if (!(a > b))  \
+												fail_msg("%f is not greater than %f", a, b); \
+										} while (0);
+# endif
+
 int		test_tuple_creation(void);
 int		test_color_create(void);
 int		test_tuple_add(void);
@@ -114,5 +121,6 @@ int		test_precompute_reflect(void);
 int		test_reflective(void);
 
 int		test_determine_indices(void);
+int		test_compute_under_point(void);
 
 #endif
