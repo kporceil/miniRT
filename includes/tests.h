@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/27 16:15:35 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 14:41:57 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ int		test_reflective(void);
 
 int		test_determine_indices(void);
 int		test_compute_under_point(void);
+int		test_refractive_color(void);
 
 #endif

@@ -6,14 +6,13 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:26:29 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/02 17:29:52 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 15:16:01 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "refract.h"
 #include <stdlib.h>
-
 
 static double	set_n(t_objlist *first, t_objlist *last)
 {

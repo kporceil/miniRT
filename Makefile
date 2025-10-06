@@ -31,7 +31,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix shadow/, in_shadow_tests is_shadowed_tests render_shadow_tests) \
 					$(addprefix patterns/, striped_pattern_tests transform_pattern_tests ring_pattern_tests gradient_pattern_tests checker_pattern_tests) \
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
-					$(addprefix refraction/, determine_indices_tests compute_under_point_tests))
+					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests))
 
 endif
 ifeq (no, $(TEST))
@@ -53,7 +53,7 @@ BASENAME := $(MAIN) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix patterns/, pattern_at pattern_at_object) \
 			$(addprefix reflect/, reflected_color) \
-			$(addprefix refraction/, find_nx init_list add_or_delete_list) \
+			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -121,39 +121,39 @@ endif
 
 .PHONY: json
 json:
-	@/home/kenzo/venv/bin/compiledb $(MAKE) MODE="$(MODE)"
+	@/home/kporceil/.local/bin/compiledb $(MAKE) MODE="$(MODE)"
 
 .PHONY: all
 all:
-	@$(MAKE) MODE="default" TEST="$(TEST)" $(NAME)
+	@$(MAKE) -j$(nproc) MODE="default" TEST="$(TEST)" $(NAME)
 
 .PHONY: debug
 debug:
-	@$(MAKE) MODE="debug" TEST="$(TEST)" $(NAME)
+	@$(MAKE) -j$(nproc) MODE="debug" TEST="$(TEST)" $(NAME)
 
 .PHONY: asan
 asan:
-	@$(MAKE) MODE="asan" TEST="$(TEST)" $(NAME)
+	@$(MAKE) -j$(nproc) MODE="asan" TEST="$(TEST)" $(NAME)
 
 .PHONY: lsan
 lsan:
-	@$(MAKE) MODE="lsan" TEST="$(TEST)" $(NAME)
+	@$(MAKE) -j$(nproc) MODE="lsan" TEST="$(TEST)" $(NAME)
 
 .PHONY: msan
 msan:
-	@$(MAKE) MODE="msan" TEST="$(TEST)" $(NAME)
+	@$(MAKE) -j$(nproc) MODE="msan" TEST="$(TEST)" $(NAME)
 
 .PHONY: gprof
 gprof:
-	@$(MAKE) MODE="gprof" TEST="$(TEST)" $(NAME)
+	@$(MAKE) -j$(nproc) MODE="gprof" TEST="$(TEST)" $(NAME)
 
 .PHONY: opti
 opti:
-	@$(MAKE) MODE="opti" TEST="$(TEST)" $(NAME)
+	@$(MAKE) -j$(nproc) MODE="opti" TEST="$(TEST)" $(NAME)
 
 .PHONY: test
 test:
-	@$(MAKE) MODE="default" TEST="yes" $(NAME) && ./miniRT
+	@$(MAKE) -j$(nproc) MODE="default" TEST="yes" $(NAME) && ./miniRT
 
 $(NAME): $(OBJS) $(LIBFT) $(FLAGFILE)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME)
@@ -162,7 +162,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c | $(DIR)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(DEPDIR)$*.d -c $< -o $@
 
 $(LIBFT): force
-	@$(MAKE) MODE="$(MODE)" -C libft/
+	@$(MAKE) -j$(nproc) MODE="$(MODE)" -C libft/
 
 $(FLAGFILE): | $(BUILDDIR)
 	@echo '$(CURRENT_FLAGS)' > $@
@@ -175,12 +175,12 @@ $(DIR):
 
 .PHONY: clean
 clean:
-	@$(MAKE) MODE="$(MODE)" clean -C libft/
+	@$(MAKE) -j$(nproc) MODE="$(MODE)" clean -C libft/
 	rm -rf $(BUILDDIR)
 
 .PHONY: fclean
 fclean: clean
-	@$(MAKE) MODE="$(MODE)" fclean -C libft/
+	@$(MAKE) -j$(nproc) MODE="$(MODE)" fclean -C libft/
 	rm -f $(NAME)
 
 .PHONY: re

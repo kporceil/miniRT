@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_management.c                                  :+:      :+:    :+:   */
+/*   add_or_delete_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:28:58 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/02 17:31:52 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 15:17:01 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void	remove_to_lst(t_objlist **first, t_objlist **last, t_objlist *to_remove)
+static void	remove_to_lst(t_objlist **first, t_objlist **last,
+		t_objlist *to_remove)
 {
 	t_objlist	*current;
 
@@ -38,7 +39,8 @@ static void	remove_to_lst(t_objlist **first, t_objlist **last, t_objlist *to_rem
 	to_remove->obj = NULL;
 }
 
-static void	add_to_lst(t_lstbuf mem, t_objlist **first, t_objlist **last, t_inter *inter)
+static void	add_to_lst(t_lstbuf mem, t_objlist **first, t_objlist **last,
+		t_inter *inter)
 {
 	t_objlist	*new;
 	size_t		i;
@@ -60,7 +62,8 @@ static void	add_to_lst(t_lstbuf mem, t_objlist **first, t_objlist **last, t_inte
 	*last = new;
 }
 
-void	insert_or_delete_inter(t_lstbuf mem, t_objlist **first, t_objlist **last, t_inter *inter)
+void	insert_or_delete_inter(t_lstbuf mem, t_objlist **first,
+		t_objlist **last, t_inter *inter)
 {
 	t_objlist	*current;
 

@@ -110,7 +110,7 @@ static void	infinte_resursive_test(__unused void **state)
 	w.objs[1] = plane(1);
 	w.objs[1].material.reflective = 1;
 	shape_set_matrix(w.objs + 1, matrix_translation(0, 1, 0));
-	color_at(w, r, &c, MAX_REFLECT);
+	color_at(w, r, &c, MAX_RECU);
 	free(w.objs);
 	free(w.lights);
 }

@@ -16,8 +16,8 @@
 # include "tuples.h"
 # include "shape.h"
 
-# ifndef MAX_REFLECT
-#  define MAX_REFLECT 50
+# ifndef MAX_RECU
+#  define MAX_RECU 10
 # endif
 
 typedef struct s_ray

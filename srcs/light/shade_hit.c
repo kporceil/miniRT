@@ -6,12 +6,13 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 23:13:07 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/03 19:27:11 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 15:29:34 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "light.h"
 #include "world.h"
+#include "refract.h"
 
 t_color	shade_hit(t_world world, t_precomp comps, size_t remaining)
 {
@@ -34,5 +35,6 @@ t_color	shade_hit(t_world world, t_precomp comps, size_t remaining)
 		++i;
 	}
 	ret = color_add(ret, reflected_color(world, comps, remaining));
+	ret = color_add(ret, refracted_color(world, comps, remaining));
 	return (ret);
 }
