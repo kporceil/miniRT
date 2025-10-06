@@ -13,10 +13,13 @@
 #include "matrix.h"
 #include "tuples.h"
 #include "shape.h"
+#include <math.h>
 
 static t_tuple	local_cylinder_normal(t_shape cyl, t_tuple object_point)
 {
-	double const	dist = object_point.x * object_point.x + object_point.z * object_point.z;
+	double const	dist = object_point.x * object_point.x
+		+ object_point.z * object_point.z;
+
 	if (dist < 1)
 	{
 		if (object_point.y >= cyl.cyl_max - 0.0001)
@@ -27,6 +30,25 @@ static t_tuple	local_cylinder_normal(t_shape cyl, t_tuple object_point)
 	return (vector(object_point.x, 0, object_point.z));
 }
 
+static t_tuple	local_cone_normal(t_shape co, t_tuple object_point)
+{
+	double const	dist = object_point.x * object_point.x
+		+ object_point.z * object_point.z;
+	double			y;
+
+	if (dist < fabs(co.cyl_min) || dist < fabs(co.cyl_max))
+	{
+		if (object_point.y >= co.cyl_max - 0.0001)
+			return (vector(0, 1, 0));
+		else if (object_point.y <= co.cyl_min + 0.0001)
+			return (vector(0, -1, 0));
+	}
+	y = sqrt(object_point.x * object_point.x + object_point.z * object_point.z);
+	if (y > 0)
+		y = -y;
+	return (vector(object_point.x, y, object_point.z));
+}
+
 static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 {
 	if (s.type == SPHERE)
@@ -35,6 +57,8 @@ static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 		return (vector(0, 1, 0));
 	if (s.type == CYLINDER)
 		return (local_cylinder_normal(s, object_point));
+	if (s.type == CONE)
+		return (local_cone_normal(s, object_point));
 	return (tuple_substract(object_point, point(0, 0, 0)));
 }
 

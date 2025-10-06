@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   equation.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/02 16:20:52 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/06 16:16:47 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/06 17:21:09 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include <float.h>
+#ifndef EQUATION_H
+# define EQUATION_H
 
-t_shape	cylinder(size_t id)
+typedef struct s_equation	t_equation;
+
+struct s_equation
 {
-	return ((t_shape){CYLINDER, identity_matrix(3), identity_matrix(4),
-		material(), 0, -DBL_MAX, DBL_MAX, id});
-}
+	double a;
+	double b
+	double c;
+	double disc;
+};
+
+#endif

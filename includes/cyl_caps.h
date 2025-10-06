@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   cyl_caps.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/02 16:20:52 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/02 13:22:06 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/06 10:25:00 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include <float.h>
+#ifndef CYL_CAPS_H
+# define CYL_CAPS_H
 
-t_shape	cylinder(size_t id)
-{
-	return ((t_shape){CYLINDER, identity_matrix(3), identity_matrix(4),
-		material(), 0, -DBL_MAX, DBL_MAX, id});
-}
+# include "shape.h"
+# include "ray.h"
+
+void	intersect_cyl_caps(t_shape *cyl, t_ray r, t_intersections *xs);
+
+#endif

@@ -111,4 +111,8 @@ int	test_cylinder_truncate(void);
 int	test_end_cap_cylinder_intersect(void);
 int	test_end_cap_cylinder_normal(void);
 
+int	test_cone_intersect(void);
+int	test_end_cap_cone_intersect(void);
+int	test_cone_normal(void);
+
 #endif

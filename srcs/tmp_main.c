@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/30 11:36:15 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 17:21:11 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int	main(void)
 	world.objs_count = 6;
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
-	world.objs[0] = cylinder(0);
-	world.objs[0].material.color = color(0.1, 1, 0.5);
+	world.objs[0] = cone(0);
+	world.objs[0].material.color = color(0.5, 1, 0.1);
 	world.objs[0].material.diffuse = 0.7;
 	world.objs[0].material.specular = 0.3;
-	world.objs[0].cyl_min = 1;
+	world.objs[0].cyl_min = 0;
 	world.objs[0].cyl_max = 2;
 	world.objs[0].cyl_closed = 1;
-	shape_set_matrix(world.objs, matrix_mult(matrix_translation(1, 0, 0), matrix_x_rotation(1.0)));
+	shape_set_matrix(world.objs, matrix_translation(1, 0, 0));
 	world.objs[1] = sphere(1);
 	world.objs[1].material.color = color(0.5, 1, 0.1);
 	world.objs[1].material.diffuse = 0.7;
@@ -72,7 +72,7 @@ int	main(void)
 	world.objs[5].material.color = color(0.7, 0.1, 0.1);
 	world.objs[5].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(-20, 0, 0), matrix_z_rotation(M_PI/2)));
-	world.lights[0] = point_light(point(-10, 10, -10), color(1, 1, 1));
+	world.lights[0] = point_light(point(-1, 1, -1), color(1, 1, 1));
 	t_camera	cam = camera(1280, 720, M_PI / 3);
 	camera_set_transform(&cam, view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0)));
 	t_canva		image = render(cam, world);

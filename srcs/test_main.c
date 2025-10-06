@@ -78,6 +78,9 @@ int	main(void)
 	ret += test_cylinder_truncate();
 	ret += test_end_cap_cylinder_intersect();
 	ret += test_end_cap_cylinder_normal();
+	ret += test_cone_intersect();
+	ret += test_end_cap_cone_intersect();
+	ret += test_cone_normal();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }
