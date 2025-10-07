@@ -51,7 +51,7 @@ int	main(void)
 	world.objs[0].material.specular = 0.3;
 	world.objs[0].cyl_min = -1;
 	world.objs[0].cyl_max = 1;
-	world.objs[0].cyl_closed = 1;
+	world.objs[0].cyl_closed = 0;
 	shape_set_matrix(world.objs, matrix_x_rotation((M_PI/5)));
 	world.lights[0] = point_light(point(0, 1.5, -5), color(1, 1, 1));
 	t_camera	cam = camera(1280, 720, M_PI / 3);

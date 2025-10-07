@@ -33,7 +33,7 @@ static t_tuple	local_cylinder_normal(t_shape cyl, t_tuple object_point)
 static t_tuple	local_cone_normal(t_shape co, t_tuple object_point)
 {
 	double const	dist = sqrt(object_point.x * object_point.x
-		+ object_point.z * object_point.z);
+			+ object_point.z * object_point.z);
 	double			y;
 
 	if (dist < fabs(co.cyl_min) || dist < fabs(co.cyl_max))

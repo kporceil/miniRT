@@ -55,7 +55,7 @@ void	ray_cone_intersect(t_shape *co, t_ray r, t_intersections *inter)
 		* r.dir.z,
 		.c = r.origin.x * r.origin.x - r.origin.y * r.origin.y + r.origin.z
 		* r.origin.z};
-	if ( fabs(eq.a) == 0)
+	if (fabs(eq.a) == 0)
 	{
 		if (fabs(eq.b) == 0)
 			return (intersect_cone_caps(co, r, inter));
