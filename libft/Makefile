@@ -123,7 +123,7 @@ $(shell mkdir -p $(BUILDDIR) && echo '$(CURRENT_FLAGS)' > $(FLAGFILE))
 endif
 
 all:
-	@$(MAKE) MODE="$(MODE)" $(NAME)
+	@$(MAKE) -j$(nproc) MODE="$(MODE)" $(NAME)
 
 $(NAME): $(OBJS) $(FLAGFILE)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)

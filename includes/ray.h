@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:20:40 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/02 17:20:32 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:34:25 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "tuples.h"
 # include "shape.h"
 
-# ifndef MAX_REFLECT
-#  define MAX_REFLECT 50
+# ifndef MAX_RECU
+#  define MAX_RECU 5
 # endif
 
 typedef struct s_ray
@@ -43,10 +43,13 @@ typedef struct s_precomp
 	t_shape	*obj;
 	t_tuple		point;
 	t_tuple		over_point;
+	t_tuple		under_point;
 	t_tuple		eyev;
 	t_tuple		normalv;
 	t_tuple		reflectv;
 	double		t;
+	double		n1;
+	double		n2;
 	bool		inside;
 }				t_precomp;
 
@@ -59,6 +62,6 @@ void	ray_cone_intersect(t_shape *s, t_ray r, t_intersections *inter);
 void	ray_intersect(t_shape *s, t_ray r, t_intersections *inter);
 t_inter		*inter_hit(t_inter *intersect, size_t size);
 t_ray		ray_transform(t_ray *r, t_matrix *m)__attribute__((hot));
-t_precomp	precompute(t_inter i, t_ray r);
+t_precomp	precompute(t_inter i, t_ray r, t_intersections *xs);
 
 #endif

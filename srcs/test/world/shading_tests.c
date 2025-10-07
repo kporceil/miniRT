@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 22:58:31 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 23:51:42 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:36:46 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	shading_intersect_test(void **state)
 	t_world	*world = (t_world *)*state;
 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_inter	i = {world->objs, 4};
-	t_precomp	comps = precompute(i, r);
+	t_precomp	comps = precompute(i, r, NULL);
 	t_color		c = shade_hit(*world, comps, 0);
 
 	assert_color_equal(color(0.38066, 0.47583, 0.2855), c);
@@ -77,10 +77,10 @@ static void	inside_shading_intersect_test(void **state)
 	*world->lights = point_light(point(0, 0.25, 0), color(1, 1, 1));
 	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
 	t_inter	i = {world->objs + 1, 0.5};
-	t_precomp	comps = precompute(i, r);
+	t_precomp	comps = precompute(i, r, NULL);
 	t_color		c = shade_hit(*world, comps, 0);
 
-	assert_color_equal(color(0.1, 0.1, 0.1), c);
+	assert_color_equal(color(0.90498, 0.90498, 0.90498), c);
 }
 
 static void	shading_no_hit_test(void **state)

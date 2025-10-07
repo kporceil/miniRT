@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/02 14:09:18 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/07 20:49:22 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@
 											for (uint_fast8_t j = 0; j < a.size; ++j) \
 												assert_double_equal(a.matrix[i][j], b.matrix[i][j], 0.0001); \
 									} while (0);
+# endif
+
+# ifndef assert_double_greater
+#  define assert_double_greater(a, b)	do { \
+											if (!(a > b))  \
+												fail_msg("%f is not greater than %f", a, b); \
+										} while (0);
 # endif
 
 int		test_tuple_creation(void);
@@ -104,16 +111,16 @@ int		test_render_shadow(void);
 
 int		test_plane_intersect(void);
 
-int	test_cylinder_create(void);
-int	test_cylinder_intersect(void);
-int	test_cylinder_normal(void);
-int	test_cylinder_truncate(void);
-int	test_end_cap_cylinder_intersect(void);
-int	test_end_cap_cylinder_normal(void);
+int		test_cylinder_create(void);
+int		test_cylinder_intersect(void);
+int		test_cylinder_normal(void);
+int		test_cylinder_truncate(void);
+int		test_end_cap_cylinder_intersect(void);
+int		test_end_cap_cylinder_normal(void);
 
-int	test_cone_intersect(void);
-int	test_end_cap_cone_intersect(void);
-int	test_cone_normal(void);
+int		test_cone_intersect(void);
+int		test_end_cap_cone_intersect(void);
+int		test_cone_normal(void);
 
 int		test_striped_pattern(void);
 int		test_transformed_pattern(void);
@@ -123,5 +130,10 @@ int		test_checker_pattern(void);
 
 int		test_precompute_reflect(void);
 int		test_reflective(void);
+
+int		test_determine_indices(void);
+int		test_compute_under_point(void);
+int		test_refractive_color(void);
+int		test_schlick_effect(void);
 
 #endif
