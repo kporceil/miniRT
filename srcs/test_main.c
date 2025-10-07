@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/06 14:42:14 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/07 20:49:36 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	main(void)
 	ret += test_determine_indices();
 	ret += test_compute_under_point();
 	ret += test_refractive_color();
+	ret += test_schlick_effect();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

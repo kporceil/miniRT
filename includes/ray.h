@@ -17,7 +17,7 @@
 # include "shape.h"
 
 # ifndef MAX_RECU
-#  define MAX_RECU 10
+#  define MAX_RECU 5
 # endif
 
 typedef struct s_ray
