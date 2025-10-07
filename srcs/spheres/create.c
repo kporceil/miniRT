@@ -14,6 +14,6 @@
 
 t_shape	sphere(size_t id)
 {
-	return ((t_shape){SPHERE, identity_matrix(4), identity_matrix(4),
-		material(), id});
+	return ((t_shape){.type = SPHERE, .transformation = identity_matrix(3),
+		.inverted = identity_matrix(4), .material = material(), .id = id});
 }

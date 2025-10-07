@@ -72,6 +72,15 @@ int	main(void)
 	ret += test_is_shadowed();
 	ret += test_render_shadow();
 	ret += test_plane_intersect();
+	ret += test_cylinder_create();
+	ret += test_cylinder_intersect();
+	ret += test_cylinder_normal();
+	ret += test_cylinder_truncate();
+	ret += test_end_cap_cylinder_intersect();
+	ret += test_end_cap_cylinder_normal();
+	ret += test_cone_intersect();
+	ret += test_end_cap_cone_intersect();
+	ret += test_cone_normal();
 	ret += test_striped_pattern();
 	ret += test_transformed_pattern();
 	ret += test_ring_pattern();

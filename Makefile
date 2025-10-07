@@ -29,6 +29,8 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix camera/, create_tests ray_tests render_tests) \
 					$(addprefix plane/, intersect_tests) \
 					$(addprefix shadow/, in_shadow_tests is_shadowed_tests render_shadow_tests) \
+					$(addprefix cylinders/, intersect_tests normal_tests create_tests truncated_tests end_cap_intersect_tests end_cap_normal_tests) \
+					$(addprefix cones/, intersect_tests end_cap_cone_intersect_tests normal_tests) \
 					$(addprefix patterns/, striped_pattern_tests transform_pattern_tests ring_pattern_tests gradient_pattern_tests checker_pattern_tests) \
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests))
@@ -51,6 +53,8 @@ BASENAME := $(MAIN) \
 			$(addprefix camera/, create ray_for_pixel render) \
 			$(addprefix shadow/, is_shadowed) \
 			$(addprefix plane/, plane intersect) \
+			$(addprefix cylinders/, create intersect intersect_caps) \
+			$(addprefix cones/, create intersect intersect_caps) \
 			$(addprefix patterns/, pattern_at pattern_at_object) \
 			$(addprefix reflect/, reflected_color) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color) \

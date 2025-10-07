@@ -111,6 +111,17 @@ int		test_render_shadow(void);
 
 int		test_plane_intersect(void);
 
+int		test_cylinder_create(void);
+int		test_cylinder_intersect(void);
+int		test_cylinder_normal(void);
+int		test_cylinder_truncate(void);
+int		test_end_cap_cylinder_intersect(void);
+int		test_end_cap_cylinder_normal(void);
+
+int		test_cone_intersect(void);
+int		test_end_cap_cone_intersect(void);
+int		test_cone_normal(void);
+
 int		test_striped_pattern(void);
 int		test_transformed_pattern(void);
 int		test_ring_pattern(void);
