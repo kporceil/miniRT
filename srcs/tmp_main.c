@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "matrix.h"
+#include "patterns.h"
 #include "shape.h"
 #include "tuples.h"
 #include "canvas.h"
@@ -53,6 +54,8 @@ int	main(void)
 	world.objs[0].cyl_closed = 1;
 	shape_set_matrix(world.objs, matrix_translation(1, 0, 0));
 	world.objs[1] = sphere(1);
+	world.objs[1].material.pat = pattern(RING, color(0.5, 1, 0.1), color(1, 0.5, 0.1));
+	pattern_set_transform(&world.objs[1].material.pat, matrix_mult(matrix_mult(matrix_x_rotation(M_PI/2), matrix_z_rotation(M_PI/1.2)), matrix_scaling(0.1, 0.1, 0.1)));
 	world.objs[1].material.color = color(0.5, 1, 0.1);
 	world.objs[1].material.diffuse = 0.7;
 	world.objs[1].material.specular = 0.3;
@@ -63,13 +66,17 @@ int	main(void)
 	world.objs[2].material.specular = 0.3;
 	shape_set_matrix(world.objs + 2, matrix_mult(matrix_translation(-1.5, 0.33, -0.75), matrix_scaling(0.33, 0.33, 0.33)));
 	world.objs[3] = plane(3);
-	world.objs[3].material.color = color(1, 0.9, 0.9);
+	world.objs[3].material.pat = pattern(CHECKER, color(0, 0, 0), color(1, 1, 1));
+	world.objs[3].material.reflective = 0.4;
+	world.objs[3].material.color = color(0, 0, 0);
 	world.objs[4] = plane(4);
-	world.objs[4].material.color = color(0.1, 0.3, 0.7);
+	world.objs[4].material.color = color(0, 0, 0);
 	world.objs[4].material.ambient = 0.6;
-	shape_set_matrix(world.objs + 4, matrix_mult(matrix_translation(5, 0, 0), matrix_z_rotation(M_PI/2)));
+	world.objs[4].material.reflective = 1;
+	shape_set_matrix(world.objs + 4, matrix_mult(matrix_translation(0, 0, 12), matrix_mult(matrix_y_rotation(-(M_PI/12)), matrix_z_rotation(M_PI/2))));
 	world.objs[5] = plane(5);
-	world.objs[5].material.color = color(0.7, 0.1, 0.1);
+	world.objs[5].material.color = color(0, 0, 0);
+	world.objs[5].material.reflective = 1;
 	world.objs[5].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(-20, 0, 0), matrix_z_rotation(M_PI/2)));
 	world.lights[0] = point_light(point(-1, 1, -1), color(1, 1, 1));

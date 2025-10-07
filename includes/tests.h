@@ -115,4 +115,13 @@ int	test_cone_intersect(void);
 int	test_end_cap_cone_intersect(void);
 int	test_cone_normal(void);
 
+int		test_striped_pattern(void);
+int		test_transformed_pattern(void);
+int		test_ring_pattern(void);
+int		test_gradient_pattern(void);
+int		test_checker_pattern(void);
+
+int		test_precompute_reflect(void);
+int		test_reflective(void);
+
 #endif

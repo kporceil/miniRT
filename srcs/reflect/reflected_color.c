@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   material.h                                         :+:      :+:    :+:   */
+/*   reflected_color.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 13:25:16 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/27 02:09:50 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/09/27 16:16:19 by kporceil          #+#    #+#             */
+/*   Updated: 2025/09/27 16:21:54 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATERIAL_H
-# define MATERIAL_H
+#include "world.h"
+#include "ray.h"
 
-# include "color.h"
-# include "patterns.h"
-
-typedef struct s_material
+t_color	reflected_color(t_world world, t_precomp comps, size_t remaining)
 {
-	t_pattern	pat;
-	t_color		color;
-	double		ambient;
-	double		diffuse;
-	double		specular;
-	double		shininess;
-	double		reflective;
-}				t_material;
+	t_color	c;
 
-t_material	material(void);
-
-#endif
+	c = color(0, 0, 0);
+	if (comps.obj->material.reflective == 0 || !remaining)
+		return (c);
+	color_at(world, ray(comps.over_point, comps.reflectv), &c, remaining - 1);
+	return (color_scalar_mult(c, comps.obj->material.reflective));
+}

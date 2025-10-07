@@ -15,7 +15,7 @@
 #include "world.h"
 #include <stdlib.h>
 
-int	color_at(t_world w, t_ray r, t_color *c)
+int	color_at(t_world w, t_ray r, t_color *c, size_t remaining)
 {
 	const t_intersections	inters = world_intersect(w, r);
 	t_inter					*hit;
@@ -31,7 +31,7 @@ int	color_at(t_world w, t_ray r, t_color *c)
 		return (0);
 	}
 	comps = precompute(*hit, r);
-	*c = shade_hit(w, comps);
+	*c = shade_hit(w, comps, remaining);
 	free(inters.inters);
 	return (0);
 }

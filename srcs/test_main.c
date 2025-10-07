@@ -81,6 +81,13 @@ int	main(void)
 	ret += test_cone_intersect();
 	ret += test_end_cap_cone_intersect();
 	ret += test_cone_normal();
+	ret += test_striped_pattern();
+	ret += test_transformed_pattern();
+	ret += test_ring_pattern();
+	ret += test_gradient_pattern();
+	ret += test_checker_pattern();
+	ret += test_precompute_reflect();
+	ret += test_reflective();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

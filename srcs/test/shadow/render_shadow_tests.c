@@ -32,7 +32,7 @@ static void	shading_in_shadow_test(__unused void **state)
 	t_ray	r = ray(point(0, 0, 5), vector(0, 0, 1));
 	t_inter	inters = {w.objs + 1, 4};
 	t_precomp	comps = precompute(inters, r);
-	t_color		c = shade_hit(w, comps);
+	t_color		c = shade_hit(w, comps, 0);
 	free(w.lights);
 	free(w.objs);
 	assert_color_equal(color(0.1, 0.1, 0.1), c);

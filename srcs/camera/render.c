@@ -40,7 +40,7 @@ t_canva	render(t_camera cam, t_world w)
 		while (x < cam.hsize)
 		{
 			r = ray_for_pixel(cam, x, y);
-			if (color_at(w, r, &c))
+			if (color_at(w, r, &c, MAX_REFLECT))
 				return (free_can_and_set_to_null(image));
 			write_pixel(&image, x++, y, c);
 		}

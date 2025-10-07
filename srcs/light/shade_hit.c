@@ -13,7 +13,7 @@
 #include "light.h"
 #include "world.h"
 
-t_color	shade_hit(t_world world, t_precomp comps)
+t_color	shade_hit(t_world world, t_precomp comps, size_t remaining)
 {
 	size_t		i;
 	t_color		ret;
@@ -29,8 +29,10 @@ t_color	shade_hit(t_world world, t_precomp comps)
 		lighting_data.eyev = comps.eyev;
 		lighting_data.normalv = comps.normalv;
 		lighting_data.in_shadow = is_shadowed(world, comps.over_point, i);
+		lighting_data.obj = comps.obj;
 		ret = color_add(ret, lighting(lighting_data));
 		++i;
 	}
+	ret = color_add(ret, reflected_color(world, comps, remaining));
 	return (ret);
 }

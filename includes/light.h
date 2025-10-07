@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:36:20 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/03 18:59:36 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/09/27 16:28:00 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_lighting
 	t_tuple		normalv;
 	t_tuple		lightv;
 	t_color		eff_color;
+	t_shape		*obj;
 	double		light_dot_norm;
 	double		ref_dot_eye;
 	double		factor;
@@ -56,8 +57,9 @@ t_tuple		normal_at(t_shape s, t_tuple p);
 t_tuple		reflect(t_tuple in, t_tuple normal);
 t_plight	point_light(t_tuple pos, t_color intensity);
 t_color		lighting(t_lighting data);
-t_color		shade_hit(t_world world, t_precomp comps);
-int			color_at(t_world w, t_ray r, t_color *c);
+t_color		shade_hit(t_world world, t_precomp comps, size_t remaining);
+int			color_at(t_world w, t_ray r, t_color *c, size_t remaining);
 bool		is_shadowed(t_world w, t_tuple p, size_t i);
+t_color		reflected_color(t_world world, t_precomp comps, size_t remaining);
 
 #endif
