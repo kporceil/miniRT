@@ -80,7 +80,7 @@ static void	inside_shading_intersect_test(void **state)
 	t_precomp	comps = precompute(i, r, NULL);
 	t_color		c = shade_hit(*world, comps, 0);
 
-	assert_color_equal(color(0.1, 0.1, 0.1), c);
+	assert_color_equal(color(0.90498, 0.90498, 0.90498), c);
 }
 
 static void	shading_no_hit_test(void **state)

@@ -26,13 +26,13 @@ t_precomp	precompute(t_inter i, t_ray r, t_intersections *xs)
 	ret.point = ray_position(r, i.point);
 	ret.eyev = tuple_negate(r.dir);
 	ret.normalv = normal_at(*i.s, ret.point);
-	ret.over_point = tuple_add(ret.point, tuple_scalar_mult(ret.normalv, EPS));
 	ret.inside = false;
 	if (dot(ret.normalv, ret.eyev) < 0)
 	{
 		ret.inside = true;
 		ret.normalv = tuple_negate(ret.normalv);
 	}
+	ret.over_point = tuple_add(ret.point, tuple_scalar_mult(ret.normalv, EPS));
 	ret.under_point = tuple_substract(ret.point, tuple_scalar_mult
 			(ret.normalv, EPS));
 	ret.reflectv = reflect(r.dir, ret.normalv);

@@ -49,7 +49,7 @@ int	main(void)
 //	world.objs[0].material.pat = pattern(GRADIENT, color(0.1, 0.5, 1), color(0.1, 1, 0.5));
 //	pattern_set_transform(&world.objs[0].material.pat, matrix_mult(matrix_translation(-1, 0, 0), matrix_scaling(2, 2, 2)));
 	world.objs[0].material.transparency = 1;
-	world.objs[0].material.refractive_index = 1.52;
+	world.objs[0].material.refractive_index = 1.5;
 	world.objs[0].material.color = color(0.1, 1, 0.5);
 	world.objs[0].material.diffuse = 0.0;
 	world.objs[0].material.ambient = 0.0;
@@ -77,14 +77,14 @@ int	main(void)
 	world.objs[5].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(-3, 0, 0), matrix_mult(matrix_y_rotation(M_PI/12), matrix_z_rotation(M_PI/2))));
 	world.lights[0] = point_light(point(-2, 10, -5), color(1, 1, 1));
-	t_camera	cam = camera(15360, 8640, M_PI / 2);
+	t_camera	cam = camera(1920, 1080, M_PI / 2);
 	camera_set_transform(&cam, view_transform(point(0, 1, -7), point(0, 1, 0), vector(0, 1, 0)));
 	t_canva		image = render(cam, world);
 	if (!image.canva)
 		return (1);
 	(void)image;
 	char		*ppm = canva_to_ppm(image);
-	write_file("/sgoinfre/kporceil/private/render/refracted.ppm", ppm);
+	write_file("render/test.ppm", ppm);
 	free(ppm);
 	free(image.canva);
 	free(world.objs);
