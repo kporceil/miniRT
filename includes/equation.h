@@ -18,7 +18,7 @@ typedef struct s_equation	t_equation;
 struct s_equation
 {
 	double a;
-	double b
+	double b;
 	double c;
 	double disc;
 };
