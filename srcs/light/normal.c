@@ -32,8 +32,8 @@ static t_tuple	local_cylinder_normal(t_shape cyl, t_tuple object_point)
 
 static t_tuple	local_cone_normal(t_shape co, t_tuple object_point)
 {
-	double const	dist = object_point.x * object_point.x
-		+ object_point.z * object_point.z;
+	double const	dist = sqrt(object_point.x * object_point.x
+		+ object_point.z * object_point.z);
 	double			y;
 
 	if (dist < fabs(co.cyl_min) || dist < fabs(co.cyl_max))
@@ -44,7 +44,7 @@ static t_tuple	local_cone_normal(t_shape co, t_tuple object_point)
 			return (vector(0, -1, 0));
 	}
 	y = sqrt(object_point.x * object_point.x + object_point.z * object_point.z);
-	if (y > 0)
+	if (object_point.y > 0)
 		y = -y;
 	return (vector(object_point.x, y, object_point.z));
 }

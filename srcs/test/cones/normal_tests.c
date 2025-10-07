@@ -43,15 +43,12 @@ static void	normal_cone_2_test(__unused void **state)
 	assert_tuple_equal(n, normalize(vector(1, -sqrt(2), 1)));
 }
 
-// NOTE: I changed this test (normal_cone_3_test) because I think there
-// is an error in the book
-
 static void	normal_cone_3_test(__unused void **state)
 {
 	t_shape	co = cone(1);
 	t_tuple	n = normal_at(co, point(-1, -1, 0));
 
-	assert_tuple_equal(n, normalize(vector(-1, -1, 0)));
+	assert_tuple_equal(n, normalize(vector(-1, 1, 0)));
 }
 
 int	test_cone_normal(void)
