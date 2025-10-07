@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/26 01:39:14 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/07 13:30:28 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "light.h"
 #include "world.h"
 #include "camera.h"
+#include "display_mlx.h"
 #include <math.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -86,6 +87,7 @@ int	main(void)
 		return (1);
 	(void)image;
 	char		*ppm = canva_to_ppm(image);
+	display_mlx(image);
 	write_file("render/test.ppm", ppm);
 	free(ppm);
 	free(image.canva);

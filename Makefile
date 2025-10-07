@@ -52,6 +52,7 @@ BASENAME := $(MAIN) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix patterns/, pattern_at pattern_at_object) \
 			$(addprefix reflect/, reflected_color) \
+			$(addprefix render_mlx/, display_mlx) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -65,15 +66,18 @@ override DEPS := $(addprefix $(DEPDIR), $(addsuffix .d, $(BASENAME)))
 
 override LIBFT := libft/libft.a
 
-override LDFLAGS := -lft -lcmocka -lm
+override MLX := minilibx-linux/libmlx.a
 
-override LDLIBS := -L libft/
+override LDFLAGS := -lmlx -lXext -lX11 -lft -lcmocka -lm
+
+override LDLIBS := -L libft/ -L minilibx-linux/
 
 override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f))))
 
 CC := cc
 
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code
+#-Wstrict-prototypes
 
 ifeq (debug, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -g3
@@ -99,7 +103,7 @@ ifeq (lsan, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=leak
 endif
 
-CPPFLAGS := -Iincludes -Ilibft/includes
+CPPFLAGS := -Iincludes -Ilibft/includes -Iminilibx-linux/
 
 DEPSFLAGS := -MD -MP -MF
 
@@ -153,7 +157,7 @@ opti:
 test:
 	@$(MAKE) MODE="default" TEST="yes" $(NAME) && ./miniRT
 
-$(NAME): $(OBJS) $(LIBFT) $(FLAGFILE)
+$(NAME): $(OBJS) $(LIBFT) $(MLX) $(FLAGFILE)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c | $(DIR)
@@ -161,6 +165,9 @@ $(OBJDIR)%.o: $(SRCDIR)%.c | $(DIR)
 
 $(LIBFT): force
 	@$(MAKE) MODE="$(MODE)" -C libft/
+
+$(MLX): force
+	@$(MAKE) -C minilibx-linux/
 
 $(FLAGFILE): | $(BUILDDIR)
 	@echo '$(CURRENT_FLAGS)' > $@
@@ -174,6 +181,7 @@ $(DIR):
 .PHONY: clean
 clean:
 	@$(MAKE) MODE="$(MODE)" clean -C libft/
+	@$(MAKE) clean -C minilibx-linux/
 	rm -rf $(BUILDDIR)
 
 .PHONY: fclean
