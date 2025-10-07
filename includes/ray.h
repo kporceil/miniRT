@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:20:40 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/12 14:17:54 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:20:32 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_ray		ray(t_tuple origin, t_tuple direction);
 t_tuple		ray_position(t_ray r, double t);
 void	ray_sphere_intersect(t_shape *s, t_ray r, t_intersections *inter)__attribute__((hot));
 void	ray_plane_intersect(t_shape *s, t_ray r, t_intersections *inter)__attribute__((hot));
+void	ray_cylinder_intersect(t_shape *s, t_ray r, t_intersections *inter);
+void	ray_cone_intersect(t_shape *s, t_ray r, t_intersections *inter);
 void	ray_intersect(t_shape *s, t_ray r, t_intersections *inter);
 t_inter		*inter_hit(t_inter *intersect, size_t size);
 t_ray		ray_transform(t_ray *r, t_matrix *m)__attribute__((hot));

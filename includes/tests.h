@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/27 16:15:35 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 14:09:18 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,17 @@ int		test_is_shadowed(void);
 int		test_render_shadow(void);
 
 int		test_plane_intersect(void);
+
+int	test_cylinder_create(void);
+int	test_cylinder_intersect(void);
+int	test_cylinder_normal(void);
+int	test_cylinder_truncate(void);
+int	test_end_cap_cylinder_intersect(void);
+int	test_end_cap_cylinder_normal(void);
+
+int	test_cone_intersect(void);
+int	test_end_cap_cone_intersect(void);
+int	test_cone_normal(void);
 
 int		test_striped_pattern(void);
 int		test_transformed_pattern(void);
