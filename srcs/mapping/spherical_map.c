@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   material.c                                         :+:      :+:    :+:   */
+/*   spherical_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 13:29:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/09 15:54:29 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/10/09 15:14:39 by kporceil          #+#    #+#             */
+/*   Updated: 2025/10/09 15:18:34 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
-#include "patterns.h"
-#include "material.h"
+#include "tuples.h"
+#include <math.h>
 
-t_material	material(void)
+void	spherical_map(t_tuple p, double *u, double *v)
 {
-	return ((t_material){(t_pattern){.type = NO, color(0, 0, 0), color(0, 0, 0),
-		identity_matrix(4), identity_matrix(4)},
-			(t_color){1, 1, 1}, 0.1, 0.9, 0.9, 200, 0, 0, 1});
+	const double	theta = atan2(p.x, p.z);
+	const t_tuple	vec = vector(p.x, p.y, p.z);
+	const double	radius = magnitude(vec);
+	const double	phi = acos(p.y / radius);
+	const double	raw_u = theta / (2 * M_PI);
+
+	*u = 1 - (raw_u + 0.5);
+	*v = 1 - phi / M_PI;
 }

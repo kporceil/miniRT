@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:36:20 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/27 16:28:00 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/09 14:50:15 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_shadow
 	size_t			i;
 }				t_shadow;
 
-typedef struct s_world t_world;
+typedef struct s_world	t_world;
 
 t_tuple		normal_at(t_shape s, t_tuple p);
 t_tuple		reflect(t_tuple in, t_tuple normal);

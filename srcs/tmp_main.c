@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/07 15:24:13 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/09 18:33:41 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,43 +42,76 @@ int	main(void)
 	t_world	world = world_create();
 
 	world.lights_count = 1;
-	world.objs_count = 6;
+	world.objs_count = 1;
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
-	world.objs[0] = cube(0);
-	world.objs[0].material.pat = pattern(CHECKER, color(1, 1, 1), color(0, 0, 0));
-	pattern_set_transform(&world.objs[0].material.pat, matrix_scaling(0.2, 0.2, 0.2));
+	//world.objs[0] = sphere(0);
+//	world.objs[0].material.pat = pattern(GRADIENT, color(0.1, 0.5, 1), color(0.1, 1, 0.5));
+//	pattern_set_transform(&world.objs[0].material.pat, matrix_mult(matrix_translation(-1, 0, 0), matrix_scaling(2, 2, 2)));
 	//world.objs[0].material.transparency = 1;
 	//world.objs[0].material.refractive_index = 1.5;
-	world.objs[0].material.color = color(0.1, 1, 0.5);
+	//world.objs[0].material.color = color(0.1, 1, 0.5);
 	//world.objs[0].material.diffuse = 0.0;
-	world.objs[0].material.ambient = 0.6;
+	//world.objs[0].material.ambient = 0.0;
 	//world.objs[0].material.specular = 0.0;
-	shape_set_matrix(world.objs, matrix_mult(matrix_translation(-0.5, 1.7, 0.5), matrix_mult(matrix_x_rotation(-(M_PI/4)), matrix_y_rotation(M_PI/4))));
-	world.objs[1] = sphere(1);
-	world.objs[1].material.color = color(0.5, 1, 0.1);
-	world.objs[1].material.diffuse = 0.7;
-	world.objs[1].material.specular = 0.3;
-	shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1.2, 0.7, -0.5), matrix_scaling(0.7, 0.7, 0.7)));
-	world.objs[2] = sphere(2);
-	world.objs[2].material.color = color(1, 0.8, 0.1);
-	world.objs[2].material.diffuse = 0.7;
-	world.objs[2].material.specular = 0.3;
-	shape_set_matrix(world.objs + 2, matrix_mult(matrix_translation(-1.5, 0.33, -0.75), matrix_scaling(0.33, 0.33, 0.33)));
-	world.objs[3] = plane(3);
-	world.objs[3].material.pat = pattern(CHECKER, color(0, 0, 0), color(1, 1, 1));
-	world.objs[3].material.color = color(0, 0, 0);
-	world.objs[4] = plane(4);
-	world.objs[4].material.color = color(0.7, 0.4, 0.3);
-	world.objs[4].material.ambient = 0.6;
-	shape_set_matrix(world.objs + 4, matrix_mult(matrix_translation(0, 0, 12), matrix_mult(matrix_y_rotation(-(M_PI/12)), matrix_z_rotation(M_PI/2))));
-	world.objs[5] = plane(5);
-	world.objs[5].material.color = color(0.2, 0.6, 0.4);
-	world.objs[5].material.ambient = 0.6;
-	shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(-3, 0, 0), matrix_mult(matrix_y_rotation(M_PI/12), matrix_z_rotation(M_PI/2))));
+	//shape_set_matrix(world.objs, matrix_translation(-0.5, 1, 0.5));
+	//world.objs[1] = sphere(1);
+	//world.objs[1].material.color = color(0.5, 1, 0.1);
+	//world.objs[1].material.diffuse = 0.7;
+	//world.objs[1].material.specular = 0.3;
+	//shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1.2, 0.7, -0.5), matrix_scaling(0.7, 0.7, 0.7)));
+	//world.objs[2] = sphere(2);
+	//world.objs[2].material.color = color(1, 0.8, 0.1);
+	//world.objs[2].material.diffuse = 0.7;
+	//world.objs[2].material.specular = 0.3;
+	//shape_set_matrix(world.objs + 2, matrix_mult(matrix_translation(-1.5, 0.33, -0.75), matrix_scaling(0.33, 0.33, 0.33)));
+	//world.objs[0] = plane(0);
+	//world.objs[0].material.pat = pattern(CHECKER, color(0, 0, 0), color(1, 1, 1));
+	//world.objs[0].material.color = color(0, 0, 0);
+	//shape_set_matrix(world.objs, matrix_mult(matrix_translation(0, 0, 3), matrix_x_rotation(M_PI/2)));
+	world.objs[0] = cube(0);
+	//world.objs[0].cyl_closed = true;
+	//world.objs[0].cyl_max = 1;
+	//world.objs[0].cyl_min = -1;
+	t_color	red = color(1, 0, 0);
+	t_color	yellow = color(1, 1, 0);
+	t_color	brown = color(1, 0.5, 0);
+	t_color	green = color(0, 1, 0);
+	t_color	cyan = color(0, 1, 1);
+	t_color	blue = color(0, 0, 1);
+	t_color	purple = color(1, 0, 1);
+	t_color	white = color(1, 1, 1);
+	t_uvpat	left = uv_align_check((t_color [5]){yellow, cyan, red, blue, brown});
+	t_uvpat	front = uv_align_check((t_color [5]){cyan, red, yellow, brown, green});
+	t_uvpat	right = uv_align_check((t_color [5]){red, yellow, purple, green, white});
+	t_uvpat	back = uv_align_check((t_color [5]){green, purple, cyan, white, blue});
+	t_uvpat	up = uv_align_check((t_color [5]){brown, cyan, purple, red, yellow});
+	t_uvpat	down = uv_align_check((t_color [5]){purple, brown, green, blue, white});
+	t_pattern	pat = cube_pattern((t_uvpat [6]){front, back, right, left, up, down});
+	world.objs[0].material.color = color(0, 0, 0);
+	world.objs[0].material.pat = pat;
+	//world.objs[0].material.pat = pattern(CHECKER, color(0.8, 0.8, 0.8), color(0.1, 0.4, 0.2));
+	world.objs[0].material.ambient = 0.5;
+	//pattern_set_transform(&world.objs[0].material.pat, matrix_scaling(0.2, 0.2, 0.2));
+	//shape_set_matrix(world.objs + 0, matrix_x_rotation(M_PI_2));
+	//world.objs[2] = sphere(2);
+	//world.objs[2].material.color = color(0, 0, 0);
+	//world.objs[2].material.transparency = 1;
+	//world.objs[2].material.reflective = 1;
+	//world.objs[2].material.refractive_index = 1;
+	//world.objs[2].material.specular = 0;
+	//shape_set_matrix(world.objs + 2, matrix_mult(matrix_translation(10, 10, -3), matrix_scaling(0.5, 0.5, 0.5)));
+	//world.objs[4] = plane(4);
+	//world.objs[4].material.color = color(0.7, 0.4, 0.3);
+	//world.objs[4].material.ambient = 0.6;
+	//shape_set_matrix(world.objs + 4, matrix_mult(matrix_translation(0, 0, 12), matrix_mult(matrix_y_rotation(-(M_PI/12)), matrix_z_rotation(M_PI/2))));
+	//world.objs[5] = plane(5);
+	//world.objs[5].material.color = color(0.2, 0.6, 0.4);
+	//world.objs[5].material.ambient = 0.6;
+	//shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(-3, 0, 0), matrix_mult(matrix_y_rotation(M_PI/12), matrix_z_rotation(M_PI/2))));
 	world.lights[0] = point_light(point(-2, 10, -5), color(1, 1, 1));
 	t_camera	cam = camera(1920, 1080, M_PI / 2);
-	camera_set_transform(&cam, view_transform(point(0, 1, -7), point(0, 1, 0), vector(0, 1, 0)));
+	camera_set_transform(&cam, view_transform(point(-2, 2, -4), point(0, 0, 0), vector(0, 1, 0)));
 	t_canva		image = render(cam, world);
 	if (!image.canva)
 		return (1);

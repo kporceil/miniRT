@@ -34,7 +34,8 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix patterns/, striped_pattern_tests transform_pattern_tests ring_pattern_tests gradient_pattern_tests checker_pattern_tests) \
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
-					$(addprefix cubes/, cube_intersect_tests normal_tests))
+					$(addprefix cubes/, cube_intersect_tests normal_tests) \
+					$(addprefix mapping/, uv_checkers_tests mapping_tests))
 
 endif
 ifeq (no, $(TEST))
@@ -60,6 +61,7 @@ BASENAME := $(MAIN) \
 			$(addprefix reflect/, reflected_color) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
+			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -77,7 +79,7 @@ override LDFLAGS := -lft -lcmocka -lm
 
 override LDLIBS := -L libft/
 
-override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f))))
+override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f)))) $(strip $(foreach f,$(addprefix includes/, $(shell ls includes/)),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f))))
 
 CC := cc
 
