@@ -34,11 +34,11 @@ int	face_from_point(t_tuple p)
 
 void	cubic_map_front(t_tuple p, double *u, double *v)
 {
-	*u = fmod(p.x + 1, 2);
+	*u = fmod(p.x + 1.0001, 2);
 	if (*u < 0)
 		*u += 1;
 	*u /= 2;
-	*v = fmod(p.y + 1, 2);
+	*v = fmod(p.y + 1.0001, 2);
 	if (*v < 0)
 		*v += 1;
 	*v /= 2;
@@ -46,11 +46,11 @@ void	cubic_map_front(t_tuple p, double *u, double *v)
 
 void	cubic_map_back(t_tuple p, double *u, double *v)
 {
-	*u = fmod(1 - p.x, 2);
+	*u = fmod(1.0001 - p.x, 2);
 	if (*u < 0)
 		*u += 2;
 	*u /= 2;
-	*v = fmod(p.y + 1, 2);
+	*v = fmod(p.y + 1.0001, 2);
 	if (*v < 0)
 		*v += 2;
 	*v /= 2;
@@ -58,11 +58,11 @@ void	cubic_map_back(t_tuple p, double *u, double *v)
 
 void	cubic_map_up(t_tuple p, double *u, double *v)
 {
-	*u = fmod(p.x + 1, 2);
+	*u = fmod(p.x + 1.0001, 2);
 	if (*u < 0)
 		*u += 2;
 	*u /= 2;
-	*v = fmod(1 - p.z, 2);
+	*v = fmod(1.0001 - p.z, 2);
 	if (*v < 0)
 		*v += 2;
 	*v /= 2;
@@ -70,11 +70,11 @@ void	cubic_map_up(t_tuple p, double *u, double *v)
 
 void	cubic_map_down(t_tuple p, double *u, double *v)
 {
-	*u = fmod(p.x + 1, 2);
+	*u = fmod(p.x + 1.0001, 2);
 	if (*u < 0)
 		*u += 2;
 	*u /= 2;
-	*v = fmod(p.z + 1, 2);
+	*v = fmod(p.z + 1.0001, 2);
 	if (*v < 0)
 		*v += 2;
 	*v /= 2;
@@ -82,11 +82,11 @@ void	cubic_map_down(t_tuple p, double *u, double *v)
 
 void	cubic_map_left(t_tuple p, double *u, double *v)
 {
-	*u = fmod(p.z + 1, 2);
+	*u = fmod(p.z + 1.0001, 2);
 	if (*u < 0)
 		*u += 2;
 	*u /= 2;
-	*v = fmod(p.y + 1, 2);
+	*v = fmod(p.y + 1.0001, 2);
 	if (*v < 0)
 		*v += 2;
 	*v /= 2;
@@ -94,11 +94,11 @@ void	cubic_map_left(t_tuple p, double *u, double *v)
 
 void	cubic_map_right(t_tuple p, double *u, double *v)
 {
-	*u = fmod(1 - p.z, 2);
+	*u = fmod(1.0001 - p.z, 2);
 	if (*u < 0)
 		*u += 2;
 	*u /= 2;
-	*v = fmod(p.y + 1, 2);
+	*v = fmod(p.y + 1.0001, 2);
 	if (*v < 0)
 		*v += 2;
 	*v /= 2;
