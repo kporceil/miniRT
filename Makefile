@@ -52,7 +52,7 @@ BASENAME := $(MAIN) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix patterns/, pattern_at pattern_at_object) \
 			$(addprefix reflect/, reflected_color) \
-			$(addprefix render_mlx/, display_mlx) \
+			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \

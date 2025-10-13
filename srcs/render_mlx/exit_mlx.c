@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_mlx.c                                      :+:      :+:    :+:   */
+/*   exit_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 12:24:33 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/13 13:54:08 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/13 12:17:50 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/13 13:40:09 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <stdlib.h>
 #include "display_mlx.h"
-#include "canvas.h"
-#include "camera.h"
 
-int	display_mlx(t_camera camera, t_world world)
+void	exit_mlx(t_display display)
 {
-	t_display const	display = init_mlx_display(camera.hsize, camera.vsize);
-
 	if (!display.mlx_ptr)
-		return (1);
-	mlx_loop_hook(display.mlx_ptr, render_loop, &(t_loop_params){world, camera, display});
-	mlx_loop(display.mlx_ptr);
-	exit_mlx(display);
-	return (0);
+		return ;
+	if (display.image)
+	{
+		mlx_destroy_image(display.mlx_ptr, display.image);
+		free(display.image);
+	}
+	if (display.window)
+	{
+		mlx_destroy_window(display.mlx_ptr, display.window);
+		free(display.window);
+	}
+	mlx_destroy_display(display.mlx_ptr);
+	free(display.mlx_ptr);
 }
