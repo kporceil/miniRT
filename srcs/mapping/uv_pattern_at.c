@@ -39,9 +39,9 @@ t_color	uv_pattern_at(t_uvpat pat, double u, double v)
 
 	if (pat.type == ALIGN || pat.type == SKYBOX)
 		return (align_uv_pattern_at(pat, u, v));
-	u2 = floor((u * pat.width) + 0.0001);
-	v2 = floor((v * pat.height) + 0.0001);
-	if ((u2 + v2) % 2 > 0.0001)
+	u2 = floor(u * pat.width);
+	v2 = floor(v * pat.height);
+	if ((u2 + v2) % 2)
 		return (pat.colors.b);
 	return (pat.colors.a);
 }

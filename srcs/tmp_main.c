@@ -91,7 +91,9 @@ int	main(void)
 	world.objs[0].material.color = color(0, 0, 0);
 	world.objs[0].material.pat = pat;
 	//world.objs[0].material.pat = pattern(CHECKER, color(0.8, 0.8, 0.8), color(0.1, 0.4, 0.2));
-	world.objs[0].material.ambient = 0.5;
+	world.objs[0].material.ambient = 1;
+	world.objs[0].material.diffuse = 0;
+	world.objs[0].material.specular = 0;
 	//pattern_set_transform(&world.objs[0].material.pat, matrix_scaling(0.2, 0.2, 0.2));
 	//shape_set_matrix(world.objs + 0, matrix_x_rotation(M_PI_2));
 	//world.objs[2] = sphere(2);

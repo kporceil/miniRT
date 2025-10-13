@@ -18,88 +18,89 @@ int	face_from_point(t_tuple p)
 	const double	abs_y = fabs(p.y);
 	const double	abs_z = fabs(p.z);
 	const double	coord = fmax(fmax(abs_x, abs_y), abs_z);
+	const double	epsilon = 1e-10;
 
-	if (fabs(coord - p.x) < 0.0001)
+	if (coord - abs_x < epsilon && p.x > 0)
 		return (RIGHTF);
-	if (fabs(coord + p.x) < 0.0001)
+	if (coord - abs_x < epsilon && p.x < 0)
 		return (LEFTF);
-	if (fabs(coord - p.y) < 0.0001)
+	if (coord - abs_y < epsilon && p.y > 0)
 		return (UPF);
-	if (fabs(coord + p.y) < 0.0001)
+	if (coord - abs_y < epsilon && p.y < 0)
 		return (DOWNF);
-	if (fabs(coord - p.z) < 0.0001)
+	if (coord - abs_z < epsilon && p.z > 0)
 		return (FRONTF);
 	return (BACKF);
 }
 
 void	cubic_map_front(t_tuple p, double *u, double *v)
 {
-	*u = fmod(p.x + 1, 2);
+	*u = fmod(p.x + 1.0, 2.0);
 	if (*u < 0)
-		*u += 1;
-	*u /= 2;
-	*v = fmod(p.y + 1, 2);
+		*u += 2.0;
+	*u = fmin(fmax(*u / 2.0, 0.0), 1.0);
+	*v = fmod(p.y + 1.0, 2.0);
 	if (*v < 0)
-		*v += 1;
-	*v /= 2;
+		*v += 2.0;
+	*v = fmin(fmax(*v / 2.0, 0.0), 1.0);
 }
 
 void	cubic_map_back(t_tuple p, double *u, double *v)
 {
-	*u = fmod(1 - (p.x + 0.0001), 2);
+	*u = fmod(1.0 - p.x, 2.0);
 	if (*u < 0)
-		*u += 2;
-	*u /= 2;
-	*v = fmod(p.y + 1, 2);
+		*u += 2.0;
+	*u = fmin(fmax(*u / 2.0, 0.0), 1.0);
+	*v = fmod(p.y + 1.0, 2.0);
 	if (*v < 0)
-		*v += 2;
-	*v /= 2;
+		*v += 2.0;
+	*v = fmin(fmax(*v / 2.0, 0.0), 1.0);
 }
 
 void	cubic_map_up(t_tuple p, double *u, double *v)
 {
-	*u = fmod(p.x + 1, 2);
+	*u = fmod(p.x + 1.0, 2.0);
 	if (*u < 0)
-		*u += 2;
-	*u /= 2;
-	*v = fmod(1 - (p.z + 0.0001), 2);
+		*u += 2.0;
+	*u = fmin(fmax(*u / 2.0, 0.0), 1.0);
+	*v = fmod(1.0 - p.z, 2.0);
 	if (*v < 0)
-		*v += 2;
-	*v /= 2;
+		*v += 2.0;
+	*v = fmin(fmax(*v / 2.0, 0.0), 1.0);
 }
 
 void	cubic_map_down(t_tuple p, double *u, double *v)
 {
-	*u = fmod(p.x + 1, 2);
+	*u = fmod(p.x + 1.0, 2.0);
 	if (*u < 0)
-		*u += 2;
-	*u /= 2;
-	*v = fmod(p.z + 1, 2);
+		*u += 2.0;
+	*u = fmin(fmax(*u / 2.0, 0.0), 1.0);
+	*v = fmod(p.z + 1.0, 2.0);
 	if (*v < 0)
-		*v += 2;
-	*v /= 2;
+		*v += 2.0;
+	*v = fmin(fmax(*v / 2.0, 0.0), 1.0);
 }
 
 void	cubic_map_left(t_tuple p, double *u, double *v)
 {
-	*u = fmod(p.z + 1, 2);
+	*u = fmod(p.z + 1.0, 2.0);
 	if (*u < 0)
-		*u += 2;
-	*u /= 2;
-	*v = fmod(p.y + 1, 2);
+		*u += 2.0;
+	*u = fmin(fmax(*u / 2.0, 0.0), 1.0);
+	*v = fmod(p.y + 1.0, 2.0);
 	if (*v < 0)
-		*v += 2;
-	*v /= 2;
+		*v += 2.0;
+	*v = fmin(fmax(*v / 2.0, 0.0), 1.0);
 }
 
 void	cubic_map_right(t_tuple p, double *u, double *v)
 {
-	*u = fmod(1 - (p.z + 0.0001), 2);
+	*u = fmod(1.0 - p.z, 2.0);
 	if (*u < 0)
-		*u += 2;
-	*u /= 2;
-	*v = fmod(p.y + 1, 2);
+		*u += 2.0;
+	*u = fmin(fmax(*u / 2.0, 0.0), 1.0);
+	*v = fmod(p.y + 1.0, 2.0);
 	if (*v < 0)
-		*v += 2;
-	*v /= 2;
+		*v += 2.0;
+	*v = fmin(fmax(*v / 2.0, 0.0), 1.0);
 }
