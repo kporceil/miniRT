@@ -1,31 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   canvas.h                                           :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/22 00:23:04 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/22 13:43:39 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/01/25 18:50:23 by kporceil          #+#    #+#             */
+/*   Updated: 2025/10/13 19:40:20 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CANVAS_H
-# define CANVAS_H
-
-# include <stddef.h>
-# include "color.h"
-
-typedef struct s_canva
+int	ft_isupper(int c)
 {
-	size_t	width;
-	size_t	height;
-	t_color	*canva;
-}				t_canva;
+	return (c >= 'A' && c <= 'Z');
+}
 
-t_canva	canva(size_t width, size_t height);
-void	write_pixel(t_canva *c, size_t x, size_t y, t_color color);
-char	*canva_to_ppm(t_canva c);
-t_canva	ppm_to_canva(char *file);
-
-#endif

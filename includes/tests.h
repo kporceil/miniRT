@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/09 15:14:13 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/13 19:09:36 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,7 @@ int		test_cube_normal(void);
 
 int		test_uv_checker_pattern(void);
 int		test_mapping(void);
+
+int		test_ppm_parsing(void);
 
 #endif

@@ -21,7 +21,7 @@ ifeq (yes, $(TEST))
 MAIN := test_main
 TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests substract_tests negate_tests scalar_tests magnitude_tests normalizing_tests dot_product_tests cross_product_tests) \
 					$(addprefix color/, create_tests add_tests substract_tests scalar_tests mult_tests) \
-					$(addprefix canvas/, create_tests write_pixel_tests ppm_tests) \
+					$(addprefix canvas/, create_tests write_pixel_tests ppm_tests ppm_parsing_tests) \
 					$(addprefix matrix/, create_tests comparison_tests mult_tests transposing_tests determinant_tests submatrix_tests minors_tests cofactor_tests larger_determinant_tests inverting_tests translation_tests scaling_tests rotation_tests shearing_tests chaining_tests view_transformation_tests) \
 					$(addprefix ray/, create_tests position_tests sphere_intersect_tests hit_tests transform_tests) \
 					$(addprefix light/, normal_tests reflection_tests point_light_tests material_tests phong_tests) \
@@ -46,7 +46,8 @@ endif
 BASENAME := $(MAIN) \
 			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product) \
 			$(addprefix color/, color add substract scalar mult) \
-			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm) \
+			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm ppm_to_canva) \
+			$(addprefix gnl/, get_next_line get_next_line_utils) \
 			$(addprefix matrix/, create compare mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
 			$(addprefix spheres/, create intersect) \
