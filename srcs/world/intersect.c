@@ -54,6 +54,24 @@ static t_intersections	adjust_and_sort_inter(t_intersections *inter)
 	return (*inter);
 }
 
+static size_t	count_possible_intersection(t_world world)
+{
+	size_t	ret;
+	size_t	i;
+
+	ret = 0;
+	i = 0;
+	while (i < world.objs_count)
+	{
+		if (world.objs[i].type == CONE)
+			ret += 4;
+		else
+			ret += 2;
+		++i;
+	}
+	return (ret);
+}
+
 t_intersections	world_intersect(t_world	world, t_ray r)
 {
 	t_intersections	inter;
@@ -64,7 +82,7 @@ t_intersections	world_intersect(t_world	world, t_ray r)
 	if (!world.objs_count)
 		return (inter);
 	i = 0;
-	inter.inters = malloc(sizeof(t_inter) * world.objs_count * 2);
+	inter.inters = malloc(sizeof(t_inter) * count_possible_intersection(world));
 	if (!inter.inters)
 		return (inter);
 	while (i < world.objs_count)

@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 22:24:38 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 22:47:19 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:38:06 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 static void	shading_precomps_test(void **state)
 {
 	t_shape	s = sphere(0);
-	t_precomp	comps = precompute((t_inter){&s, 4}, (t_ray){point(0, 0, -5), vector(0, 0, 1)});
+	t_precomp	comps = precompute((t_inter){&s, 4}, (t_ray){point(0, 0, -5), vector(0, 0, 1)}, NULL);
 
 	(void)state;
 	assert_double_equal(comps.t, 4, 0.0001);
@@ -36,7 +36,7 @@ static void	shading_precomps_test(void **state)
 static void	inside_obj_shading_precomps_test(void **state)
 {
 	t_shape	s = sphere(0);
-	t_precomp	comps = precompute((t_inter){&s, 1}, (t_ray){point(0, 0, 0), vector(0, 0, 1)});
+	t_precomp	comps = precompute((t_inter){&s, 1}, (t_ray){point(0, 0, 0), vector(0, 0, 1)}, NULL);
 
 	(void)state;
 	assert_double_equal(comps.t, 1, 0.0001);

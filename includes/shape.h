@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:49:15 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/25 22:55:02 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:42:32 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_tshape
 	PLANE,
 	CYLINDER,
 	CUBE,
+	CONE,
 }				t_tshape;
 
 typedef struct s_shape
@@ -31,11 +32,16 @@ typedef struct s_shape
 	t_matrix	transformation;
 	t_matrix	inverted;
 	t_material	material;
+	int			cyl_closed;
+	double		cyl_min;
+	double		cyl_max;
 	size_t		id;
 }				t_shape;
 
 t_shape		plane(size_t id);
 t_shape		sphere(size_t id);
+t_shape		cylinder(size_t id);
+t_shape		cone(size_t id);
 void		shape_set_matrix(t_shape *s, t_matrix m);
 
 #endif
