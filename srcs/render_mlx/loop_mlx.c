@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:30:11 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/13 14:13:28 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/13 16:01:34 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,23 @@ static int	color_to_int(t_color c)
 
 int	render_loop(t_loop_params *p)
 {
-	t_canva	canva;
-	size_t	pos;
-	size_t	pos_max;
+	static size_t	frame = 0;
+	size_t			pos;
+	size_t			pos_max;
 
-	canva = render(p->camera, p->world);
-	// TODO: check if fail;
-	pos = 0;
-	pos_max = canva.height * canva.width;
-	while (pos < pos_max)
+	if (!frame)
 	{
-		((int *)p->display.data_addr)[pos] = mlx_get_color_value(p->display.mlx_ptr, color_to_int(canva.canva[pos]));
-		++pos;
+		pos = 0;
+		pos_max = p->canva.height * p->canva.width;
+		while (pos < pos_max)
+		{
+			((int *)p->display.data_addr)[pos]
+				= mlx_get_color_value(p->display.mlx_ptr,
+					color_to_int(p->canva.canva[pos]));
+			++pos;
+		}
+		mlx_put_image_to_window(p->display.mlx_ptr, p->display.window,
+			p->display.image, 0, 0);
 	}
-	mlx_put_image_to_window(p->display.mlx_ptr, p->display.window, p->display.image, 0, 0);
-	free(canva.canva);
-	return (0);
+	return (++frame);
 }

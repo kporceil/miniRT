@@ -52,7 +52,7 @@ BASENAME := $(MAIN) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix patterns/, pattern_at pattern_at_object) \
 			$(addprefix reflect/, reflected_color) \
-			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx) \
+			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -80,7 +80,8 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code
 #-Wstrict-prototypes
 
 ifeq (debug, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -g3
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -g3
+#-Wstrict-prototypes
 endif
 
 ifeq (opti, $(MODE))
@@ -96,7 +97,8 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreach
 endif
 
 ifeq (msan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=memory
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=memory
+#-Wstrict-prototypes
 endif
 
 ifeq (lsan, $(MODE))

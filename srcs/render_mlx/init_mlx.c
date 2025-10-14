@@ -24,13 +24,15 @@ t_display	init_mlx_display(size_t width, size_t height)
 	display.mlx_ptr = mlx_init();
 	if (display.mlx_ptr)
 	{
-		display.window = mlx_new_window(display.mlx_ptr, width, height, WINDOW_TITLE);
+		display.window = mlx_new_window(display.mlx_ptr, width, height,
+				WINDOW_TITLE);
 		if (display.window)
 		{
 			display.image = mlx_new_image(display.mlx_ptr, width, height);
 			if (display.image)
 			{
-				display.data_addr = mlx_get_data_addr(display.image, &display.bpp, &display.size_line, &display.endian);
+				display.data_addr = mlx_get_data_addr(display.image,
+						&display.bpp, &display.size_line, &display.endian);
 				display.opp = display.bpp / 8;
 				return (display);
 			}

@@ -34,6 +34,7 @@ struct s_display
 
 struct s_loop_params
 {
+	t_canva		canva;
 	t_world		world;
 	t_camera	camera;
 	t_display	display;
@@ -41,7 +42,8 @@ struct s_loop_params
 
 t_display	init_mlx_display(size_t width, size_t height);
 void		exit_mlx(t_display display);
-int			display_mlx(t_camera camera, t_world world);
+int			display_mlx(t_canva canva, t_camera camera, t_world world);
 int			render_loop(t_loop_params *p);
+int			key_hooks(int keycode, t_loop_params *p);
 
 #endif
