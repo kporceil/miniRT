@@ -25,9 +25,9 @@ int	display_mlx(t_canva canva, t_camera camera, t_world world)
 	mlx_loop_hook(display.mlx_ptr, render_loop,
 		&(t_loop_params){canva, world, camera, display});
 	mlx_hook(display.window, KeyPress, KeyPressMask,
-			&key_hooks, &(t_loop_params){canva, world, camera, display});
+		&key_hooks, &(t_loop_params){canva, world, camera, display});
 	mlx_hook(display.window, DestroyNotify, StructureNotifyMask,
-			&mlx_loop_end, display.mlx_ptr);
+		&mlx_loop_end, display.mlx_ptr);
 	mlx_loop(display.mlx_ptr);
 	exit_mlx(display);
 	return (0);
