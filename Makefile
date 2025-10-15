@@ -58,6 +58,7 @@ BASENAME := $(MAIN) \
 			$(addprefix cones/, create intersect intersect_caps) \
 			$(addprefix patterns/, pattern_at pattern_at_object) \
 			$(addprefix reflect/, reflected_color) \
+			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
 			$(TEST_BASENAME)
@@ -73,41 +74,44 @@ override DEPS := $(addprefix $(DEPDIR), $(addsuffix .d, $(BASENAME)))
 
 override LIBFT := libft/libft.a
 
-override LDFLAGS := -lft -lcmocka -lm
+override MLX := minilibx-linux/libmlx.a
 
-override LDLIBS := -L libft/
+override LDFLAGS := -lmlx -lXext -lX11 -lft -lcmocka -lm
+
+override LDLIBS := -L libft/ -L minilibx-linux/
 
 override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f))))
 
 CC := cc
 
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code
 
 ifeq (debug, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -g3
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -g3
 endif
 
 ifeq (opti, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -O3 -march=native -flto -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Ofast -march=native -flto -ffast-math -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
 endif
 
 ifeq (gprof, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -pg
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -pg
 endif
 
 ifeq (asan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=address
 endif
 
 ifeq (msan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=memory
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=memory
+#-Wstrict-prototypes
 endif
 
 ifeq (lsan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=leak
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=leak
 endif
 
-CPPFLAGS := -Iincludes -Ilibft/includes
+CPPFLAGS := -Iincludes -Ilibft/includes -Iminilibx-linux/
 
 DEPSFLAGS := -MD -MP -MF
 
@@ -161,7 +165,7 @@ opti:
 test:
 	@$(MAKE) -j$(nproc) MODE="default" TEST="yes" $(NAME) && ./miniRT
 
-$(NAME): $(OBJS) $(LIBFT) $(FLAGFILE)
+$(NAME): $(OBJS) $(LIBFT) $(MLX) $(FLAGFILE)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c | $(DIR)
@@ -169,6 +173,9 @@ $(OBJDIR)%.o: $(SRCDIR)%.c | $(DIR)
 
 $(LIBFT): force
 	@$(MAKE) -j$(nproc) MODE="$(MODE)" -C libft/
+
+$(MLX): force
+	@$(MAKE) -C minilibx-linux/
 
 $(FLAGFILE): | $(BUILDDIR)
 	@echo '$(CURRENT_FLAGS)' > $@
@@ -181,6 +188,7 @@ $(DIR):
 
 .PHONY: clean
 clean:
+	@$(MAKE) -j$(nproc) clean -C minilibx-linux/
 	@$(MAKE) -j$(nproc) MODE="$(MODE)" clean -C libft/
 	rm -rf $(BUILDDIR)
 
