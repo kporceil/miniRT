@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 17:08:19 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/09 18:59:51 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 19:38:46 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "color.h"
 # include "tuples.h"
 # include "matrix.h"
+# include "canvas.h"
 # include <stddef.h>
 # include <math.h>
 
@@ -49,8 +50,7 @@ typedef enum e_uvpatype
 {
 	CHECKERS,
 	ALIGN,
-	CUSTOM,
-	SKYBOX,
+	IMAGE,
 }				t_uvpatype;
 
 typedef union u_uvcol
@@ -76,6 +76,7 @@ typedef struct s_uvpat
 	size_t		height;
 	size_t		width;
 	t_uvcol		colors;
+	t_canva		file;
 }				t_uvpat;
 
 typedef enum e_patype
@@ -100,6 +101,11 @@ typedef struct s_pattern
 	t_uvpat		faces[6];
 	void		(*uvmapper)(t_tuple, double *, double *);
 }				t_pattern;
+
+static inline t_uvpat	uv_image(t_canva c)
+{
+	return ((t_uvpat){.type = IMAGE, .file = c});
+}
 
 static inline t_pattern	cube_pattern(t_uvpat face[6])
 {

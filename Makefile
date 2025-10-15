@@ -35,7 +35,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
 					$(addprefix cubes/, cube_intersect_tests normal_tests) \
-					$(addprefix mapping/, uv_checkers_tests mapping_tests))
+					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests))
 
 endif
 ifeq (no, $(TEST))
@@ -46,7 +46,7 @@ endif
 BASENAME := $(MAIN) \
 			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product) \
 			$(addprefix color/, color add substract scalar mult) \
-			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm ppm_to_canva) \
+			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm ppm_to_canva ppm_header ppm_io) \
 			$(addprefix gnl/, get_next_line get_next_line_utils) \
 			$(addprefix matrix/, create compare mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
@@ -94,7 +94,7 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -g3
 endif
 
 ifeq (opti, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Ofast -march=native -flto -ffast-math -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -O3 -march=native -flto -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
 endif
 
 ifeq (gprof, $(MODE))

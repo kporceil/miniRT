@@ -1,8 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
+/*   tests.h                                            :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
@@ -151,5 +150,6 @@ int		test_uv_checker_pattern(void);
 int		test_mapping(void);
 
 int		test_ppm_parsing(void);
+int		test_uv_file(void);
 
 #endif

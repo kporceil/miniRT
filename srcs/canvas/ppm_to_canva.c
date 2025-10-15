@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:10:39 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/13 19:57:26 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 17:27:47 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,85 +17,80 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static int	get_width_and_height(int fd, t_canva *c)
+int	ppm_parse_line(char *line, t_canva *c, double scale, size_t *i)
+{
+	char			*ptr1;
+	char			*ptr2;
+	static int		rgb = 0;
+	
+	ptr1 = line;
+	while (ft_isspace(*ptr1))
+		++ptr1;
+	while (*ptr1 && *ptr1 != '\n' && *ptr1 != '#')
+	{
+		if (rgb == 0)
+			c->canva[*i].red = ft_strtoul(ptr1, &ptr2, 10) * scale;
+		else if (rgb == 1)
+			c->canva[*i].green = ft_strtoul(ptr1, &ptr2, 10) * scale;
+		else if (rgb == 2)
+			c->canva[(*i)++].blue = ft_strtoul(ptr1, &ptr2, 10) * scale;
+		ptr1 = ptr2;
+		rgb++;
+		if (rgb == 3)
+			rgb = 0;
+		while (ft_isspace(*ptr1))
+			++ptr1;
+		if (*ptr1 && !ft_isdigit(*ptr1) && *ptr1 != '#')
+			return (-1);
+	}
+	return (0);
+}
+
+int	parse_ppm_file(int fd, t_canva *c, double scale)
 {
 	char	*line;
-	char	*ptr1;
-	char	*ptr2;
+	size_t	i;
 
-	line = get_next_line(fd);
-	if (!line)
+	c->canva = malloc(sizeof(t_color) * c->height * c->width);
+	if (!c->canva)
 		return (-1);
-	c->width = ft_strtoul(line, &ptr1, 10);
-	if (ptr1 == line)
+	line = get_next_line(fd, READ);
+	i = 0;
+	while (line)
 	{
+		if (ppm_parse_line(line, c, scale, &i) == -1)
+		{
+			free(c->canva);
+			free(line);
+			return (-1);
+		}
 		free(line);
-		ft_putendl_fd("Internal error", 2);
-		return (-1);
-	}
-	c->height = ft_strtoul(ptr1, &ptr2, 10);
-	if (ptr2 == ptr1)
-	{
-		free(line);
-		ft_putendl_fd("Internal error", 2);
-		return (-1);
+		line = get_next_line(fd, READ);
 	}
 	free(line);
 	return (0);
 }
 
-static t_canva	create_canva(char *file, int fd)
-{
-	char	*line;
-	t_canva	c;
-
-	line = get_next_line(fd);
-	if (!line)
-	{
-		ft_putendl_fd("Malloc error", 2);
-		return ((t_canva){0, 0, NULL});
-	}
-	if (ft_strncmp("P3\n", line, 3))
-	{
-		ft_putstr_fd(file, 2);
-		ft_putendl_fd(": corrupted file", 2);
-		return ((t_canva){0, 0, NULL});
-	}
-	free(line);
-	if (get_width_and_height(fd, &c) == -1)
-		return ((t_canva){0, 0, NULL});
-	c.canva = malloc(sizeof(t_color) * (c.height * c.width));
-	if (!c.canva)
-	{
-		ft_putendl_fd("Malloc error", 2);
-		return ((t_canva){0, 0, NULL});
-	}
-	return (c);
-}
-
 t_canva	ppm_to_canva(char *file)
 {
-	const int	fd = open(file, O_RDONLY);
+	const int	fd = open_file(file, O_RDONLY);
+	size_t		max_color;
+	double		scale;
 	t_canva		c;
 
-	c.canva = NULL;
-	c.height = 0;
-	c.width = 0;
 	if (fd == -1)
+		return ((t_canva){0, 0, NULL});
+	if (parse_ppm_header(fd, &c, &max_color) == -1)
 	{
-		ft_putstr_fd(file, 2);
-		ft_putendl_fd(": no such file or directory", 2);
-		return (c);
+		close_ppm(fd);
+		return ((t_canva){0, 0, NULL});
 	}
-	c = create_canva(file, fd);
-	if (!c.canva)
-		return (c);
-	if (fill_canva(fd, &c) == -1)
+	scale = 1.0 / max_color;
+	if (parse_ppm_file(fd, &c, scale) == -1)
 	{
-		free(c.canva);
-		c.canva = NULL;
-		return (c);
+		close_ppm(fd);
+		return ((t_canva){0, 0, NULL});
 	}
-	close(fd);
+	close_ppm(fd);
 	return (c);
 }
