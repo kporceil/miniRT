@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/15 19:41:33 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 21:57:56 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,12 @@ int	main(void)
 	write_file("render/test.ppm", ppm);
 	free(ppm);
 	free(image.canva);
+	free(left.file.canva);
+	free(right.file.canva);
+	free(front.file.canva);
+	free(back.file.canva);
+	free(down.file.canva);
+	free(up.file.canva);
 	free(world.objs);
 	free(world.lights);
 }
