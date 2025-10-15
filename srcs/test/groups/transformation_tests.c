@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_tests.c                                  :+:      :+:    :+:   */
+/*   transformation_tests.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 12:46:17 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/15 17:33:36 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 17:35:13 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,26 @@
 # define EPSILON 0.0001
 #endif
 
-static void	intersect_group_1_test(__unused void **state)
+static void	transform_group_1_test(__unused void **state)
 {
-	t_shape	g = group(1, 0);
-	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
+	t_shape	g = group(1, 1);
+	t_ray	r = ray(point(10, 0, -10), vector(0, 0, 1));
 	t_intersections xs;
 
-	ray_group_intersect(&g, r, &xs);
-	assert_int_equal(xs.size, 0);
-}
-
-static void	intersect_group_2_test(__unused void **state)
-{
-	t_shape	g = group(1, 3);
-	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_intersections xs;
-
-	xs.inters = malloc(sizeof(t_inter) * 4);
+	shape_set_matrix(&g, matrix_scaling(2, 2, 2));
 	g.child[0] = sphere(2);
-	g.child[1] = sphere(3);
-	shape_set_matrix(g.child + 1, matrix_translation(0, 0, -3));
-	g.child[2] = sphere(4);
-	shape_set_matrix(g.child + 2, matrix_translation(5, 0, 0));
-	ray_group_intersect(&g, r, &xs);
-	assert_int_equal(xs.size, 4);
-	free(xs.inters);
+	shape_set_matrix(g.child, matrix_translation(5, 0, 0));
+	xs.inters = malloc(sizeof(t_inter) * 2);
+	ray_intersect(&g, r, &xs);
+	assert_int_equal(xs.size, 2);
 	free(g.child);
+	free(xs.inters);
 }
 
-int	test_group_intersect(void)
+int	test_group_transform(void)
 {
-	const struct CMUnitTest	group_intersect_tests[] = {
-		cmocka_unit_test(intersect_group_1_test),
-		cmocka_unit_test(intersect_group_2_test),
+	const struct CMUnitTest	group_transform_tests[] = {
+		cmocka_unit_test(transform_group_1_test),
 	};
-	return (cmocka_run_group_tests(group_intersect_tests, NULL, NULL));
+	return (cmocka_run_group_tests(group_transform_tests, NULL, NULL));
 }
