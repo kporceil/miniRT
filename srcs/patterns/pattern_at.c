@@ -17,27 +17,40 @@
 
 static inline t_color	stripe_at(t_pattern pat, t_tuple p)
 {
-	if ((int)floor(p.x) % 2)
+	int	x;
+
+	x = floor(p.x + 0.0001);
+	if (x % 2)
 		return (pat.b);
 	return (pat.a);
 }
 
 static inline t_color	ring_at(t_pattern pat, t_tuple p)
 {
-	if ((int)(floor(sqrt(p.x * p.x + p.z * p.z))) % 2)
+	if ((int)(floor(sqrt(p.x * p.x + p.z * p.z) + 0.0001)) % 2)
 		return (pat.b);
 	return (pat.a);
 }
 
 static inline t_color	gradient_at(t_pattern pat, t_tuple p)
 {
+	int	x;
+
+	x = floor(p.x + 0.0001);
 	return (color_add(pat.a, color_scalar_mult(color_substract(pat.b, pat.a),
-				p.x - (int)p.x)));
+				p.x - x)));
 }
 
 static inline t_color	checker_at(t_pattern pat, t_tuple p)
 {
-	if (((int)p.x + (int)p.y + (int)p.z) % 2)
+	int	x;
+	int	y;
+	int	z;
+
+	x = floor(p.x + 0.0001);
+	y = floor(p.y + 0.0001);
+	z = floor(p.z + 0.0001);
+	if ((x + y + z) % 2)
 		return (pat.b);
 	return (pat.a);
 }
