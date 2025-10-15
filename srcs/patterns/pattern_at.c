@@ -6,53 +6,33 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 18:00:52 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/26 01:29:36 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/09 15:52:22 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "tuples.h"
 #include "patterns.h"
-#include <math.h>
 
-static inline t_color	stripe_at(t_pattern pat, t_tuple p)
+t_color	uv_cube_pattern_at(t_pattern pat, t_tuple p)
 {
-	int	x;
+	const int	face = face_from_point(p);
+	double		u;
+	double		v;
 
-	x = floor(p.x + 0.0001);
-	if (x % 2)
-		return (pat.b);
-	return (pat.a);
-}
-
-static inline t_color	ring_at(t_pattern pat, t_tuple p)
-{
-	if ((int)(floor(sqrt(p.x * p.x + p.z * p.z) + 0.0001)) % 2)
-		return (pat.b);
-	return (pat.a);
-}
-
-static inline t_color	gradient_at(t_pattern pat, t_tuple p)
-{
-	int	x;
-
-	x = floor(p.x + 0.0001);
-	return (color_add(pat.a, color_scalar_mult(color_substract(pat.b, pat.a),
-				p.x - x)));
-}
-
-static inline t_color	checker_at(t_pattern pat, t_tuple p)
-{
-	int	x;
-	int	y;
-	int	z;
-
-	x = floor(p.x + 0.0001);
-	y = floor(p.y + 0.0001);
-	z = floor(p.z + 0.0001);
-	if ((x + y + z) % 2)
-		return (pat.b);
-	return (pat.a);
+	if (face == FRONTF)
+		cubic_map_front(p, &u, &v);
+	else if (face == BACKF)
+		cubic_map_back(p, &u, &v);
+	else if (face == RIGHTF)
+		cubic_map_right(p, &u, &v);
+	else if (face == LEFTF)
+		cubic_map_left(p, &u, &v);
+	else if (face == UPF)
+		cubic_map_up(p, &u, &v);
+	else
+		cubic_map_down(p, &u, &v);
+	return (uv_pattern_at(pat.faces[face], u, v));
 }
 
 t_color	pattern_at(t_pattern pat, t_tuple p)
@@ -65,5 +45,9 @@ t_color	pattern_at(t_pattern pat, t_tuple p)
 		return (gradient_at(pat, p));
 	if (pat.type == CHECKER)
 		return (checker_at(pat, p));
+	if (pat.type == UV)
+		return (uv_pattern_at_point(pat, p));
+	if (pat.type == CUBE_UV)
+		return (uv_cube_pattern_at(pat, p));
 	return (color(-1, -1, -1));
 }

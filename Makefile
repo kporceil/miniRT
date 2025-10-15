@@ -21,7 +21,7 @@ ifeq (yes, $(TEST))
 MAIN := test_main
 TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests substract_tests negate_tests scalar_tests magnitude_tests normalizing_tests dot_product_tests cross_product_tests) \
 					$(addprefix color/, create_tests add_tests substract_tests scalar_tests mult_tests) \
-					$(addprefix canvas/, create_tests write_pixel_tests ppm_tests) \
+					$(addprefix canvas/, create_tests write_pixel_tests ppm_tests ppm_parsing_tests) \
 					$(addprefix matrix/, create_tests comparison_tests mult_tests transposing_tests determinant_tests submatrix_tests minors_tests cofactor_tests larger_determinant_tests inverting_tests translation_tests scaling_tests rotation_tests shearing_tests chaining_tests view_transformation_tests) \
 					$(addprefix ray/, create_tests position_tests sphere_intersect_tests hit_tests transform_tests) \
 					$(addprefix light/, normal_tests reflection_tests point_light_tests material_tests phong_tests) \
@@ -34,7 +34,8 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix patterns/, striped_pattern_tests transform_pattern_tests ring_pattern_tests gradient_pattern_tests checker_pattern_tests) \
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
-					$(addprefix cubes/, cube_intersect_tests normal_tests))
+					$(addprefix cubes/, cube_intersect_tests normal_tests) \
+					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests))
 
 endif
 ifeq (no, $(TEST))
@@ -45,7 +46,8 @@ endif
 BASENAME := $(MAIN) \
 			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product) \
 			$(addprefix color/, color add substract scalar mult) \
-			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm) \
+			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm ppm_to_canva ppm_header ppm_io) \
+			$(addprefix gnl/, get_next_line get_next_line_utils) \
 			$(addprefix matrix/, create compare mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
 			$(addprefix spheres/, create intersect) \
@@ -56,11 +58,12 @@ BASENAME := $(MAIN) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix cylinders/, create intersect intersect_caps) \
 			$(addprefix cones/, create intersect intersect_caps) \
-			$(addprefix patterns/, pattern_at pattern_at_object) \
+			$(addprefix patterns/, pattern_at pattern_at_object ring_at check_at gradient_at stripe_at) \
 			$(addprefix reflect/, reflected_color) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
+			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -80,7 +83,7 @@ override LDFLAGS := -lmlx -lXext -lX11 -lft -lcmocka -lm
 
 override LDLIBS := -L libft/ -L minilibx-linux/
 
-override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f))))
+override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f)))) $(strip $(foreach f,$(addprefix includes/, $(shell ls includes/)),$(if $(or $(findstring test,$(f)),$(findstring tmp,$(f))),,$(f))))
 
 CC := cc
 
@@ -91,7 +94,7 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -g3
 endif
 
 ifeq (opti, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Ofast -march=native -flto -ffast-math -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -O3 -march=native -flto -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
 endif
 
 ifeq (gprof, $(MODE))

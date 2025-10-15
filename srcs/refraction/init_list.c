@@ -21,7 +21,7 @@ t_lstbuf	init_list(size_t size)
 
 	lst = malloc(sizeof(t_objlist) * size);
 	if (!lst)
-		write(2, "Malloc error: not enough memory for refraction\n", 47);
+		(void)!write(2, "Malloc error: not enough memory for refraction\n", 47);
 	else
 	{
 		i = 0;

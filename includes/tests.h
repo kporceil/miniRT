@@ -1,12 +1,11 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
+/*   tests.h                                            :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/08 15:21:29 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/13 19:09:36 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +43,14 @@
 											if (!(a > b))  \
 												fail_msg("%f is not greater than %f", a, b); \
 										} while (0);
+# endif
+
+# ifndef BLACK
+#  define BLACK color(0, 0, 0)
+# endif
+
+# ifndef WHITE
+#  define WHITE color(0, 0, 0)
 # endif
 
 int		test_tuple_creation(void);
@@ -138,5 +145,11 @@ int		test_schlick_effect(void);
 
 int		test_cube_intersect(void);
 int		test_cube_normal(void);
+
+int		test_uv_checker_pattern(void);
+int		test_mapping(void);
+
+int		test_ppm_parsing(void);
+int		test_uv_file(void);
 
 #endif

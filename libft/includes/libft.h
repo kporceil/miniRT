@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:48:55 by kporceil          #+#    #+#             */
-/*   Updated: 2025/06/17 15:39:22 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/13 19:51:43 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 /*                              is functions                                  */
 
 int		ft_isalpha(int c);
+int		ft_isupper(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
@@ -61,6 +62,8 @@ char	*ft_strndup(const char *s, size_t len);
 
 /*                             other                                          */
 
+size_t	ft_strtoul(const char *nptr, char **endptr, int base);
+long	ft_strtol(const char *nptr, char **endptr, int base);
 int		ft_atoi(const char *nptr, int *error);
 
 /*                                                                            */

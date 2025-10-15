@@ -38,6 +38,9 @@ BASENAME := ft_isalpha \
 		   ft_strdup \
 		   ft_strndup \
 		   ft_atoi \
+		   ft_strtoul \
+		   ft_strtol \
+		   ft_isupper \
 		   ft_substr \
 		   ft_putchar_fd \
 		   ft_putstr_fd \
