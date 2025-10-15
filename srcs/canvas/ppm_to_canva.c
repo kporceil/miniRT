@@ -22,7 +22,7 @@ int	ppm_parse_line(char *line, t_canva *c, double scale, size_t *i)
 	char			*ptr1;
 	char			*ptr2;
 	static int		rgb = 0;
-	
+
 	ptr1 = line;
 	while (ft_isspace(*ptr1))
 		++ptr1;

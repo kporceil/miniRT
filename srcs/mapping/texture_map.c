@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ppm_io.c                                           :+:      :+:    :+:   */
+/*   texture_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 16:06:30 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/15 16:07:02 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/10/15 21:40:58 by kporceil          #+#    #+#             */
+/*   Updated: 2025/10/15 21:41:07 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "get_next_line.h"
-#include <fcntl.h>
-#include <unistd.h>
+#include "patterns.h"
 
-int	open_file(char *file, int flag)
+t_pattern	texture_map(t_uvpat pat, void (*uvmapper)
+		(t_tuple, double *, double *))
 {
-	int	fd;
-
-	fd = open(file, flag);
-	if (fd == -1)
-	{
-		ft_putstr_fd(file, 2);
-		ft_putendl_fd(": Unable to open file", 2);
-	}
-	return (fd);
-}
-
-void	close_ppm(int fd)
-{
-	get_next_line(fd, DELETE);
-	close(fd);
+	return ((t_pattern){.type = UV, .uvpat = pat, .uvmapper = uvmapper,
+		.transform = identity_matrix(4), .inverted = identity_matrix(4)});
 }

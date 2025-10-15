@@ -99,7 +99,7 @@ int	main(void)
 	shape_set_matrix(world.objs + 0, matrix_scaling(100, 100, 100));
 	world.objs[1] = sphere(1);
 	world.objs[1].material.color = color(0.4, 0.4, 0.4);
-	world.objs[1].material.reflective = 0.3;
+	world.objs[1].material.reflective = 0.7;
 	//world.objs[2] = sphere(2);
 	//world.objs[2].material.color = color(0, 0, 0);
 	//world.objs[2].material.transparency = 1;

@@ -58,12 +58,12 @@ BASENAME := $(MAIN) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix cylinders/, create intersect intersect_caps) \
 			$(addprefix cones/, create intersect intersect_caps) \
-			$(addprefix patterns/, pattern_at pattern_at_object) \
+			$(addprefix patterns/, pattern_at pattern_at_object ring_at check_at gradient_at stripe_at) \
 			$(addprefix reflect/, reflected_color) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
-			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map) \
+			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
