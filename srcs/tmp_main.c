@@ -19,6 +19,7 @@
 #include "light.h"
 #include "world.h"
 #include "camera.h"
+#include "display_mlx.h"
 #include <math.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -117,10 +118,11 @@ int	main(void)
 	t_canva		image = render(cam, world);
 	if (!image.canva)
 		return (1);
-	(void)image;
-	char		*ppm = canva_to_ppm(image);
-	write_file("render/test.ppm", ppm);
-	free(ppm);
+	display_mlx(image, cam, world);
+	//char		*ppm = canva_to_ppm(image);
+	//display_mlx(image);
+	//write_file("render/test.ppm", ppm);
+	//free(ppm);
 	free(image.canva);
 	free(world.objs);
 	free(world.lights);
