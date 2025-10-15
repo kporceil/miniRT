@@ -5,23 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/15 10:28:46 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/15 10:06:27 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/15 10:42:31 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
-#include "float_limits.h"
+#include "matrix.h"
+#include "material.h"
+#include <stdlib.h>
 
-t_shape	cylinder(size_t id)
+// NOTE: all calls to this function should ce checked (malloc)
+
+t_shape	group(size_t id, size_t nb_members)
 {
-	return ((t_shape){.type = CYLINDER,
+	return ((t_shape){.type = GROUP,
 			.transformation = identity_matrix(3),
 			.inverted = identity_matrix(4),
 			.material = material(),
 			.parent = NULL,
-			.cyl_closed = 0,
-			.cyl_min = -DBL_MAX,
-			.cyl_max = DBL_MAX,
+			.child = malloc(sizeof(t_shape) * nb_members),
 			.id = id});
 }
