@@ -1,6 +1,5 @@
 .build
 render/*
-*.ppm
 miniRT
 .cache
 *.out
