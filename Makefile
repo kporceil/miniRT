@@ -83,23 +83,21 @@ override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring tes
 CC := cc
 
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code
-#-Wstrict-prototypes
 
 ifeq (debug, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -g3
-#-Wstrict-prototypes
 endif
 
 ifeq (opti, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -Ofast -march=native -flto -ffast-math -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Ofast -march=native -flto -ffast-math -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
 endif
 
 ifeq (gprof, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -pg
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -pg
 endif
 
 ifeq (asan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=address
 endif
 
 ifeq (msan, $(MODE))
@@ -108,7 +106,7 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=memory
 endif
 
 ifeq (lsan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=leak
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=leak
 endif
 
 CPPFLAGS := -Iincludes -Ilibft/includes -Iminilibx-linux/
