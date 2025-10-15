@@ -43,6 +43,7 @@ typedef struct s_shape
 }				t_shape;
 
 t_shape		plane(size_t id);
+t_shape		cube(size_t id);
 t_shape		sphere(size_t id);
 t_shape		cylinder(size_t id);
 t_shape		cone(size_t id);

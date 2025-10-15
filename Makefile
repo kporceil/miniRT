@@ -34,7 +34,8 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix patterns/, striped_pattern_tests transform_pattern_tests ring_pattern_tests gradient_pattern_tests checker_pattern_tests) \
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
-					$(addprefix groups/, create_tests))
+					$(addprefix cubes/, cube_intersect_tests normal_tests) \
+					$(addprefix groups/, create_tests intersect_tests))
 
 endif
 ifeq (no, $(TEST))
@@ -60,7 +61,8 @@ BASENAME := $(MAIN) \
 			$(addprefix reflect/, reflected_color) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
-			$(addprefix groups/, create) \
+			$(addprefix cube/, cube intersect) \
+			$(addprefix groups/, create intersect) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -85,23 +87,21 @@ override FILTERED_SRCS := $(strip $(foreach f,$(SRCS),$(if $(or $(findstring tes
 CC := cc
 
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code
-#-Wstrict-prototypes
 
 ifeq (debug, $(MODE))
 CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -g3
-#-Wstrict-prototypes
 endif
 
 ifeq (opti, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -Ofast -march=native -flto -ffast-math -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Ofast -march=native -flto -ffast-math -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
 endif
 
 ifeq (gprof, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -pg
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -pg
 endif
 
 ifeq (asan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=address
 endif
 
 ifeq (msan, $(MODE))
@@ -110,7 +110,7 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=memory
 endif
 
 ifeq (lsan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -Wstrict-prototypes -Wunreachable-code -Wstrict-prototypes -fsanitize=leak
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=leak
 endif
 
 CPPFLAGS := -Iincludes -Ilibft/includes -Iminilibx-linux/

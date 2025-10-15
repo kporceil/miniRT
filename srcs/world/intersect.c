@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 18:15:15 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/30 19:21:54 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 17:11:21 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static size_t	count_possible_intersection(t_world world)
 	{
 		if (world.objs[i].type == CONE)
 			ret += 4;
+		else if (world.objs[i].type == GROUP)
+			ret += count_possible_intersection((t_world){.objs_count = world.objs[i].nb_members, .objs = world.objs[i].child});
 		else
 			ret += 2;
 		++i;
