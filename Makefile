@@ -35,7 +35,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
 					$(addprefix cubes/, cube_intersect_tests normal_tests) \
-					$(addprefix groups/, create_tests intersect_tests transformation_tests))
+					$(addprefix groups/, create_tests intersect_tests transformation_tests normal_tests))
 
 endif
 ifeq (no, $(TEST))
@@ -62,7 +62,7 @@ BASENAME := $(MAIN) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
-			$(addprefix groups/, create intersect) \
+			$(addprefix groups/, create intersect normal add_shape) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \

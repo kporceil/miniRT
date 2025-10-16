@@ -142,5 +142,6 @@ int		test_cube_normal(void);
 int		test_group_create(void);
 int		test_group_intersect(void);
 int		test_group_transform(void);
+int		test_group_normal(void);
 
 #endif

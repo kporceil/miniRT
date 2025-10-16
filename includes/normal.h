@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect.c                                        :+:      :+:    :+:   */
+/*   normal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 16:05:50 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/16 13:48:26 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/16 13:30:52 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/16 14:14:57 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "ray.h"
+#ifndef NORMAL_H
+# define NORMAL_H
 
-void	ray_group_intersect(t_shape *g, t_ray r, t_intersections *xs)
-{
-	size_t	i;
+# include "tuples.h"
+# include "shape.h"
 
-	i = 0;
-	while (i < g->group_size)
-	{
-		ray_intersect(g->child + i, r, xs);
-		++i;
-	}
-}
+t_tuple	world_to_object(t_shape *s, t_tuple p);
+t_tuple	normal_to_world(t_shape *s, t_tuple n);
+
+#endif

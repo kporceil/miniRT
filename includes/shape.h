@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:49:15 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/15 10:19:04 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 13:56:33 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_shape
 	t_material	material;
 	t_shape		*parent;
 	t_shape		*child;
+	size_t		group_size;
 	size_t		nb_members;
 	int			cyl_closed;
 	double		cyl_min;
@@ -47,7 +48,8 @@ t_shape		cube(size_t id);
 t_shape		sphere(size_t id);
 t_shape		cylinder(size_t id);
 t_shape		cone(size_t id);
-t_shape		group(size_t id, size_t nb_members);
+t_shape		group(size_t id, size_t group_size);
 void		shape_set_matrix(t_shape *s, t_matrix m);
+int			group_add_shape(t_shape *g, t_shape s);
 
 #endif

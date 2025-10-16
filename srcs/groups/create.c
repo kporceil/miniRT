@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:06:27 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/15 17:26:17 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 14:22:31 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 // NOTE: all calls to this function should ce checked (malloc)
 
-t_shape	group(size_t id, size_t nb_members)
+t_shape	group(size_t id, size_t group_size)
 {
 	t_shape	ret;
 
@@ -26,10 +26,11 @@ t_shape	group(size_t id, size_t nb_members)
 			.inverted = identity_matrix(4),
 			.material = material(),
 			.parent = NULL,
-			.nb_members = nb_members,
+			.group_size = group_size,
+			.nb_members = 0,
 			.id = id};
-	if (nb_members)
-		ret.child = malloc(sizeof(t_shape) * nb_members);
+	if (group_size)
+		ret.child = malloc(sizeof(t_shape) * group_size);
 	else
 		ret.child = NULL;
 	return (ret);

@@ -6,13 +6,14 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:31:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/08 15:26:19 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 16:30:09 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 #include "tuples.h"
 #include "shape.h"
+#include "normal.h"
 #include <math.h>
 
 static t_tuple	local_cylinder_normal(t_shape cyl, t_tuple object_point)
@@ -77,11 +78,11 @@ static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 
 t_tuple	normal_at(t_shape s, t_tuple p)
 {
-	t_tuple const	object_point = matrix_tuple_mult(s.inverted, p);
+	t_tuple const	object_point = world_to_object(&s, p);
 	t_tuple const	object_normal = local_object_normal(s, object_point);
 	t_tuple			normal;
 
-	normal = matrix_tuple_mult(matrix_transpose(s.inverted), object_normal);
+	normal = normal_to_world(&s, object_normal);
 	normal.w = 0;
 	return (normalize(normal));
 }

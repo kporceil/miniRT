@@ -97,6 +97,7 @@ int	main(void)
 	ret += test_group_create();
 	ret += test_group_intersect();
 	ret += test_group_transform();
+	ret += 	test_group_normal();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

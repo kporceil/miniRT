@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect.c                                        :+:      :+:    :+:   */
+/*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 16:05:50 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/16 13:48:26 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/16 13:27:30 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/16 15:05:42 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
-#include "ray.h"
+#include "matrix.h"
+#include "tuples.h"
 
-void	ray_group_intersect(t_shape *g, t_ray r, t_intersections *xs)
+t_tuple	world_to_object(t_shape *s, t_tuple p)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < g->group_size)
+	if (s->parent)
 	{
-		ray_intersect(g->child + i, r, xs);
-		++i;
+		p = world_to_object(s->parent, p);
 	}
+	return (matrix_tuple_mult(s->inverted, p));
+}
+
+t_tuple	normal_to_world(t_shape *s, t_tuple n)
+{
+	n = matrix_tuple_mult(matrix_transpose(s->inverted), n);
+	n.w = 0;
+	n = normalize(n);
+	if (s->parent)
+		n = normal_to_world(s->parent, n);
+	return (n);
 }
