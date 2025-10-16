@@ -38,6 +38,24 @@ void	write_file(char	*name, char	*ppm)
 	close(fd);
 }
 
+static size_t	count_possible_intersection(t_world world)
+{
+	size_t	ret;
+	size_t	i;
+
+	ret = 0;
+	i = 0;
+	while (i < world.objs_count)
+	{
+		if (world.objs[i].type == CONE)
+			ret += 4;
+		else
+			ret += 2;
+		++i;
+	}
+	return (ret);
+}
+
 int	main(void)
 {
 	t_world	world = world_create();
@@ -118,6 +136,9 @@ int	main(void)
 	world.lights[0] = point_light(point(-2, 10, -5), color(1, 1, 1));
 	t_camera	cam = camera(1920, 1080, M_PI / 2);
 	camera_set_transform(&cam, view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0)));
+	world.buf_inter = malloc(sizeof(t_inter) * count_possible_intersection(world));
+	if (!world.buf_inter)
+		goto end;
 	t_canva		image = render(cam, world);
 	if (!image.canva)
 		return (1);
@@ -126,6 +147,8 @@ int	main(void)
 	write_file("render/test.ppm", ppm);
 	free(ppm);
 	free(image.canva);
+	free(world.buf_inter);
+end:
 	free(left.file.canva);
 	free(right.file.canva);
 	free(front.file.canva);

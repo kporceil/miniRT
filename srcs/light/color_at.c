@@ -33,6 +33,5 @@ int	color_at(t_world w, t_ray r, t_color *c, size_t remaining)
 	}
 	comps = precompute(*hit, r, &inters);
 	*c = shade_hit(w, comps, remaining);
-	free(inters.inters);
 	return (0);
 }

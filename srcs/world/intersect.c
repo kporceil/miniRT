@@ -14,25 +14,7 @@
 #include "world.h"
 #include "ray.h"
 
-static void	adjust_inter(t_intersections *inter)
-{
-	t_inter	*adjusted;
-	size_t	i;
-
-	adjusted = malloc(sizeof(t_inter) * inter->size);
-	if (!adjusted)
-		return ;
-	i = 0;
-	while (i < inter->size)
-	{
-		adjusted[i] = inter->inters[i];
-		++i;
-	}
-	free(inter->inters);
-	inter->inters = adjusted;
-}
-
-static t_intersections	adjust_and_sort_inter(t_intersections *inter)
+static t_intersections	sort_inter(t_intersections *inter)
 {
 	t_inter	tmp;
 	size_t	i;
@@ -50,26 +32,7 @@ static t_intersections	adjust_and_sort_inter(t_intersections *inter)
 		else
 			++i;
 	}
-	adjust_inter(inter);
 	return (*inter);
-}
-
-static size_t	count_possible_intersection(t_world world)
-{
-	size_t	ret;
-	size_t	i;
-
-	ret = 0;
-	i = 0;
-	while (i < world.objs_count)
-	{
-		if (world.objs[i].type == CONE)
-			ret += 4;
-		else
-			ret += 2;
-		++i;
-	}
-	return (ret);
 }
 
 t_intersections	world_intersect(t_world	world, t_ray r)
@@ -78,17 +41,14 @@ t_intersections	world_intersect(t_world	world, t_ray r)
 	size_t			i;
 
 	inter.size = 0;
-	inter.inters = NULL;
+	inter.inters = world.buf_inter;
 	if (!world.objs_count)
 		return (inter);
 	i = 0;
-	inter.inters = malloc(sizeof(t_inter) * count_possible_intersection(world));
-	if (!inter.inters)
-		return (inter);
 	while (i < world.objs_count)
 	{
 		ray_intersect(world.objs + i, r, &inter);
 		++i;
 	}
-	return (adjust_and_sort_inter(&inter));
+	return (sort_inter(&inter));
 }

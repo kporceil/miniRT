@@ -23,6 +23,7 @@ typedef struct s_world
 	t_plight	*lights;
 	size_t		objs_count;
 	size_t		lights_count;
+	t_inter		*buf_inter;
 }				t_world;
 
 t_world			world_create(void);
