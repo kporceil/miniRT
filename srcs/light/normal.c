@@ -64,8 +64,11 @@ static t_tuple	local_torus_normal(t_shape s, t_tuple p)
 {
 	double const	rm = s.torus_major;
 	double const	sum_sq = p.x * p.x + p.z * p.z;
-	double const	factor = 1.0 - rm / sqrt(sum_sq);
+	double			factor;
 
+	if (sum_sq < 1e-10)
+		return (vector(0, p.y > 0 ? 1 : -1, 0));
+	factor = 1.0 - rm / sqrt(sum_sq);
 	return (vector(p.x * factor, p.y, p.z * factor));
 }
 
