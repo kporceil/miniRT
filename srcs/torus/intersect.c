@@ -57,18 +57,19 @@ static int	solve_quartic(double c4, double c3, double c2, double c1,
 	{
 		n = solve_quadratic(1.0, a, p, &t[0], &t[1]);
 		count = 0;
-		while (count < n && count < 2)
+		if (n > 0 && t[0] >= 0)
 		{
-			if (t[count] >= 0)
-			{
-				u = sqrt(t[count]);
-				roots[n * 2] = u - sub;
-				roots[n * 2 + 1] = -u - sub;
-				n += 2;
-			}
-			count++;
+			u = sqrt(t[0]);
+			roots[count++] = u - sub;
+			roots[count++] = -u - sub;
 		}
-		return (n);
+		if (n > 1 && t[1] >= 0)
+		{
+			u = sqrt(t[1]);
+			roots[count++] = u - sub;
+			roots[count++] = -u - sub;
+		}
+		return (count);
 	}
 	q = a * a - 4.0 * p;
 	d = a * a * a - 4.0 * a * p - b * b;
