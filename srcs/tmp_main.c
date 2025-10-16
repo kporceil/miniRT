@@ -43,7 +43,7 @@ int	main(void)
 	t_world	world = world_create();
 
 	world.lights_count = 1;
-	world.objs_count = 6;
+	world.objs_count = 7;
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.objs[0] = cube(0);
@@ -77,6 +77,12 @@ int	main(void)
 	world.objs[5].material.color = color(0.2, 0.6, 0.4);
 	world.objs[5].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(-3, 0, 0), matrix_mult(matrix_y_rotation(M_PI/12), matrix_z_rotation(M_PI/2))));
+	world.objs[6] = torus(6);
+	world.objs[6].material.color = color(1, 0.2, 0.2);
+	world.objs[6].material.diffuse = 0.7;
+	world.objs[6].material.specular = 0.6;
+	world.objs[6].material.shininess = 100;
+	shape_set_matrix(world.objs + 6, matrix_mult(matrix_translation(0, 1.5, 2), matrix_mult(matrix_x_rotation(M_PI/4), matrix_scaling(0.8, 0.8, 0.8))));
 	world.lights[0] = point_light(point(-2, 10, -5), color(1, 1, 1));
 	t_camera	cam = camera(1920, 1080, M_PI / 2);
 	camera_set_transform(&cam, view_transform(point(0, 1, -7), point(0, 1, 0), vector(0, 1, 0)));
