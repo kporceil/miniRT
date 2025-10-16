@@ -24,6 +24,7 @@ typedef enum e_tshape
 	CYLINDER,
 	CUBE,
 	CONE,
+	TORUS,
 }				t_tshape;
 
 typedef struct s_shape
@@ -35,6 +36,8 @@ typedef struct s_shape
 	int			cyl_closed;
 	double		cyl_min;
 	double		cyl_max;
+	double		torus_major;
+	double		torus_minor;
 	size_t		id;
 }				t_shape;
 
@@ -43,6 +46,7 @@ t_shape		cube(size_t id);
 t_shape		sphere(size_t id);
 t_shape		cylinder(size_t id);
 t_shape		cone(size_t id);
+t_shape		torus(size_t id);
 void		shape_set_matrix(t_shape *s, t_matrix m);
 
 #endif

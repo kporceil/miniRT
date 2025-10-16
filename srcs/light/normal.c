@@ -60,6 +60,15 @@ static t_tuple	local_cube_normal(t_tuple p)
 	return (vector(0, 0, p.z));
 }
 
+static t_tuple	local_torus_normal(t_shape s, t_tuple p)
+{
+	double const	rm = s.torus_major;
+	double const	sum_sq = p.x * p.x + p.z * p.z;
+	double const	factor = 1.0 - rm / sqrt(sum_sq);
+
+	return (vector(p.x * factor, p.y, p.z * factor));
+}
+
 static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 {
 	if (s.type == SPHERE)
@@ -72,6 +81,8 @@ static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 		return (local_cone_normal(s, object_point));
 	if (s.type == CUBE)
 		return (local_cube_normal(object_point));
+	if (s.type == TORUS)
+		return (local_torus_normal(s, object_point));
 	return (tuple_substract(object_point, point(0, 0, 0)));
 }
 

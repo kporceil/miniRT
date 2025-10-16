@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/07 10:15:20 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/16 15:50:00 by kporceil          #+#    #+#             */
+/*   Updated: 2025/10/16 15:50:00 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
-#include "float_limits.h"
 
-t_shape	cone(size_t id)
+t_shape	torus(size_t id)
 {
-	return ((t_shape){CONE, identity_matrix(3), identity_matrix(4),
-		material(), 0, -DBL_MAX, DBL_MAX, 0.0, 0.0, id});
+	return ((t_shape){.type = TORUS, .transformation = identity_matrix(4),
+		.inverted = identity_matrix(4), .id = id, .material = material(),
+		.torus_major = 1.0, .torus_minor = 0.25});
 }

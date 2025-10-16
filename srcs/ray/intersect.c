@@ -25,4 +25,6 @@ void	ray_intersect(t_shape *s, t_ray r, t_intersections *inter)
 		ray_cone_intersect(s, ray_transform(&r, &s->inverted), inter);
 	if (s->type == CUBE)
 		ray_cube_intersect(s, ray_transform(&r, &s->inverted), inter);
+	if (s->type == TORUS)
+		ray_torus_intersect(s, ray_transform(&r, &s->inverted), inter);
 }
