@@ -15,5 +15,6 @@
 t_shape	plane(size_t id)
 {
 	return ((t_shape){.type = PLANE, .transformation = identity_matrix(3),
-		.inverted = identity_matrix(4), .material = material(), .id = id});
+		.inverted = identity_matrix(4), .inv_transposed = identity_matrix(4),
+		.material = material(), .id = id});
 }

@@ -31,6 +31,7 @@ typedef struct s_shape
 	t_tshape	type;
 	t_matrix	transformation;
 	t_matrix	inverted;
+	t_matrix	inv_transposed;
 	t_material	material;
 	int			cyl_closed;
 	double		cyl_min;

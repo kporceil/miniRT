@@ -18,4 +18,5 @@ void	shape_set_matrix(t_shape *s, t_matrix m)
 	s->inverted = m;
 	if (is_matrix_invertible(m))
 		s->inverted = matrix_invert(m);
+	s->inv_transposed = matrix_transpose(s->inverted);
 }
