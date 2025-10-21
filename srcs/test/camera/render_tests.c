@@ -40,6 +40,14 @@ static int	setup(void **state)
 		free(world);
 		return (-1);
 	}
+	world->buf_inter = malloc(sizeof(t_inter) * 4);
+	if (!world->buf_inter)
+	{
+		free(world->objs);
+		free(world->lights);
+		free(world);
+		return (-1);
+	}
 	world->objs[0] = sphere(0);
 	world->objs[1] = sphere(1);
 	world->objs[0].material.diffuse = 0.7;
@@ -56,6 +64,7 @@ static int	teardown(void **state)
 {
 	t_world	*world = *state;
 
+	free(world->buf_inter);
 	free(world->lights);
 	free(world->objs);
 	free(world);
