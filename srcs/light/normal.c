@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:31:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/16 16:30:09 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/20 13:42:59 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,13 @@ static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 
 t_tuple	normal_at(t_shape s, t_tuple p)
 {
-	t_tuple const	object_point = world_to_object(&s, p);
+	//t_tuple const	object_point = world_to_object(&s, p);
+	t_tuple const	object_point = matrix_tuple_mult(s.inverted, p);
 	t_tuple const	object_normal = local_object_normal(s, object_point);
 	t_tuple			normal;
 
-	normal = normal_to_world(&s, object_normal);
+	//normal = normal_to_world(&s, object_normal);
+	normal = matrix_tuple_mult(matrix_transpose(s.inverted), object_normal);
 	normal.w = 0;
 	return (normalize(normal));
 }

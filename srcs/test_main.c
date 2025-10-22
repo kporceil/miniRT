@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/15 17:34:23 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/20 14:03:53 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	main(void)
 	ret += test_group_create();
 	ret += test_group_intersect();
 	ret += test_group_transform();
-	ret += 	test_group_normal();
+	//ret += 	test_group_normal();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

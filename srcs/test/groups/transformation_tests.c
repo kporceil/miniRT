@@ -30,11 +30,27 @@ static void	transform_group_1_test(__unused void **state)
 {
 	t_shape	g = group(1, 1);
 	t_ray	r = ray(point(10, 0, -10), vector(0, 0, 1));
-	t_intersections xs;
+	t_intersections xs = (t_intersections){0};
 
-	shape_set_matrix(&g, matrix_scaling(2, 2, 2));
-	g.child[0] = sphere(2);
+	group_set_matrix(&g, matrix_scaling(2, 2, 2));
+	group_add_shape(&g, sphere(2));
 	shape_set_matrix(g.child, matrix_translation(5, 0, 0));
+	xs.inters = malloc(sizeof(t_inter) * 2);
+	ray_intersect(&g, r, &xs);
+	assert_int_equal(xs.size, 2);
+	free(g.child);
+	free(xs.inters);
+}
+
+static void	transform_group_2_test(__unused void **state)
+{
+	t_shape	g = group(1, 1);
+	t_ray	r = ray(point(10, 0, -10), vector(0, 0, 1));
+	t_intersections xs = (t_intersections){0};
+
+	group_add_shape(&g, sphere(2));
+	shape_set_matrix(g.child, matrix_translation(5, 0, 0));
+	group_set_matrix(&g, matrix_scaling(2, 2, 2));
 	xs.inters = malloc(sizeof(t_inter) * 2);
 	ray_intersect(&g, r, &xs);
 	assert_int_equal(xs.size, 2);
@@ -46,6 +62,7 @@ int	test_group_transform(void)
 {
 	const struct CMUnitTest	group_transform_tests[] = {
 		cmocka_unit_test(transform_group_1_test),
+		cmocka_unit_test(transform_group_2_test),
 	};
 	return (cmocka_run_group_tests(group_transform_tests, NULL, NULL));
 }

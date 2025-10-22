@@ -30,7 +30,7 @@ static void	create_group_1_test(__unused void **state)
 {
 	t_shape	g = group(1, 0);
 
-	assert_matrix_equal(g.transformation, identity_matrix(3));
+	assert_matrix_equal(g.transformation, identity_matrix(4));
 	assert_ptr_equal(g.child, NULL);
 }
 
