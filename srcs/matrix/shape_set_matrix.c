@@ -16,13 +16,14 @@ void	shape_set_matrix(t_shape *s, t_matrix m)
 {
 	if (s->type == GROUP)
 		return (group_set_matrix(s, m));
+	s->local_transformation = m;
 	if (s->parent)
 	{
 		//m = matrix_mult(m, s->parent->transformation);
-		m = matrix_mult(s->parent->transformation, m);
+		m = matrix_mult(s->parent->final_transformation, m);
 	}
-	s->transformation = m;
-	s->inverted = m;
+	s->final_transformation = m;
+	s->final_inverted = m;
 	if (is_matrix_invertible(m))
-		s->inverted = matrix_invert(m);
+		s->final_inverted = matrix_invert(m);
 }

@@ -22,8 +22,9 @@ t_shape	group(size_t id, size_t group_size)
 	t_shape	ret;
 
 	ret = (t_shape){.type = GROUP,
-			.transformation = identity_matrix(4),
-			.inverted = identity_matrix(4),
+			.local_transformation = identity_matrix(4),
+			.final_transformation = identity_matrix(4),
+			.final_inverted = identity_matrix(4),
 			.material = material(),
 			.parent = NULL,
 			.group_size = group_size,

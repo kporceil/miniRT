@@ -94,8 +94,8 @@ int	main(void)
 	world.objs[0] = hexagon(300);
 	//group_add_shape(world.objs, sphere(2));
 	//double pi = M_PI;
-	//group_set_matrix(world.objs, matrix_y_rotation(M_PI));
-	group_set_matrix(world.objs, matrix_translation(0, 0, 0));
+	group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));
+	//group_set_matrix(world.objs, matrix_translation(1, 0, 0));
 	//shape_set_matrix(world.objs->child, matrix_translation(0, 0, 5));
 	//group_add_shape(world.objs, sphere(2));
 	//shape_set_matrix(world.objs->child, matrix_scaling(1, 2, 1));

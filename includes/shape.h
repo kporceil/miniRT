@@ -31,8 +31,9 @@ typedef enum e_tshape
 typedef struct s_shape
 {
 	t_tshape	type;
-	t_matrix	transformation;
-	t_matrix	inverted;
+	t_matrix	local_transformation;
+	t_matrix	final_transformation;
+	t_matrix	final_inverted;
 	t_material	material;
 	t_shape		*parent;
 	t_shape		*child;

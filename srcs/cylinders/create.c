@@ -16,8 +16,9 @@
 t_shape	cylinder(size_t id)
 {
 	return ((t_shape){.type = CYLINDER,
-			.transformation = identity_matrix(3),
-			.inverted = identity_matrix(4),
+			.local_transformation = identity_matrix(3),
+			.final_transformation = identity_matrix(3),
+			.final_inverted = identity_matrix(4),
 			.material = material(),
 			.parent = NULL,
 			.cyl_closed = 0,

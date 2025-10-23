@@ -16,11 +16,11 @@ int	group_add_shape(t_shape *g, t_shape s)
 {
 	if (g->nb_members == g->group_size)
 		return (1);
-	if (s.type == GROUP)
-		group_set_matrix(&s, matrix_mult(g->transformation, s.transformation));
-	else
-		shape_set_matrix(&s, matrix_mult(g->transformation, s.transformation));
 	s.parent = g;
+	if (s.type == GROUP)
+		group_set_matrix(&s, s.local_transformation);
+	else
+		shape_set_matrix(&s, s.local_transformation);
 	g->child[g->nb_members] = s;
 	++g->nb_members;
 	return (0);
