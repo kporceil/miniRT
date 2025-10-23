@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:30:11 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/13 16:01:34 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/23 17:19:53 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static int	color_to_int(t_color c)
 	if (c.red >= 1.0)
 		ret += 255 << 16;
 	else
-		ret += (char)(c.red * 255) << 16;
+		ret += (unsigned char)(c.red * 255) << 16;
 	if (c.green >= 1.0)
 		ret += 255 << 8;
 	else
-		ret += (char)(c.green * 255) << 8;
+		ret += (unsigned char)(c.green * 255) << 8;
 	if (c.blue >= 1.0)
 		ret += 255;
 	else
-		ret += (char)(c.blue * 255);
+		ret += (unsigned char)(c.blue * 255);
 	return (ret);
 }
 

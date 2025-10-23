@@ -51,7 +51,7 @@ BASENAME := $(MAIN) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
 			$(addprefix spheres/, create intersect) \
 			$(addprefix light/, normal reflect point_light material phong shade_hit color_at) \
-			$(addprefix world/, create intersect) \
+			$(addprefix world/, create intersect free_world) \
 			$(addprefix camera/, create ray_for_pixel render) \
 			$(addprefix shadow/, is_shadowed) \
 			$(addprefix plane/, plane intersect) \
@@ -62,7 +62,7 @@ BASENAME := $(MAIN) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
-			$(addprefix groups/, create intersect add_shape group_set_matrix) \
+			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \

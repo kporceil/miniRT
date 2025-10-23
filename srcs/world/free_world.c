@@ -1,34 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normal.c                                           :+:      :+:    :+:   */
+/*   free_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 13:27:30 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/16 15:05:42 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/23 15:49:08 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/23 17:20:37 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
-#include "matrix.h"
-#include "tuples.h"
+#include "world.h"
+#include <stdlib.h>
 
-t_tuple	world_to_object(t_shape *s, t_tuple p)
+static void	free_group(t_shape *g)
 {
-	if (s->parent)
+	size_t	i;
+
+	i = 0;
+	while (i < g->nb_members)
 	{
-		p = world_to_object(s->parent, p);
+		if (g->child[i].type == GROUP)
+			free_group(g->child + i);
+		++i;
 	}
-	return (matrix_tuple_mult(s->inverted, p));
+	free(g->child);
 }
 
-t_tuple	normal_to_world(t_shape *s, t_tuple n)
+void	free_world(t_world *w)
 {
-	n = matrix_tuple_mult(matrix_transpose(s->inverted), n);
-	n.w = 0;
-	n = normalize(n);
-	if (s->parent)
-		n = normal_to_world(s->parent, n);
-	return (n);
+	size_t	i;
+
+	i = 0;
+	while (i < w->objs_count)
+	{
+		if (w->objs[i].type == GROUP)
+			free_group(w->objs + i);
+		++i;
+	}
+	free(w->objs);
+	free(w->lights);
 }

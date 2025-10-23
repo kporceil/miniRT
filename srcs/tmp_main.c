@@ -6,11 +6,12 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/20 20:20:03 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/23 17:21:39 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
+#include "groups.h"
 #include "patterns.h"
 #include "shape.h"
 #include "tuples.h"
@@ -43,7 +44,7 @@ static t_shape	hex_corner(size_t id)
 	t_shape	ret;
 
 	ret = sphere(id);
-	shape_set_matrix(&ret, matrix_mult(matrix_translation(0, 0, -1), matrix_scaling(0.25, 0.25, 0.25)));
+	shape_set_matrix(&ret, matrix_mult(matrix_mult(matrix_translation(0, 0, -1), matrix_scaling(0.25, 0.25, 0.25)), matrix_y_rotation(-M_PI/6)));
 	return (ret);
 }
 
@@ -88,14 +89,18 @@ int	main(void)
 	(void)hexagon;
 
 	world.lights_count = 1;
-	world.objs_count = 1;
+	world.objs_count = 2;
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.objs[0] = hexagon(300);
+	world.objs[1] = sphere(400);
 	//group_add_shape(world.objs, sphere(2));
 	//double pi = M_PI;
-	group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));
-	//group_set_matrix(world.objs, matrix_translation(1, 0, 0));
+	//group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));
+	group_set_matrix(world.objs, matrix_scaling(2, 2, 2));
+	group_set_material(world.objs, (t_material){(t_pattern){CHECKER, color(1, 0, 0), color(0, 1, 0), identity_matrix(4), identity_matrix(4)}, (t_color){1, 0.1, 0.1}, 0.1, 0.9, 0.9, 200, 0, 0, 1});
+	//world.objs[1]->	
+	shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1, 1.5, 0), matrix_scaling(0.25, 0.25, 0.25)));
 	//shape_set_matrix(world.objs->child, matrix_translation(0, 0, 5));
 	//group_add_shape(world.objs, sphere(2));
 	//shape_set_matrix(world.objs->child, matrix_scaling(1, 2, 1));
@@ -106,7 +111,7 @@ int	main(void)
 	//group_set_matrix(world.objs, matrix_scaling(1.5, 1.5, 1.5));
 	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
 	t_camera	cam = camera(1000, 1000, M_PI / 2);
-	camera_set_transform(&cam, view_transform(point(2, 2, 0), point(0, 0, 0), vector(0, 1, 0)));
+	camera_set_transform(&cam, view_transform(point(1, 4, 0), point(0, 0, 0), vector(1, 0, 0)));
 	t_canva		image = render(cam, world);
 	if (!image.canva)
 		return (1);
@@ -115,6 +120,5 @@ int	main(void)
 	//write_file("render/test.ppm", ppm);
 	//free(ppm);
 	free(image.canva);
-	free(world.objs);
-	free(world.lights);
+	free_world(&world);
 }
