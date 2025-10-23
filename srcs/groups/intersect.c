@@ -20,10 +20,7 @@ void	ray_group_intersect(t_shape *g, t_ray r, t_intersections *xs)
 	i = 0;
 	while (i < g->group_size)
 	{
-		if (g->child->type == GROUP)
-			ray_intersect(g->child + i, r, xs);
-		else
-			ray_intersect(g->child + i, r, xs);
+		ray_intersect(g->child + i, r, xs);
 		++i;
 	}
 }

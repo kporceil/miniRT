@@ -41,8 +41,8 @@ static void	group_member_group_set_matrix(t_shape *g, t_matrix m)
 {
 	size_t	i;
 
-	//if (matrix_compare(g->transformation, identity_matrix(4)))
-		//reset_group_matrix(g);
+	if (matrix_compare(g->transformation, identity_matrix(4)))
+		reset_group_matrix(g);
 	g->transformation = m;
 	g->inverted = m;
 	if (is_matrix_invertible(m))
@@ -67,7 +67,7 @@ void	group_set_matrix(t_shape *g, t_matrix m)
 	if (matrix_compare(g->transformation, identity_matrix(4)))
 		reset_group_matrix(g);
 	if (g->parent)
-		m = matrix_mult(m, g->parent->transformation);
+		m = matrix_mult(g->parent->transformation, m);
 	g->transformation = m;
 	g->inverted = m;
 	if (is_matrix_invertible(m))
@@ -76,11 +76,11 @@ void	group_set_matrix(t_shape *g, t_matrix m)
 	while (i < g->group_size)
 	{
 		if (g->child[i].type == GROUP)
-			//group_set_matrix(g->child + i, matrix_mult(m, g->child[i].transformation));
-			group_member_group_set_matrix(g->child + i, matrix_mult(g->child[i].transformation, m));
+			//group_member_group_set_matrix(g->child + i, matrix_mult(g->child[i].transformation, m));
+			group_member_group_set_matrix(g->child + i, matrix_mult(m, g->child[i].transformation));
 		else
-			//shape_set_matrix(g->child + i, matrix_mult(m, g->child[i].transformation));
-			group_member_shape_set_matrix(g->child + i, matrix_mult(g->child[i].transformation, m));
+			//group_member_shape_set_matrix(g->child + i, matrix_mult(g->child[i].transformation, m));
+			group_member_shape_set_matrix(g->child + i, matrix_mult(m, g->child[i].transformation));
 		++i;
 	}
 }

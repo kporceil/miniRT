@@ -18,8 +18,8 @@ void	shape_set_matrix(t_shape *s, t_matrix m)
 		return (group_set_matrix(s, m));
 	if (s->parent)
 	{
-		m = matrix_mult(m, s->parent->transformation);
-		//m = matrix_mult(s->parent->transformation, m);
+		//m = matrix_mult(m, s->parent->transformation);
+		m = matrix_mult(s->parent->transformation, m);
 	}
 	s->transformation = m;
 	s->inverted = m;

@@ -95,7 +95,7 @@ int	main(void)
 	//group_add_shape(world.objs, sphere(2));
 	//double pi = M_PI;
 	//group_set_matrix(world.objs, matrix_y_rotation(M_PI));
-	//group_set_matrix(world.objs, matrix_translation(5, 0, 0));
+	group_set_matrix(world.objs, matrix_translation(0, 0, 0));
 	//shape_set_matrix(world.objs->child, matrix_translation(0, 0, 5));
 	//group_add_shape(world.objs, sphere(2));
 	//shape_set_matrix(world.objs->child, matrix_scaling(1, 2, 1));
@@ -105,8 +105,8 @@ int	main(void)
 	//shape_set_matrix(world.objs->child + 1, matrix_mult(matrix_translation(1, 0, 0), matrix_z_rotation(-M_PI/2)));
 	//group_set_matrix(world.objs, matrix_scaling(1.5, 1.5, 1.5));
 	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
-	t_camera	cam = camera(1920, 1080, M_PI / 2);
-	camera_set_transform(&cam, view_transform(point(5, 5, 0), point(0, 0, 0), vector(0, 1, 0)));
+	t_camera	cam = camera(1000, 1000, M_PI / 2);
+	camera_set_transform(&cam, view_transform(point(2, 2, 0), point(0, 0, 0), vector(0, 1, 0)));
 	t_canva		image = render(cam, world);
 	if (!image.canva)
 		return (1);
