@@ -14,24 +14,53 @@
 #include "world.h"
 #include "ray.h"
 
-static t_intersections	sort_inter(t_intersections *inter)
+static void	swap_inter(t_inter *a, t_inter *b)
 {
 	t_inter	tmp;
-	size_t	i;
 
-	i = 0;
-	while (i + 1 < inter->size)
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+static int	partition(t_inter *arr, int low, int high)
+{
+	double	pivot;
+	int		i;
+	int		j;
+
+	pivot = arr[high].point;
+	i = low - 1;
+	j = low;
+	while (j < high)
 	{
-		if (inter->inters[i].point > inter->inters[i + 1].point)
+		if (arr[j].point <= pivot)
 		{
-			tmp = inter->inters[i];
-			inter->inters[i] = inter->inters[i + 1];
-			inter->inters[i + 1] = tmp;
-			i = 0;
+			i++;
+			swap_inter(arr + i, arr + j);
 		}
-		else
-			++i;
+		j++;
 	}
+	swap_inter(arr + i + 1, arr + high);
+	return (i + 1);
+}
+
+static void	quicksort_inter(t_inter *arr, int low, int high)
+{
+	int	pivot_index;
+
+	if (low < high)
+	{
+		pivot_index = partition(arr, low, high);
+		quicksort_inter(arr, low, pivot_index - 1);
+		quicksort_inter(arr, pivot_index + 1, high);
+	}
+}
+
+static t_intersections	sort_inter(t_intersections *inter)
+{
+	if (inter->size > 1)
+		quicksort_inter(inter->inters, 0, (int)(inter->size - 1));
 	return (*inter);
 }
 
