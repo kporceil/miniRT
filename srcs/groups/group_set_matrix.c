@@ -33,9 +33,11 @@ static void	group_member_group_set_matrix(t_shape *g, t_matrix m)
 	while (i < g->group_size)
 	{
 		if (g->child[i].type == GROUP)
-			group_member_group_set_matrix(g->child + i, matrix_mult(m, g->child[i].local_transformation));
+			group_member_group_set_matrix(g->child + i, matrix_mult(
+					m, g->child[i].local_transformation));
 		else
-			group_member_shape_set_matrix(g->child + i, matrix_mult(m, g->child[i].local_transformation));
+			group_member_shape_set_matrix(g->child + i, matrix_mult(
+					m, g->child[i].local_transformation));
 		++i;
 	}
 }
@@ -54,9 +56,11 @@ void	group_set_matrix(t_shape *g, t_matrix m)
 	while (i < g->group_size)
 	{
 		if (g->child[i].type == GROUP)
-			group_member_group_set_matrix(g->child + i, matrix_mult(m, g->child[i].local_transformation));
+			group_member_group_set_matrix(g->child + i, matrix_mult(
+					m, g->child[i].local_transformation));
 		else
-			group_member_shape_set_matrix(g->child + i, matrix_mult(m, g->child[i].local_transformation));
+			group_member_shape_set_matrix(g->child + i, matrix_mult(
+					m, g->child[i].local_transformation));
 		++i;
 	}
 }

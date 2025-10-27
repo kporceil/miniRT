@@ -111,7 +111,7 @@ int	main(void)
 	//group_set_matrix(world.objs, matrix_scaling(1.5, 1.5, 1.5));
 	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
 	t_camera	cam = camera(1000, 1000, M_PI / 2);
-	camera_set_transform(&cam, view_transform(point(1, 4, 0), point(0, 0, 0), vector(1, 0, 0)));
+	camera_set_transform(&cam, view_transform(point(2, 2, 0), point(0, 0, 0), vector(0, 1, 0)));
 	t_canva		image = render(cam, world);
 	if (!image.canva)
 		return (1);

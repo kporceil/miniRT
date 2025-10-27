@@ -16,13 +16,13 @@
 t_shape	cylinder(size_t id)
 {
 	return ((t_shape){.type = CYLINDER,
-			.local_transformation = identity_matrix(3),
-			.final_transformation = identity_matrix(3),
-			.final_inverted = identity_matrix(4),
-			.material = material(),
-			.parent = NULL,
-			.cyl_closed = 0,
-			.cyl_min = -DBL_MAX,
-			.cyl_max = DBL_MAX,
-			.id = id});
+		.local_transformation = identity_matrix(3),
+		.final_transformation = identity_matrix(3),
+		.final_inverted = identity_matrix(4),
+		.material = material(),
+		.parent = NULL,
+		.cyl_closed = 0,
+		.cyl_min = -DBL_MAX,
+		.cyl_max = DBL_MAX,
+		.id = id});
 }

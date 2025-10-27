@@ -20,7 +20,6 @@ void	shape_set_matrix(t_shape *s, t_matrix m)
 	s->local_transformation = m;
 	if (s->parent)
 	{
-		//m = matrix_mult(m, s->parent->transformation);
 		m = matrix_mult(s->parent->final_transformation, m);
 	}
 	s->final_transformation = m;

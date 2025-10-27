@@ -22,14 +22,14 @@ t_shape	group(size_t id, size_t group_size)
 	t_shape	ret;
 
 	ret = (t_shape){.type = GROUP,
-			.local_transformation = identity_matrix(4),
-			.final_transformation = identity_matrix(4),
-			.final_inverted = identity_matrix(4),
-			.material = material(),
-			.parent = NULL,
-			.group_size = group_size,
-			.nb_members = 0,
-			.id = id};
+		.local_transformation = identity_matrix(4),
+		.final_transformation = identity_matrix(4),
+		.final_inverted = identity_matrix(4),
+		.material = material(),
+		.parent = NULL,
+		.group_size = group_size,
+		.nb_members = 0,
+		.id = id};
 	if (group_size)
 		ret.child = malloc(sizeof(t_shape) * group_size);
 	else
