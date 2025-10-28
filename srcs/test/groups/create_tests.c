@@ -21,6 +21,7 @@
 #include "tests.h"
 #include "ray.h"
 #include "tuples.h"
+#include "groups.h"
 
 #ifndef EPSILON
 # define EPSILON 0.0001
@@ -30,7 +31,7 @@ static void	create_group_1_test(__unused void **state)
 {
 	t_shape	g = group(1, 0);
 
-	assert_matrix_equal(g.transformation, identity_matrix(4));
+	assert_matrix_equal(g.final_transformation, identity_matrix(4));
 	assert_ptr_equal(g.child, NULL);
 }
 

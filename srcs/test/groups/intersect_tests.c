@@ -21,6 +21,7 @@
 #include "tests.h"
 #include "ray.h"
 #include "tuples.h"
+#include "groups.h"
 
 #ifndef EPSILON
 # define EPSILON 0.0001

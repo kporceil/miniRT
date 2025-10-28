@@ -50,7 +50,7 @@ static void	ray_scaled_intersect_test(__unused void **state)
 	
 	(void)state;
 	shape_set_matrix(&s, matrix_scaling(2, 2, 2));
-	ray_sphere_intersect(&s, ray_transform(&r, &s.inverted), &inter);
+	ray_sphere_intersect(&s, ray_transform(&r, &s.final_inverted), &inter);
 	assert_int_equal(inter.size, 2);
 	assert_double_equal(inter.inters[0].point, 3, 0.0001);
 	assert_double_equal(inter.inters[1].point, 7, 0.0001);
@@ -64,7 +64,7 @@ static void	ray_translate_intersect_test(__unused void **state)
 	t_intersections	inter = {NULL, 0};
 	
 	shape_set_matrix(&s, matrix_translation(5, 0, 0));
-	ray_sphere_intersect(&s, ray_transform(&r, &s.inverted), &inter);
+	ray_sphere_intersect(&s, ray_transform(&r, &s.final_inverted), &inter);
 	assert_int_equal(inter.size, 0);
 }
 

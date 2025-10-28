@@ -63,9 +63,9 @@ static size_t	count_possible_intersection(t_world world)
 	i = 0;
 	while (i < world.objs_count)
 	{
-		if (world.objs[i].type == cone)
+		if (world.objs[i].type == CONE)
 			ret += 4;
-		else if (world.objs[i].type == group)
+		else if (world.objs[i].type == GROUP)
 			ret += count_possible_intersection((t_world){.objs_count
 					= world.objs[i].nb_members,
 					.objs = world.objs[i].child});

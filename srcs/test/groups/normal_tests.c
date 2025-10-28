@@ -24,6 +24,7 @@
 #include "tuples.h"
 #include "normal.h"
 #include "light.h"
+#include "groups.h"
 
 #ifndef EPSILON
 # define EPSILON 0.0001
