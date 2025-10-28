@@ -30,7 +30,7 @@ static void	group_member_group_set_matrix(t_shape *g, t_matrix m)
 	if (is_matrix_invertible(m))
 		g->final_inverted = matrix_invert(m);
 	i = 0;
-	while (i < g->group_size)
+	while (i < g->nb_members)
 	{
 		if (g->child[i].type == GROUP)
 			group_member_group_set_matrix(g->child + i, matrix_mult(
@@ -49,11 +49,12 @@ void	group_set_matrix(t_shape *g, t_matrix m)
 	g->local_transformation = m;
 	if (g->parent)
 		m = matrix_mult(g->parent->final_transformation, m);
+	g->final_transformation = m;
 	g->final_inverted = m;
 	if (is_matrix_invertible(m))
 		g->final_inverted = matrix_invert(m);
 	i = 0;
-	while (i < g->group_size)
+	while (i < g->nb_members)
 	{
 		if (g->child[i].type == GROUP)
 			group_member_group_set_matrix(g->child + i, matrix_mult(
