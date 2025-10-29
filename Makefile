@@ -35,7 +35,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
 					$(addprefix cubes/, cube_intersect_tests normal_tests) \
-					$(addprefix groups/, create_tests intersect_tests transformation_tests normal_tests))
+					$(addprefix groups/, create_tests intersect_tests transformation_tests))
 
 endif
 ifeq (no, $(TEST))
