@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:05:42 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/31 14:33:33 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/29 16:35:03 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@
 # include "world.h"
 # include "canvas.h"
 # include <stddef.h>
+# include <stdbool.h>
 
 typedef struct s_camera
 {
 	t_matrix	transform;
 	t_matrix	inverted_transform;
+	t_tuple		pos;
+	t_tuple		look_at;
+	t_tuple		up;
 	size_t		hsize;
 	size_t		vsize;
 	double		fov;
@@ -31,9 +35,11 @@ typedef struct s_camera
 	double		half_height;
 }				t_camera;
 
-t_camera	camera(size_t hsize, size_t vsize, double fov);
+t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos);
 void		camera_set_transform(t_camera *cam, t_matrix m);
 t_ray		ray_for_pixel(t_camera cam, size_t px, size_t py);
 t_canva	render(t_camera cam, t_world w, size_t pixel_size);
+void	render_on_canva(t_canva *canva, t_camera cam, t_world w, size_t pixel_size);
+void	move_camera(t_camera *c, t_tuple translation, _Bool *should_render);
 
 #endif

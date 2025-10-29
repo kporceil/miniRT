@@ -52,7 +52,7 @@ BASENAME := $(MAIN) \
 			$(addprefix spheres/, create intersect) \
 			$(addprefix light/, normal reflect point_light material phong shade_hit color_at) \
 			$(addprefix world/, create intersect free_world) \
-			$(addprefix camera/, create ray_for_pixel render) \
+			$(addprefix camera/, create ray_for_pixel render move) \
 			$(addprefix shadow/, is_shadowed) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix cylinders/, create intersect intersect_caps) \

@@ -21,12 +21,15 @@ void	camera_set_transform(t_camera *cam, t_matrix m)
 		cam->inverted_transform = matrix_invert(m);
 }
 
-t_camera	camera(size_t hsize, size_t vsize, double fov)
+t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos)
 {
 	t_camera	ret;
 	double		half_view;
 	double		aspect;
 
+	ret.pos = pos;
+	ret.look_at = point(0, 0, 0);
+	ret.up = vector(0, 1, 0);
 	ret.hsize = hsize;
 	ret.vsize = vsize;
 	ret.fov = fov;
