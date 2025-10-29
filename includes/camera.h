@@ -34,6 +34,6 @@ typedef struct s_camera
 t_camera	camera(size_t hsize, size_t vsize, double fov);
 void		camera_set_transform(t_camera *cam, t_matrix m);
 t_ray		ray_for_pixel(t_camera cam, size_t px, size_t py);
-t_canva		render(t_camera cam, t_world w);
+t_canva	render(t_camera cam, t_world w, size_t pixel_size);
 
 #endif

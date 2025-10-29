@@ -112,7 +112,7 @@ int	main(void)
 	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
 	t_camera	cam = camera(1000, 1000, M_PI / 2);
 	camera_set_transform(&cam, view_transform(point(2, 2, 0), point(0, 0, 0), vector(0, 1, 0)));
-	t_canva		image = render(cam, world);
+	t_canva		image = render(cam, world, 5);
 	if (!image.canva)
 		return (1);
 	display_mlx(image, cam, world);

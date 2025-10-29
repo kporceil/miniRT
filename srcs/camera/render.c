@@ -23,7 +23,25 @@ static t_canva	free_can_and_set_to_null(t_canva c)
 	return (c);
 }
 
-t_canva	render(t_camera cam, t_world w)
+static void put_square(t_canva *image, size_t x, size_t y, t_color c, size_t pixel_size)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < pixel_size)
+	{
+		j = 0;
+		while (j < pixel_size)
+		{
+			write_pixel(image, x + j, y + i, c);
+			++j;
+		}
+		++i;
+	}
+}
+
+t_canva	render(t_camera cam, t_world w, size_t pixel_size)
 {
 	t_canva	image;
 	t_ray	r;
@@ -43,9 +61,11 @@ t_canva	render(t_camera cam, t_world w)
 			r = ray_for_pixel(cam, x, y);
 			if (color_at(w, r, &c, MAX_RECU))
 				return (free_can_and_set_to_null(image));
-			write_pixel(&image, x++, y, c);
+			put_square(&image, x, y, c, pixel_size);
+			//write_pixel(&image, x, y, c);
+			x += pixel_size;
 		}
-		++y;
+		y += pixel_size;
 	}
 	return (image);
 }
