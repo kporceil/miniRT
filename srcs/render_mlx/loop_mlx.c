@@ -55,6 +55,13 @@ static void	canva_to_mlx_image(t_display display, t_canva canva)
 
 #include <stdio.h>
 
+// NOTE: to rotate, rotate look at point arround the origin by substracting camera coords from look at point. the add them bacj after the rotation was done.
+
+static t_tuple	rotate_camera(int dx, int dy, t_tuple look_at, t_tuple cam_pos)
+{
+
+}
+
 int	render_loop(t_loop_params *p)
 {
 	static size_t	frame = 0;
