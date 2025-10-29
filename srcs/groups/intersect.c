@@ -18,7 +18,7 @@ void	ray_group_intersect(t_shape *g, t_ray r, t_intersections *xs)
 	size_t	i;
 
 	i = 0;
-	while (i < g->group_size)
+	while (i < g->nb_members)
 	{
 		ray_intersect(g->child + i, r, xs);
 		++i;

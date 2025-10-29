@@ -44,10 +44,10 @@ static void	intersect_group_2_test(__unused void **state)
 	t_intersections xs;
 
 	xs.inters = malloc(sizeof(t_inter) * 4);
-	g.child[0] = sphere(2);
-	g.child[1] = sphere(3);
+	group_add_shape(&g, sphere(2));
+	group_add_shape(&g, sphere(3));
 	shape_set_matrix(g.child + 1, matrix_translation(0, 0, -3));
-	g.child[2] = sphere(4);
+	group_add_shape(&g, sphere(4));
 	shape_set_matrix(g.child + 2, matrix_translation(5, 0, 0));
 	ray_group_intersect(&g, r, &xs);
 	assert_int_equal(xs.size, 4);
