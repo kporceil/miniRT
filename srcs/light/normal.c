@@ -13,7 +13,6 @@
 #include "matrix.h"
 #include "tuples.h"
 #include "shape.h"
-#include "normal.h"
 #include <math.h>
 
 static t_tuple	local_cylinder_normal(t_shape cyl, t_tuple object_point)

@@ -22,7 +22,6 @@
 #include "tests.h"
 #include "ray.h"
 #include "tuples.h"
-#include "normal.h"
 #include "light.h"
 #include "groups.h"
 
