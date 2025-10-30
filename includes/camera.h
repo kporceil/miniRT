@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:05:42 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/30 14:58:25 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/30 15:36:03 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	render_on_canva(t_canva *canva, t_camera cam, t_world w, size_t pixel_size)
 void	move_camera_forward(t_camera *c, t_tuple translation, _Bool *should_render);
 void	move_camera_sideway(t_camera *c, t_tuple translation, _Bool *should_render);
 void	move_camera_upward(t_camera *c, t_tuple translation, _Bool *should_render);
-t_tuple	rotate_camera(int dx, int dy, t_tuple look_at, t_tuple cam_pos, t_tuple *up);
+t_tuple	rotate_camera(int dx, int dy, t_camera *c);
 
 #endif

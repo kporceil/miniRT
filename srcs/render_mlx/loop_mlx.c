@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:30:11 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/30 14:24:02 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/30 17:14:37 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 
 #include <stdio.h>
 
-static void	manage_moving(t_loop_params *p)
+static void	manage_moving(t_loop_params *p, size_t frame)
 {
 	int				x;
 	int				y;
 
 	mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &x, &y);
-	p->camera->look_at = rotate_camera(x - p->last_x, y - p->last_y, p->camera->look_at, p->camera->pos, &p->camera->up);
+	p->camera->look_at = rotate_camera(x - p->last_x, y - p->last_y, p->camera);
 	camera_set_transform(p->camera, view_transform(p->camera->pos, p->camera->look_at, p->camera->up));
 	render_on_canva(&p->canva, *p->camera, p->world, 10);
-	p->last_x = x;
-	p->last_y = y;
+	if (!(frame % 100))
+		mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->last_x, p->last_y);
 }
 
 static void	should_render(t_loop_params *p, size_t frame)
@@ -41,7 +41,7 @@ static void	should_render(t_loop_params *p, size_t frame)
 	{
 		if (p->moving)
 		{
-			manage_moving(p);
+			manage_moving(p, frame);
 		}
 		else
 		{

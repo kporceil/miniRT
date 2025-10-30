@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:24:33 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/30 13:17:46 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/30 16:09:09 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	display_mlx(t_canva canva, t_camera *camera, t_world world)
 
 	if (!display.mlx_ptr)
 		return (1);
-	params = (t_loop_params){canva, world, camera, display,  0, 0, false, true};
+	params = (t_loop_params){canva, world, camera, display,  camera->vsize / 2, camera->hsize / 2, false, true};
 	mlx_loop_hook(display.mlx_ptr, render_loop, &params);
 	mlx_hook(display.window, KeyPress, KeyPressMask, &key_hooks, &params);
 	mlx_hook(display.window, KeyPress, KeyPressMask, &key_hooks, &params);

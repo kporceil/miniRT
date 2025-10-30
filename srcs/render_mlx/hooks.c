@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:50:07 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/30 15:14:46 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/30 17:13:38 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	key_hooks(int keycode, t_loop_params *p)
 		p->moving ^= true;
 		p->should_render = true;
 		mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &p->last_x, &p->last_y);
-		if (p->moving)
-			mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
-		else
-			mlx_mouse_show(p->display.mlx_ptr, p->display.window);
+		//if (p->moving)
+		//	mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
+		//else
+		//	mlx_mouse_show(p->display.mlx_ptr, p->display.window);
 	}
 	else if (p->moving && keycode == XK_w)
 		move_camera_forward(p->camera, vector(0.1, 0.1, 0.1), &p->should_render);
