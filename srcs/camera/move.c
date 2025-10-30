@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:15:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/30 14:28:33 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/30 15:27:48 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,35 @@
 #include "tuples.h"
 #include <stdbool.h>
 
-void	move_camera(t_camera *c, t_tuple translation, _Bool *should_render)
+void	move_camera_forward(t_camera *c, t_tuple translation, _Bool *should_render)
 {
+	t_tuple const	forward = normalize(tuple_substract(c->look_at, c->pos));
+
+	translation = tuple_mult(forward,  translation);
 	c->pos = tuple_add(c->pos, translation);
 	c->look_at = tuple_add(c->look_at, translation);
-	//c->pos = tuple_add(c->pos, tuple_mult(tuple_substract(c->pos, c->look_at), translation));
-	//c->look_at = tuple_add(c->look_at, tuple_mult(tuple_substract(c->pos, c->look_at), translation));
 	*should_render = true;
 }
 
-// NOTE: to rotate, rotate look at point arround the origin by substracting camera coords from look at point. the add them bacj after the rotation was done.
+void	move_camera_sideway(t_camera *c, t_tuple translation, _Bool *should_render)
+{
+	t_tuple const	forward = normalize(tuple_substract(c->look_at, c->pos));
+	t_tuple const	right = normalize(cross(forward, c->up));
+
+	translation = tuple_mult(right, translation);
+	c->pos = tuple_add(c->pos, translation);
+	c->look_at = tuple_add(c->look_at, translation);
+	*should_render = true;
+}
+
+void	move_camera_upward(t_camera *c, t_tuple translation, _Bool *should_render)
+{
+	translation = tuple_mult(c->up, translation);
+
+	c->pos = tuple_add(c->pos, translation);
+	c->look_at = tuple_add(c->look_at, translation);
+	*should_render = true;
+}
 
 t_tuple	rotate_camera(int dx, int dy, t_tuple look_at, t_tuple cam_pos, t_tuple *up)
 {
@@ -31,10 +50,10 @@ t_tuple	rotate_camera(int dx, int dy, t_tuple look_at, t_tuple cam_pos, t_tuple 
 
 	ret = tuple_substract(look_at, cam_pos);
 	ret.w = 1;
-	ret = matrix_tuple_mult(matrix_z_rotation(0.01 * dy), ret);
-	ret = matrix_tuple_mult(matrix_y_rotation(0.01 * dx), ret);
-	*up = matrix_tuple_mult(matrix_z_rotation(0.01 * dy), *up);
-	*up = matrix_tuple_mult(matrix_y_rotation(0.01 * dx), *up);
+	ret = matrix_tuple_mult(matrix_z_rotation(0.005 * dy), ret);
+	ret = matrix_tuple_mult(matrix_y_rotation(0.005 * dx), ret);
+	*up = normalize(matrix_tuple_mult(matrix_z_rotation(0.005 * dy), *up));
+	*up = normalize(matrix_tuple_mult(matrix_y_rotation(0.005 * dx), *up));
 	ret = tuple_add(ret, cam_pos);
 	return (ret);
 }
