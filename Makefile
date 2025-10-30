@@ -44,7 +44,7 @@ TEST_BASENAME :=
 endif
 
 BASENAME := $(MAIN) \
-			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product) \
+			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product mult) \
 			$(addprefix color/, color add substract scalar mult) \
 			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm) \
 			$(addprefix matrix/, create compare mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix) \
@@ -59,7 +59,7 @@ BASENAME := $(MAIN) \
 			$(addprefix cones/, create intersect intersect_caps) \
 			$(addprefix patterns/, pattern_at pattern_at_object) \
 			$(addprefix reflect/, reflected_color) \
-			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
+			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks canva_to_mlx_image) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
 			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \

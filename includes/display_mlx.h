@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:28:14 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/29 16:40:36 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/30 11:24:28 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ struct s_loop_params
 	t_world		world;
 	t_camera	*camera;
 	t_display	display;
+	int			last_x;
+	int			last_y;
 	_Bool		moving;
 	_Bool		should_render;
 };
@@ -48,5 +50,6 @@ void		exit_mlx(t_display display);
 int			display_mlx(t_canva canva, t_camera *camera, t_world world);
 int			render_loop(t_loop_params *p);
 int			key_hooks(int keycode, t_loop_params *p);
+void	canva_to_mlx_image(t_display display, t_canva canva);
 
 #endif

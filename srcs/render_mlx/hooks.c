@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:50:07 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/29 16:40:34 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/10/30 12:48:08 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	key_hooks(int keycode, t_loop_params *p)
 	{
 		p->moving ^= true;
 		p->should_render = true;
+		mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &p->last_x, &p->last_y);
+		if (p->moving)
+			mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
+		else
+			mlx_mouse_show(p->display.mlx_ptr, p->display.window);
 	}
 	else if (p->moving && keycode == XK_s)
 		move_camera(p->camera, (t_tuple){0.1, 0, 0, 0}, &p->should_render);
@@ -36,6 +41,10 @@ int	key_hooks(int keycode, t_loop_params *p)
 		move_camera(p->camera, (t_tuple){0, 0, 0.1, 0}, &p->should_render);
 	else if (p->moving && keycode == XK_a)
 		move_camera(p->camera, (t_tuple){0, 0, -0.1, 0}, &p->should_render);
+	else if (p->moving && keycode == XK_q)
+		move_camera(p->camera, (t_tuple){0, -0.1, 0, 0}, &p->should_render);
+	else if (p->moving && keycode == XK_e)
+		move_camera(p->camera, (t_tuple){0, 0.1, 0, 0}, &p->should_render);
 	printf("%lf\n", p->camera->pos.x);
 	return (0);
 }
