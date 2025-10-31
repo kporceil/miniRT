@@ -28,10 +28,10 @@ int	key_hooks(int keycode, t_loop_params *p)
 		p->moving ^= true;
 		p->should_render = true;
 		mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &p->last_x, &p->last_y);
-		//if (p->moving)
-		//	mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
-		//else
-		//	mlx_mouse_show(p->display.mlx_ptr, p->display.window);
+		if (p->moving)
+			mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
+		else
+			mlx_mouse_show(p->display.mlx_ptr, p->display.window);
 	}
 	else if (p->moving && keycode == XK_w)
 		move_camera_forward(p->camera, vector(0.1, 0.1, 0.1), &p->should_render);
@@ -47,3 +47,18 @@ int	key_hooks(int keycode, t_loop_params *p)
 		move_camera_upward(p->camera, vector(-0.1, -0.1, -0.1), &p->should_render);
 	return (0);
 }
+
+
+int	mouse_movement_hook(int x, int y, t_loop_params *params)
+{
+	if (p->moving)
+	{
+
+	}
+	else
+	{
+
+	}
+	return (0);
+}
+

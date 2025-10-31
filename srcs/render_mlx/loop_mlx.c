@@ -23,8 +23,8 @@
 
 static void	manage_moving(t_loop_params *p, size_t frame)
 {
-	int				x;
-	int				y;
+	int	x;
+	int	y;
 
 	mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &x, &y);
 	p->camera->look_at = rotate_camera(x - p->last_x, y - p->last_y, p->camera);
