@@ -97,6 +97,10 @@ int	main(void)
 	ret += test_group_create();
 	ret += test_group_intersect();
 	ret += test_group_transform();
+	ret += test_uv_checker_pattern();
+	ret += test_mapping();
+	ret += test_ppm_parsing();
+	ret += test_uv_file();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }
