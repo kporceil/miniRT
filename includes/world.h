@@ -27,6 +27,6 @@ typedef struct s_world
 
 t_world			world_create(void);
 t_intersections	world_intersect(t_world	world, t_ray r);
-void	free_world(t_world *w);
+void			free_world(t_world *w);
 
 #endif
