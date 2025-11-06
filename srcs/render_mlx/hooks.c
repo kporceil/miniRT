@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:50:07 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/06 14:20:04 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/06 14:55:27 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@
 #include "display_mlx.h"
 #include "camera.h"
 
-#include <stdio.h>
-
 static void	toggle_moving_mode(t_loop_params *p)
 {
 	p->moving ^= true;
-	mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &p->last_x,
-		&p->last_y);
+	p->last_x = p->canva.width / 2;
+	p->last_y = p->canva.height / 2;
 	if (p->moving)
 		mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
 	else
@@ -63,9 +61,9 @@ int	mouse_movement_hook(int x, int y, t_loop_params *p)
 		p->camera->look_at = rotate_camera(x - p->last_x, y - p->last_y,
 				p->camera);
 		p->expect_moving_cursor = false;
-		//mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->canva.width / 2, p->canva.height / 2);
-		mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->last_x,
-			p->last_y);
+		mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->canva.width / 2, p->canva.height / 2);
+		//mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->last_x,
+		//	p->last_y);
 		XFlush(((t_xvar *)p->display.mlx_ptr)->display);
 		p->should_render = true;
 	}
