@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:30:11 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/06 14:16:56 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/06 16:13:14 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 								size_t last_pixel_size)
 {
+	size_t const	target_ms =  (1.0 / target_fps) * 1000;
 	size_t	new_px_size;
 
 	new_px_size = last_pixel_size;
-	if (render_time > (1.0 / target_fps) * 1000)
+	if (render_time > target_ms * 2)
 	{
 		++new_px_size;
 		while (new_px_size <= WIDTH && new_px_size <= HEIGHT
@@ -51,7 +52,8 @@ static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 static void	should_render(t_loop_params *p, size_t frame,
 							size_t last_render_time)
 {
-	static size_t	pixel_size = 10;
+	static size_t	moving_pixel_size = 10;
+	size_t			pixel_size;
 
 	if (frame)
 	{
@@ -59,8 +61,9 @@ static void	should_render(t_loop_params *p, size_t frame,
 		{
 			camera_set_transform(p->camera, view_transform(p->camera->pos,
 					p->camera->look_at, p->camera->up));
-			pixel_size = optimal_pixel_size(TARGET_FPS, last_render_time,
-					pixel_size);
+			moving_pixel_size = optimal_pixel_size(TARGET_FPS, last_render_time,
+					moving_pixel_size);
+			pixel_size = moving_pixel_size;
 		}
 		else
 			pixel_size = 1;
