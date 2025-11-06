@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/30 14:52:53 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/06 13:09:13 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "world.h"
 #include "camera.h"
 #include "display_mlx.h"
+#include "visual_settings.h"
 #include <math.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -110,7 +111,7 @@ int	main(void)
 	//shape_set_matrix(world.objs->child + 1, matrix_mult(matrix_translation(1, 0, 0), matrix_z_rotation(-M_PI/2)));
 	//group_set_matrix(world.objs, matrix_scaling(1.5, 1.5, 1.5));
 	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
-	t_camera	cam = camera(1000, 1000, M_PI / 2, point(4, 0, 0));
+	t_camera	cam = camera(WIDTH, HEIGHT, M_PI / 2, point(4, 0, 0));
 	camera_set_transform(&cam, view_transform(cam.pos, cam.look_at, cam.up));
 	t_canva		image = render(cam, world, 10);
 	if (!image.canva)
