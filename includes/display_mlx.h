@@ -43,6 +43,7 @@ struct s_loop_params
 	int			last_y;
 	_Bool		moving;
 	_Bool		should_render;
+	_Bool		expect_moving_cursor;
 };
 
 t_display	init_mlx_display(size_t width, size_t height);

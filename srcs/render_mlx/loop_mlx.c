@@ -18,36 +18,22 @@
 #include "matrix.h"
 #include "tuples.h"
 
-
 #include <stdio.h>
-
-static void	manage_moving(t_loop_params *p, size_t frame)
-{
-	int	x;
-	int	y;
-
-	mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &x, &y);
-	p->camera->look_at = rotate_camera(x - p->last_x, y - p->last_y, p->camera);
-	camera_set_transform(p->camera, view_transform(p->camera->pos, p->camera->look_at, p->camera->up));
-	render_on_canva(&p->canva, *p->camera, p->world, 10);
-	if (!(frame % 100))
-		mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->last_x, p->last_y);
-}
 
 static void	should_render(t_loop_params *p, size_t frame)
 {
-
 	if (frame)
 	{
 		if (p->moving)
 		{
-			manage_moving(p, frame);
+			camera_set_transform(p->camera, view_transform(p->camera->pos, p->camera->look_at, p->camera->up));
+			render_on_canva(&p->canva, *p->camera, p->world, 10);
 		}
 		else
 		{
 			render_on_canva(&p->canva, *p->camera, p->world, 1);
-			p->should_render = false;
 		}
+		p->should_render = false;
 	}
 	canva_to_mlx_image(p->display, p->canva);
 	mlx_put_image_to_window(p->display.mlx_ptr, p->display.window,

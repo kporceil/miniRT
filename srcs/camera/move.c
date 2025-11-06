@@ -12,19 +12,17 @@
 
 #include "camera.h"
 #include "tuples.h"
-#include <stdbool.h>
 
-void	move_camera_forward(t_camera *c, t_tuple translation, _Bool *should_render)
+void	move_camera_forward(t_camera *c, t_tuple translation)
 {
 	t_tuple const	forward = normalize(tuple_substract(c->look_at, c->pos));
 
 	translation = tuple_mult(forward,  translation);
 	c->pos = tuple_add(c->pos, translation);
 	c->look_at = tuple_add(c->look_at, translation);
-	*should_render = true;
 }
 
-void	move_camera_sideway(t_camera *c, t_tuple translation, _Bool *should_render)
+void	move_camera_sideway(t_camera *c, t_tuple translation)
 {
 	t_tuple const	forward = normalize(tuple_substract(c->look_at, c->pos));
 	t_tuple const	right = normalize(cross(forward, c->up));
@@ -32,16 +30,14 @@ void	move_camera_sideway(t_camera *c, t_tuple translation, _Bool *should_render)
 	translation = tuple_mult(right, translation);
 	c->pos = tuple_add(c->pos, translation);
 	c->look_at = tuple_add(c->look_at, translation);
-	*should_render = true;
 }
 
-void	move_camera_upward(t_camera *c, t_tuple translation, _Bool *should_render)
+void	move_camera_upward(t_camera *c, t_tuple translation)
 {
 	translation = tuple_mult(normalize(c->up), translation);
 
 	c->pos = tuple_add(c->pos, translation);
 	c->look_at = tuple_add(c->look_at, translation);
-	*should_render = true;
 }
 
 t_tuple	rotate_camera(int dx, int dy, t_camera *c)
