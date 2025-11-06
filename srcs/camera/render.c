@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:25:20 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/30 12:58:37 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/06 14:48:11 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static t_canva	free_can_and_set_to_null(t_canva c)
 	return (c);
 }
 
-static void put_square(t_canva *image, size_t x, size_t y, t_color c, size_t pixel_size)
+static void	put_square(t_canva *image, t_tuple p, t_color c
+					, size_t pixel_size)
 {
 	size_t	i;
 	size_t	j;
@@ -34,14 +35,15 @@ static void put_square(t_canva *image, size_t x, size_t y, t_color c, size_t pix
 		j = 0;
 		while (j < pixel_size)
 		{
-			write_pixel(image, x + j, y + i, c);
+			write_pixel(image, p.x + j, p.y + i, c);
 			++j;
 		}
 		++i;
 	}
 }
 
-void	render_on_canva(t_canva *canva, t_camera cam, t_world w, size_t pixel_size)
+void	render_on_canva(t_canva *canva, t_camera cam, t_world w,
+					size_t pixel_size)
 {
 	t_ray	r;
 	t_color	c;
@@ -57,7 +59,7 @@ void	render_on_canva(t_canva *canva, t_camera cam, t_world w, size_t pixel_size)
 			r = ray_for_pixel(cam, x, y);
 			if (color_at(w, r, &c, MAX_RECU))
 				return ;
-			put_square(canva, x, y, c, pixel_size);
+			put_square(canva, (t_tuple){x, y, 0, 0}, c, pixel_size);
 			x += pixel_size;
 		}
 		y += pixel_size;
@@ -84,7 +86,7 @@ t_canva	render(t_camera cam, t_world w, size_t pixel_size)
 			r = ray_for_pixel(cam, x, y);
 			if (color_at(w, r, &c, MAX_RECU))
 				return (free_can_and_set_to_null(image));
-			put_square(&image, x, y, c, pixel_size);
+			put_square(&image, (t_tuple){x, y, 0, 0}, c, pixel_size);
 			x += pixel_size;
 		}
 		y += pixel_size;

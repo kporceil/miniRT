@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:50:07 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/30 17:13:38 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/06 14:20:04 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,23 @@
 
 #include <stdio.h>
 
+static void	toggle_moving_mode(t_loop_params *p)
+{
+	p->moving ^= true;
+	mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &p->last_x,
+		&p->last_y);
+	if (p->moving)
+		mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
+	else
+		mlx_mouse_show(p->display.mlx_ptr, p->display.window);
+}
+
 int	key_hooks(int keycode, t_loop_params *p)
 {
 	if (keycode == XK_Escape)
 		return (mlx_loop_end(p->display.mlx_ptr));
 	if (keycode == XK_Return)
-	{
-		p->moving ^= true;
-		mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &p->last_x, &p->last_y);
-		if (p->moving)
-			mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
-		else
-			mlx_mouse_show(p->display.mlx_ptr, p->display.window);
-	}
+		toggle_moving_mode(p);
 	else if (p->moving && keycode == XK_w)
 		move_camera_forward(p->camera, vector(0.1, 0.1, 0.1));
 	else if (p->moving && keycode == XK_s)
@@ -56,17 +60,19 @@ int	mouse_movement_hook(int x, int y, t_loop_params *p)
 	}
 	if (p->moving)
 	{
-		p->camera->look_at = rotate_camera(x - p->last_x, y - p->last_y, p->camera);
+		p->camera->look_at = rotate_camera(x - p->last_x, y - p->last_y,
+				p->camera);
 		p->expect_moving_cursor = false;
 		//mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->canva.width / 2, p->canva.height / 2);
-		mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->last_x, p->last_y);
+		mlx_mouse_move(p->display.mlx_ptr, p->display.window, p->last_x,
+			p->last_y);
 		XFlush(((t_xvar *)p->display.mlx_ptr)->display);
 		p->should_render = true;
 	}
 	else
 	{
-		mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &p->last_x, &p->last_y);
+		mlx_mouse_get_pos(p->display.mlx_ptr, p->display.window, &p->last_x,
+			&p->last_y);
 	}
 	return (0);
 }
-

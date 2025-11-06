@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:11:30 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/30 12:58:45 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/06 14:02:20 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos)
 	half_view = tan(fov / 2);
 	aspect = (double)hsize / vsize;
 	if (aspect >= 1)
-	{
 		ret.half_width = half_view;
+	if (aspect >= 1)
 		ret.half_height = half_view / aspect;
-	}
 	else
 	{
 		ret.half_width = half_view * aspect;
