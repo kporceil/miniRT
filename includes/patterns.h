@@ -16,8 +16,68 @@
 # include "color.h"
 # include "tuples.h"
 # include "matrix.h"
+# include "canvas.h"
+# include <stddef.h>
+# include <math.h>
 
-typedef struct s_shape t_shape;
+# ifndef FRONTF
+#  define FRONTF 0
+# endif
+
+# ifndef BACKF
+#  define BACKF 1
+# endif
+
+# ifndef RIGHTF
+#  define RIGHTF 2
+# endif
+
+# ifndef LEFTF
+#  define LEFTF 3
+# endif
+
+# ifndef UPF
+#  define UPF 4
+# endif
+
+# ifndef DOWNF
+#  define DOWNF 5
+# endif
+
+typedef struct s_shape	t_shape;
+
+typedef enum e_uvpatype
+{
+	CHECKERS,
+	ALIGN,
+	IMAGE,
+}				t_uvpatype;
+
+typedef union u_uvcol
+{
+	struct
+	{
+		t_color	a;
+		t_color	b;
+	};
+	struct
+	{
+		t_color	main;
+		t_color	ul;
+		t_color	ur;
+		t_color	bl;
+		t_color	br;
+	};
+}				t_uvcol;
+
+typedef struct s_uvpat
+{
+	t_uvpatype	type;
+	size_t		height;
+	size_t		width;
+	t_uvcol		colors;
+	t_canva		file;
+}				t_uvpat;
 
 typedef enum e_patype
 {
@@ -26,20 +86,34 @@ typedef enum e_patype
 	GRADIENT,
 	RING,
 	CHECKER,
+	UV,
+	CUBE_UV,
 }				t_patype;
 
 typedef struct s_pattern
-{ 
+{
 	t_patype	type;
 	t_color		a;
 	t_color		b;
 	t_matrix	transform;
 	t_matrix	inverted;
+	t_uvpat		uvpat;
+	t_uvpat		faces[6];
+	void		(*uvmapper)(t_tuple, double *, double *);
 }				t_pattern;
+
+t_uvpat		uv_image(t_canva c);
+t_pattern	cube_pattern(t_uvpat face[6]);
+t_uvpat		uv_checkers(size_t width, size_t height,
+				t_color a, t_color b);
+t_uvpat		uv_align_check(t_color colors[5]);
+t_pattern	texture_map(t_uvpat pat, void (*uvmapper)
+				(t_tuple, double *, double *));
 
 static inline t_pattern	pattern(t_patype type, t_color a, t_color b)
 {
-	return ((t_pattern){type, a, b, identity_matrix(4), identity_matrix(4)});
+	return ((t_pattern){.type = type, .a = a, .b = b,
+		.transform = identity_matrix(4), .inverted = identity_matrix(4)});
 }
 
 static inline void	pattern_set_transform(t_pattern *pat, t_matrix transform)
@@ -48,7 +122,33 @@ static inline void	pattern_set_transform(t_pattern *pat, t_matrix transform)
 	pat->inverted = matrix_invert(transform);
 }
 
-t_color	pattern_at(t_pattern pat, t_tuple p);
-t_color	pattern_at_object(t_pattern pat, t_shape obj, t_tuple p);
+t_color		stripe_at(t_pattern pat, t_tuple p);
+t_color		ring_at(t_pattern pat, t_tuple p);
+t_color		gradient_at(t_pattern pat, t_tuple p);
+t_color		checker_at(t_pattern pat, t_tuple p);
+t_color		uv_pattern_at(t_uvpat pat, double u, double v);
+
+static inline t_color	uv_pattern_at_point(t_pattern pat, t_tuple p)
+{
+	double	u;
+	double	v;
+
+	pat.uvmapper(p, &u, &v);
+	return (uv_pattern_at(pat.uvpat, u, v));
+}
+
+t_color		pattern_at(t_pattern pat, t_tuple p);
+t_color		pattern_at_object(t_pattern pat, t_shape obj, t_tuple p);
+void		spherical_map(t_tuple p, double *u, double *v);
+void		planar_map(t_tuple p, double *u, double *v);
+void		cylindrical_map(t_tuple p, double *u, double *v);
+int			face_from_point(t_tuple p);
+void		cubic_map_front(t_tuple p, double *u, double *v);
+void		cubic_map_back(t_tuple p, double *u, double *v);
+void		cubic_map_up(t_tuple p, double *u, double *v);
+void		cubic_map_down(t_tuple p, double *u, double *v);
+void		cubic_map_left(t_tuple p, double *u, double *v);
+void		cubic_map_right(t_tuple p, double *u, double *v);
+int			face_from_point(t_tuple p);
 
 #endif

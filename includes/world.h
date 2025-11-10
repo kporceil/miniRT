@@ -19,7 +19,7 @@
 
 typedef struct s_world
 {
-	t_shape	*objs;
+	t_shape		*objs;
 	t_plight	*lights;
 	size_t		objs_count;
 	size_t		lights_count;
