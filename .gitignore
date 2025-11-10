@@ -1,5 +1,6 @@
 *.md
 .build
+*.md
 render/*
 miniRT
 .cache

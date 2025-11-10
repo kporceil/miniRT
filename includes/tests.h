@@ -5,7 +5,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:07:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/13 19:09:36 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 17:33:57 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,11 @@ int		test_schlick_effect(void);
 
 int		test_cube_intersect(void);
 int		test_cube_normal(void);
+
+int		test_group_create(void);
+int		test_group_intersect(void);
+int		test_group_transform(void);
+int		test_group_normal(void);
 
 int		test_uv_checker_pattern(void);
 int		test_mapping(void);

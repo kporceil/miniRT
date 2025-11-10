@@ -22,7 +22,7 @@
 
 static void	camera_ray_test1(void **state)
 {
-	t_camera	cam = camera(201, 101, M_PI / 2);
+	t_camera	cam = camera(201, 101, M_PI / 2, point(0, 0, 0));
 	t_ray		r = ray_for_pixel(cam, 100, 50);
 
 	(void)state;
@@ -32,7 +32,7 @@ static void	camera_ray_test1(void **state)
 
 static void	camera_ray_test2(void **state)
 {
-	t_camera	cam = camera(201, 101, M_PI / 2);
+	t_camera	cam = camera(201, 101, M_PI / 2, point(0, 0, 0));
 	t_ray		r = ray_for_pixel(cam, 0, 0);
 
 	(void)state;
@@ -42,7 +42,7 @@ static void	camera_ray_test2(void **state)
 
 static void	camera_ray_test3(void **state)
 {
-	t_camera	cam = camera(201, 101, M_PI / 2);
+	t_camera	cam = camera(201, 101, M_PI / 2, point(0, 0, 0));
 	camera_set_transform(&cam, matrix_mult(matrix_y_rotation(M_PI/4), matrix_translation(0, -2, 5)));
 	t_ray		r = ray_for_pixel(cam, 100, 50);
 

@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/15 10:27:27 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/15 16:05:50 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/16 13:48:26 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
+#include "ray.h"
 
-t_shape	sphere(size_t id)
+void	ray_group_intersect(t_shape *g, t_ray r, t_intersections *xs)
 {
-	return ((t_shape){.type = SPHERE,
-		.local_transformation = identity_matrix(3),
-		.final_transformation = identity_matrix(3),
-		.final_inverted = identity_matrix(4),
-		.material = material(),
-		.parent = NULL,
-		.id = id});
+	size_t	i;
+
+	i = 0;
+	while (i < g->nb_members)
+	{
+		ray_intersect(g->child + i, r, xs);
+		++i;
+	}
 }

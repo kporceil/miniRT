@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:04:43 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/09 14:54:34 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/23 15:55:14 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ typedef struct s_world
 
 t_world			world_create(void);
 t_intersections	world_intersect(t_world	world, t_ray r);
+void			free_world(t_world *w);
 
 #endif

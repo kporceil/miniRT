@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:20:40 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/09 14:53:35 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 17:05:42 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		ray_plane_intersect(t_shape *s, t_ray r, t_intersections *inter)
 void		ray_cylinder_intersect(t_shape *s, t_ray r, t_intersections *inter);
 void		ray_cone_intersect(t_shape *s, t_ray r, t_intersections *inter);
 void		ray_cube_intersect(t_shape *s, t_ray r, t_intersections *xs);
+void		ray_group_intersect(t_shape *g, t_ray r, t_intersections *xs);
 void		ray_intersect(t_shape *s, t_ray r, t_intersections *inter);
 t_inter		*inter_hit(t_inter *intersect, size_t size);
 t_ray		ray_transform(t_ray *r, t_matrix *m)__attribute__((hot));

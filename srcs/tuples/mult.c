@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_set_matrix.c                                 :+:      :+:    :+:   */
+/*   mult.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 20:49:13 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/23 15:38:30 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/08/20 18:57:27 by kporceil          #+#    #+#             */
+/*   Updated: 2025/10/30 13:20:01 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "groups.h"
+#include "tuples.h"
 
-void	shape_set_matrix(t_shape *s, t_matrix m)
+inline t_tuple	tuple_mult(t_tuple t1, t_tuple t2)
 {
-	if (s->type == GROUP)
-		return (group_set_matrix(s, m));
-	s->local_transformation = m;
-	if (s->parent)
-	{
-		m = matrix_mult(s->parent->final_transformation, m);
-	}
-	s->final_transformation = m;
-	s->final_inverted = m;
-	if (is_matrix_invertible(m))
-		s->final_inverted = matrix_invert(m);
+	return ((t_tuple){t1.x * t2.x, t1.y * t2.y, t1.z * t2.z, t1.w * t2.w});
 }
