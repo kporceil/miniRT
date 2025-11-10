@@ -35,8 +35,8 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
 					$(addprefix cubes/, cube_intersect_tests normal_tests) \
+					$(addprefix groups/, create_tests intersect_tests transformation_tests) \
 					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests))
-
 endif
 ifeq (no, $(TEST))
 MAIN := tmp_main
@@ -52,7 +52,7 @@ BASENAME := $(MAIN) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
 			$(addprefix spheres/, create intersect) \
 			$(addprefix light/, normal reflect point_light material phong shade_hit color_at) \
-			$(addprefix world/, create intersect) \
+			$(addprefix world/, create intersect free_world) \
 			$(addprefix camera/, create ray_for_pixel render) \
 			$(addprefix shadow/, is_shadowed) \
 			$(addprefix plane/, plane intersect) \
@@ -63,6 +63,7 @@ BASENAME := $(MAIN) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
+			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(TEST_BASENAME)
 

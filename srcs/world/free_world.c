@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   free_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/15 10:29:06 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/10/23 15:49:08 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/10/23 17:20:37 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
-#include "float_limits.h"
+#include "world.h"
+#include <stdlib.h>
 
-t_shape	cone(size_t id)
+static void	free_group(t_shape *g)
 {
-	return ((t_shape){.type = CONE,
-		.local_transformation = identity_matrix(3),
-		.final_transformation = identity_matrix(3),
-		.final_inverted = identity_matrix(4),
-		.material = material(),
-		.parent = NULL,
-		.cyl_closed = 0,
-		.cyl_min = -DBL_MAX,
-		.cyl_max = DBL_MAX,
-		.id = id});
+	size_t	i;
+
+	i = 0;
+	while (i < g->nb_members)
+	{
+		if (g->child[i].type == GROUP)
+			free_group(g->child + i);
+		++i;
+	}
+	free(g->child);
+}
+
+void	free_world(t_world *w)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < w->objs_count)
+	{
+		if (w->objs[i].type == GROUP)
+			free_group(w->objs + i);
+		++i;
+	}
+	free(w->objs);
+	free(w->lights);
 }

@@ -81,7 +81,7 @@ static void	world_setup_test(void **state)
 	assert_double_equal(world->objs[0].material.diffuse, 0.7, 0.0001);
 	assert_double_equal(world->objs[0].material.specular, 0.2, 0.0001);
 	assert_color_equal(world->objs[0].material.color, color(0.8, 1.0, 0.6));
-	assert_matrix_equal(world->objs[1].transformation, matrix_scaling(0.5, 0.5, 0.5));
+	assert_matrix_equal(world->objs[1].final_transformation, matrix_scaling(0.5, 0.5, 0.5));
 	assert_tuple_equal(world->lights[0].pos, point(-10, 10, -10));
 	assert_color_equal(world->lights[0].intensity, color(1, 1, 1));
 }

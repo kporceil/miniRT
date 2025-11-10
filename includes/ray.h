@@ -62,6 +62,7 @@ void		ray_plane_intersect(t_shape *s, t_ray r, t_intersections *inter)
 void		ray_cylinder_intersect(t_shape *s, t_ray r, t_intersections *inter);
 void		ray_cone_intersect(t_shape *s, t_ray r, t_intersections *inter);
 void		ray_cube_intersect(t_shape *s, t_ray r, t_intersections *xs);
+void		ray_group_intersect(t_shape *g, t_ray r, t_intersections *xs);
 void		ray_intersect(t_shape *s, t_ray r, t_intersections *inter);
 t_inter		*inter_hit(t_inter *intersect, size_t size);
 t_ray		ray_transform(t_ray *r, t_matrix *m)__attribute__((hot));
