@@ -25,8 +25,8 @@
 static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 								size_t last_pixel_size)
 {
-	size_t const	target_ms =  (1.0 / target_fps) * 1000;
-	size_t	new_px_size;
+	size_t const	target_ms = (1.0 / target_fps) * 1000;
+	size_t			new_px_size;
 
 	new_px_size = last_pixel_size;
 	if (render_time > target_ms * 2)

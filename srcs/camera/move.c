@@ -48,8 +48,6 @@ t_tuple	rotate_camera(int dx, int dy, t_camera *c)
 	ret.w = 1;
 	ret = matrix_tuple_mult(matrix_z_rotation(0.001 * dy), ret);
 	ret = matrix_tuple_mult(matrix_y_rotation(0.001 * dx), ret);
-	c->up = normalize(matrix_tuple_mult(matrix_z_rotation(0.001 * dy), c->up));
-	c->up = normalize(matrix_tuple_mult(matrix_y_rotation(0.001 * dx), c->up));
 	c->up = normalize(cross(normalize(cross(forward, vector(0, 1, 0))),
 				forward));
 	ret = tuple_add(ret, c->pos);
