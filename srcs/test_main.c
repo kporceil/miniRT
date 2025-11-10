@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/20 14:03:53 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 18:51:56 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	main(void)
 	ret += test_mapping();
 	ret += test_ppm_parsing();
 	ret += test_uv_file();
+	ret += test_triangle_create();
+	ret += test_triangle_normal();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

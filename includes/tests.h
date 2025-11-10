@@ -157,4 +157,7 @@ int		test_mapping(void);
 int		test_ppm_parsing(void);
 int		test_uv_file(void);
 
+int	test_triangle_create(void);
+int	test_triangle_normal(void);
+
 #endif

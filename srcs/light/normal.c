@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:31:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/20 13:42:59 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 18:51:15 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
 		return (local_cone_normal(s, object_point));
 	if (s.type == CUBE)
 		return (local_cube_normal(object_point));
+	if (s.type == TRIANGLE)
+		return (s.tri_normal);
 	return (tuple_substract(object_point, point(0, 0, 0)));
 }
 
