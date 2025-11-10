@@ -99,7 +99,7 @@ int	main(void)
 	//double pi = M_PI;
 	//group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));
 	group_set_matrix(world.objs, matrix_scaling(2, 2, 2));
-	group_set_material(world.objs, (t_material){(t_pattern){RING, color(1, 0, 0), color(0, 1, 0), identity_matrix(4), identity_matrix(4)}, (t_color){1, 0.1, 0.1}, 0.1, 0.9, 0.9, 200, 0.8, 0, 1});
+	//group_set_material(world.objs, (t_material){(t_pattern){RING, color(1, 0, 0), color(0, 1, 0), identity_matrix(4), identity_matrix(4)}, (t_color){1, 0.1, 0.1}, 0.1, 0.9, 0.9, 200, 0.8, 0, 1});
 	//world.objs[1]->	
 	//shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1, 1.5, 0), matrix_scaling(0.25, 0.25, 0.25)));
 	//shape_set_matrix(world.objs->child, matrix_translation(0, 0, 5));
