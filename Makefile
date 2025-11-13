@@ -37,7 +37,6 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix cubes/, cube_intersect_tests normal_tests) \
 					$(addprefix groups/, create_tests intersect_tests transformation_tests) \
 					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests))
-
 endif
 ifeq (no, $(TEST))
 MAIN := tmp_main
