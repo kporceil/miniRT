@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/time.h>
 
 void	tick(t_tuple *env, t_tuple *proj);
 
@@ -88,6 +89,8 @@ int	main(void)
 {
 	t_world	world = world_create();
 	(void)hexagon;
+	struct timeval	tv_a = (struct timeval){0};
+	struct timeval	tv_b = (struct timeval){0};
 
 	world.lights_count = 1;
 	world.objs_count = 2;
@@ -113,10 +116,13 @@ int	main(void)
 	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
 	t_camera	cam = camera(WIDTH, HEIGHT, M_PI / 2, point(4, 0, 0));
 	camera_set_transform(&cam, view_transform(cam.pos, cam.look_at, cam.up));
-	t_canva		image = render(cam, world, 10);
+	t_canva		image = render(cam, world, 1);
 	if (!image.canva)
 		return (1);
-	display_mlx(image, &cam, world);
+	gettimeofday(&tv_b, NULL);
+	display_mlx(image, &cam, world, 1000 * (tv_a.tv_sec - tv_b.tv_sec)
+			+ (tv_a.tv_usec - tv_b.tv_usec) / 1000);
+	gettimeofday(&tv_a, NULL);
 	//char		*ppm = canva_to_ppm(image);
 	//write_file("render/test.ppm", ppm);
 	//free(ppm);
