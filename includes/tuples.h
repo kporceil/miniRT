@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 17:20:54 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/21 19:12:22 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/10/30 13:21:37 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_tuple
 t_tuple	vector(double x, double y, double z);
 t_tuple	point(double x, double y, double z);
 t_tuple	tuple_add(t_tuple t1, t_tuple t2);
+t_tuple	tuple_mult(t_tuple t1, t_tuple t2);
 t_tuple	tuple_substract(t_tuple t1, t_tuple t2);
 t_tuple	tuple_negate(t_tuple t);
 t_tuple	tuple_scalar_mult(t_tuple t, double scalar);

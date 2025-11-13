@@ -22,7 +22,7 @@
 
 static void	camera_create_test(void **state)
 {
-	t_camera	cam = camera(160, 120, M_PI / 2);
+	t_camera	cam = camera(160, 120, M_PI / 2, point(0, 0, 0)) ;
 
 	(void)state;
 	assert_int_equal(160, cam.hsize);
@@ -33,7 +33,7 @@ static void	camera_create_test(void **state)
 
 static void	camera_create_test2(void **state)
 {
-	t_camera	cam = camera(200, 125, M_PI / 2);
+	t_camera	cam = camera(200, 125, M_PI / 2, point(0, 0, 0)) ;
 
 	(void)state;
 	assert_int_equal(200, cam.hsize);
@@ -45,7 +45,7 @@ static void	camera_create_test2(void **state)
 
 static void	camera_create_test3(void **state)
 {
-	t_camera	cam = camera(125, 200, M_PI / 2);
+	t_camera	cam = camera(125, 200, M_PI / 2, point(0, 0, 0)) ;
 
 	(void)state;
 	assert_int_equal(125, cam.hsize);
