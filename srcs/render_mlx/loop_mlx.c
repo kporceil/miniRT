@@ -29,11 +29,12 @@ static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 	size_t			new_px_size;
 
 	new_px_size = last_pixel_size;
+	printf("render : %ld\t|\ttarget: %ld\n", render_time, target_ms * 2);
 	if (render_time > target_ms * 2)
 	{
 		++new_px_size;
-		while (new_px_size <= WIDTH && new_px_size <= HEIGHT
-			&& (WIDTH % new_px_size) && (HEIGHT % new_px_size))
+		while (new_px_size < WIDTH && new_px_size < HEIGHT
+			&& ((WIDTH % new_px_size) || (HEIGHT % new_px_size)))
 			++new_px_size;
 		if (new_px_size == WIDTH || new_px_size == HEIGHT)
 			return (last_pixel_size);
@@ -41,7 +42,7 @@ static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 	else
 	{
 		--new_px_size;
-		while (new_px_size && (WIDTH % new_px_size) && (HEIGHT % new_px_size))
+		while (new_px_size && ((WIDTH % new_px_size) || (HEIGHT % new_px_size)))
 			--new_px_size;
 		if (!new_px_size)
 			return (last_pixel_size);
@@ -52,7 +53,7 @@ static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 static void	should_render(t_loop_params *p, size_t frame,
 							size_t last_render_time)
 {
-	static size_t	moving_pixel_size = 10;
+	static size_t	moving_pixel_size = 1;
 	size_t			pixel_size;
 
 	if (frame)

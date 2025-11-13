@@ -13,8 +13,8 @@
 #ifndef VISUAL_SETTINGS_H
 # define VISUAL_SETTINGS_H
 
-# define HEIGHT 1000
-# define WIDTH 1000
+# define HEIGHT 1080
+# define WIDTH 1920
 # define TARGET_FPS 60
 # define SENSITIVITY 0.001
 

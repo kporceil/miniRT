@@ -150,6 +150,11 @@ int		test_group_create(void);
 int		test_group_intersect(void);
 int		test_group_transform(void);
 int		test_group_normal(void);
+int		test_uv_checker_pattern(void);
+int		test_mapping(void);
+
+int		test_ppm_parsing(void);
+int		test_uv_file(void);
 
 int		test_uv_checker_pattern(void);
 int		test_mapping(void);
