@@ -49,7 +49,8 @@ struct s_loop_params
 
 t_display	init_mlx_display(size_t width, size_t height);
 void		exit_mlx(t_display display);
-int			display_mlx(t_canva canva, t_camera *camera, t_world world, size_t render_time);
+int			display_mlx(t_canva canva, t_camera *camera, t_world world,
+				size_t render_time);
 int			render_loop(t_loop_params *p);
 int			key_hooks(int keycode, t_loop_params *p);
 void		canva_to_mlx_image(t_display display, t_canva canva);

@@ -18,15 +18,16 @@
 #include "canvas.h"
 #include "camera.h"
 
-int	display_mlx(t_canva canva, t_camera *camera, t_world world, size_t render_time)
+int	display_mlx(t_canva canva, t_camera *camera, t_world world,
+				size_t render_time)
 {
 	t_display const	display = init_mlx_display(camera->hsize, camera->vsize);
 	t_loop_params	params;
 
 	if (!display.mlx_ptr)
 		return (1);
-	params = (t_loop_params){canva, world, camera, display, render_time, camera->vsize / 2,
-		camera->hsize / 2, false, true, true};
+	params = (t_loop_params){canva, world, camera, display, render_time,
+		camera->vsize / 2, camera->hsize / 2, false, true, true};
 	mlx_loop_hook(display.mlx_ptr, render_loop, &params);
 	mlx_hook(display.window, KeyPress, KeyPressMask, &key_hooks, &params);
 	mlx_hook(display.window, DestroyNotify, StructureNotifyMask,
