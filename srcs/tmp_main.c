@@ -85,6 +85,17 @@ static t_shape	hexagon(size_t id)
 	return (hex);
 }
 
+static t_shape	pyramid(size_t id)
+{
+	t_shape	pyr = group(id, 4);
+
+	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 0, 0.5)));
+	group_add_shape(&pyr, triangle(id + 1, point(0, 1, 0), point(0.5, 0, -0.5), point(0, 0, 0.5)));
+	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0, 1, 0), point(0, 0, 0.5)));
+	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 1, 0)));
+	return (pyr);
+}
+
 int	main(void)
 {
 	t_world	world = world_create();
@@ -97,7 +108,7 @@ int	main(void)
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.objs[0] = hexagon(300);
-	world.objs[1] = sphere(400);
+	world.objs[1] = pyramid(69);
 	//group_add_shape(world.objs, sphere(2));
 	//double pi = M_PI;
 	//group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));

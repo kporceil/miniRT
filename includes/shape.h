@@ -26,6 +26,7 @@ typedef enum e_tshape
 	CUBE,
 	CONE,
 	GROUP,
+	TRIANGLE,
 }				t_tshape;
 
 typedef struct s_shape
@@ -35,6 +36,12 @@ typedef struct s_shape
 	t_matrix	final_transformation;
 	t_matrix	final_inverted;
 	t_material	material;
+	t_tuple		tri_p1;
+	t_tuple		tri_p2;
+	t_tuple		tri_p3;
+	t_tuple		tri_e1;
+	t_tuple		tri_e2;
+	t_tuple		tri_normal;
 	t_shape		*parent;
 	t_shape		*child;
 	size_t		group_size;
@@ -50,6 +57,7 @@ t_shape		cube(size_t id);
 t_shape		sphere(size_t id);
 t_shape		cylinder(size_t id);
 t_shape		cone(size_t id);
+t_shape		triangle(size_t id, t_tuple p1, t_tuple p2, t_tuple p3);
 void		shape_set_matrix(t_shape *s, t_matrix m);
 
 #endif
