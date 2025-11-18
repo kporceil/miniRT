@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/23 17:21:39 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/06 14:01:52 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@
 #include "world.h"
 #include "camera.h"
 #include "display_mlx.h"
+#include "visual_settings.h"
 #include <math.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/time.h>
 
 void	tick(t_tuple *env, t_tuple *proj);
 
@@ -87,6 +89,8 @@ int	main(void)
 {
 	t_world	world = world_create();
 	(void)hexagon;
+	struct timeval	tv_a = (struct timeval){0};
+	struct timeval	tv_b = (struct timeval){0};
 
 	world.lights_count = 1;
 	world.objs_count = 2;
@@ -98,15 +102,9 @@ int	main(void)
 	//double pi = M_PI;
 	//group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));
 	group_set_matrix(world.objs, matrix_scaling(2, 2, 2));
-	t_pattern	pat;
-	pat.type = CHECKER;
-	pat.a = color(1, 0, 0);
-	pat.b = color(0, 1, 0);
-	pat.transform = identity_matrix(4);
-	pat.inverted = identity_matrix(4);
-	group_set_material(world.objs, (t_material){pat, color(1, 0.1, 0.1), 0.1, 0.9, 0.9, 200, 0, 0, 1});
+	//group_set_material(world.objs, (t_material){(t_pattern){RING, color(1, 0, 0), color(0, 1, 0), identity_matrix(4), identity_matrix(4)}, (t_color){1, 0.1, 0.1}, 0.1, 0.9, 0.9, 200, 0.8, 0, 1});
 	//world.objs[1]->	
-	shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1, 1.5, 0), matrix_scaling(0.25, 0.25, 0.25)));
+	//shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1, 1.5, 0), matrix_scaling(0.25, 0.25, 0.25)));
 	//shape_set_matrix(world.objs->child, matrix_translation(0, 0, 5));
 	//group_add_shape(world.objs, sphere(2));
 	//shape_set_matrix(world.objs->child, matrix_scaling(1, 2, 1));
@@ -116,12 +114,15 @@ int	main(void)
 	//shape_set_matrix(world.objs->child + 1, matrix_mult(matrix_translation(1, 0, 0), matrix_z_rotation(-M_PI/2)));
 	//group_set_matrix(world.objs, matrix_scaling(1.5, 1.5, 1.5));
 	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
-	t_camera	cam = camera(1000, 1000, M_PI / 2);
-	camera_set_transform(&cam, view_transform(point(2, 2, 0), point(0, 0, 0), vector(0, 1, 0)));
-	t_canva		image = render(cam, world);
+	t_camera	cam = camera(WIDTH, HEIGHT, M_PI / 2, point(4, 0, 0));
+	camera_set_transform(&cam, view_transform(cam.pos, cam.look_at, cam.up));
+	t_canva		image = render(cam, world, 1);
 	if (!image.canva)
 		return (1);
-	display_mlx(image, cam, world);
+	gettimeofday(&tv_b, NULL);
+	display_mlx(image, &cam, world, 1000 * (tv_a.tv_sec - tv_b.tv_sec)
+			+ (tv_a.tv_usec - tv_b.tv_usec) / 1000);
+	gettimeofday(&tv_a, NULL);
 	//char		*ppm = canva_to_ppm(image);
 	//write_file("render/test.ppm", ppm);
 	//free(ppm);

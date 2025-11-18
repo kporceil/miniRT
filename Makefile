@@ -44,7 +44,7 @@ TEST_BASENAME :=
 endif
 
 BASENAME := $(MAIN) \
-			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product) \
+			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product mult) \
 			$(addprefix color/, color add substract scalar mult) \
 			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm ppm_to_canva ppm_header ppm_io) \
 			$(addprefix gnl/, get_next_line get_next_line_utils) \
@@ -53,14 +53,14 @@ BASENAME := $(MAIN) \
 			$(addprefix spheres/, create intersect) \
 			$(addprefix light/, normal reflect point_light material phong shade_hit color_at) \
 			$(addprefix world/, create intersect free_world) \
-			$(addprefix camera/, create ray_for_pixel render) \
+			$(addprefix camera/, create ray_for_pixel render move) \
 			$(addprefix shadow/, is_shadowed) \
 			$(addprefix plane/, plane intersect) \
 			$(addprefix cylinders/, create intersect intersect_caps) \
 			$(addprefix cones/, create intersect intersect_caps) \
 			$(addprefix patterns/, pattern_at pattern_at_object ring_at check_at gradient_at stripe_at) \
 			$(addprefix reflect/, reflected_color) \
-			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks) \
+			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks canva_to_mlx_image) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
 			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \
