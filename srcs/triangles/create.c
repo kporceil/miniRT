@@ -15,7 +15,9 @@
 
 t_shape	triangle(size_t id, t_tuple p1, t_tuple p2, t_tuple p3)
 {
-	t_shape	ret = (t_shape){.type = TRIANGLE,
+	t_shape	ret;
+
+	ret = (t_shape){.type = TRIANGLE,
 		.local_transformation = identity_matrix(4),
 		.final_transformation = identity_matrix(4),
 		.final_inverted = identity_matrix(4),
