@@ -20,8 +20,6 @@
 #include "tuples.h"
 #include "visual_settings.h"
 
-#include <stdio.h>
-
 static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 								size_t last_pixel_size)
 {
