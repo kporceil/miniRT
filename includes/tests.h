@@ -164,5 +164,6 @@ int		test_uv_file(void);
 
 int	test_triangle_create(void);
 int	test_triangle_normal(void);
+int	test_triangle_intersect(void);
 
 #endif

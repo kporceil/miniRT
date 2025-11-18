@@ -29,7 +29,6 @@ static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 	size_t			new_px_size;
 
 	new_px_size = last_pixel_size;
-	printf("render : %ld\t|\ttarget: %ld\n", render_time, target_ms * 2);
 	if (render_time > target_ms * 2)
 	{
 		++new_px_size;

@@ -97,7 +97,7 @@ int	main(void)
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.objs[0] = hexagon(300);
-	world.objs[1] = sphere(400);
+	world.objs[1] = triangle(69, point(-1, -1, 0), point(1, -1, 1), point(0, 1, 0));
 	//group_add_shape(world.objs, sphere(2));
 	//double pi = M_PI;
 	//group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));
