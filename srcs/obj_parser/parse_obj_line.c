@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 18:21:08 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 19:25:43 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 19:34:44 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static void	free_split(char **split)
 		++i;
 	}
 	free(split);
+}
+
+static void	add_vertice(char **args, t_obj_parsing *p)
+{
+
 }
 
 void	parse_obj_line(char *line, t_obj_parsing *p)

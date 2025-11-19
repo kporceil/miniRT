@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/19 18:31:53 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 19:32:10 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	main(void)
 	ret += test_vector_create();
 	ret += test_vector_add();
 	ret += test_obj_parser_ignoring();
+	ret += test_obj_parser_vertices();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }
