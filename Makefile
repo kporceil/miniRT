@@ -38,7 +38,8 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix groups/, create_tests intersect_tests transformation_tests) \
 					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests) \
 					$(addprefix triangles/, create_tests normal_tests intersect_tests) \
-					$(addprefix vectors/, create_tests add_tests))
+					$(addprefix vectors/, create_tests add_tests) \
+					$(addprefix obj_parser/, ignoring_tests))
 endif
 ifeq (no, $(TEST))
 MAIN := tmp_main
@@ -65,10 +66,12 @@ BASENAME := $(MAIN) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks canva_to_mlx_image) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
-			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \
+			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material free) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(addprefix triangles/, create intersect) \
 			$(addprefix vectors/, create get_header free add) \
+			$(addprefix uid/, generate_uid) \
+			$(addprefix obj_parser/, obj_parser parse_obj_line free) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \

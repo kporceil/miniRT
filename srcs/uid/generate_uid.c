@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_world.c                                       :+:      :+:    :+:   */
+/*   generate_uid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 15:49:08 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 19:13:32 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/11/19 17:51:26 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/11/19 18:56:12 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "world.h"
-#include "groups.h"
-#include "vectors.h"
-#include <stdlib.h>
+#include <stddef.h>
 
-void	free_world(t_world *w)
+size_t	generate_uid(void)
 {
-	size_t	i;
+	static size_t	uid = 1;
 
-	i = 0;
-	while (i < w->objs_count)
-	{
-		if (w->objs[i].type == GROUP)
-			free_group(w->objs + i);
-		++i;
-	}
-	free(w->objs);
-	free(w->lights);
+	return (uid++);
 }

@@ -1,32 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_world.c                                       :+:      :+:    :+:   */
+/*   parse_obj_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 15:49:08 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 19:13:32 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/11/19 18:21:08 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/11/19 19:25:43 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "world.h"
-#include "groups.h"
-#include "vectors.h"
 #include <stdlib.h>
+#include "obj_parser.h"
+#include "libft.h"
 
-void	free_world(t_world *w)
+// NOTE: for readibility and time reasons, yes this is done with split
+
+static void	free_split(char **split)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < w->objs_count)
+	while (split[i])
 	{
-		if (w->objs[i].type == GROUP)
-			free_group(w->objs + i);
+		free(split[i]);
 		++i;
 	}
-	free(w->objs);
-	free(w->lights);
+	free(split);
+}
+
+void	parse_obj_line(char *line, t_obj_parsing *p)
+{
+	char ** const	args = ft_splits(line, " \f\t\n\r\v");
+
+	if (!args)
+	{
+		p->status = MALLOC_ERROR;
+		return ;
+	}
+	if (!ft_strncmp(args[0], "v", 2))
+		(void)args;
+	else
+		++p->ignored;
+	free_split(args);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ignoring_test.c                                    :+:      :+:    :+:   */
+/*   ignoring_tests.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 12:56:18 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/18 19:20:14 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 19:20:09 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@
 #include "tests.h"
 #include "obj_parser.h"
 
-static void	ignoring_obj_parser_1_test(void **state)
+static void	ignoring_obj_parser_1_test(__unused void **state)
 {
-	t_obj_parsing	parsed = obj_parser("./test_assets/gibberish.obj")
+	t_obj_parsing	parsed = obj_parser("./test_assets/gibberish.obj");
+
+	assert_int_equal(parsed.ignored, 5);
+	free_obj_parsing(&parsed);
 }
 
 int	test_obj_parser_ignoring(void)
 {
-	const struct CMUnitTest	matrix_mult_tests[] = {
-		cmocka_unit_test(matrix4x4_mult_test),
+	const struct CMUnitTest	obj_parser_ignoring_tests[] = {
+		cmocka_unit_test(ignoring_obj_parser_1_test),
 	};
-	return (cmocka_run_group_tests(matrix_mult_tests, NULL, NULL));
+	return (cmocka_run_group_tests(obj_parser_ignoring_tests, NULL, NULL));
 }

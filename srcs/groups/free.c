@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_parser.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 18:45:41 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/18 19:20:12 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/11/19 19:12:35 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/11/19 19:12:57 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/stat.h>
-#include <fcntl.h>
-#include "obj_parser.h"
-#include "get_next_line.h"
+#include "vectors.h"
+#include "groups.h"
 
-t_obj_parsing	obj_parser(char *path)
+void	free_group(t_shape *g)
 {
-	t_obj_parsing	ret;
-	int				fd;
+	size_t	i;
 
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (t_object){.status = OPEN_ERROR};
+	i = 0;
+	while (i < g->nb_members)
+	{
+		if (g->child[i].type == GROUP)
+			free_group(g->child + i);
+		++i;
+	}
+	vec_free(g->child);
 }

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_world.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 15:49:08 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 19:13:32 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/11/19 19:09:25 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/11/19 19:20:00 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "world.h"
-#include "groups.h"
+#include "obj_parser.h"
 #include "vectors.h"
-#include <stdlib.h>
 
-void	free_world(t_world *w)
+void	free_obj_parsing(t_obj_parsing *p)
 {
-	size_t	i;
+	size_t const	nb_groups = vec_get_header(p->groups)->nb_elems;
+	size_t			i;
 
 	i = 0;
-	while (i < w->objs_count)
+	while (i < nb_groups)
 	{
-		if (w->objs[i].type == GROUP)
-			free_group(w->objs + i);
+		free_group(p->groups + i);
 		++i;
 	}
-	free(w->objs);
-	free(w->lights);
+	vec_free(p->vertices);
+	vec_free(p->groups);
 }

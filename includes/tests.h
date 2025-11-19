@@ -169,4 +169,6 @@ int	test_triangle_intersect(void);
 int	test_vector_create(void);
 int	test_vector_add(void);
 
+int	test_obj_parser_ignoring(void);
+
 #endif
