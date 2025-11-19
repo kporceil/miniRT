@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_parser.h                                       :+:      :+:    :+:   */
+/*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 12:58:09 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 13:31:43 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/11/19 12:38:50 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/11/19 14:49:12 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJ_PARSER_H
-# define OBJ_PARSER_H
+#ifndef VECTORS_H
+# define VECTORS_H
 
-typedef enum e_parsing_status	t_parsing_status;
-typedef struct s_obj_parsing	t_obj_parsing;
+# include <stddef.h>
 
-enum e_parsing_status
+# define GROWTH_COEF 2
+
+typedef struct s_vector_head	t_vector_head;
+
+struct s_vector_head
 {
-	NO_ERROR,
-	OPEN_ERROR,
-	MALLOC_ERROR
-}
+	size_t	vector_size;
+	size_t	nb_elems;
+	size_t	max_elems;
+	size_t	el_size;
+};
 
-struct s_obj_parsing
-{
-	t_group				default_group;
-	t_tuple				*vertices;
-	size_t				vertices_nb;
-	size_t				faces_nb;
-	t_parsing_status	status;
-}
+void			*vec_create(size_t el_size, size_t vec_size);
+t_vector_head	*vec_get_header(void *vec);
+void			vec_free(void *vec);
+int				vec_add(void **vector, void *el);
 
 #endif
