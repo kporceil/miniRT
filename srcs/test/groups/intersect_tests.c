@@ -22,6 +22,7 @@
 #include "ray.h"
 #include "tuples.h"
 #include "groups.h"
+#include "vectors.h"
 
 #ifndef EPSILON
 # define EPSILON 0.0001
@@ -52,7 +53,7 @@ static void	intersect_group_2_test(__unused void **state)
 	ray_group_intersect(&g, r, &xs);
 	assert_int_equal(xs.size, 4);
 	free(xs.inters);
-	free(g.child);
+	vec_free(g.child);
 }
 
 int	test_group_intersect(void)

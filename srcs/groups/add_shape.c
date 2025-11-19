@@ -12,6 +12,7 @@
 
 #include "shape.h"
 #include "groups.h"
+#include "vectors.h"
 
 int	group_add_shape(t_shape *g, t_shape s)
 {
@@ -22,7 +23,8 @@ int	group_add_shape(t_shape *g, t_shape s)
 		group_set_matrix(&s, s.local_transformation);
 	else
 		shape_set_matrix(&s, s.local_transformation);
-	g->child[g->nb_members] = s;
+	vec_add((void **)&g->child, &s);
+	//g->child[g->nb_members] = s;
 	++g->nb_members;
 	return (0);
 }

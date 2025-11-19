@@ -13,6 +13,7 @@
 #include "shape.h"
 #include "matrix.h"
 #include "material.h"
+#include "vectors.h"
 #include <stdlib.h>
 
 // NOTE: all calls to this function should ce checked (malloc)
@@ -31,7 +32,7 @@ t_shape	group(size_t id, size_t group_size)
 		.nb_members = 0,
 		.id = id};
 	if (group_size)
-		ret.child = malloc(sizeof(t_shape) * group_size);
+		ret.child = vec_create(sizeof(t_shape), group_size);
 	else
 		ret.child = NULL;
 	return (ret);

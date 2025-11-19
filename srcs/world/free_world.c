@@ -12,6 +12,7 @@
 
 #include "shape.h"
 #include "world.h"
+#include "vectors.h"
 #include <stdlib.h>
 
 static void	free_group(t_shape *g)
@@ -25,7 +26,7 @@ static void	free_group(t_shape *g)
 			free_group(g->child + i);
 		++i;
 	}
-	free(g->child);
+	vec_free(g->child);
 }
 
 void	free_world(t_world *w)
