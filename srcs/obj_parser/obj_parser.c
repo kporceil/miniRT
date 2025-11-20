@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 18:45:41 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 18:56:15 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 16:59:07 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	init_obj_parsing(t_obj_parsing *p)
 		vec_free(p->groups);
 		return ;
 	}
+	p->current_group = p->groups;
 	p->vertices = vec_create(sizeof(t_tuple), DEFAULT_VERTICES_SIZE);
 	if (!p->vertices)
 	{
@@ -47,6 +48,7 @@ static void	init_obj_parsing(t_obj_parsing *p)
 	}
 }
 
+#include <stdio.h>
 
 static void	parse_obj_file(int fd, t_obj_parsing *p)
 {
@@ -57,6 +59,12 @@ static void	parse_obj_file(int fd, t_obj_parsing *p)
 	{
 		parse_obj_line(line, p);
 		free(line);
+		if (p->status)
+		{
+			printf("status: %d\n", p->status);
+			get_next_line(fd, DELETE);
+			return ;
+		}
 		line = get_next_line(fd, READ);
 	}
 }

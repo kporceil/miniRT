@@ -6,15 +6,14 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 18:21:08 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 19:34:44 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 16:57:56 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "obj_parser.h"
 #include "libft.h"
-
-// NOTE: for readibility and time reasons, yes this is done with split
+#include "vectors.h"
 
 static void	free_split(char **split)
 {
@@ -29,10 +28,7 @@ static void	free_split(char **split)
 	free(split);
 }
 
-static void	add_vertice(char **args, t_obj_parsing *p)
-{
-
-}
+// NOTE: for readibility and time reasons, yes this is done with split
 
 void	parse_obj_line(char *line, t_obj_parsing *p)
 {
@@ -43,8 +39,12 @@ void	parse_obj_line(char *line, t_obj_parsing *p)
 		p->status = MALLOC_ERROR;
 		return ;
 	}
-	if (!ft_strncmp(args[0], "v", 2))
-		(void)args;
+	if (!args[0])
+		++p->ignored;
+	else if (!ft_strncmp(args[0], "v", 2))
+		add_vertice(args + 1, p);
+	else if (!ft_strncmp(args[0], "f", 2))
+		add_face(args + 1, p);
 	else
 		++p->ignored;
 	free_split(args);

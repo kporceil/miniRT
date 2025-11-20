@@ -39,7 +39,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests) \
 					$(addprefix triangles/, create_tests normal_tests intersect_tests) \
 					$(addprefix vectors/, create_tests add_tests) \
-					$(addprefix obj_parser/, ignoring_tests vertices_tests))
+					$(addprefix obj_parser/, ignoring_tests vertices_tests triangle_tests))
 endif
 ifeq (no, $(TEST))
 MAIN := tmp_main
@@ -71,7 +71,7 @@ BASENAME := $(MAIN) \
 			$(addprefix triangles/, create intersect) \
 			$(addprefix vectors/, create get_header free add) \
 			$(addprefix uid/, generate_uid) \
-			$(addprefix obj_parser/, obj_parser parse_obj_line free) \
+			$(addprefix obj_parser/, obj_parser parse_obj_line free add_vertice add_face) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \

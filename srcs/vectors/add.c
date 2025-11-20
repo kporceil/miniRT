@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:48:44 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 15:20:08 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 16:06:07 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	vec_add(void **vector, void *el)
 	{
 		copy = malloc(head->vector_size * GROWTH_COEF + sizeof(t_vector_head));
 		if (!copy)
+		{
+			--head->nb_elems;
 			return (1);
+		}
 		((t_vector_head *)copy)->vector_size = head->vector_size * GROWTH_COEF;
 		((t_vector_head *)copy)->max_elems = head->max_elems * GROWTH_COEF;
 		((t_vector_head *)copy)->nb_elems = head->nb_elems;
