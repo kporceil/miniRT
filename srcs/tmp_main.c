@@ -85,16 +85,16 @@ static t_shape	hexagon(size_t id)
 	return (hex);
 }
 
-static t_shape	pyramid(size_t id)
-{
-	t_shape	pyr = group(id, 4);
-
-	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 0, 0.5)));
-	group_add_shape(&pyr, triangle(id + 1, point(0, 1, 0), point(0.5, 0, -0.5), point(0, 0, 0.5)));
-	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0, 1, 0), point(0, 0, 0.5)));
-	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 1, 0)));
-	return (pyr);
-}
+//static t_shape	pyramid(size_t id)
+//{
+//	t_shape	pyr = group(id, 4);
+//
+//	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 0, 0.5)));
+//	group_add_shape(&pyr, triangle(id + 1, point(0, 1, 0), point(0.5, 0, -0.5), point(0, 0, 0.5)));
+//	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0, 1, 0), point(0, 0, 0.5)));
+//	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 1, 0)));
+//	return (pyr);
+//}
 
 int	main(void)
 {
