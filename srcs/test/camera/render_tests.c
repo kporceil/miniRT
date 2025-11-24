@@ -74,9 +74,9 @@ static int	teardown(void **state)
 static void	camera_render_test(void **state)
 {
 	t_world		*world = (t_world *)*state;
-	t_camera	cam = camera(11, 11, M_PI/2);
+	t_camera	cam = camera(11, 11, M_PI/2, point(0, 0, -5)) ;
 	camera_set_transform(&cam, view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0)));
-	t_canva		image = render(cam, *world);
+	t_canva		image = render(cam, *world, 1);
 
 	if (!image.canva)
 		fail_msg("Malloc fail");

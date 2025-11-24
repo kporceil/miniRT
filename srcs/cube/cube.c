@@ -14,7 +14,10 @@
 
 t_shape	cube(size_t id)
 {
-	return ((t_shape){.type = CUBE, .transformation = identity_matrix(4),
-		.inverted = identity_matrix(4), .inv_transposed = identity_matrix(4),
+	return ((t_shape){.type = CUBE,
+		.local_transformation = identity_matrix(4),
+		.final_transformation = identity_matrix(4),
+		.final_inverted = identity_matrix(4),
+		.parent = NULL,
 		.id = id, .material = material()});
 }
