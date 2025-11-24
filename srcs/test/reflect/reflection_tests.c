@@ -39,6 +39,14 @@ static int	setup(void **state)
 		free(world);
 		return (-1);
 	}
+	world->buf_inter = malloc(sizeof(t_inter) * 4);
+	if (!world->buf_inter)
+	{
+		free(world->objs);
+		free(world->lights);
+		free(world);
+		return (-1);
+	}
 	world->objs[0] = sphere(0);
 	world->objs[1] = sphere(1);
 	world->objs[0].material.diffuse = 0.7;
@@ -55,6 +63,7 @@ static int	teardown(void **state)
 {
 	t_world	*world = *state;
 
+	free(world->buf_inter);
 	free(world->lights);
 	free(world->objs);
 	free(world);
@@ -75,8 +84,9 @@ static void	reflective_test(void **state)
 {
 	t_world	*w = (t_world*)(*state);
 	t_ray	r = ray(point(0, 0, -3), vector(0, -(sqrt(2)/2), sqrt(2)/2));
-	
+
 	w->objs = realloc(w->objs, sizeof(t_shape) * 3);
+	w->buf_inter = realloc(w->buf_inter, sizeof(t_inter) * 6);
 	w->objs[2] = plane(2);
 	w->objs[2].material.reflective = 0.5;
 	shape_set_matrix(w->objs + 2, matrix_translation(0, -1, 0));
@@ -87,8 +97,9 @@ static void	color_reflective_test(void **state)
 {
 	t_world	*w = (t_world*)(*state);
 	t_ray	r = ray(point(0, 0, -3), vector(0, -(sqrt(2)/2), sqrt(2)/2));
-	
+
 	w->objs = realloc(w->objs, sizeof(t_shape) * 3);
+	w->buf_inter = realloc(w->buf_inter, sizeof(t_inter) * 6);
 	w->objs[2] = plane(2);
 	w->objs[2].material.reflective = 0.5;
 	shape_set_matrix(w->objs + 2, matrix_translation(0, -1, 0));
@@ -100,9 +111,10 @@ static void	infinte_resursive_test(__unused void **state)
 	t_world	w = world_create();
 	t_ray	r = ray(point(0, 0, 0), vector(0, 1, 0));
 	t_color	c;
-	
+
 	w.objs = malloc(sizeof(t_shape) * 2);
 	w.lights = malloc(sizeof(t_plight));
+	w.buf_inter = malloc(sizeof(t_inter) * 4);
 	w.lights[0] = point_light(point(0, 0, 0), color(1, 1, 1));
 	w.objs[0] = plane(0);
 	w.objs[0].material.reflective = 1;
@@ -111,6 +123,7 @@ static void	infinte_resursive_test(__unused void **state)
 	w.objs[1].material.reflective = 1;
 	shape_set_matrix(w.objs + 1, matrix_translation(0, 1, 0));
 	color_at(w, r, &c, MAX_RECU);
+	free(w.buf_inter);
 	free(w.objs);
 	free(w.lights);
 }
@@ -119,8 +132,9 @@ static void	limit_recursion_test(void **state)
 {
 	t_world	*w = (t_world*)(*state);
 	t_ray	r = ray(point(0, 0, -3), vector(0, -(sqrt(2)/2), sqrt(2)/2));
-	
+
 	w->objs = realloc(w->objs, sizeof(t_shape) * 3);
+	w->buf_inter = realloc(w->buf_inter, sizeof(t_inter) * 6);
 	w->objs[2] = plane(3);
 	w->objs[2].material.reflective = 0.5;
 	shape_set_matrix(w->objs + 2, matrix_translation(0, -1, 0));
