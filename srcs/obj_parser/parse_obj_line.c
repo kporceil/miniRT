@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 18:21:08 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/20 16:57:56 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 20:34:25 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	parse_obj_line(char *line, t_obj_parsing *p)
 		add_vertice(args + 1, p);
 	else if (!ft_strncmp(args[0], "f", 2))
 		add_face(args + 1, p);
+	else if (!ft_strncmp(args[0], "g", 2))
+		change_group(p);
 	else
 		++p->ignored;
 	free_split(args);

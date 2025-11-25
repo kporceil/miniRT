@@ -172,5 +172,7 @@ int	test_vector_add(void);
 int	test_obj_parser_ignoring(void);
 int	test_obj_parser_vertices(void);
 int	test_obj_parser_triangle(void);
+int	test_obj_parser_group(void);
+int	test_obj_parser_parsed_to_group(void);
 
 #endif

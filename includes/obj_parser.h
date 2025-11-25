@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 12:58:09 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/20 16:53:32 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/25 18:56:56 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ void			parse_obj_line(char *line, t_obj_parsing *p);
 void			free_obj_parsing(t_obj_parsing *p);
 void			add_vertice(char **args, t_obj_parsing *p);
 void			add_face(char **args, t_obj_parsing *p);
+void			change_group(t_obj_parsing *p);
+t_shape			parsed_to_group(t_obj_parsing *p);
 
 #endif
