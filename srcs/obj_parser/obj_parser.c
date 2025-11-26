@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 18:45:41 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/20 19:30:32 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 13:46:56 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static void	init_obj_parsing(t_obj_parsing *p)
 	}
 }
 
-#include <stdio.h>
-
 static void	parse_obj_file(int fd, t_obj_parsing *p)
 {
 	char	*line;
@@ -61,7 +59,6 @@ static void	parse_obj_file(int fd, t_obj_parsing *p)
 		free(line);
 		if (p->status)
 		{
-			printf("status: %d\n", p->status);
 			get_next_line(fd, DELETE);
 			return ;
 		}

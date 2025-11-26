@@ -66,7 +66,7 @@ BASENAME := $(MAIN) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks canva_to_mlx_image) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
-			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material free) \
+			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material free copy) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(addprefix triangles/, create intersect) \
 			$(addprefix vectors/, create get_header free add) \

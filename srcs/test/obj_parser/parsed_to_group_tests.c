@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 12:56:18 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/25 19:03:11 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 13:46:52 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 #include <cmocka.h>
 #include "tests.h"
 #include "obj_parser.h"
+#include "groups.h"
 
 static void	parsed_to_group_obj_parser_1_test(__unused void **state)
 {
-	t_obj_parsing	parsed = obj_parser("./test_assets/parsed_to_group.obj");
+	t_obj_parsing	parsed = obj_parser("./test_assets/group.obj");
 	t_shape			group = parsed_to_group(&parsed);
 
 	assert_tuple_equal(group.child[0].child[0].tri_p1, parsed.vertices[0]);
@@ -31,6 +32,7 @@ static void	parsed_to_group_obj_parser_1_test(__unused void **state)
 	assert_tuple_equal(group.child[1].child[0].tri_p3, parsed.vertices[3]);
 	assert_int_equal(parsed.ignored, 0);
 	free_obj_parsing(&parsed);
+	free_group(&group);
 }
 
 int	test_obj_parser_parsed_to_group(void)
