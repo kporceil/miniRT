@@ -25,7 +25,7 @@ static void	eye_between_light_surface_test(void **state)
 	t_tuple	eyev = vector(0, 0, -1);
 	t_tuple	normalv = vector (0, 0, -1);
 	t_plight	light = point_light(point (0, 0, -10), color(1, 1, 1));
-	t_lighting	lighting_data = {.m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
+	t_lighting	lighting_data = {.ambient = color(0.1, 0.1, 0.1), .m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
 	t_color		result = lighting(lighting_data);
 
 	(void)state;
@@ -37,7 +37,7 @@ static void	eye_45_degree_between_light_surface_test(void **state)
 	t_tuple	eyev = vector(0, sqrt(2)/2, -sqrt(2)/2);
 	t_tuple	normalv = vector (0, 0, -1);
 	t_plight	light = point_light(point (0, 0, -10), color(1, 1, 1));
-	t_lighting	lighting_data = {.m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
+	t_lighting	lighting_data = {.ambient = color(0.1, 0.1, 0.1), .m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
 	t_color		result = lighting(lighting_data);
 
 	(void)state;
@@ -49,7 +49,7 @@ static void	eye_behind_light_45_degree_surface_test(void **state)
 	t_tuple	eyev = vector(0, 0, -1);
 	t_tuple	normalv = vector (0, 0, -1);
 	t_plight	light = point_light(point (0, 10, -10), color(1, 1, 1));
-	t_lighting	lighting_data = {.m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
+	t_lighting	lighting_data = {.ambient = color(0.1, 0.1, 0.1), .m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
 	t_color		result = lighting(lighting_data);
 
 	(void)state;
@@ -61,7 +61,7 @@ static void	eye_in_the_path_of_light_test(void **state)
 	t_tuple	eyev = vector(0, -sqrt(2)/2, -sqrt(2)/2);
 	t_tuple	normalv = vector (0, 0, -1);
 	t_plight	light = point_light(point (0, 10, -10), color(1, 1, 1));
-	t_lighting	lighting_data = {.m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
+	t_lighting	lighting_data = {.ambient = color(0.1, 0.1, 0.1), .m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
 	t_color		result = lighting(lighting_data);
 
 	(void)state;
@@ -73,7 +73,7 @@ static void	eye_behind_surface_test(void **state)
 	t_tuple	eyev = vector(0, 0, -1);
 	t_tuple	normalv = vector (0, 0, -1);
 	t_plight	light = point_light(point (0, 0, 10), color(1, 1, 1));
-	t_lighting	lighting_data = {.m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
+	t_lighting	lighting_data = {.ambient = color(0.1, 0.1, 0.1), .m = material(), .light = light, .p = point(0, 0, 0), .eyev = eyev, .normalv = normalv, .in_shadow = false};
 	t_color		result = lighting(lighting_data);
 
 	(void)state;

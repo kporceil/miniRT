@@ -25,7 +25,6 @@ static void	material_test(void **state)
 
 	(void)state;
 	assert_color_equal(m.color, color(1, 1, 1));
-	assert_double_equal(m.ambient, 0.1, 0.0001);
 	assert_double_equal(m.diffuse, 0.9, 0.0001);
 	assert_double_equal(m.specular, 0.9, 0.0001);
 	assert_double_equal(m.shininess, 200, 0.0001);

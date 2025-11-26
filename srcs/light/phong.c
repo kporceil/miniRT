@@ -32,7 +32,7 @@ t_color	lighting(t_lighting l)
 	const t_color	obj_color = set_color(l);
 
 	l.eff_color = color_mult(obj_color, l.light.intensity);
-	ambient = color_scalar_mult(l.eff_color, l.m.ambient);
+	ambient = color_mult(l.eff_color, l.ambient);
 	if (l.in_shadow)
 		return (ambient);
 	l.lightv = normalize(tuple_substract(l.light.pos, l.p));

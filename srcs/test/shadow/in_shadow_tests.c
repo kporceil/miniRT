@@ -20,7 +20,7 @@
 
 static void	lighting_in_shadow_test(__unused void **state)
 {
-	t_lighting lighting_data = {.m = material(), .p = point(0, 0, 0), .eyev = vector(0, 0, -1), .normalv = vector(0, 0, -1), .light = point_light(point(0, 0, -10), color(1, 1, 1)), .in_shadow = true};
+	t_lighting lighting_data = {.ambient = color(0.1, 0.1, 0.1), .m = material(), .p = point(0, 0, 0), .eyev = vector(0, 0, -1), .normalv = vector(0, 0, -1), .light = point_light(point(0, 0, -10), color(1, 1, 1)), .in_shadow = true};
 	t_color	result = lighting(lighting_data);
 
 	assert_color_equal(color(0.1, 0.1, 0.1), result);

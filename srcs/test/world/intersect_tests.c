@@ -36,6 +36,14 @@ static int	setup(void **state)
 		free(world);
 		return (-1);
 	}
+	world->buf_inter = malloc(sizeof(t_inter) * 4);
+	if (!world->buf_inter)
+	{
+		free(world->objs);
+		free(world->lights);
+		free(world);
+		return (-1);
+	}
 	world->objs[0] = sphere(0);
 	world->objs[1] = sphere(1);
 	world->objs[0].material.diffuse = 0.7;
@@ -52,6 +60,7 @@ static int	teardown(void **state)
 {
 	t_world	*world = *state;
 
+	free(world->buf_inter);
 	free(world->lights);
 	free(world->objs);
 	free(world);
@@ -63,14 +72,11 @@ static void	world_ray_intersect_test(void **state)
 	t_world	*world = (t_world *)*state;
 	t_intersections	inters = world_intersect(*world, ray(point(0, 0, -5), vector(0, 0, 1)));
 
-	if (!inters.inters && inters.size)
-		fail_msg("Malloc failed");
 	assert_int_equal(inters.size, 4);
 	assert_double_equal(inters.inters[0].point, 4, 0.0001);
 	assert_double_equal(inters.inters[1].point, 4.5, 0.0001);
 	assert_double_equal(inters.inters[2].point, 5.5, 0.0001);
 	assert_double_equal(inters.inters[3].point, 6, 0.0001);
-	free(inters.inters);
 }
 
 int	test_world_intersections(void)

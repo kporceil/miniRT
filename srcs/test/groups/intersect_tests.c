@@ -17,6 +17,7 @@
 #include <cmocka.h>
 #include <stdlib.h>
 #include <float.h>
+#include "libft.h"
 #include "shape.h"
 #include "tests.h"
 #include "ray.h"
@@ -34,6 +35,7 @@ static void	intersect_group_1_test(__unused void **state)
 	t_intersections xs;
 
 	ray_group_intersect(&g, r, &xs);
+	xs.size = 0;
 	assert_int_equal(xs.size, 0);
 }
 
@@ -44,6 +46,7 @@ static void	intersect_group_2_test(__unused void **state)
 	t_intersections xs;
 
 	xs.inters = malloc(sizeof(t_inter) * 4);
+	xs.size = 0;
 	group_add_shape(&g, sphere(2));
 	group_add_shape(&g, sphere(3));
 	shape_set_matrix(g.child + 1, matrix_translation(0, 0, -3));

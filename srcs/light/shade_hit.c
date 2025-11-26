@@ -24,6 +24,7 @@ static void	copy_data(t_precomp *comps, t_lighting *data, t_world *w,
 	data->normalv = comps->normalv;
 	data->in_shadow = is_shadowed(*w, comps->over_point, i);
 	data->obj = comps->obj;
+	data->ambient = w->ambient;
 }
 
 t_color	shade_hit(t_world world, t_precomp comps, size_t remaining)

@@ -20,7 +20,6 @@ typedef struct s_material
 {
 	t_pattern	pat;
 	t_color		color;
-	double		ambient;
 	double		diffuse;
 	double		specular;
 	double		shininess;
