@@ -136,14 +136,12 @@ int	main(void)
 	world.objs[4].material.specular = 0;
 	world.objs[4].material.diffuse = 0.4;
 	shape_set_matrix(world.objs + 4, matrix_mult(matrix_translation(0, 0, -3), matrix_x_rotation(M_PI_2)));
-	world.objs[5].material.color = color(0, 0, 0);
-	world.objs[5].material.transparency = 1;
-	world.objs[5].material.refractive_index = 1.5;
+	world.objs[5].material.color = color(0.2, 0.2, 0.5);
 	world.objs[5].material.specular = 0.5;
 	world.objs[5].material.diffuse = 0.4;
 	shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(1, -4.2, -1.5), matrix_scaling(0.75, 0.75, 0.75)));
 	world.lights[0] = point_light(point(-1.6, -1.2, 1.6), color(1, 1, 1));
-	t_camera	cam = camera(1920, 1080, M_PI / 2, point(-4, -2.7, 0.8));
+	t_camera	cam = camera(100, 100, M_PI / 2, point(-4, -2.7, 0.8));
 	cam.look_at = point(0, -3.6, -0.2);
 	camera_set_transform(&cam, view_transform(cam.pos, cam.look_at, cam.up));
 	t_canva		image = render(cam, world, 1);
