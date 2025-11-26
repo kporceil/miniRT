@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "color.h"
 #include "matrix.h"
 #include "groups.h"
 #include "patterns.h"
@@ -108,6 +109,7 @@ int	main(void)
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.buf_inter = malloc(sizeof(t_inter) * world.objs_count * 2);
+	world.ambient = color_scalar_mult(color(1, 1, 1), 0.6);
 	world.objs[0] = plane(0);
 	world.objs[1] = plane(1);
 	world.objs[2] = plane(2);
@@ -117,34 +119,28 @@ int	main(void)
 	world.objs[0].material.color = color(0.5, 0.5, 0.5);
 	world.objs[0].material.specular = 0;
 	world.objs[0].material.diffuse = 0.4;
-	world.objs[0].material.ambient = 0.6;
 	shape_set_matrix(world.objs, matrix_translation(0, -5, 0));
 	world.objs[1].material.color = color(0.5, 0.5, 0.5);
 	world.objs[1].material.specular = 0;
 	world.objs[1].material.diffuse = 0.4;
-	world.objs[1].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(3, 0, 0), matrix_z_rotation(M_PI_2)));
 	world.objs[2].material.color = color(0.5, 0.5, 0.5);
 	world.objs[2].material.specular = 0;
 	world.objs[2].material.diffuse = 0.4;
-	world.objs[2].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 2, matrix_translation(0, -1, 0));
 	world.objs[3].material.color = color(0.5, 0.2, 0.2);
 	world.objs[3].material.specular = 0;
 	world.objs[3].material.diffuse = 0.4;
-	world.objs[3].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 3, matrix_mult(matrix_translation(0, 0, 3), matrix_x_rotation(M_PI_2)));
 	world.objs[4].material.color = color(0.2, 0.5, 0.2);
 	world.objs[4].material.specular = 0;
 	world.objs[4].material.diffuse = 0.4;
-	world.objs[4].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 4, matrix_mult(matrix_translation(0, 0, -3), matrix_x_rotation(M_PI_2)));
 	world.objs[5].material.color = color(0, 0, 0);
 	world.objs[5].material.transparency = 1;
 	world.objs[5].material.refractive_index = 1.5;
 	world.objs[5].material.specular = 0.5;
 	world.objs[5].material.diffuse = 0.4;
-	world.objs[5].material.ambient = 0.6;
 	shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(1, -4.2, -1.5), matrix_scaling(0.75, 0.75, 0.75)));
 	world.lights[0] = point_light(point(-1.6, -1.2, 1.6), color(1, 1, 1));
 	t_camera	cam = camera(1920, 1080, M_PI / 2, point(-4, -2.7, 0.8));

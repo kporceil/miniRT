@@ -14,5 +14,5 @@
 
 t_world	world_create(void)
 {
-	return ((t_world){NULL, NULL, 0, 0, NULL});
+	return ((t_world){NULL, NULL, 0, 0, (t_color){0, 0, 0}, NULL});
 }
