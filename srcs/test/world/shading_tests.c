@@ -54,6 +54,7 @@ static int	setup(void **state)
 	shape_set_matrix(world->objs + 1, matrix_scaling(0.5, 0.5, 0.5));
 	world->lights[0].intensity = color(1, 1, 1);
 	world->lights[0].pos = point(-10, 10, -10);
+	world->ambient = color(0.1, 0.1, 0.1);
 	*state = world;
 	return (0);
 }
@@ -117,10 +118,8 @@ static void	shading_hit_test(void **state)
 static void	behind_shading_hit_test(void **state)
 {
 	t_world	*world = (t_world *)*state;
-	t_shape	*outer = world->objs;
 	t_shape	*inner = world->objs + 1;
-	outer->material.ambient = 1;
-	inner->material.ambient = 1;
+	world->ambient = color(1, 1, 1);
 	t_ray	r = ray(point(0, 0, 0.75), vector(0, 0, -1));
 	t_color	c;
 
