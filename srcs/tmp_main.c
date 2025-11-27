@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/06 14:01:52 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/27 16:38:56 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "matrix.h"
 #include "groups.h"
 #include "patterns.h"
+#include "scenes_parsing.h"
 #include "shape.h"
 #include "tuples.h"
 #include "canvas.h"
@@ -28,8 +29,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/time.h>
-
-void	tick(t_tuple *env, t_tuple *proj);
 
 void	write_file(char	*name, char	*ppm)
 {
@@ -86,16 +85,16 @@ static t_shape	hexagon(size_t id)
 	return (hex);
 }
 
-//static t_shape	pyramid(size_t id)
-//{
-//	t_shape	pyr = group(id, 4);
+// static t_shape	pyramid(size_t id)
+// {
+// 	t_shape	pyr = group(id, 4);
 //
-//	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 0, 0.5)));
-//	group_add_shape(&pyr, triangle(id + 1, point(0, 1, 0), point(0.5, 0, -0.5), point(0, 0, 0.5)));
-//	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0, 1, 0), point(0, 0, 0.5)));
-//	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 1, 0)));
-//	return (pyr);
-//}
+// 	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 0, 0.5)));
+// 	group_add_shape(&pyr, triangle(id + 1, point(0, 1, 0), point(0.5, 0, -0.5), point(0, 0, 0.5)));
+// 	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0, 1, 0), point(0, 0, 0.5)));
+// 	group_add_shape(&pyr, triangle(id + 1, point(-0.5, 0, -0.5), point(0.5, 0, -0.5), point(0, 1, 0)));
+// 	return (pyr);
+// }
 
 int	main(void)
 {

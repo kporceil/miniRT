@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 15:44:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 16:59:58 by kporceil         ###   ########lyon.fr   */
+/*   Created: 2025/11/27 16:47:08 by kporceil          #+#    #+#             */
+/*   Updated: 2025/11/27 17:08:22 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
+#include "libft.h"
 
-t_world	world_create(void)
+int	parse_camera(char *file, t_world *world)
 {
-	return ((t_world){false, false, camera(0, 0, 0, point(0, 0, 0)),
-		NULL, NULL, 0, 0, (t_color){0, 0, 0},
-		NULL});
+	(void)file;
+	if (world->had_cam == true)
+	{
+		ft_putendl_fd("A scene can only have one camera", 2);
+		return (-1);
+	}
+	world->had_cam = true;
+	return (0);
 }
