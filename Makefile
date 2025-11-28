@@ -38,7 +38,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix groups/, create_tests intersect_tests transformation_tests) \
 					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests) \
 					$(addprefix triangles/, create_tests normal_tests intersect_tests) \
-					$(addprefix scenes_parsing/, unique_identifier_tests objs_count_tests lights_count_tests))
+					$(addprefix scenes_parsing/, unique_identifier_tests objs_count_tests lights_count_tests ft_strtod_tests))
 endif
 ifeq (no, $(TEST))
 MAIN := tmp_main
@@ -68,7 +68,7 @@ BASENAME := $(MAIN) \
 			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(addprefix triangles/, create intersect) \
-			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cylinder parse_cone) \
+			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cylinder parse_cone ) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \

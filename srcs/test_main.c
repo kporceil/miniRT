@@ -107,6 +107,7 @@ int	main(void)
 	ret += test_objs_count();
 	ret += test_lights_count();
 	ret += test_unique_identifier();
+	ret += test_ft_strtod();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

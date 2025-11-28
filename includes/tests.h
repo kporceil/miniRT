@@ -170,4 +170,6 @@ int		test_lights_count(void);
 int		test_objs_count(void);
 int		test_unique_identifier(void);
 
+int		test_ft_strtod(void);
+
 #endif
