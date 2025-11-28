@@ -39,7 +39,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests) \
 					$(addprefix triangles/, create_tests normal_tests intersect_tests) \
 					$(addprefix vectors/, create_tests add_tests) \
-					$(addprefix obj_parser/, ignoring_tests vertices_tests triangle_tests group_tests parsed_to_group_tests smooth_triangle_tests) \
+					$(addprefix obj_parser/, ignoring_tests vertices_tests triangle_tests group_tests parsed_to_group_tests smooth_triangle_tests faces_normal_tests) \
 					$(addprefix smooth_triangles/, create_tests uv_tests normal_tests precomp_tests))
 endif
 ifeq (no, $(TEST))
