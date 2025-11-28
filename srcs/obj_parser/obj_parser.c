@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 18:45:41 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/26 13:46:56 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 20:57:04 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,25 @@ static void	init_obj_parsing(t_obj_parsing *p)
 	t_shape	default_group;
 
 	p->groups = vec_create(sizeof(t_shape), DEFAULT_GROUP_SIZE);
-	if (!p->groups)
+	if (p->groups)
 	{
-		p->status = MALLOC_ERROR;
-		return ;
-	}
-	default_group = group(generate_uid(), DEFAULT_GROUP_MEMBER_SIZE);
-	if (vec_add((void **)&p->groups, &default_group))
-	{
-		p->status = MALLOC_ERROR;
+		default_group = group(generate_uid(), DEFAULT_GROUP_MEMBER_SIZE);
+		if (default_group.child && !vec_add((void **)&p->groups, &default_group))
+		{
+			p->current_group = p->groups;
+			p->vertices = vec_create(sizeof(t_tuple), DEFAULT_VERTICES_SIZE);
+			if (p->vertices)
+			{
+				p->normals = vec_create(sizeof(t_tuple), DEFAULT_NORMALS_SIZE);
+				if (p->normals)
+					return ;
+				vec_free(p->vertices);
+			}
+			vec_free(p->groups->child);
+		}
 		vec_free(p->groups);
-		return ;
 	}
-	p->current_group = p->groups;
-	p->vertices = vec_create(sizeof(t_tuple), DEFAULT_VERTICES_SIZE);
-	if (!p->vertices)
-	{
-		p->status = MALLOC_ERROR;
-		vec_free(p->groups->child);
-		vec_free(p->groups);
-		return ;
-	}
+	p->status = MALLOC_ERROR;
 }
 
 static void	parse_obj_file(int fd, t_obj_parsing *p)

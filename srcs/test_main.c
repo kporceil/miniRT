@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/25 18:24:10 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 20:29:38 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,11 @@ int	main(void)
 	ret += test_obj_parser_triangle();
 	ret += test_obj_parser_group();
 	ret += test_obj_parser_parsed_to_group();
+	ret += test_smooth_triangle_create();
+	ret += test_smooth_triangle_uv();
+	ret += test_smooth_triangle_normal();
+	ret += test_smooth_triangle_precomp();
+	ret += test_obj_parser_smooth_triangle();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

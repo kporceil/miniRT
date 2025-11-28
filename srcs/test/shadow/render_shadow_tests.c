@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:05:23 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/02 17:37:38 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:59:30 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	shading_in_shadow_test(__unused void **state)
 	w.lights[0] = point_light(point(0, 0, -10), color(1, 1, 1));
 	shape_set_matrix(w.objs + 1, matrix_translation(0, 0, 10));
 	t_ray	r = ray(point(0, 0, 5), vector(0, 0, 1));
-	t_inter	inters = {w.objs + 1, 4};
+	t_inter	inters = {.s = w.objs + 1, .point = 4};
 	t_precomp	comps = precompute(inters, r, NULL);
 	t_color		c = shade_hit(w, comps, 0);
 	free(w.lights);
@@ -43,7 +43,7 @@ static void	over_point_test(__unused void **state)
 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_shape	s = sphere(0);
 	shape_set_matrix(&s, matrix_translation(0, 0, 1));
-	t_inter		i = {&s, 5};
+	t_inter		i = {.s = &s, .point = 5};
 	t_precomp	comp = precompute(i, r, NULL);
 	if (comp.over_point.z >= -0.0001/2)
 		fail_msg("%lf is not inferior to %lf", comp.over_point.z, -0.0001/2);

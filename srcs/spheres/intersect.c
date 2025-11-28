@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/09/11 14:56:40 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:47:42 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ray_sphere_intersect(t_shape *s, t_ray r, t_intersections *inter)
 	opti[1] = sqrt(discriminant);
 	opti[2] = 1.0 / (2.0 * a);
 	opti[0] = (-b - opti[1]) * opti[2];
-	inter->inters[inter->size++] = (t_inter){s, opti[0]};
+	inter->inters[inter->size++] = (t_inter){.s = s, .point = opti[0]};
 	if (discriminant > 0)
-		inter->inters[inter->size++] = (t_inter){s, (-b + opti[1]) * opti[2]};
+		inter->inters[inter->size++] = (t_inter){.s = s, .point = (-b + opti[1]) * opti[2]};
 }

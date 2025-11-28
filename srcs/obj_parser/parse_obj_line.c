@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 18:21:08 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/20 20:34:25 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 21:04:19 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	parse_obj_line(char *line, t_obj_parsing *p)
 	}
 	if (!args[0])
 		++p->ignored;
+	else if (!ft_strncmp(args[0], "vn", 3))
+		add_vertice_normal(args + 1, p);
 	else if (!ft_strncmp(args[0], "v", 2))
 		add_vertice(args + 1, p);
 	else if (!ft_strncmp(args[0], "f", 2))

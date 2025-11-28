@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 12:58:09 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/25 18:56:56 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 21:04:16 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define DEFAULT_GROUP_SIZE 1
 # define DEFAULT_GROUP_MEMBER_SIZE 100
 # define DEFAULT_VERTICES_SIZE 1000
+# define DEFAULT_NORMALS_SIZE 1000
 
 typedef enum e_parsing_status	t_parsing_status;
 typedef struct s_obj_parsing	t_obj_parsing;
@@ -38,6 +39,7 @@ struct s_obj_parsing
 	t_shape				*groups;
 	t_shape				*current_group;
 	t_tuple				*vertices;
+	t_tuple				*normals;
 	t_parsing_status	status;
 	size_t				ignored;
 };
@@ -47,6 +49,7 @@ void			parse_obj_line(char *line, t_obj_parsing *p);
 void			free_obj_parsing(t_obj_parsing *p);
 void			add_vertice(char **args, t_obj_parsing *p);
 void			add_face(char **args, t_obj_parsing *p);
+void			add_vertice_normal(char **args, t_obj_parsing *p);
 void			change_group(t_obj_parsing *p);
 t_shape			parsed_to_group(t_obj_parsing *p);
 

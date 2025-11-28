@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 12:57:48 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/08 13:16:46 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:44:59 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	ray_cube_intersect(t_shape *s, t_ray r, t_intersections *xs)
 	tmax = fmin(fmin(xt[1], yt[1]), zt[1]);
 	if (tmin > tmax)
 		return ;
-	xs->inters[xs->size++] = (t_inter){s, tmin};
-	xs->inters[xs->size++] = (t_inter){s, tmax};
+	xs->inters[xs->size++] = (t_inter){.s = s, .point = tmin};
+	xs->inters[xs->size++] = (t_inter){.s = s, .point = tmax};
 }

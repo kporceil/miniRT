@@ -175,4 +175,10 @@ int	test_obj_parser_triangle(void);
 int	test_obj_parser_group(void);
 int	test_obj_parser_parsed_to_group(void);
 
+int	test_smooth_triangle_create(void);
+int	test_smooth_triangle_uv(void);
+int	test_smooth_triangle_normal(void);
+int	test_smooth_triangle_precomp(void);
+int	test_obj_parser_smooth_triangle(void);
+
 #endif

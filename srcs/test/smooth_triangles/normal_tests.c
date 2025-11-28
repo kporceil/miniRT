@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:26:31 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/26 18:20:37 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 18:22:34 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,33 @@
 #include "shape.h"
 #include "tests.h"
 #include "ray.h"
-#include "tuples.h"
 #include "light.h"
+#include "tuples.h"
 
-static void	normal_triangle_1_test(__unused void **state)
+#ifndef EPSILON
+# define EPSILON 0.0001
+#endif
+
+static void	smooth_triangle_normal_1_test(__unused void **state)
 {
-	t_tuple	p1 = point(0, 1, 0);
-	t_tuple	p2 = point(-1, 0, 0);
-	t_tuple	p3 = point(1, 0, 0);
-	t_shape	tri = triangle(1, p1, p2, p3);
-	t_tuple	n1 = normal_at(tri, point(0, 0.5, 0), NULL);
-	t_tuple	n2 = normal_at(tri, point(-0.5, 0.75, 0), NULL);
-	t_tuple	n3 = normal_at(tri, point(0.5, 0.25, 0), NULL);
+	t_tuple	p[3];
+	t_tuple	n[3];
+	p[0] = point(0, 1, 0);
+	p[1] = point(-1, 0, 0);
+	p[2] = point(1, 0, 0);
+	n[0] = point(0, 1, 0);
+	n[1] = point(-1, 0, 0);
+	n[2] = point(1, 0, 0);
+	t_shape	tri = smooth_triangle(1, p, n);
 
-	assert_tuple_equal(n1, tri.tri_normal);
-	assert_tuple_equal(n2, tri.tri_normal);
-	assert_tuple_equal(n3, tri.tri_normal);
+	t_tuple	no = normal_at(tri, point(0, 0, 0), &(t_inter){.s = &tri, .point = 1, .u = 0.45, .v = 0.25});
+	assert_tuple_equal(no, vector(-0.5547, 0.83205, 0));
 }
 
-int	test_triangle_normal(void)
+int	test_smooth_triangle_normal(void)
 {
-	const struct CMUnitTest	triangle_normal_tests[] = {
-		cmocka_unit_test(normal_triangle_1_test),
+	const struct CMUnitTest	smooth_triangle_normal_tests[] = {
+		cmocka_unit_test(smooth_triangle_normal_1_test),
 	};
-	return (cmocka_run_group_tests(triangle_normal_tests, NULL, NULL));
+	return (cmocka_run_group_tests(smooth_triangle_normal_tests, NULL, NULL));
 }

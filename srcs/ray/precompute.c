@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 22:33:34 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/06 15:15:42 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/27 18:13:12 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_precomp	precompute(t_inter i, t_ray r, t_intersections *xs)
 	ret.obj = i.s;
 	ret.point = ray_position(r, i.point);
 	ret.eyev = tuple_negate(r.dir);
-	ret.normalv = normal_at(*i.s, ret.point);
+	ret.normalv = normal_at(*i.s, ret.point, &i);
 	ret.inside = false;
 	if (dot(ret.normalv, ret.eyev) < 0)
 	{
