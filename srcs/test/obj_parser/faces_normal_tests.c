@@ -25,17 +25,15 @@ static void	face_normal_obj_parser_1_test(__unused void **state)
 	assert_tuple_equal(parsed.groups->child[0].tri_p1, parsed.vertices[0]);
 	assert_tuple_equal(parsed.groups->child[0].tri_p2, parsed.vertices[1]);
 	assert_tuple_equal(parsed.groups->child[0].tri_p3, parsed.vertices[2]);
-	assert_tuple_equal(parsed.groups->child[0].tri_n1, parsed.vertices[2]);
-	assert_tuple_equal(parsed.groups->child[0].tri_n2, parsed.vertices[0]);
-	assert_tuple_equal(parsed.groups->child[0].tri_n3, parsed.vertices[1]);
-	assert_tuple_equal(parsed.groups->child[0].tri_n3, parsed.vertices[1]);
+	assert_tuple_equal(parsed.groups->child[0].tri_n1, parsed.normals[2]);
+	assert_tuple_equal(parsed.groups->child[0].tri_n2, parsed.normals[0]);
+	assert_tuple_equal(parsed.groups->child[0].tri_n3, parsed.normals[1]);
 	assert_tuple_equal(parsed.groups->child[1].tri_p1, parsed.vertices[0]);
 	assert_tuple_equal(parsed.groups->child[1].tri_p2, parsed.vertices[1]);
 	assert_tuple_equal(parsed.groups->child[1].tri_p3, parsed.vertices[2]);
-	assert_tuple_equal(parsed.groups->child[1].tri_n1, parsed.vertices[2]);
-	assert_tuple_equal(parsed.groups->child[1].tri_n2, parsed.vertices[0]);
-	assert_tuple_equal(parsed.groups->child[1].tri_n3, parsed.vertices[1]);
-	assert_tuple_equal(parsed.groups->child[1].tri_n3, parsed.vertices[1]);
+	assert_tuple_equal(parsed.groups->child[1].tri_n1, parsed.normals[2]);
+	assert_tuple_equal(parsed.groups->child[1].tri_n2, parsed.normals[0]);
+	assert_tuple_equal(parsed.groups->child[1].tri_n3, parsed.normals[1]);
 	assert_int_equal(parsed.ignored, 0);
 	free_obj_parsing(&parsed);
 }

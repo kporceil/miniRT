@@ -23,6 +23,14 @@
 
 typedef enum e_parsing_status	t_parsing_status;
 typedef struct s_obj_parsing	t_obj_parsing;
+typedef struct s_vertice_data	t_vertice_data;
+
+struct s_vertice_data
+{
+	unsigned long	vertice;
+	unsigned long	texture;
+	unsigned long	normal;
+};
 
 enum e_parsing_status
 {
@@ -32,6 +40,7 @@ enum e_parsing_status
 	FILE_NEGATIVE_VERTICE,
 	FILE_NONEXISTANT_VERTICE,
 	FILE_INVALID_VERTICE,
+	FILE_UNCONSISTANT_VN,
 };
 
 struct s_obj_parsing

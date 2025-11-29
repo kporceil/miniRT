@@ -25,5 +25,6 @@ void	free_obj_parsing(t_obj_parsing *p)
 		++i;
 	}
 	vec_free(p->vertices);
+	vec_free(p->normals);
 	vec_free(p->groups);
 }

@@ -38,7 +38,7 @@ static void	uv_1_test(__unused void **state)
 	n[1] = point(-1, 0, 0);
 	n[2] = point(1, 0, 0);
 	t_shape	tri = smooth_triangle(1, p, n);
-	t_intersections xs;
+	t_intersections xs = (t_intersections){0};
 
 	xs.inters = malloc(sizeof(t_inter) * 1);
 	ray_triangle_intersect(&tri, r, &xs);
