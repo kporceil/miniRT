@@ -72,7 +72,7 @@ BASENAME := $(MAIN) \
 			$(addprefix triangles/, create intersect) \
 			$(addprefix vectors/, create get_header free add) \
 			$(addprefix uid/, generate_uid) \
-			$(addprefix obj_parser/, obj_parser parse_obj_line free add_vertice add_face change_group parsed_to_group add_vertice_normal) \
+			$(addprefix obj_parser/, obj_parser parse_obj_line free add_vertice add_face change_group parsed_to_group add_vertice_normal add_smooth_polygon add_polygon) \
 			$(addprefix smooth_triangles/, create) \
 			$(TEST_BASENAME)
 

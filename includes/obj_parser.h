@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 12:58:09 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/28 21:04:16 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 18:42:34 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,12 @@ void			free_obj_parsing(t_obj_parsing *p);
 void			add_vertice(char **args, t_obj_parsing *p);
 void			add_face(char **args, t_obj_parsing *p);
 void			add_vertice_normal(char **args, t_obj_parsing *p);
+void			add_smooth_polygon(char **args, t_vertice_data v1,
+					t_obj_parsing *p, size_t len);
+void			add_polygon(char **args, unsigned long v1, t_obj_parsing *p,
+					size_t len);
 void			change_group(t_obj_parsing *p);
 t_shape			parsed_to_group(t_obj_parsing *p);
+t_vertice_data	parse_vertice_data(char *s, t_obj_parsing *p);
 
 #endif
