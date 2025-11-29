@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:46:39 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 16:12:32 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 19:29:47 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@
 #include "tests.h"
 #include "world.h"
 
+void	free_light_list(t_world *world);
+
 static void	one_light_test(__unused void **state)
 {
 	t_world	world = world_create();
 
 	assert_int_equal(parse_file("test_assets/one_light.rt", &world), 0);
 	assert_int_equal(world.lights_count, 1);
+	assert_tuple_equal(world.tmp_light->light.pos, point(0, 0, 0));
+	assert_color_equal(world.tmp_light->light.intensity, color(1, 1, 1));
+	free_light_list(&world);
 }
 
 static void	multi_light_test(__unused void **state)
@@ -34,6 +39,7 @@ static void	multi_light_test(__unused void **state)
 	
 	assert_int_equal(parse_file("test_assets/multi_light.rt", &world), 0);
 	assert_int_equal(world.lights_count, 5);
+	free_light_list(&world);
 }
 
 static void	no_light_test(__unused void **state)

@@ -6,12 +6,13 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:46:27 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 18:05:29 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 19:17:29 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 #include "libft.h"
+#include "scenes_parsing.h"
 
 static char	*skip_space(char *str)
 {
@@ -20,25 +21,19 @@ static char	*skip_space(char *str)
 	return (str);
 }
 
-static int	parse_ambient_value(char *file, t_world *world, double factor, double *rgb)
+static int	parse_ambient_value(char *file, t_world *world)
 {
 	char	*sptr;
+	double	factor;
+	t_color	rgb;
 
 	factor = ft_strtod(file, &sptr);
-	if (sptr == file || !ft_isspace(*sptr))
-		return (-1);
-	file = sptr;
-	rgb[0] = ft_strtoul(file, &sptr, 10) / 255.0;
-	if (sptr == file || *sptr != ',')
-		return (-1);
-	file = sptr + 1;
-	rgb[1] = ft_strtoul(file, &sptr, 10) / 255.0;
-	if (sptr == file || *sptr != ',')
-		return (-1);
-	file = sptr + 1;
-	rgb[2] = ft_strtoul(file, &sptr, 10) / 255.0;
 	if (sptr == file)
 		return (-1);
+	file = sptr;
+	if (parse_color(file, &sptr, &rgb) == -1)
+		return (-1);
+	file = sptr;
 	file = skip_space(file);
 	if (*file != '\0')
 	{
@@ -46,20 +41,18 @@ static int	parse_ambient_value(char *file, t_world *world, double factor, double
 		return (-1);
 	}
 	world->had_ambient = true;
-	world->ambient = color_scalar_mult(color(rgb[0], rgb[1], rgb[2]), factor);
+	world->ambient = color_scalar_mult(rgb, factor);
+	return (0);
 }
 
 int	parse_ambient(char *file, t_world *world)
 {
-	double	factor;
-	double	rgb[3];
-
 	if (world->had_ambient == true)
 	{
 		ft_putendl_fd("A scene can only have one ambient light", 2);
 		return (-1);
 	}
-	if (parse_ambient_value(file, world, factor, rgb) == -1)
+	if (parse_ambient_value(file, world) == -1)
 		return (-1);
 	return (0);
 }

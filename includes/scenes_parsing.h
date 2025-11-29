@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:55:38 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 16:50:34 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 19:11:23 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ int	parse_sphere(char *file, t_world *world);
 int	parse_light(char *file, t_world *world);
 int	parse_ambient(char *file, t_world *world);
 int	parse_camera(char *file, t_world *world);
+int	parse_point(char *file, char **endptr, t_tuple *point);
+int	parse_color(char *file, char **endptr, t_color *color);
+int	parse_vector(char *file, char **endptr, t_tuple *point);
 
 #endif

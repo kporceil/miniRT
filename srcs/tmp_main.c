@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 16:38:56 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 19:37:18 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int	main(void)
 	world.objs[5].material.diffuse = 0.4;
 	shape_set_matrix(world.objs + 5, matrix_mult(matrix_translation(1, -4.2, -1.5), matrix_scaling(0.75, 0.75, 0.75)));
 	world.lights[0] = point_light(point(-1.6, -1.2, 1.6), color(1, 1, 1));
-	t_camera	cam = camera(100, 100, M_PI / 2, point(-4, -2.7, 0.8));
+	t_camera	cam = camera(1920, 1080, M_PI / 2, point(-4, -2.7, 0.8));
 	cam.look_at = point(0, -3.6, -0.2);
 	camera_set_transform(&cam, view_transform(cam.pos, cam.look_at, cam.up));
 	t_canva		image = render(cam, world, 1);
