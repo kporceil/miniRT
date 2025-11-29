@@ -68,7 +68,7 @@ BASENAME := $(MAIN) \
 			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(addprefix triangles/, create intersect) \
-			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cylinder parse_cone parse_point parse_vector parse_color) \
+			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cylinder parse_cone parse_point parse_vector parse_color new_light_node free_light_list) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
