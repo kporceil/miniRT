@@ -70,13 +70,8 @@ double	ft_strtod(const char *nptr, char **endptr)
 	integer_part = get_number(nptr, endptr);
 	if (nptr == *endptr)
 		return (0);
-	if (**endptr != '.')
+	if (**endptr != '.' || !ft_isdigit(*(*endptr + 1)))
 		return (integer_part);
-	if (!ft_isdigit(*(*endptr + 1)))
-	{
-		*endptr = (char *)nptr;
-		return (integer_part);
-	}
 	s = *endptr + 1;
 	dec_size = calc_dec_size(s);
 	dec_part = get_number(s, endptr);

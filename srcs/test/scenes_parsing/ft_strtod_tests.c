@@ -96,7 +96,7 @@ static void	invalid_negative_nbr_test(__unused void **state)
 	char	*endptr;
 
 	assert_double_equal(-12, ft_strtod(nptr, &endptr), 0.0001);
-	assert_ptr_equal(endptr, nptr);
+	assert_ptr_equal(endptr, nptr + 3);
 }
 
 int	test_ft_strtod(void)
