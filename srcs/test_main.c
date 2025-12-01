@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/12/01 18:15:06 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/01 19:11:12 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	main(void)
 	ret += test_bounding_box_create();
 	ret += test_bounding_box_add_point();
 	ret += test_bounding_box_bounds_of();
+	ret += test_bounding_box_add();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }
