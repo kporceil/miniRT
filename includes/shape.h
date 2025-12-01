@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:49:15 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/23 15:34:35 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/01 19:00:32 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef enum e_tshape
 	CONE,
 	GROUP,
 	TRIANGLE,
+	SMOOTH_TRIANGLE,
 }				t_tshape;
 
 typedef struct s_shape

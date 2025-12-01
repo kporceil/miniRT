@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   bounding_box.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/01 18:30:13 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/12/01 17:36:27 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/12/01 18:16:42 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "float_limits.h"
-#include <math.h>
+#ifndef BOUNDING_BOX_H
+# define BOUNDING_BOX_H
 
-t_shape	cylinder(size_t id)
+# include <stdbool.h>
+# include "tuples.h"
+# include "shape.h"
+
+typedef struct s_bounding_box	t_bounding_box;
+
+struct s_bounding_box
 {
-	return ((t_shape){.type = CYLINDER,
-		.local_transformation = identity_matrix(3),
-		.final_transformation = identity_matrix(3),
-		.final_inverted = identity_matrix(4),
-		.material = material(),
-		.parent = NULL,
-		.cyl_closed = 0,
-		.cyl_min = -INFINITY,
-		.cyl_max = INFINITY,
-		.id = id});
-}
+	t_tuple	min;
+	t_tuple	max;
+};
+
+t_bounding_box	bounding_box(_Bool points, t_tuple min, t_tuple max);
+void			bb_add_point(t_bounding_box *box, t_tuple point);
+t_bounding_box	bb_bounds_of(t_shape s);
+
+#endif

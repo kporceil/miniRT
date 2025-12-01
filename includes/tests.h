@@ -166,4 +166,8 @@ int	test_triangle_create(void);
 int	test_triangle_normal(void);
 int	test_triangle_intersect(void);
 
+int	test_bounding_box_create(void);
+int	test_bounding_box_add_point(void);
+int	test_bounding_box_bounds_of(void);
+
 #endif

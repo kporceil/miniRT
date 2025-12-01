@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bounds_of.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/01 18:15:29 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/12/01 19:00:43 by lcesbron         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "bounding_box.h"
+
+static t_bounding_box	bounds_of_cone(t_shape *cone)
+{
+	double const	a = fabs(cone->cyl_min);
+	double const	b = fabs(cone->cyl_max);
+	double			limit;
+
+	if (a > b)
+		limit = a;
+	else
+		limit = b;
+	return ((t_bounding_box){.min = point(-limit, cone->cyl_min, -limit),
+							.max = point(limit, cone->cyl_max, limit)});
+}
+
+static t_bounding_box	bounds_of_triangle(t_shape *triangle)
+{
+	t_bounding_box	ret;
+
+	ret = bounding_box(0, (t_tuple){0}, (t_tuple){0});
+	bb_add_point(&ret, triangle->tri_p1);
+	bb_add_point(&ret, triangle->tri_p2);
+	bb_add_point(&ret, triangle->tri_p3);
+	return (ret);
+}
+
+t_bounding_box	bb_bounds_of(t_shape s)
+{
+	if (s.type == SPHERE || s.type == CUBE)
+	{
+		return ((t_bounding_box){.min = point(-1, -1, -1),
+			.max = point(1, 1, 1)});
+	}
+	if (s.type == PLANE)
+	{
+		return ((t_bounding_box){.min = point(-INFINITY, 0, -INFINITY),
+			.max = point(INFINITY, 0, INFINITY)});
+	}
+	if (s.type == CYLINDER)
+	{
+		return ((t_bounding_box){.min = point(-1, s.cyl_min, -1),
+			.max = point(1, s.cyl_max, 1)});
+	}
+	if (s.type == CONE)
+	{
+		return (bounds_of_cone(&s));
+	}
+	if (s.type == TRIANGLE || s.type == SMOOTH_TRIANGLE)
+	{
+		return (bounds_of_triangle(&s));
+	}
+	return (bounding_box(false, (t_tuple){0}, (t_tuple){0}));
+}
