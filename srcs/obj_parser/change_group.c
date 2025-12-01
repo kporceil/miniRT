@@ -25,5 +25,6 @@ void	change_group(t_obj_parsing *p)
 	if (vec_add((void **)&p->groups, &new_group))
 		p->status = MALLOC_ERROR;
 	else
-		p->current_group = p->groups + (vec_get_header(p->groups)->nb_elems - 1);
+		p->current_group = p->groups
+			+ (vec_get_header(p->groups)->nb_elems - 1);
 }

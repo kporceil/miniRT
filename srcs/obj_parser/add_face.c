@@ -42,7 +42,6 @@ void	add_face(char **args, t_obj_parsing *p)
 				add_smooth_polygon(args, v1, p, len);
 			else
 				add_polygon(args, v1.vertice, p, len);
-
 		}
 		else
 			++p->ignored;

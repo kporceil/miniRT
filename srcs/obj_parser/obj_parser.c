@@ -28,7 +28,8 @@ static void	init_obj_parsing(t_obj_parsing *p)
 	if (p->groups)
 	{
 		default_group = group(generate_uid(), DEFAULT_GROUP_MEMBER_SIZE);
-		if (default_group.child && !vec_add((void **)&p->groups, &default_group))
+		if (default_group.child && !vec_add((void **)&p->groups,
+				&default_group))
 		{
 			p->current_group = p->groups;
 			p->vertices = vec_create(sizeof(t_tuple), DEFAULT_VERTICES_SIZE);
@@ -72,7 +73,7 @@ t_obj_parsing	obj_parser(char *path)
 	ret = (t_obj_parsing){0};
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (t_obj_parsing){.status = OPEN_ERROR};
+		return ((t_obj_parsing){.status = OPEN_ERROR});
 	init_obj_parsing(&ret);
 	if (!ret.status)
 	{

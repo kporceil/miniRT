@@ -16,5 +16,6 @@
 void	ray_plane_intersect(t_shape *s, t_ray r, t_intersections *inter)
 {
 	if (fabs(r.dir.y) >= 0.0001)
-		inter->inters[inter->size++] = (t_inter){.s = s, .point = -r.origin.y / r.dir.y};
+		inter->inters[inter->size++] = (t_inter){.s = s,
+			.point = -r.origin.y / r.dir.y};
 }

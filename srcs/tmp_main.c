@@ -56,7 +56,7 @@ int	main(void)
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	printf("begin parsing\n");
-	p = obj_parser("./assets/jsp.obj");
+	p = obj_parser("./assets/teapot.obj");
 	world.objs[0] = parsed_to_group(&p);
 	free_obj_parsing(&p);
 	printf("finish parsing\n");

@@ -30,5 +30,6 @@ void	ray_sphere_intersect(t_shape *s, t_ray r, t_intersections *inter)
 	opti[0] = (-b - opti[1]) * opti[2];
 	inter->inters[inter->size++] = (t_inter){.s = s, .point = opti[0]};
 	if (discriminant > 0)
-		inter->inters[inter->size++] = (t_inter){.s = s, .point = (-b + opti[1]) * opti[2]};
+		inter->inters[inter->size++] = (t_inter){.s = s,
+			.point = (-b + opti[1]) * opti[2]};
 }

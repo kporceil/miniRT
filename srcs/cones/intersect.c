@@ -59,7 +59,8 @@ void	ray_cone_intersect(t_shape *co, t_ray r, t_intersections *inter)
 	{
 		if (fabs(eq.b) == 0)
 			return (intersect_cone_caps(co, r, inter));
-		inter->inters[inter->size++] = (t_inter){.s = co, .point = -eq.c / (2 * eq.b)};
+		inter->inters[inter->size++] = (t_inter){.s = co,
+			.point = -eq.c / (2 * eq.b)};
 		return (intersect_cone_caps(co, r, inter));
 	}
 	eq.disc = eq.b * eq.b - 4 * eq.a * eq.c;

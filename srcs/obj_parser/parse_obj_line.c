@@ -32,7 +32,7 @@ static void	free_split(char **split)
 
 void	parse_obj_line(char *line, t_obj_parsing *p)
 {
-	char ** const	args = ft_splits(line, " \f\t\n\r\v");
+	char **const	args = ft_splits(line, " \f\t\n\r\v");
 
 	if (!args)
 	{

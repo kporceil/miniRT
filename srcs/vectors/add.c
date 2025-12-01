@@ -18,7 +18,7 @@ int	vec_add(void **vector, void *el)
 {
 	t_vector_head	*head;
 	void			*copy;
-	
+
 	head = vec_get_header(*vector);
 	++head->nb_elems;
 	if (head->nb_elems > head->max_elems)
@@ -38,6 +38,7 @@ int	vec_add(void **vector, void *el)
 		free(head);
 		head = copy;
 	}
-	ft_memcpy(*vector + (head->nb_elems - 1) * head->el_size, el, head->el_size);
+	ft_memcpy(*vector + (head->nb_elems - 1) * head->el_size, el,
+		head->el_size);
 	return (0);
 }

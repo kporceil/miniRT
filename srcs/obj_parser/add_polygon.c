@@ -36,11 +36,10 @@ void	add_polygon(char **args, unsigned long v1, t_obj_parsing *p, size_t len)
 		if (p->status)
 			return ;
 		if (group_add_shape(p->current_group, triangle(generate_uid(),
-												p->vertices[v1 - 1],
-												p->vertices[v2 - 1],
-												p->vertices[v3 - 1])))
+					p->vertices[v1 - 1],
+					p->vertices[v2 - 1],
+					p->vertices[v3 - 1])))
 			p->status = MALLOC_ERROR;
 		++i;
 	}
 }
-

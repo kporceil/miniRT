@@ -77,8 +77,8 @@ static t_tuple	local_object_normal(t_shape s, t_tuple object_point, t_inter *i)
 		return (s.tri_normal);
 	if (s.type == SMOOTH_TRIANGLE)
 		return (tuple_add(tuple_add(tuple_scalar_mult(s.tri_n2, i->u),
-		tuple_scalar_mult(s.tri_n3, i->v)),
-		tuple_scalar_mult(s.tri_n1, (1 - i->u - i-> v))));
+					tuple_scalar_mult(s.tri_n3, i->v)),
+				tuple_scalar_mult(s.tri_n1, (1 - i->u - i-> v))));
 	return (tuple_substract(object_point, point(0, 0, 0)));
 }
 

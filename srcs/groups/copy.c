@@ -17,7 +17,7 @@
 static t_shape	shape_copy(t_shape *src)
 {
 	t_shape	ret;
-	
+
 	ft_memcpy(&ret, src, sizeof(t_shape));
 	ret.id = generate_uid();
 	return (ret);
