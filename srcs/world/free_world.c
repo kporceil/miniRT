@@ -12,6 +12,7 @@
 
 #include "shape.h"
 #include "world.h"
+#include "scenes_parsing.h"
 #include <stdlib.h>
 
 static void	free_group(t_shape *g)
@@ -39,6 +40,8 @@ void	free_world(t_world *w)
 			free_group(w->objs + i);
 		++i;
 	}
+	free_light_list(w);
+	free_shape_list(w);
 	free(w->objs);
 	free(w->lights);
 	free(w->buf_inter);

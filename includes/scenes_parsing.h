@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:55:38 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/29 19:11:51 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/02 15:42:31 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int		parse_camera(char *file, t_world *world);
 int		parse_point(char *file, char **endptr, t_tuple *point);
 int		parse_color(char *file, char **endptr, t_color *color);
 int		parse_vector(char *file, char **endptr, t_tuple *point);
+int		new_shape_node(t_world *world, t_shape *shape);
 int		new_light_node(t_world *world, t_plight *light);
 void	free_light_list(t_world *world);
+void	free_shape_list(t_world *world);
+size_t	get_shape_id(t_world *world);
+int		parse_normalized_vector(char *file, char **endptr, t_tuple *point);
 
 #endif

@@ -47,6 +47,7 @@ BASENAME := ft_isalpha \
 		   ft_putstr_fd \
 		   ft_putendl_fd \
 		   ft_putnbr_fd \
+		   ft_putdouble_fd \
 		   ft_strmapi \
 		   ft_striteri \
 		   ft_itoa \

@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:47:08 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/28 19:11:35 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 19:14:07 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include <math.h>
 
 #ifndef HEIGHT
-# define HEIGHT 1080
+# define HEIGHT 1920
 #endif
 
 #ifndef WIDTH
-# define WIDTH 1920
+# define WIDTH 1080
 #endif
 
 static char	*skip_space(char *str)
@@ -33,30 +33,29 @@ static char	*skip_space(char *str)
 static int	parse_camera_value(char *file, t_world *world)
 {
 	t_tuple	pos;
-	t_tuple	look_at;
+	t_tuple	forward;
 	double	fov;
 	char	*sptr;
 
 	if (parse_point(file, &sptr, &pos) == -1)
 		return (-1);
 	file = sptr;
-	if (parse_vector(file, &sptr, &look_at) == -1)
+	if (parse_normalized_vector(file, &sptr, &forward) == -1)
 		return (-1);
 	file = sptr;
-	fov = ft_strtoul(file, &sptr, 10) * (M_PI / 180);
+	fov = ft_strtod(file, &sptr) * (M_PI / 180);
 	if (file == sptr)
 		return (-1);
-	file = sptr;
-	file = skip_space(file);
+	file = skip_space(sptr);
 	if (*file != '\0')
 	{
 		ft_putendl_fd("Extra character after camera declaration", 2);
 		return (-1);
 	}
 	world->cam = camera(HEIGHT, WIDTH, fov, pos);
-	world->cam.look_at = tuple_add(look_at, pos);
-	camera_set_transform(&world->cam, view_transform(world->cam.pos,
-							world->cam.look_at, world->cam.up));
+	world->cam.look_at = tuple_add(forward, pos);
+	camera_set_transform(&world->cam, view_transform_from_to(world->cam.pos,
+			world->cam.look_at, world->cam.up));
 	return (0);
 }
 

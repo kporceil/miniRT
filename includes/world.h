@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:04:43 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/28 19:31:44 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 19:25:50 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ typedef struct s_lightlist
 	struct s_lightlist	*next;
 }				t_lightlist;
 
-typedef struct s_objlist_p
+typedef struct s_shapelist
 {
 	t_shape				shape;
-	struct s_objlist_p	*next;
-}				t_objlist_p;
+	struct s_shapelist	*next;
+}				t_shapelist;
 
 typedef struct s_world
 {
@@ -42,7 +42,7 @@ typedef struct s_world
 	t_color		ambient;
 	t_inter		*buf_inter;
 	t_lightlist	*tmp_light;
-	t_objlist_p	*tmp_obj;
+	t_shapelist	*tmp_obj;
 }				t_world;
 
 t_world			world_create(void);

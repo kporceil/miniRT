@@ -30,24 +30,24 @@ static char	*go_to_number_and_set_sign(const char *nptr, int8_t *sign)
 	char	c;
 
 	c = *nptr++;
-	*sign = 1;
+	if (sign)
+		*sign = 1;
 	while (ft_isspace(c))
 		c = *nptr++;
-	if (c == '-')
+	if (c == '-' && sign)
 		*sign = -1;
 	else
 		nptr -= 1;
 	return ((char *)nptr);
 }
 
-static double	get_number(const char *nptr, char **endptr)
+static double	get_number(const char *nptr, char **endptr, int8_t *sign)
 {
 	char	*s;
-	int8_t		sign;
 	double		nbr;
 	char		c;
 
-	s = go_to_number_and_set_sign(nptr, &sign);
+	s = go_to_number_and_set_sign(nptr, sign);
 	nbr = 0;
 	c = *s++;
 	while (ft_isdigit(c))
@@ -57,7 +57,7 @@ static double	get_number(const char *nptr, char **endptr)
 		c = *s++;
 	}
 	*endptr = s - 1;
-	return (nbr * sign);
+	return (nbr);
 }
 
 double	ft_strtod(const char *nptr, char **endptr)
@@ -65,17 +65,16 @@ double	ft_strtod(const char *nptr, char **endptr)
 	size_t	dec_size;
 	double	integer_part;
 	double	dec_part;
+	int8_t	sign;
 	char	*s;
 
-	integer_part = get_number(nptr, endptr);
+	integer_part = get_number(nptr, endptr, &sign);
 	if (nptr == *endptr)
 		return (0);
 	if (**endptr != '.' || !ft_isdigit(*(*endptr + 1)))
-		return (integer_part);
+		return (integer_part * sign);
 	s = *endptr + 1;
 	dec_size = calc_dec_size(s);
-	dec_part = get_number(s, endptr);
-	if (integer_part < 0)
-		return (integer_part - dec_part / dec_size);
-	return (integer_part + dec_part / dec_size);
+	dec_part = get_number(s, endptr, NULL);
+	return ((integer_part + dec_part / dec_size) * sign);
 }

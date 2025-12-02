@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:46:39 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/28 19:29:47 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 19:37:22 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	one_light_test(__unused void **state)
 	assert_tuple_equal(world.tmp_light->light.pos, point(0, 0, 0));
 	assert_color_equal(world.tmp_light->light.intensity, color(1, 1, 1));
 	free_light_list(&world);
+	free_shape_list(&world);
 }
 
 static void	multi_light_test(__unused void **state)
@@ -40,6 +41,7 @@ static void	multi_light_test(__unused void **state)
 	assert_int_equal(parse_file("test_assets/multi_light.rt", &world), 0);
 	assert_int_equal(world.lights_count, 5);
 	free_light_list(&world);
+	free_shape_list(&world);
 }
 
 static void	no_light_test(__unused void **state)
@@ -48,6 +50,8 @@ static void	no_light_test(__unused void **state)
 
 	assert_int_equal(parse_file("test_assets/no_light.rt", &world), 0);
 	assert_int_equal(world.lights_count, 0);
+	free_light_list(&world);
+	free_shape_list(&world);
 }
 
 int	test_lights_count(void)
