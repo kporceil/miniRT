@@ -100,19 +100,24 @@ int	main(void)
 {
 	t_world	world = world_create();
 	(void)hexagon;
+	(void)pyramid;
 	struct timeval	tv_a = (struct timeval){0};
 	struct timeval	tv_b = (struct timeval){0};
 
 	world.lights_count = 1;
-	world.objs_count = 2;
+	world.objs_count = 3;
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
-	world.objs[0] = hexagon(300);
-	world.objs[1] = pyramid(69);
+	world.objs[0] = sphere(300);
+	world.objs[1] = sphere(301);
+	world.objs[2] = sphere(302);
+	shape_set_matrix(world.objs, matrix_translation(-1, -1, -1));
+	shape_set_matrix(world.objs + 1, matrix_translation(1, -1, -1));
+	shape_set_matrix(world.objs + 2, matrix_translation(-1, -1, 1));
 	//group_add_shape(world.objs, sphere(2));
 	//double pi = M_PI;
 	//group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));
-	group_set_matrix(world.objs, matrix_scaling(2, 2, 2));
+	//group_set_matrix(world.objs, matrix_scaling(2, 2, 2));
 	//group_set_material(world.objs, (t_material){(t_pattern){RING, color(1, 0, 0), color(0, 1, 0), identity_matrix(4), identity_matrix(4)}, (t_color){1, 0.1, 0.1}, 0.1, 0.9, 0.9, 200, 0.8, 0, 1});
 	//world.objs[1]->	
 	//shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1, 1.5, 0), matrix_scaling(0.25, 0.25, 0.25)));
@@ -125,7 +130,7 @@ int	main(void)
 	//shape_set_matrix(world.objs->child + 1, matrix_mult(matrix_translation(1, 0, 0), matrix_z_rotation(-M_PI/2)));
 	//group_set_matrix(world.objs, matrix_scaling(1.5, 1.5, 1.5));
 	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
-	t_camera	cam = camera(WIDTH, HEIGHT, M_PI / 2, point(4, 0, 0));
+	t_camera	cam = camera(WIDTH, HEIGHT, 70 * (M_PI / 180), point(4, 0, 0));
 	camera_set_transform(&cam, view_transform(cam.pos, cam.look_at, cam.up));
 	t_canva		image = render(cam, world, 1);
 	if (!image.canva)
