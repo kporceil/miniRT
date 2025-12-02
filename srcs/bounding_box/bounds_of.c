@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 18:15:29 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/01 19:04:09 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/02 11:24:40 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ static t_bounding_box	bounds_of_triangle(t_shape *triangle)
 	return (ret);
 }
 
+static t_bounding_box	bounds_of_group(t_shape *g)
+{
+	t_bounding_box	ret;
+	t_bounding_box	buf;
+	size_t			i;
+
+	ret = bounding_box(false, (t_tuple){0}, (t_tuple){0});
+	i = 0;
+	while (i < g->nb_members)
+	{
+		buf = bb_parent_space_bounds_of(g->child + i);
+		bb_add(&ret, buf);
+		++i;
+	}
+	return (ret);
+}
+
 t_bounding_box	bb_bounds_of(t_shape s)
 {
 	if (s.type == SPHERE || s.type == CUBE)
@@ -55,12 +72,10 @@ t_bounding_box	bb_bounds_of(t_shape s)
 			.max = point(1, s.cyl_max, 1)});
 	}
 	if (s.type == CONE)
-	{
 		return (bounds_of_cone(&s));
-	}
 	if (s.type == TRIANGLE || s.type == SMOOTH_TRIANGLE)
-	{
 		return (bounds_of_triangle(&s));
-	}
+	if (s.type == GROUP)
+		return (bounds_of_group(&s));
 	return (bounding_box(false, (t_tuple){0}, (t_tuple){0}));
 }

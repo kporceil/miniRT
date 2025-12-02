@@ -170,5 +170,10 @@ int	test_bounding_box_create(void);
 int	test_bounding_box_add_point(void);
 int	test_bounding_box_bounds_of(void);
 int	test_bounding_box_add(void);
+int	test_bounding_box_contains_point(void);
+int	test_bounding_box_contains_box(void);
+int	test_bounding_box_transform(void);
+int	test_bounding_box_parent_space_bounds_of(void);
+int	test_bounding_box_group_bounds_of(void);
 
 #endif
