@@ -175,5 +175,6 @@ int	test_bounding_box_contains_box(void);
 int	test_bounding_box_transform(void);
 int	test_bounding_box_parent_space_bounds_of(void);
 int	test_bounding_box_group_bounds_of(void);
+int	test_bounding_box_intersect(void);
 
 #endif
