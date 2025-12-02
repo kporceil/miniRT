@@ -50,7 +50,7 @@ BASENAME := $(MAIN) \
 			$(addprefix color/, color add substract scalar mult) \
 			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm ppm_to_canva ppm_header ppm_io) \
 			$(addprefix gnl/, get_next_line get_next_line_utils) \
-			$(addprefix matrix/, create compare mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix) \
+			$(addprefix matrix/, create compare mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix orientation) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
 			$(addprefix spheres/, create intersect) \
 			$(addprefix light/, normal reflect point_light material phong shade_hit color_at) \
@@ -210,4 +210,5 @@ re: fclean all
 
 .PHONY: norm
 norm:
+	@$(MAKE) $@ -C $(dir $(LIBFT))
 	@norminette $(FILTERED_SRCS)

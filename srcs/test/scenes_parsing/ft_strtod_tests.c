@@ -99,6 +99,15 @@ static void	invalid_negative_nbr_test(__unused void **state)
 	assert_ptr_equal(endptr, nptr + 3);
 }
 
+static void	only_whitespace_test(__unused void **state)
+{
+	char	*nptr = "               ";
+	char	*endptr;
+
+	assert_double_equal(0, ft_strtod(nptr, &endptr), 0.0001);
+	assert_ptr_equal(endptr, nptr);
+}
+
 int	test_ft_strtod(void)
 {
 	const struct CMUnitTest	ft_strtod_tests[] = {
@@ -111,6 +120,7 @@ int	test_ft_strtod(void)
 		cmocka_unit_test(whitespace_before_nbr_test),
 		cmocka_unit_test(negative_nbr_test),
 		cmocka_unit_test(invalid_negative_nbr_test),
+		cmocka_unit_test(only_whitespace_test),
 	};
 	return (cmocka_run_group_tests(ft_strtod_tests, NULL, NULL));
 }

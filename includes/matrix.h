@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 16:00:30 by kporceil          #+#    #+#             */
-/*   Updated: 2025/08/31 12:45:09 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/02 20:54:33 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_matrix	matrix_shearing(double x[2], double y[2], double z[2]);
 t_matrix	view_transform_forward(t_tuple from, t_tuple forward, t_tuple up);
 t_matrix	view_transform_from_to(t_tuple from, t_tuple to, t_tuple up);
 t_tuple		matrix_tuple_mult_p(t_matrix *m1, t_tuple *t1);
+t_matrix	object_orientation(t_tuple position, t_tuple forward, t_tuple up);
 
 #endif

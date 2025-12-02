@@ -44,19 +44,26 @@ static char	*go_to_number_and_set_sign(const char *nptr, int8_t *sign)
 static double	get_number(const char *nptr, char **endptr, int8_t *sign)
 {
 	char	*s;
-	double		nbr;
-	char		c;
+	double	nbr;
+	char	c;
+	int8_t	any;
 
 	s = go_to_number_and_set_sign(nptr, sign);
 	nbr = 0;
 	c = *s++;
+	any = 0;
 	while (ft_isdigit(c))
 	{
+		if (any == 0)
+			any = 1;
 		nbr *= 10;
 		nbr += c - '0';
 		c = *s++;
 	}
-	*endptr = s - 1;
+	if (any)
+		*endptr = s - 1;
+	else
+		*endptr = (char *)nptr;
 	return (nbr);
 }
 

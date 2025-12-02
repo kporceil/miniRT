@@ -152,6 +152,9 @@ fclean: clean
 
 re: fclean all
 
+norm:
+	@norminette $(SRCS)
+
 -include $(DEPS)
 
 .PHONY: all clean fclean re

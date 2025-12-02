@@ -6,13 +6,20 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:45:40 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/29 19:12:09 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/02 21:04:32 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 #include "scenes_parsing.h"
 #include "libft.h"
+
+static char	*skip_space(char *str)
+{
+	while (ft_isspace(*str))
+		++str;
+	return (str);
+}
 
 static int	parse_light_value(char *file, t_world *world)
 {
@@ -30,6 +37,9 @@ static int	parse_light_value(char *file, t_world *world)
 		return (-1);
 	file = sptr;
 	if (parse_color(file, &sptr, &rgb) == -1)
+		return (-1);
+	file = skip_space(sptr);
+	if (*file != '\0')
 		return (-1);
 	light = point_light(pos, color_scalar_mult(rgb, factor));
 	if (new_light_node(world, &light) == -1)
