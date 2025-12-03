@@ -52,6 +52,7 @@ static int	setup(void **state)
 	world->objs[0].material.diffuse = 0.7;
 	world->objs[0].material.specular = 0.2;
 	world->objs[0].material.color = color(0.8, 1, 0.6);
+	world->ambient = color(0.1, 0.1, 0.1);
 	shape_set_matrix(world->objs + 1, matrix_scaling(0.5, 0.5, 0.5));
 	world->lights[0].intensity = color(1, 1, 1);
 	world->lights[0].pos = point(-10, 10, -10);
@@ -76,7 +77,7 @@ static void	non_reflective_test(void **state)
 	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
 	t_inter	i = (t_inter){w->objs + 1, 1};
 	
-	w->objs[1].material.ambient = 1;
+	w->ambient = color(1, 1, 1);
 	assert_color_equal(color(0, 0, 0), reflected_color(*w, precompute(i, r, NULL), 1));
 }
 
@@ -89,6 +90,7 @@ static void	reflective_test(void **state)
 	w->buf_inter = realloc(w->buf_inter, sizeof(t_inter) * 6);
 	w->objs[2] = plane(2);
 	w->objs[2].material.reflective = 0.5;
+	w->ambient = color(0.1, 0.1, 0.1);
 	shape_set_matrix(w->objs + 2, matrix_translation(0, -1, 0));
 	assert_color_equal(color(0.19032, 0.2379, 0.14274), reflected_color(*w, precompute((t_inter){w->objs + 2, sqrt(2)}, r, NULL), 1));
 }
