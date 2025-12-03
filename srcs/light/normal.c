@@ -57,7 +57,7 @@ static t_tuple	local_cube_normal(t_tuple p)
 		return (vector(p.x, 0, 0));
 	if (fabs(fabs(p.y) - maxc) < 0.0001)
 		return (vector(0, p.y, 0));
-	return (vector(0, 0, p.z));
+	return (vector(0, 0,p.z));
 }
 
 static t_tuple	local_object_normal(t_shape s, t_tuple object_point)
