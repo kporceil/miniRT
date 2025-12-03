@@ -39,6 +39,14 @@ static int	setup(void **state)
 		free(world);
 		return (-1);
 	}
+	world->buf_inter = malloc(sizeof(t_inter) * 4);
+	if (!world->buf_inter)
+	{
+		free(world->objs);
+		free(world->lights);
+		free(world);
+		return (-1);
+	}
 	world->objs[0] = sphere(0);
 	world->objs[1] = sphere(1);
 	world->objs[0].material.diffuse = 0.7;
@@ -47,6 +55,7 @@ static int	setup(void **state)
 	shape_set_matrix(world->objs + 1, matrix_scaling(0.5, 0.5, 0.5));
 	world->lights[0].intensity = color(1, 1, 1);
 	world->lights[0].pos = point(-10, 10, -10);
+	world->ambient = color(0.1, 0.1, 0.1);
 	*state = world;
 	return (0);
 }
@@ -55,6 +64,7 @@ static int	teardown(void **state)
 {
 	t_world	*world = *state;
 
+	free(world->buf_inter);
 	free(world->lights);
 	free(world->objs);
 	free(world);
@@ -113,7 +123,7 @@ static void	refractive_color_test(void **state)
 	t_ray	r = ray(point(0, 0, 0.1), vector(0, 1, 0));
 	t_intersections	xs = (t_intersections){malloc(sizeof(t_inter) * 4), 2};
 
-	w->objs[0].material.ambient = 1.0;
+	w->ambient = color(1, 1, 1);
 	w->objs[0].material.pat = pattern(NO, color(1, 1, 1), color(0, 0, 0));
 	w->objs[1].material.transparency = 1.0;
 	w->objs[1].material.refractive_index = 1.5;
@@ -137,19 +147,19 @@ static void	refractive_in_shade_hit_test(void **state)
 	t_shape			floor = plane(2);
 	t_shape			ball = sphere(3);
 	w->objs = realloc(w->objs, sizeof(t_shape) * 4);
+	w->buf_inter = realloc(w->buf_inter, sizeof(t_inter) * 8);
 	w->objs[2] = floor;
 	w->objs[3] = ball;
 	w->objs[2].material.transparency = 0.5;
 	w->objs[2].material.refractive_index = 1.5;
 	w->objs[3].material.color = color(1, 0, 0);
-	w->objs[3].material.ambient = 0.5;
 	w->objs_count = 4;
 	shape_set_matrix(w->objs + 2, matrix_translation(0, -1, 0));
 	shape_set_matrix(w->objs + 3, matrix_translation(0, -3.5, -0.5));
 	xs.inters[0].s = w->objs + 2;
 	xs.inters[0].point = sqrt(2);
 	t_color	ret = shade_hit(*w, precompute(xs.inters[0], r, &xs), 50);
-	assert_color_equal(color(0.93642, 0.68642, 0.68642), ret);
+	assert_color_equal(color(0.736425, 0.686425, 0.686425), ret);
 	free(xs.inters);
 }
 

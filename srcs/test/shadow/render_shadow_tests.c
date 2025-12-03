@@ -23,7 +23,7 @@
 
 static void	shading_in_shadow_test(__unused void **state)
 {
-	t_world	w = { .lights_count = 1, .objs_count = 2, .objs = malloc(sizeof(t_shape) * 2), .lights = malloc(sizeof(t_plight))};
+	t_world	w = { .ambient = color(0.1, 0.1, 0.1), .lights_count = 1, .objs_count = 2, .objs = malloc(sizeof(t_shape) * 2), .lights = malloc(sizeof(t_plight)), .buf_inter = malloc(sizeof(t_inter) * 4)};
 
 	w.objs[0] = sphere(0);
 	w.objs[1] = sphere(1);
@@ -33,6 +33,7 @@ static void	shading_in_shadow_test(__unused void **state)
 	t_inter	inters = {.s = w.objs + 1, .point = 4};
 	t_precomp	comps = precompute(inters, r, NULL);
 	t_color		c = shade_hit(w, comps, 0);
+	free(w.buf_inter);
 	free(w.lights);
 	free(w.objs);
 	assert_color_equal(color(0.1, 0.1, 0.1), c);

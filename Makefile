@@ -104,7 +104,7 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -g3
 endif
 
 ifeq (opti, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -O3 -march=native -flto -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -DNDEBUG -pipe
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -O3 -march=native -flto -funroll-loops -finline-functions -fomit-frame-pointer -fno-math-errno -funsafe-math-optimizations -fno-signed-zeros -DNDEBUG -pipe
 endif
 
 ifeq (gprof, $(MODE))

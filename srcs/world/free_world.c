@@ -29,4 +29,5 @@ void	free_world(t_world *w)
 	}
 	free(w->objs);
 	free(w->lights);
+	free(w->buf_inter);
 }

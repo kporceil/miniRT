@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "color.h"
 #include "matrix.h"
 #include "groups.h"
 #include "patterns.h"

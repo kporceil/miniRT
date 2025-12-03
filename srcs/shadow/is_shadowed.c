@@ -31,10 +31,6 @@ bool	is_shadowed(t_world w, t_tuple p, size_t i)
 		return (false);
 	shadow.hit_point = inter_hit(shadow.inters.inters, shadow.inters.size);
 	if (shadow.hit_point && shadow.distance - shadow.hit_point->point > 0.0001)
-	{
-		free(shadow.inters.inters);
 		return (true);
-	}
-	free(shadow.inters.inters);
 	return (false);
 }

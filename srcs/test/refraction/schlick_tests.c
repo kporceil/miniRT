@@ -38,6 +38,14 @@ static int	setup(void **state)
 		free(world);
 		return (-1);
 	}
+	world->buf_inter = malloc(sizeof(t_inter) * 8);
+	if (!world->buf_inter)
+	{
+		free(world->objs);
+		free(world->lights);
+		free(world);
+		return (-1);
+	}
 	world->objs[0] = sphere(0);
 	world->objs[1] = sphere(1);
 	world->objs[0].material.diffuse = 0.7;
@@ -51,7 +59,7 @@ static int	setup(void **state)
 	shape_set_matrix(world->objs + 2, matrix_translation(0, -1, 0));
 	world->objs[3] = sphere(3);
 	world->objs[3].material.color = color(1, 0, 0);
-	world->objs[3].material.ambient = 0.5;
+	world->ambient = color(0.5, 0.5, 0.5);
 	shape_set_matrix(world->objs + 3, matrix_translation(0, -3.5, -0.5));
 	world->lights[0].intensity = color(1, 1, 1);
 	world->lights[0].pos = point(-10, 10, -10);
@@ -63,6 +71,7 @@ static int	teardown(void **state)
 {
 	t_world	*world = *state;
 
+	free(world->buf_inter);
 	free(world->lights);
 	free(world->objs);
 	free(world);
@@ -120,7 +129,7 @@ static void	shade_hit_test(void **state)
 	t_intersections	xs = (t_intersections){malloc(sizeof(t_inter)), 1};
 	xs.inters[0] = (t_inter){.s = w->objs + 2, .point = sqrt(2)};
 	t_precomp	comps = precompute(xs.inters[0], r, &xs);
-	assert_color_equal(color(0.93391, 0.69643, 0.69243), shade_hit(*w, comps, 5));
+	assert_color_equal(color(1.340647, 1.104849, 1.097480), shade_hit(*w, comps, 5));
 	free(xs.inters);
 }
 
