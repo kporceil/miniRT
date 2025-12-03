@@ -20,4 +20,5 @@ void	partition_children(t_shape *group)
 
 	bb_split_bounds(g->group_bbox, &left, &right);
 	i = 0;
+	while ()
 }
