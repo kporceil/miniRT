@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:11:04 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/06 10:25:36 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:49:10 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	intersect_cone_caps(t_shape *cyl, t_ray r, t_intersections *xs)
 		return ;
 	t = (cyl->cyl_min - r.origin.y) / r.dir.y;
 	if (check_cone_cap(r, t, fabs(cyl->cyl_min)))
-		xs->inters[xs->size++] = (t_inter){cyl, t};
+		xs->inters[xs->size++] = (t_inter){.s = cyl, .point = t};
 	t = (cyl->cyl_max - r.origin.y) / r.dir.y;
 	if (check_cone_cap(r, t, fabs(cyl->cyl_max)))
-		xs->inters[xs->size++] = (t_inter){cyl, t};
+		xs->inters[xs->size++] = (t_inter){.s = cyl, .point = t};
 }

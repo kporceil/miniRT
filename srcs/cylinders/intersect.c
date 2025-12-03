@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:22 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/02 16:21:28 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:48:23 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	ray_cylinder_intersect(t_shape *cyl, t_ray r, t_intersections *inter)
 		if (t0 > t1)
 			double_swap(&t0, &t1);
 		if (is_between(cyl->cyl_min, r.origin.y + t0 * r.dir.y, cyl->cyl_max))
-			inter->inters[inter->size++] = (t_inter){cyl, t0};
+			inter->inters[inter->size++] = (t_inter){.s = cyl, .point = t0};
 		if (is_between(cyl->cyl_min, r.origin.y + t1 * r.dir.y, cyl->cyl_max))
-			inter->inters[inter->size++] = (t_inter){cyl, t1};
+			inter->inters[inter->size++] = (t_inter){.s = cyl, .point = t1};
 	}
 	intersect_cyl_caps(cyl, r, inter);
 }

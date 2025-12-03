@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 15:51:19 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/02 17:35:55 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:58:54 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	non_reflective_test(void **state)
 {
 	t_world	*w = (t_world *)(*state);
 	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
-	t_inter	i = (t_inter){w->objs + 1, 1};
+	t_inter	i = (t_inter){.s = w->objs + 1, .point = 1};
 	
 	w->ambient = color(1, 1, 1);
 	assert_color_equal(color(0, 0, 0), reflected_color(*w, precompute(i, r, NULL), 1));
@@ -92,7 +92,7 @@ static void	reflective_test(void **state)
 	w->objs[2].material.reflective = 0.5;
 	w->ambient = color(0.1, 0.1, 0.1);
 	shape_set_matrix(w->objs + 2, matrix_translation(0, -1, 0));
-	assert_color_equal(color(0.19032, 0.2379, 0.14274), reflected_color(*w, precompute((t_inter){w->objs + 2, sqrt(2)}, r, NULL), 1));
+	assert_color_equal(color(0.19032, 0.2379, 0.14274), reflected_color(*w, precompute((t_inter){.s = w->objs + 2, .point = sqrt(2)}, r, NULL), 1));
 }
 
 static void	color_reflective_test(void **state)
@@ -105,7 +105,7 @@ static void	color_reflective_test(void **state)
 	w->objs[2] = plane(2);
 	w->objs[2].material.reflective = 0.5;
 	shape_set_matrix(w->objs + 2, matrix_translation(0, -1, 0));
-	assert_color_equal(color(0.87677, 0.92436, 0.82918), shade_hit(*w, precompute((t_inter){w->objs + 2, sqrt(2)}, r, NULL), 1));
+	assert_color_equal(color(0.87677, 0.92436, 0.82918), shade_hit(*w, precompute((t_inter){.s = w->objs + 2, .point = sqrt(2)}, r, NULL), 1));
 }
 
 static void	infinte_resursive_test(__unused void **state)
@@ -140,7 +140,7 @@ static void	limit_recursion_test(void **state)
 	w->objs[2] = plane(3);
 	w->objs[2].material.reflective = 0.5;
 	shape_set_matrix(w->objs + 2, matrix_translation(0, -1, 0));
-	assert_color_equal(color(0, 0, 0), reflected_color(*w, precompute((t_inter){w->objs + 2, sqrt(2)}, r, NULL), 0));
+	assert_color_equal(color(0, 0, 0), reflected_color(*w, precompute((t_inter){.s = w->objs + 2, .point = sqrt(2)}, r, NULL), 0));
 }
 
 int	test_reflective(void)

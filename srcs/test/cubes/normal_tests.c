@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 15:11:03 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/08 15:27:42 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 18:20:30 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	normal_test(__unused void **state)
 					vector(1, 0, 0),
 					vector(-1, 0, 0) };
 	for (size_t i = 0; i < 8; ++i) {
-		assert_tuple_equal(n[i], normal_at(c, p[i]));
+		assert_tuple_equal(n[i], normal_at(c, p[i], NULL));
 	}
 }
 

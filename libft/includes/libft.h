@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:48:55 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/13 19:51:43 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 14:44:18 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	*ft_strndup(const char *s, size_t len);
 size_t	ft_strtoul(const char *nptr, char **endptr, int base);
 long	ft_strtol(const char *nptr, char **endptr, int base);
 int		ft_atoi(const char *nptr, int *error);
+double	ft_atof(const char *nptr);
 
 /*                                                                            */
 /*                            PART TWO                                        */

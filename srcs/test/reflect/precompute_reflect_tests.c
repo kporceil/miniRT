@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 02:08:14 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/02 17:36:19 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:54:21 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	precompute_reflect_test(__unused void **state)
 {
 	t_shape		obj = plane(0);
 	t_ray		r = ray(point(0, 1, -1), vector(0, -(sqrt(2)/2), sqrt(2)/2));
-	t_inter		i = (t_inter){&obj, sqrt(2)};
+	t_inter		i = (t_inter){.s = &obj, .point = sqrt(2)};
 	t_precomp	comps = precompute(i, r, NULL);
 
 	assert_tuple_equal(vector(0, sqrt(2)/2, sqrt(2)/2), comps.reflectv);

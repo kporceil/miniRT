@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:20:40 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/17 13:09:11 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:31:20 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_inter
 {
 	t_shape		*s;
 	double		point;
+	double		u;
+	double		v;
 }				t_inter;
 
 typedef struct s_intersections
