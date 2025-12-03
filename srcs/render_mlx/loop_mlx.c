@@ -65,8 +65,8 @@ static void	should_render(t_loop_params *p, size_t frame,
 		else
 			pixel_size = 1;
 		render_on_canva(&p->canva, *p->camera, p->world, pixel_size);
-		p->should_render = false;
 	}
+	p->should_render = false;
 	canva_to_mlx_image(p->display, p->canva);
 	mlx_put_image_to_window(p->display.mlx_ptr, p->display.window,
 		p->display.image, 0, 0);

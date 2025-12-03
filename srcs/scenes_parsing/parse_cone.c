@@ -55,8 +55,8 @@ static int	parse_cone_value(char *file, t_world *world)
 		shape_set_matrix(&co, matrix_mult(object_orientation(pos, dir, vector(1, 0, 0)),matrix_scaling(diam_height[0], 1, diam_height[0])));
 	co.material.color = rgb;
 	co.cyl_closed = true;
-	co.cyl_max = diam_height[1] / 2.0;
-	co.cyl_min = - (diam_height[1] / 2.0);
+	co.cyl_max = diam_height[1] / 2;
+	co.cyl_min = - (diam_height[1] / 2);
 	if (new_shape_node(world, &co) == -1)
 		return (-1);
 	return (0);

@@ -29,7 +29,6 @@ static void	toggle_moving_mode(t_loop_params *p)
 
 int	key_hooks(int keycode, t_loop_params *p)
 {
-	p->should_render = true;
 	if (keycode == XK_Escape)
 		return (mlx_loop_end(p->display.mlx_ptr));
 	if (keycode == XK_Return)
@@ -46,8 +45,7 @@ int	key_hooks(int keycode, t_loop_params *p)
 		move_camera_upward(p->camera, vector(0.1, 0.1, 0.1));
 	else if (p->moving && keycode == XK_e)
 		move_camera_upward(p->camera, vector(-0.1, -0.1, -0.1));
-	else
-		p->should_render = false;
+	p->should_render = true;
 	return (0);
 }
 
