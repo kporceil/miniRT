@@ -60,6 +60,23 @@ static void	copy_list_in_array(t_world *world)
 	}
 }
 
+static size_t	possible_intersections(t_world *world)
+{
+	size_t	count;
+	size_t	i;
+
+	count = 0;
+	i = 0;
+	while (i < world->objs_count)
+	{
+		if (world->objs[i++].type == CONE)
+			count += 4;
+		else
+			count += 2;
+	}
+	return (count);
+}
+
 static int	convert_world_list(t_world *world)
 {
 	world->lights = malloc(sizeof(t_plight) * world->lights_count);
@@ -74,8 +91,8 @@ static int	convert_world_list(t_world *world)
 		free_world(world);
 		return (-1);
 	}
-	world->buf_inter = malloc(sizeof(t_inter) * world->objs_count * 2);
 	copy_list_in_array(world);
+	world->buf_inter = malloc(sizeof(t_inter) * possible_intersections(world));
 	return (0);
 }
 

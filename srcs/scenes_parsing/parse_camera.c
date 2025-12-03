@@ -13,15 +13,8 @@
 #include "world.h"
 #include "libft.h"
 #include "scenes_parsing.h"
+#include "visual_settings.h"
 #include <math.h>
-
-#ifndef HEIGHT
-# define HEIGHT 1920
-#endif
-
-#ifndef WIDTH
-# define WIDTH 1080
-#endif
 
 static char	*skip_space(char *str)
 {
@@ -52,7 +45,7 @@ static int	parse_camera_value(char *file, t_world *world)
 		ft_putendl_fd("Extra character after camera declaration", 2);
 		return (-1);
 	}
-	world->cam = camera(HEIGHT, WIDTH, fov, pos);
+	world->cam = camera(WIDTH, HEIGHT, fov, pos);
 	world->cam.look_at = tuple_add(forward, pos);
 	camera_set_transform(&world->cam, view_transform_from_to(world->cam.pos,
 			world->cam.look_at, world->cam.up));
