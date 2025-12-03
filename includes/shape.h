@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:49:15 by kporceil          #+#    #+#             */
-/*   Updated: 2025/12/01 19:00:32 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/03 14:39:29 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "matrix.h"
 # include "material.h"
 # include "stdbool.h"
+# include "bounding_box.h"
 
 typedef enum e_tshape
 {
@@ -32,25 +33,26 @@ typedef enum e_tshape
 
 typedef struct s_shape
 {
-	t_tshape	type;
-	t_matrix	local_transformation;
-	t_matrix	final_transformation;
-	t_matrix	final_inverted;
-	t_material	material;
-	t_tuple		tri_p1;
-	t_tuple		tri_p2;
-	t_tuple		tri_p3;
-	t_tuple		tri_e1;
-	t_tuple		tri_e2;
-	t_tuple		tri_normal;
-	t_shape		*parent;
-	t_shape		*child;
-	size_t		group_size;
-	size_t		nb_members;
-	int			cyl_closed;
-	double		cyl_min;
-	double		cyl_max;
-	size_t		id;
+	t_tshape		type;
+	t_matrix		local_transformation;
+	t_matrix		final_transformation;
+	t_matrix		final_inverted;
+	t_material		material;
+	t_tuple			tri_p1;
+	t_tuple			tri_p2;
+	t_tuple			tri_p3;
+	t_tuple			tri_e1;
+	t_tuple			tri_e2;
+	t_tuple			tri_normal;
+	t_bounding_box	group_bbox;
+	t_shape			*parent;
+	t_shape			*child;
+	size_t			group_size;
+	size_t			nb_members;
+	int				cyl_closed;
+	double			cyl_min;
+	double			cyl_max;
+	size_t			id;
 }				t_shape;
 
 t_shape		plane(size_t id);

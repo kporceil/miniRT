@@ -38,7 +38,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix groups/, create_tests intersect_tests transformation_tests) \
 					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests) \
 					$(addprefix triangles/, create_tests normal_tests intersect_tests) \
-					$(addprefix bounding_box/, create_tests add_point_tests bounds_of_tests add_tests contains_point_tests contains_box_tests transform_tests parent_space_bounds_of_tests group_bounds_of_tests intersect_tests split_bounds_tests))
+					$(addprefix bounding_box/, create_tests add_point_tests bounds_of_tests add_tests contains_point_tests contains_box_tests transform_tests parent_space_bounds_of_tests group_bounds_of_tests intersect_tests split_bounds_tests partition_children_tests))
 endif
 ifeq (no, $(TEST))
 MAIN := tmp_main
@@ -68,7 +68,7 @@ BASENAME := $(MAIN) \
 			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(addprefix triangles/, create intersect) \
-			$(addprefix bounding_box/, create add_point bounds_of add contains_point contains_box transform parent_space_bounds_of intersect split_bounds) \
+			$(addprefix bounding_box/, create add_point bounds_of add contains_point contains_box transform parent_space_bounds_of intersect split_bounds partition_children) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \

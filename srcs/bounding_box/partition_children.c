@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_shape.c                                        :+:      :+:    :+:   */
+/*   partition_children.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 13:44:21 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/03 14:41:36 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/12/03 14:37:38 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/12/03 15:29:06 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "groups.h"
+#include "bounding_box.h"
 
-int	group_add_shape(t_shape *g, t_shape s)
+void	partition_children(t_shape *group)
 {
-	if (g->nb_members == g->group_size)
-		return (1);
-	s.parent = g;
-	if (s.type == GROUP)
-		group_set_matrix(&s, s.local_transformation);
-	else
-		shape_set_matrix(&s, s.local_transformation);
-	g->child[g->nb_members] = s;
-	++g->nb_members;
-	bb_add(&g->group_bbox, parent_space_bounds_of(s));
-	return (0);
+	t_bounding_box	left;
+	t_bounding_box	right;
+	size_t			i;
+
+	bb_split_bounds(g->group_bbox, &left, &right);
+	i = 0;
 }
