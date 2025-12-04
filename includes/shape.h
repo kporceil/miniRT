@@ -14,10 +14,22 @@
 # define SHAPE_H
 
 # include <stddef.h>
+# include <stdbool.h>
 # include "matrix.h"
 # include "material.h"
-# include "stdbool.h"
-# include "bounding_box.h"
+
+# ifndef T_BOUNDING_BOX
+#  define T_BOUNDING_BOX
+
+typedef struct s_bounding_box	t_bounding_box;
+
+struct s_bounding_box
+{
+	t_tuple	min;
+	t_tuple	max;
+};
+
+# endif
 
 typedef enum e_tshape
 {
@@ -44,6 +56,9 @@ typedef struct s_shape
 	t_tuple			tri_e1;
 	t_tuple			tri_e2;
 	t_tuple			tri_normal;
+	t_tuple			tri_n1;
+	t_tuple			tri_n2;
+	t_tuple			tri_n3;
 	t_bounding_box	group_bbox;
 	t_shape			*parent;
 	t_shape			*child;
@@ -61,6 +76,7 @@ t_shape		sphere(size_t id);
 t_shape		cylinder(size_t id);
 t_shape		cone(size_t id);
 t_shape		triangle(size_t id, t_tuple p1, t_tuple p2, t_tuple p3);
+t_shape		smooth_triangle(size_t id, t_tuple p[3], t_tuple n[3]);
 void		shape_set_matrix(t_shape *s, t_matrix m);
 
 #endif

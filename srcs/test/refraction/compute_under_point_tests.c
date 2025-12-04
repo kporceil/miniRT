@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 17:35:31 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/03 17:35:47 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:55:07 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	compute_under_point_test(__unused void **state)
 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_shape	s = glass_sphere(0);
 	shape_set_matrix(&s, matrix_translation(0, 0, 1));
-	t_inter	i = (t_inter){&s, 5};
+	t_inter	i = (t_inter){.s = &s, .point = 5};
 	t_intersections	xs = (t_intersections){&i, 1};
 	t_precomp		comps = precompute(i, r, &xs);
 

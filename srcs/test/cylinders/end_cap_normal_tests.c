@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:43:22 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/02 14:31:56 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 18:17:04 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	end_cap_normal_cylinder_1_test(__unused void **state)
 	cyl.cyl_min = 1;
 	cyl.cyl_max = 2;
 	cyl.cyl_closed = 1;
-	n = normal_at(cyl, point(0, 1, 0));
+	n = normal_at(cyl, point(0, 1, 0), NULL);
 	assert_tuple_equal(n, vector(0, -1, 0));
 }
 
@@ -46,7 +46,7 @@ static void	end_cap_normal_cylinder_2_test(__unused void **state)
 	cyl.cyl_min = 1;
 	cyl.cyl_max = 2;
 	cyl.cyl_closed = 1;
-	n = normal_at(cyl, point(0.5, 1, 0));
+	n = normal_at(cyl, point(0.5, 1, 0), NULL);
 	assert_tuple_equal(n, vector(0, -1, 0));
 }
 
@@ -58,7 +58,7 @@ static void	end_cap_normal_cylinder_3_test(__unused void **state)
 	cyl.cyl_min = 1;
 	cyl.cyl_max = 2;
 	cyl.cyl_closed = 1;
-	n = normal_at(cyl, point(0, 1, 0.5));
+	n = normal_at(cyl, point(0, 1, 0.5), NULL);
 	assert_tuple_equal(n, vector(0, -1, 0));
 }
 
@@ -70,7 +70,7 @@ static void	end_cap_normal_cylinder_4_test(__unused void **state)
 	cyl.cyl_min = 1;
 	cyl.cyl_max = 2;
 	cyl.cyl_closed = 1;
-	n = normal_at(cyl, point(0, 2, 0));
+	n = normal_at(cyl, point(0, 2, 0), NULL);
 	assert_tuple_equal(n, vector(0, 1, 0));
 }
 
@@ -82,7 +82,7 @@ static void	end_cap_normal_cylinder_5_test(__unused void **state)
 	cyl.cyl_min = 1;
 	cyl.cyl_max = 2;
 	cyl.cyl_closed = 1;
-	n = normal_at(cyl, point(0.5, 2, 0));
+	n = normal_at(cyl, point(0.5, 2, 0), NULL);
 	assert_tuple_equal(n, vector(0, 1, 0));
 }
 
@@ -94,7 +94,7 @@ static void	end_cap_normal_cylinder_6_test(__unused void **state)
 	cyl.cyl_min = 1;
 	cyl.cyl_max = 2;
 	cyl.cyl_closed = 1;
-	n = normal_at(cyl, point(0, 2, 0.5));
+	n = normal_at(cyl, point(0, 2, 0.5), NULL);
 	assert_tuple_equal(n, vector(0, 1, 0));
 }
 

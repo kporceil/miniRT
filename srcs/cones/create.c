@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
 #include "float_limits.h"
+#include "shape.h"
 
 t_shape	cone(size_t id)
 {

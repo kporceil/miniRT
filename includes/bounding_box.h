@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:36:27 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/02 11:46:43 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/04 12:00:45 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,20 @@
 # include <stdbool.h>
 # include "tuples.h"
 # include "shape.h"
-# include "ray.h"
+
+# ifndef T_RAY
+#  define T_RAY
+
+typedef struct s_ray
+{
+	t_tuple	origin;
+	t_tuple	dir;
+}				t_ray;
+
+# endif
+
+# ifndef T_BOUNDING_BOX
+#  define T_BOUNDING_BOX
 
 typedef struct s_bounding_box	t_bounding_box;
 
@@ -25,6 +38,8 @@ struct s_bounding_box
 	t_tuple	min;
 	t_tuple	max;
 };
+
+# endif
 
 t_bounding_box	bounding_box(_Bool points, t_tuple min, t_tuple max);
 void			bb_add_point(t_bounding_box *box, t_tuple point);

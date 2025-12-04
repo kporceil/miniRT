@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 22:58:31 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/02 17:36:46 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:53:47 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ static int	setup(void **state)
 		free(world);
 		return (-1);
 	}
+	world->buf_inter = malloc(sizeof(t_inter) * 4);
+	if (!world->buf_inter)
+	{
+		free(world->objs);
+		free(world->lights);
+		free(world);
+		return (-1);
+	}
 	world->objs[0] = sphere(0);
 	world->objs[1] = sphere(1);
 	world->objs[0].material.diffuse = 0.7;
@@ -46,6 +54,7 @@ static int	setup(void **state)
 	shape_set_matrix(world->objs + 1, matrix_scaling(0.5, 0.5, 0.5));
 	world->lights[0].intensity = color(1, 1, 1);
 	world->lights[0].pos = point(-10, 10, -10);
+	world->ambient = color(0.1, 0.1, 0.1);
 	*state = world;
 	return (0);
 }
@@ -54,6 +63,7 @@ static int	teardown(void **state)
 {
 	t_world	*world = *state;
 
+	free(world->buf_inter);
 	free(world->lights);
 	free(world->objs);
 	free(world);
@@ -64,7 +74,7 @@ static void	shading_intersect_test(void **state)
 {
 	t_world	*world = (t_world *)*state;
 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_inter	i = {world->objs, 4};
+	t_inter	i = {.s = world->objs, .point = 4};
 	t_precomp	comps = precompute(i, r, NULL);
 	t_color		c = shade_hit(*world, comps, 0);
 
@@ -76,7 +86,7 @@ static void	inside_shading_intersect_test(void **state)
 	t_world	*world = (t_world *)*state;
 	*world->lights = point_light(point(0, 0.25, 0), color(1, 1, 1));
 	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
-	t_inter	i = {world->objs + 1, 0.5};
+	t_inter	i = {.s = world->objs + 1, .point = 0.5};
 	t_precomp	comps = precompute(i, r, NULL);
 	t_color		c = shade_hit(*world, comps, 0);
 
@@ -108,10 +118,8 @@ static void	shading_hit_test(void **state)
 static void	behind_shading_hit_test(void **state)
 {
 	t_world	*world = (t_world *)*state;
-	t_shape	*outer = world->objs;
 	t_shape	*inner = world->objs + 1;
-	outer->material.ambient = 1;
-	inner->material.ambient = 1;
+	world->ambient = color(1, 1, 1);
 	t_ray	r = ray(point(0, 0, 0.75), vector(0, 0, -1));
 	t_color	c;
 

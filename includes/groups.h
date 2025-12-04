@@ -19,5 +19,7 @@ t_shape		group(size_t id, size_t group_size);
 int			group_add_shape(t_shape *g, t_shape s);
 void		group_set_matrix(t_shape *g, t_matrix m);
 void		group_set_material(t_shape *g, t_material m);
+void		free_group(t_shape *g);
+t_shape		group_copy(t_shape *src);
 
 #endif

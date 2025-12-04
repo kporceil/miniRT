@@ -20,11 +20,16 @@
 #  define MAX_RECU 5
 # endif
 
+# ifndef T_RAY
+#  define T_RAY
+
 typedef struct s_ray
 {
 	t_tuple	origin;
 	t_tuple	dir;
 }				t_ray;
+
+# endif
 
 typedef struct s_one_d_ray
 {
@@ -36,6 +41,8 @@ typedef struct s_inter
 {
 	t_shape		*s;
 	double		point;
+	double		u;
+	double		v;
 }				t_inter;
 
 typedef struct s_intersections

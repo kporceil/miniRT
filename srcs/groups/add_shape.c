@@ -12,18 +12,23 @@
 
 #include "shape.h"
 #include "groups.h"
+#include "vectors.h"
+#include "bounding_box.h"
 
 int	group_add_shape(t_shape *g, t_shape s)
 {
-	if (g->nb_members == g->group_size)
-		return (1);
+	t_vector_head	*head;
+
 	s.parent = g;
 	if (s.type == GROUP)
 		group_set_matrix(&s, s.local_transformation);
 	else
 		shape_set_matrix(&s, s.local_transformation);
-	g->child[g->nb_members] = s;
-	++g->nb_members;
-	bb_add(&g->group_bbox, parent_space_bounds_of(s));
+	if (vec_add((void **)&g->child, &s))
+		return (1);
+	bb_add(&g->group_bbox, bb_parent_space_bounds_of(&s));
+	head = vec_get_header(g->child);
+	g->nb_members = head->nb_elems;
+	g->group_size = head->max_elems;
 	return (0);
 }

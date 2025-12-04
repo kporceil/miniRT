@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "bounding_box.h"
+#include "ray.h"
 
 static void	check_axis(t_one_d_ray r, double *ret, double min, double max)
 {

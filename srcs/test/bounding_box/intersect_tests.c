@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 11:28:20 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/02 13:38:06 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/04 12:02:50 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "tests.h"
 #include "bounding_box.h"
 #include "groups.h"
+#include "ray.h"
 
 #ifndef EPSILON
 # define EPSILON 0.0001

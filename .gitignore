@@ -7,7 +7,7 @@ miniRT
 *.out
 *.json
 callgrind*
-assets/Satellite.obj
-assets/big_teapot.obj
-assets/jsp.obj
 assets/taxi.obj
+assets/jsp.obj
+assets/big_teapot.obj
+assets/Satellite.obj

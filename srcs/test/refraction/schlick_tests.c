@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 20:38:55 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/07 21:16:36 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:57:22 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ static int	setup(void **state)
 		free(world);
 		return (-1);
 	}
+	world->buf_inter = malloc(sizeof(t_inter) * 8);
+	if (!world->buf_inter)
+	{
+		free(world->objs);
+		free(world->lights);
+		free(world);
+		return (-1);
+	}
 	world->objs[0] = sphere(0);
 	world->objs[1] = sphere(1);
 	world->objs[0].material.diffuse = 0.7;
@@ -51,7 +59,7 @@ static int	setup(void **state)
 	shape_set_matrix(world->objs + 2, matrix_translation(0, -1, 0));
 	world->objs[3] = sphere(3);
 	world->objs[3].material.color = color(1, 0, 0);
-	world->objs[3].material.ambient = 0.5;
+	world->ambient = color(0.5, 0.5, 0.5);
 	shape_set_matrix(world->objs + 3, matrix_translation(0, -3.5, -0.5));
 	world->lights[0].intensity = color(1, 1, 1);
 	world->lights[0].pos = point(-10, 10, -10);
@@ -63,6 +71,7 @@ static int	teardown(void **state)
 {
 	t_world	*world = *state;
 
+	free(world->buf_inter);
 	free(world->lights);
 	free(world->objs);
 	free(world);
@@ -83,8 +92,8 @@ static void	total_internal_reflection_test(__unused void **state)
 	t_shape	s = glass_sphere(0);
 	t_ray	r = ray(point(0, 0, sqrt(2)/2), vector(0, 1, 0));
 	t_intersections	xs = (t_intersections){malloc(sizeof(t_inter) * 2), 2};
-	xs.inters[0] = (t_inter){&s, -sqrt(2)/2};
-	xs.inters[1] = (t_inter){&s, sqrt(2)/2};
+	xs.inters[0] = (t_inter){.s = &s, .point = -sqrt(2)/2};
+	xs.inters[1] = (t_inter){.s = &s, .point = sqrt(2)/2};
 	t_precomp	comps = precompute(xs.inters[1], r, &xs);
 	assert_double_equal(1, schlick(comps), 0.0001);
 	free(xs.inters);
@@ -95,8 +104,8 @@ static void	perpendicular_angle_test(__unused void **state)
 	t_shape	s = glass_sphere(0);
 	t_ray	r = ray(point(0, 0, 0), vector(0, 1, 0));
 	t_intersections	xs = (t_intersections){malloc(sizeof(t_inter) * 2), 2};
-	xs.inters[0] = (t_inter){&s, -1};
-	xs.inters[1] = (t_inter){&s, 1};
+	xs.inters[0] = (t_inter){.s = &s, .point = -1};
+	xs.inters[1] = (t_inter){.s = &s, .point = 1};
 	t_precomp	comps = precompute(xs.inters[1], r, &xs);
 	assert_double_equal(0.04, schlick(comps), 0.0001);
 	free(xs.inters);
@@ -107,7 +116,7 @@ static void	n2_greater_n1_test(__unused void **state)
 	t_shape	s = glass_sphere(0);
 	t_ray	r = ray(point(0, 0.99, -2), vector(0, 0, 1));
 	t_intersections	xs = (t_intersections){malloc(sizeof(t_inter)), 1};
-	xs.inters[0] = (t_inter){&s, 1.8589};
+	xs.inters[0] = (t_inter){.s = &s, .point = 1.8589};
 	t_precomp	comps = precompute(xs.inters[0], r, &xs);
 	assert_double_equal(0.48873, schlick(comps), 0.0001);
 	free(xs.inters);
@@ -118,9 +127,9 @@ static void	shade_hit_test(void **state)
 	t_world	*w = (t_world *)*state;
 	t_ray	r = ray(point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2));
 	t_intersections	xs = (t_intersections){malloc(sizeof(t_inter)), 1};
-	xs.inters[0] = (t_inter){w->objs + 2, sqrt(2)};
+	xs.inters[0] = (t_inter){.s = w->objs + 2, .point = sqrt(2)};
 	t_precomp	comps = precompute(xs.inters[0], r, &xs);
-	assert_color_equal(color(0.93391, 0.69643, 0.69243), shade_hit(*w, comps, 5));
+	assert_color_equal(color(1.340647, 1.104849, 1.097480), shade_hit(*w, comps, 5));
 	free(xs.inters);
 }
 

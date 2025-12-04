@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:43:22 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/09/30 11:33:47 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 18:20:35 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 static void	normal_cone_1_test(__unused void **state)
 {
 	t_shape	co = cone(1);
-	t_tuple	n = normal_at(co, point(0, 0, 0));
+	t_tuple	n = normal_at(co, point(0, 0, 0), NULL);
 
 	assert_tuple_equal(n, normalize(vector(0, 0, 0)));
 }
@@ -38,7 +38,7 @@ static void	normal_cone_1_test(__unused void **state)
 static void	normal_cone_2_test(__unused void **state)
 {
 	t_shape	co = cone(1);
-	t_tuple	n = normal_at(co, point(1, 1, 1));
+	t_tuple	n = normal_at(co, point(1, 1, 1), NULL);
 
 	assert_tuple_equal(n, normalize(vector(1, -sqrt(2), 1)));
 }
@@ -46,7 +46,7 @@ static void	normal_cone_2_test(__unused void **state)
 static void	normal_cone_3_test(__unused void **state)
 {
 	t_shape	co = cone(1);
-	t_tuple	n = normal_at(co, point(-1, -1, 0));
+	t_tuple	n = normal_at(co, point(-1, -1, 0), NULL);
 
 	assert_tuple_equal(n, normalize(vector(-1, 1, 0)));
 }

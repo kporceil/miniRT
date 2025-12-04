@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   tests.h                                            :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */
@@ -177,5 +177,22 @@ int	test_bounding_box_parent_space_bounds_of(void);
 int	test_bounding_box_group_bounds_of(void);
 int	test_bounding_box_intersect(void);
 int	test_bounding_box_split_bounds(void);
+
+int	test_vector_create(void);
+int	test_vector_add(void);
+int	test_vector_delete_index(void);
+
+int	test_obj_parser_ignoring(void);
+int	test_obj_parser_vertices(void);
+int	test_obj_parser_triangle(void);
+int	test_obj_parser_group(void);
+int	test_obj_parser_parsed_to_group(void);
+int	test_obj_parser_smooth_triangle(void);
+int	test_obj_parser_face_normal(void);
+
+int	test_smooth_triangle_create(void);
+int	test_smooth_triangle_uv(void);
+int	test_smooth_triangle_normal(void);
+int	test_smooth_triangle_precomp(void);
 
 #endif
