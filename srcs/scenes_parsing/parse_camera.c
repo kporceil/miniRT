@@ -16,13 +16,6 @@
 #include "visual_settings.h"
 #include <math.h>
 
-static char	*skip_space(char *str)
-{
-	while (ft_isspace(*str))
-		++str;
-	return (str);
-}
-
 static int	parse_camera_value(char *file, t_world *world)
 {
 	t_tuple	pos;

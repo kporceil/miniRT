@@ -13,13 +13,7 @@
 #include "world.h"
 #include "scenes_parsing.h"
 #include "libft.h"
-
-static char	*skip_space(char *str)
-{
-	while (ft_isspace(*str))
-		++str;
-	return (str);
-}
+#include <stdlib.h>
 
 static int	parse_mandatory_value(char *file, char **endptr, t_shape *sp)
 {
@@ -43,25 +37,50 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *sp)
 	return (0);
 }
 
+static int	parse_image_pattern(char *file, t_shape *sp)
+{
+	size_t	i;
+	char	backup;
+	t_canva	texture;
+
+	i = 0;
+	while (!ft_isspace(file[i]))
+		++i;
+	backup = file[i];
+	file[i] = '\0';
+	texture = ppm_to_canva(file);
+	if (texture.canva == NULL)
+		return (-1);
+	file[i] = backup;
+	sp->material.pat = texture_map(uv_image(texture), spherical_map);
+	return (0);
+}
+
 static int	parse_bonus_value(char *file, char **endptr, t_shape *sp)
 {
 	if (*file == '\0')
 		return (0);
 	sp->material.reflective = ft_strtod(file, endptr);
-	file = *endptr;
-	sp->material.transparency = ft_strtod(file, endptr);
-	file = *endptr;
-	sp->material.refractive_index = ft_strtod(file, endptr);
+	sp->material.transparency = ft_strtod(*endptr, endptr);
+	sp->material.refractive_index = ft_strtod(*endptr, endptr);
 	file = skip_space(*endptr);
 	if (ft_strncmp("checker", file, 7) == 0)
-	{
 		sp->material.pat = texture_map(
 				uv_checkers(16, 8, sp->material.color, color(1, 1, 1)),
 				spherical_map);
-		file += 7;
+	else if (*file == 'T')
+	{
+		if (parse_image_pattern(file + 1, sp) == -1)
+			return (-1);
 	}
+	while (*file != '\0' && !ft_isspace(*file))
+		++file;
 	if (*skip_space(file) != '\0')
+	{
+		if (sp->material.pat.type == UV && sp->material.pat.uvpat.type == IMAGE)
+			free(sp->material.pat.uvpat.file.canva);
 		return (-1);
+	}
 	return (0);
 }
 

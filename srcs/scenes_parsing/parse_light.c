@@ -14,13 +14,6 @@
 #include "scenes_parsing.h"
 #include "libft.h"
 
-static char	*skip_space(char *str)
-{
-	while (ft_isspace(*str))
-		++str;
-	return (str);
-}
-
 static int	parse_light_value(char *file, t_world *world)
 {
 	char		*sptr;

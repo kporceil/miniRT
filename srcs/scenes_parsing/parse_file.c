@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:48:17 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 16:42:34 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/05 17:51:52 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ static bool	check_world_health(t_world *world)
 	return (true);
 }
 
-static void	error_clear(int fd, char *to_free)
+static void	error_clear(int fd, char *to_free, t_world *world)
 {
 	(void)get_next_line(fd, DELETE);
 	close(fd);
 	free(to_free);
+	free_light_list(world);
+	free_shape_list(world);
 }
 
 static void	copy_list_in_array(t_world *world)
@@ -60,23 +62,6 @@ static void	copy_list_in_array(t_world *world)
 	}
 }
 
-static size_t	possible_intersections(t_world *world)
-{
-	size_t	count;
-	size_t	i;
-
-	count = 0;
-	i = 0;
-	while (i < world->objs_count)
-	{
-		if (world->objs[i++].type == CONE)
-			count += 4;
-		else
-			count += 2;
-	}
-	return (count);
-}
-
 static int	convert_world_list(t_world *world)
 {
 	world->lights = malloc(sizeof(t_plight) * world->lights_count);
@@ -92,7 +77,8 @@ static int	convert_world_list(t_world *world)
 		return (-1);
 	}
 	copy_list_in_array(world);
-	world->buf_inter = malloc(sizeof(t_inter) * possible_intersections(world));
+	world->buf_inter = malloc(sizeof(t_inter)
+			* count_possible_intersections(world));
 	return (0);
 }
 
@@ -111,7 +97,7 @@ int	parse_file(char *file, t_world *world)
 	{
 		if (parse_line(line, world) == -1)
 		{
-			error_clear(fd, line);
+			error_clear(fd, line, world);
 			return (-1);
 		}
 		free(line);

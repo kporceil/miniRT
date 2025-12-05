@@ -29,6 +29,16 @@ static void	free_group(t_shape *g)
 	free(g->child);
 }
 
+static void	free_cube_texture(t_shape *cu)
+{
+	free(cu->material.pat.faces[0].file.canva);
+	free(cu->material.pat.faces[1].file.canva);
+	free(cu->material.pat.faces[2].file.canva);
+	free(cu->material.pat.faces[3].file.canva);
+	free(cu->material.pat.faces[4].file.canva);
+	free(cu->material.pat.faces[5].file.canva);
+}
+
 void	free_world(t_world *w)
 {
 	size_t	i;
@@ -38,6 +48,12 @@ void	free_world(t_world *w)
 	{
 		if (w->objs[i].type == GROUP)
 			free_group(w->objs + i);
+		if (w->objs[i].material.pat.type == UV
+			&& w->objs[i].material.pat.uvpat.type == IMAGE)
+			free(w->objs[i].material.pat.uvpat.file.canva);
+		if (w->objs[i].material.pat.type == CUBE_UV
+			&& w->objs[i].material.pat.faces->type == IMAGE)
+			free_cube_texture(w->objs + i);
 		++i;
 	}
 	free_light_list(w);

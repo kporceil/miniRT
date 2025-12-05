@@ -66,9 +66,9 @@ BASENAME := $(MAIN) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
 			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material) \
-			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
+			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map conical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(addprefix triangles/, create intersect) \
-			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cylinder parse_cone parse_point parse_vector parse_color new_light_node free_light_list new_shape_node free_shape_list get_shape_id parse_normalized_vector) \
+			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cube_texture parse_cylinder parse_cone parse_point parse_vector parse_color new_light_node free_light_list new_shape_node free_shape_list get_shape_id parse_normalized_vector count_possible_intersections) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
@@ -107,7 +107,7 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -pg
 endif
 
 ifeq (asan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=address -g3 -O1
 endif
 
 ifeq (msan, $(MODE))

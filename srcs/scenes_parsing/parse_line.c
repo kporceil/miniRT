@@ -15,13 +15,6 @@
 #include "scenes_parsing.h"
 #include <unistd.h>
 
-static char	*skip_space(char *str)
-{
-	while (ft_isspace(*str))
-		++str;
-	return (str);
-}
-
 int	parse_line(char *file, t_world *world)
 {
 	file = skip_space(file);
