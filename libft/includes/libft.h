@@ -66,6 +66,7 @@ size_t	ft_strtoul(const char *nptr, char **endptr, int base);
 long	ft_strtol(const char *nptr, char **endptr, int base);
 double	ft_strtod(const char *nptr, char **endptr);
 int		ft_atoi(const char *nptr, int *error);
+double	ft_atof(const char *nptr);
 
 /*                                                                            */
 /*                            PART TWO                                        */

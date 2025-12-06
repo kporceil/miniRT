@@ -108,6 +108,19 @@ int	main(void)
 	ret += test_lights_count();
 	ret += test_unique_identifier();
 	ret += test_ft_strtod();
+	ret += test_vector_create();
+	ret += test_vector_add();
+	ret += test_obj_parser_ignoring();
+	ret += test_obj_parser_vertices();
+	ret += test_obj_parser_triangle();
+	ret += test_obj_parser_group();
+	ret += test_obj_parser_parsed_to_group();
+	ret += test_smooth_triangle_create();
+	ret += test_smooth_triangle_uv();
+	ret += test_smooth_triangle_normal();
+	ret += test_smooth_triangle_precomp();
+	ret += test_obj_parser_smooth_triangle();
+	ret += test_obj_parser_face_normal();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

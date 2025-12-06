@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:22 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/07 10:12:10 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:46:08 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static void	put_solutions(t_equation eq, t_intersections *inter, t_ray r,
 	if (t0 > t1)
 		double_swap(&t0, &t1);
 	if (is_between(co->cyl_min, r.origin.y + t0 * r.dir.y, co->cyl_max))
-		inter->inters[inter->size++] = (t_inter){co, t0};
+		inter->inters[inter->size++] = (t_inter){.s = co, .point = t0};
 	if (is_between(co->cyl_min, r.origin.y + t1 * r.dir.y, co->cyl_max))
-		inter->inters[inter->size++] = (t_inter){co, t1};
+		inter->inters[inter->size++] = (t_inter){.s = co, .point = t1};
 }
 
 void	ray_cone_intersect(t_shape *co, t_ray r, t_intersections *inter)
@@ -59,7 +59,8 @@ void	ray_cone_intersect(t_shape *co, t_ray r, t_intersections *inter)
 	{
 		if (fabs(eq.b) == 0)
 			return (intersect_cone_caps(co, r, inter));
-		inter->inters[inter->size++] = (t_inter){co, -eq.c / (2 * eq.b)};
+		inter->inters[inter->size++] = (t_inter){.s = co,
+			.point = -eq.c / (2 * eq.b)};
 		return (intersect_cone_caps(co, r, inter));
 	}
 	eq.disc = eq.b * eq.b - 4 * eq.a * eq.c;

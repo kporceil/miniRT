@@ -22,6 +22,7 @@
 #include "ray.h"
 #include "tuples.h"
 #include "groups.h"
+#include "vectors.h"
 
 #ifndef EPSILON
 # define EPSILON 0.0001
@@ -39,7 +40,7 @@ static void	transform_group_1_test(__unused void **state)
 	xs.inters = malloc(sizeof(t_inter) * 2);
 	ray_intersect(&g, r, &xs);
 	assert_int_equal(xs.size, 2);
-	free(g.child);
+	vec_free(g.child);
 	free(xs.inters);
 }
 
@@ -55,7 +56,7 @@ static void	transform_group_2_test(__unused void **state)
 	xs.inters = malloc(sizeof(t_inter) * 2);
 	ray_intersect(&g, r, &xs);
 	assert_int_equal(xs.size, 2);
-	free(g.child);
+	vec_free(g.child);
 	free(xs.inters);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 12:58:50 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/17 13:21:08 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 16:43:47 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static double	calculate_inv_det(t_shape *tri, t_tuple dir_cross_e2)
 
 void	ray_triangle_intersect(t_shape *tri, t_ray r, t_intersections *xs)
 {
-	t_tuple			p1_to_origin;
-	t_tuple			cross_buffer;
-	double			det_inv;
-	double			u;
-	double			v;
+	t_tuple	p1_to_origin;
+	t_tuple	cross_buffer;
+	double	det_inv;
+	double	u;
+	double	v;
 
 	cross_buffer = cross(r.dir, tri->tri_e2);
 	det_inv = calculate_inv_det(tri, cross_buffer);
@@ -49,5 +49,5 @@ void	ray_triangle_intersect(t_shape *tri, t_ray r, t_intersections *xs)
 	if (v < 0 || (u + v) > 1)
 		return ;
 	xs->inters[xs->size++] = (t_inter)
-	{tri, det_inv * dot(tri->tri_e2, cross_buffer)};
+	{tri, det_inv * dot(tri->tri_e2, cross_buffer), u, v};
 }

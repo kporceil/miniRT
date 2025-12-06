@@ -20,6 +20,7 @@
 #include "canvas.h"
 #include "libft.h"
 #include "light.h"
+#include "obj_parser.h"
 #include "world.h"
 #include "camera.h"
 #include "display_mlx.h"
@@ -84,7 +85,7 @@ void	write_file(char	*name, char	*ppm)
 // 	//group_set_matrix(&hex, matrix_translation(0, 0, -0.5));
 // 	return (hex);
 // }
-
+//
 // static t_shape	pyramid(size_t id)
 // {
 // 	t_shape	pyr = group(id, 4);

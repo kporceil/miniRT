@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 12:46:17 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/20 13:42:50 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 18:20:38 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	normal_of_child_1_test(__unused void **state)
 	shape_set_matrix(g1.child, matrix_scaling(1, 2, 3));
 	group_add_shape(g1.child, sphere(2));
 	shape_set_matrix(g1.child->child, matrix_translation(5, 0, 0));
-	n = normal_at(*g1.child->child, point(1.7321, 1.1547, -5.5774));
+	n = normal_at(*g1.child->child, point(1.7321, 1.1547, -5.5774), NULL);
 
 	assert_tuple_equal(n, vector(0.2857, 0.4286, -0.8571));
 }

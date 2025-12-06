@@ -71,7 +71,8 @@ BASENAME := ft_isalpha \
 		   ft_btrright \
 		   ft_lstnext \
 		   ft_strjoinarr \
-		   ft_tablen
+		   ft_tablen \
+		   ft_atof
 
 override SRCS := $(addprefix $(SRCDIR), $(addsuffix .c, $(BASENAME)))
 

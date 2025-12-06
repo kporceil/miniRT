@@ -23,6 +23,7 @@
 #include "ray.h"
 #include "tuples.h"
 #include "groups.h"
+#include "vectors.h"
 
 #ifndef EPSILON
 # define EPSILON 0.0001
@@ -32,7 +33,7 @@ static void	intersect_group_1_test(__unused void **state)
 {
 	t_shape	g = group(1, 0);
 	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
-	t_intersections xs;
+	t_intersections xs = (t_intersections){0};
 
 	ray_group_intersect(&g, r, &xs);
 	xs.size = 0;
@@ -43,7 +44,7 @@ static void	intersect_group_2_test(__unused void **state)
 {
 	t_shape	g = group(1, 3);
 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_intersections xs;
+	t_intersections xs = (t_intersections){0};
 
 	xs.inters = malloc(sizeof(t_inter) * 4);
 	xs.size = 0;
@@ -55,7 +56,7 @@ static void	intersect_group_2_test(__unused void **state)
 	ray_group_intersect(&g, r, &xs);
 	assert_int_equal(xs.size, 4);
 	free(xs.inters);
-	free(g.child);
+	vec_free(g.child);
 }
 
 int	test_group_intersect(void)

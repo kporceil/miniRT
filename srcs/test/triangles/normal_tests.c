@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:26:31 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/10 18:55:02 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 18:20:37 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static void	normal_triangle_1_test(__unused void **state)
 	t_tuple	p2 = point(-1, 0, 0);
 	t_tuple	p3 = point(1, 0, 0);
 	t_shape	tri = triangle(1, p1, p2, p3);
-	t_tuple	n1 = normal_at(tri, point(0, 0.5, 0));
-	t_tuple	n2 = normal_at(tri, point(-0.5, 0.75, 0));
-	t_tuple	n3 = normal_at(tri, point(0.5, 0.25, 0));
+	t_tuple	n1 = normal_at(tri, point(0, 0.5, 0), NULL);
+	t_tuple	n2 = normal_at(tri, point(-0.5, 0.75, 0), NULL);
+	t_tuple	n3 = normal_at(tri, point(0.5, 0.25, 0), NULL);
 
 	assert_tuple_equal(n1, tri.tri_normal);
 	assert_tuple_equal(n2, tri.tri_normal);

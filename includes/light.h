@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:36:20 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/09 14:50:15 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/11/26 18:18:26 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_shadow
 
 typedef struct s_world	t_world;
 
-t_tuple		normal_at(t_shape s, t_tuple p);
+t_tuple		normal_at(t_shape s, t_tuple p, t_inter *i);
 t_tuple		reflect(t_tuple in, t_tuple normal);
 t_plight	point_light(t_tuple pos, t_color intensity);
 t_color		lighting(t_lighting data);

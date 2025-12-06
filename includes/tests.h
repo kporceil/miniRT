@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   tests.h                                            :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */
@@ -171,5 +171,21 @@ int		test_objs_count(void);
 int		test_unique_identifier(void);
 
 int		test_ft_strtod(void);
+
+int	test_vector_create(void);
+int	test_vector_add(void);
+
+int	test_obj_parser_ignoring(void);
+int	test_obj_parser_vertices(void);
+int	test_obj_parser_triangle(void);
+int	test_obj_parser_group(void);
+int	test_obj_parser_parsed_to_group(void);
+int	test_obj_parser_smooth_triangle(void);
+int	test_obj_parser_face_normal(void);
+
+int	test_smooth_triangle_create(void);
+int	test_smooth_triangle_uv(void);
+int	test_smooth_triangle_normal(void);
+int	test_smooth_triangle_precomp(void);
 
 #endif
