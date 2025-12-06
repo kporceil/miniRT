@@ -47,9 +47,6 @@ static int	parse_camera_value(char *file, t_world *world)
 
 int	parse_camera(char *file, t_world *world)
 {
-	t_tuple	pos;
-
-	pos.w = 1;
 	if (world->had_cam == true)
 	{
 		ft_putendl_fd("A scene can only have one camera", 2);
