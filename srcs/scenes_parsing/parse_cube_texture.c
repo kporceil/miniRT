@@ -69,7 +69,7 @@ int	parse_cube_texture_map(char *dir, t_shape *cu)
 	i = 0;
 	while (i < 6)
 	{
-		if (load_cube_face(dir, (char *)face_names[i], &faces[i]) == -1)
+		if (load_cube_face(dir, (char *)face_names[i], faces + i) == -1)
 		{
 			free_cube_textures(faces, i);
 			return (-1);

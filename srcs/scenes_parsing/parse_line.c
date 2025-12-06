@@ -36,7 +36,9 @@ int	parse_line(char *file, t_world *world)
 		return (parse_cube(file + 2, world));
 	if (*file == 'c' && *(file + 1) == 'o')
 		return (parse_cone(file + 2, world));
-	write(2, "Invalid Identifier at this line: ", 33);
+	if (*file == 'o' && *(file + 1) == 'b' && *(file + 2) == 'j')
+		return (parse_model(file + 3, world));
+	(void)!write(2, "Invalid Identifier at this line: ", 33);
 	ft_putstr_fd(file, 2);
 	return (-1);
 }

@@ -139,7 +139,7 @@ endif
 
 .PHONY: json
 json:
-	@/home/kporceil/.local/bin/compiledb $(MAKE) MODE="$(MODE)"
+	@compiledb $(MAKE) MODE="$(MODE)"
 
 .PHONY: all
 all:

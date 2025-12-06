@@ -108,6 +108,7 @@ void	remove_unused_fd(t_fd **lst)
 	t_fd	*next;
 
 	current = *lst;
+	prev = NULL;
 	while (current)
 	{
 		if (!current->buffer_lst)

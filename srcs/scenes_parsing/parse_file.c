@@ -89,7 +89,7 @@ int	parse_file(char *file, t_world *world)
 
 	if (fd == -1)
 	{
-		write(2, "Cannot open file\n", 18);
+		(void)!write(2, "Cannot open file\n", 18);
 		return (-1);
 	}
 	line = get_next_line(fd, READ);
