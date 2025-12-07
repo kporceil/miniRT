@@ -39,6 +39,7 @@ int		parse_cube_texture_map(char *dir, t_shape *cu);
 void	free_cube_textures(t_uvpat faces[6], int count);
 void	set_skybox_params(t_shape *cu);
 size_t	count_possible_intersections(t_world *world);
+int		parse_model(char *file, t_world *world);
 
 static inline char	*skip_space(char *str)
 {

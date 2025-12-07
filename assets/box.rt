@@ -10,10 +10,12 @@ pl 0,0,-3 0,0,1 120,200,120
 pl 3,0,0 1,0,0 160,160,160 Tassets/lcesbron.ppm
 pl 0,6,0 0,1,0 160,160,160
 
-sp 0,0.5,-2 0.5 63,47,207 Tassets/foriol.ppm
+sp 0,0.5,-2 0.5 63,47,207 checker
 
-cy 1,0,-1 0,1,0 0.3 0.7 15,23,31 Tassets/foriol.ppm
+cy 1,0,-1 0,1,0 0.3 0.7 15,23,31 checker
 
-co 0,0.26,0 0,1,0 1 0.5 135,0,183 Tassets/foriol.ppm
+co 0,0.26,0 0,1,0 1 0.5 135,0,183 checker
 
-cu 1,0.43,1 0,1,0 0.3,0.3,0.3  183,71,23 Tassets/lancellottichapel S
+cu 1,0.3001,1 0,1,0 0.3,0.3,0.3  183,71,23 checker
+
+obj assets/teapot.obj 0,0,2 0,0,1 0.03,0.03,0.03 60,60,180

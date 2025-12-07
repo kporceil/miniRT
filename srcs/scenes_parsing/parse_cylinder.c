@@ -73,7 +73,7 @@ static int	parse_bonus_value(char *file, char **endptr, t_shape *cy)
 	file = skip_space(*endptr);
 	if (ft_strncmp("checker", file, 7) == 0)
 		cy->material.pat = texture_map(
-				uv_checkers(2, 2, cy->material.color, color(1, 1, 1)),
+				uv_checkers(16, 8, cy->material.color, color(1, 1, 1)),
 				cylindrical_map);
 	else if (*file == 'T')
 	{
