@@ -40,6 +40,7 @@ t_matrix	matrix_scaling(double x, double y, double z);
 t_matrix	matrix_x_rotation(double rad);
 t_matrix	matrix_y_rotation(double rad);
 t_matrix	matrix_z_rotation(double rad);
+t_matrix	matrix_xyz_rotation(double x, double y, double z);
 t_matrix	matrix_shearing(double x[2], double y[2], double z[2]);
 t_matrix	view_transform_forward(t_tuple from, t_tuple forward, t_tuple up);
 t_matrix	view_transform_from_to(t_tuple from, t_tuple to, t_tuple up);

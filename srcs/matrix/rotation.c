@@ -13,6 +13,12 @@
 #include "matrix.h"
 #include <math.h>
 
+inline t_matrix	matrix_xyz_rotation(double x, double y, double z)
+{
+	return (matrix_mult(matrix_x_rotation(x), matrix_mult(matrix_y_rotation(y),
+				matrix_z_rotation(z))));
+}
+
 inline t_matrix	matrix_x_rotation(double rad)
 {
 	return ((t_matrix){{

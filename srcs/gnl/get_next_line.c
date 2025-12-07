@@ -142,6 +142,7 @@ void	*buffer_clear(t_fd **lst, int fd)
 	t_buffer	*buffer_tmp2;
 
 	fd_tmp = *lst;
+	fd_tmp2 = NULL;
 	while (fd_tmp && fd_tmp->fd != fd)
 	{
 		fd_tmp2 = fd_tmp;
