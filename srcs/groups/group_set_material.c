@@ -16,14 +16,15 @@ void	group_set_material(t_shape *g, t_material m)
 {
 	size_t	i;
 
-	g->material = m;
 	i = 0;
-	while (i < g->nb_members)
+	if (g->type == GROUP)
 	{
-		if (g->child[i].type == GROUP)
+		while (i < g->nb_members)
+		{
 			group_set_material(g->child + i, m);
-		else
-			g->child[i].material = m;
-		++i;
+			++i;
+		}
+		return ;
 	}
+	g->material = m;
 }
