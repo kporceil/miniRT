@@ -5,25 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 10:53:09 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/08 11:26:40 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/12/08 11:07:24 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/12/08 11:10:11 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vectors.h"
-#include "libft.h"
+#include "groups.h"
 
-int	vec_delete_index(void *vec, size_t index)
+int	group_delete_index(t_shape *group, size_t index)
 {
-	t_vector_head * const	header = vec_get_header(vec);
-	void				*dest;
-
-	if (index >= header->nb_elems)
-	{
+	if (vec_delete_index(group->child, index))
 		return (1);
-	}
-	dest = vec + header->el_size * index;
-	ft_memmove(dest, dest + header->el_size, header->el_size * (header->nb_elems - index - 1));
-	--header->nb_elems;
+	--group->nb_members;
 	return (0);
 }

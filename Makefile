@@ -35,10 +35,10 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
 					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
 					$(addprefix cubes/, cube_intersect_tests normal_tests) \
-					$(addprefix groups/, create_tests intersect_tests transformation_tests) \
+					$(addprefix groups/, create_tests intersect_tests transformation_tests delete_index_tests) \
 					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests) \
 					$(addprefix triangles/, create_tests normal_tests intersect_tests) \
-					$(addprefix bounding_box/, create_tests add_point_tests bounds_of_tests add_tests contains_point_tests contains_box_tests transform_tests parent_space_bounds_of_tests group_bounds_of_tests intersect_tests split_bounds_tests) \
+					$(addprefix bounding_box/, create_tests add_point_tests bounds_of_tests add_tests contains_point_tests contains_box_tests transform_tests parent_space_bounds_of_tests group_bounds_of_tests intersect_tests split_bounds_tests partition_children_tests) \
 					$(addprefix vectors/, create_tests add_tests delete_index_tests) \
 					$(addprefix obj_parser/, ignoring_tests vertices_tests triangle_tests group_tests parsed_to_group_tests smooth_triangle_tests faces_normal_tests) \
 					$(addprefix smooth_triangles/, create_tests uv_tests normal_tests precomp_tests))
@@ -68,10 +68,10 @@ BASENAME := $(MAIN) \
 			$(addprefix render_mlx/, init_mlx exit_mlx loop_mlx display_mlx hooks canva_to_mlx_image) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
-			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material free copy) \
+			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material free copy delete_index) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(addprefix triangles/, create intersect) \
-			$(addprefix bounding_box/, create add_point bounds_of add contains_point contains_box transform parent_space_bounds_of intersect split_bounds) \
+			$(addprefix bounding_box/, create add_point bounds_of add contains_point contains_box transform parent_space_bounds_of intersect split_bounds partition_children) \
 			$(addprefix vectors/, create get_header free add delete_index) \
 			$(addprefix uid/, generate_uid) \
 			$(addprefix obj_parser/, obj_parser parse_obj_line free add_vertice add_face change_group parsed_to_group add_vertice_normal add_smooth_polygon add_polygon) \

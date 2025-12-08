@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/12/04 10:59:31 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/08 11:28:32 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,6 @@ int	main(void)
 	ret += test_schlick_effect();
 	ret += test_cube_intersect();
 	ret += test_cube_normal();
-	ret += test_group_create();
-	ret += test_group_intersect();
-	ret += test_group_transform();
 	ret += test_uv_checker_pattern();
 	ret += test_mapping();
 	ret += test_ppm_parsing();
@@ -115,6 +112,13 @@ int	main(void)
 	ret += test_smooth_triangle_precomp();
 	ret += test_obj_parser_smooth_triangle();
 	ret += test_obj_parser_face_normal();
+	ret += test_vector_create();
+	ret += test_vector_add();
+	ret += test_vector_delete_index();
+	ret += test_group_create();
+	ret += test_group_intersect();
+	ret += test_group_transform();
+	ret += test_group_delete_index();
 	ret += test_bounding_box_create();
 	ret += test_bounding_box_add_point();
 	ret += test_bounding_box_bounds_of();
@@ -126,9 +130,7 @@ int	main(void)
 	ret += test_bounding_box_group_bounds_of();
 	ret += test_bounding_box_intersect();
 	ret += test_bounding_box_split_bounds();
-	ret += test_vector_create();
-	ret += test_vector_add();
-	ret += test_vector_delete_index();
+	ret += test_bounding_box_partition_children();
 	printf("Failed %d tests\n", ret);
 	return (ret);
 }

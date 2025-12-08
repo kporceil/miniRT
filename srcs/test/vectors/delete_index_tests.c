@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 10:53:51 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/04 12:04:56 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/08 11:06:37 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	vector_delete_index_1_test(__unused void **state)
 	vec_add((void **)&tab, &(int){5});
 	vec_add((void **)&tab, &(int){-18});
 	vec_add((void **)&tab, &(int){8});
-	vec_delete_index((void **)&tab, 1);
+	vec_delete_index(tab, 1);
 	assert_int_equal(header->vector_size, sizeof(int) * 5);
 	assert_int_equal(header->nb_elems, 2);
 	assert_int_equal(header->max_elems, 5);
@@ -45,9 +45,9 @@ void	vector_delete_index_2_test(__unused void **state)
 	vec_add((void **)&tab, &(int){5});
 	vec_add((void **)&tab, &(int){-18});
 	vec_add((void **)&tab, &(int){8});
-	vec_delete_index((void **)&tab, 0);
-	vec_delete_index((void **)&tab, 0);
-	vec_delete_index((void **)&tab, 0);
+	vec_delete_index(tab, 0);
+	vec_delete_index(tab, 0);
+	vec_delete_index(tab, 0);
 	assert_int_equal(header->vector_size, sizeof(int) * 5);
 	assert_int_equal(header->nb_elems, 0);
 	assert_int_equal(header->max_elems, 5);
@@ -62,7 +62,7 @@ void	vector_delete_index_3_test(__unused void **state)
 	vec_add((void **)&tab, &(int){5});
 	vec_add((void **)&tab, &(int){-18});
 	vec_add((void **)&tab, &(int){8});
-	vec_delete_index((void **)&tab, 0);
+	vec_delete_index(tab, 0);
 	assert_int_equal(header->vector_size, sizeof(int) * 5);
 	assert_int_equal(header->nb_elems, 2);
 	assert_int_equal(header->max_elems, 5);
@@ -79,7 +79,7 @@ void	vector_delete_index_4_test(__unused void **state)
 	vec_add((void **)&tab, &(int){5});
 	vec_add((void **)&tab, &(int){-18});
 	vec_add((void **)&tab, &(int){8});
-	vec_delete_index((void **)&tab, 3);
+	vec_delete_index(tab, 3);
 	assert_int_equal(header->vector_size, sizeof(int) * 5);
 	assert_int_equal(header->nb_elems, 3);
 	assert_int_equal(header->max_elems, 5);

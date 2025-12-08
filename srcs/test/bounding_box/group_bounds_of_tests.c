@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 10:54:28 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/02 11:31:25 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/08 15:33:08 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	bounding_box_group_bounds_of_1_test(__unused void **state)
 	b1 = bb_bounds_of(g);
 	assert_tuple_equal(b1.min, point(-4.5, -3, -5));
 	assert_tuple_equal(b1.max, point(4, 7, 4.5));
+	free_group(&g);
 }
 
 int	test_bounding_box_group_bounds_of(void)
