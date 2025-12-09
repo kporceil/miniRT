@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:48:41 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 16:48:52 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 17:06:01 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *cu)
 	file = *endptr;
 	if (parse_color(file, endptr, &rgb) == -1)
 		return (-1);
-	*endptr = skip_space(*endptr);
 	shape_set_matrix(cu, matrix_mult(object_orientation(pos, dir,
-				vector(0, 1, 0)), matrix_scaling(scale.x, scale.y, scale.z)));
+				vector(0, 1, 0)),
+			matrix_scaling(scale.x / 2.0, scale.y / 2.0, scale.z / 2.0)));
 	if (fabs(dir.y) > 0.9)
 		shape_set_matrix(cu, matrix_mult(object_orientation(pos, dir,
-					vector(1, 0, 0)), matrix_scaling(scale.x,
-					scale.y, scale.z)));
+					vector(1, 0, 0)), matrix_scaling(scale.x / 2.0,
+					scale.y / 2.0, scale.z / 2.0)));
 	cu->material.color = rgb;
 	return (0);
 }
@@ -107,7 +107,7 @@ static int	parse_cube_value(char *file, t_world *world)
 	cu = cube(get_shape_id(world));
 	if (parse_mandatory_value(file, &endptr, &cu) == -1)
 		return (-1);
-	file = endptr;
+	file = skip_space(endptr);
 	if (*file != '\0' && parse_bonus_value(file, &endptr, &cu) == -1)
 		return (-1);
 	if (new_shape_node(world, &cu) == -1)

@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:48:58 by kporceil          #+#    #+#             */
-/*   Updated: 2025/12/09 15:36:36 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 17:08:32 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *co)
 	d_h[0] = ft_strtod(*endptr, endptr);
 	file = *endptr;
 	d_h[1] = ft_strtod(file, endptr);
-	if (file == *endptr)
-		return (-1);
 	if (parse_color(*endptr, endptr, &rgb) == -1)
 		return (-1);
 	shape_set_matrix(co, matrix_mult(object_orientation(pos, dir,
-				vector(0, 1, 0)), matrix_scaling(d_h[0], 1, d_h[0])));
+				vector(0, 1, 0)),
+			matrix_scaling(d_h[0] / d_h[1], 1, d_h[0] / d_h[1])));
 	if (fabs(dir.y) > 0.9)
 		shape_set_matrix(co, matrix_mult(object_orientation(pos, dir,
-					vector(1, 0, 0)), matrix_scaling(d_h[0], 1, d_h[0])));
+					vector(1, 0, 0)),
+				matrix_scaling(d_h[0] / d_h[1], 1, d_h[0] / d_h[1])));
 	co->material.color = rgb;
 	co->cyl_max = d_h[1] / 2.0;
 	co->cyl_min = -(d_h[1] / 2.0);

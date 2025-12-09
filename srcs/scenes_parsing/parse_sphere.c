@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:47:44 by kporceil          #+#    #+#             */
-/*   Updated: 2025/12/09 15:18:40 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 16:16:38 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *sp)
 		return (-1);
 	*endptr = skip_space(*endptr);
 	shape_set_matrix(sp, matrix_mult(matrix_translation(pos.x, pos.y, pos.z),
-			matrix_scaling(diameter, diameter, diameter)));
+			matrix_scaling(diameter / 2.0, diameter / 2.0, diameter / 2.0)));
 	sp->material.color = rgb;
 	return (0);
 }
