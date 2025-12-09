@@ -6,14 +6,13 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 15:49:08 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/11/19 19:13:32 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 15:23:25 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
 #include "world.h"
 #include "groups.h"
-#include "vectors.h"
 #include "scenes_parsing.h"
 #include <stdlib.h>
 
@@ -42,6 +41,8 @@ void	free_world(t_world *w)
 		if (w->objs[i].material.pat.type == CUBE_UV
 			&& w->objs[i].material.pat.faces->type == IMAGE)
 			free_cube_texture(w->objs + i);
+		if (w->objs[i].material.normal_map.type != NO)
+			free(w->objs[i].material.normal_map.uvpat.file.canva);
 		++i;
 	}
 	free_light_list(w);

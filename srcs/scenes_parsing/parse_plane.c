@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:48:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/12/02 22:02:07 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 15:18:55 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,6 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *pl)
 	return (0);
 }
 
-static int	parse_image_pattern(char *file, t_shape *pl)
-{
-	size_t	i;
-	char	backup;
-	t_canva	texture;
-
-	i = 0;
-	while (!ft_isspace(file[i]))
-		++i;
-	backup = file[i];
-	file[i] = '\0';
-	texture = ppm_to_canva(file);
-	if (texture.canva == NULL)
-		return (-1);
-	file[i] = backup;
-	pl->material.pat = texture_map(uv_image(texture), planar_map);
-	return (0);
-}
-
 static int	parse_bonus_value(char *file, char **endptr, t_shape *pl)
 {
 	if (*file == '\0')
@@ -64,21 +45,15 @@ static int	parse_bonus_value(char *file, char **endptr, t_shape *pl)
 	pl->material.transparency = ft_strtod(*endptr, endptr);
 	pl->material.refractive_index = ft_strtod(*endptr, endptr);
 	file = skip_space(*endptr);
-	if (ft_strncmp("checker", file, 7) == 0)
-		pl->material.pat = texture_map(
-				uv_checkers(2, 2, pl->material.color, color(1, 1, 1)),
-				planar_map);
-	else if (*file == 'T')
-	{
-		if (parse_image_pattern(file + 1, pl) == -1)
-			return (-1);
-	}
-	while (!ft_isspace(*file))
-		++file;
+	if (parse_texture(file, endptr, pl, planar_map) == -1)
+		return (-1);
+	file = *endptr;
 	if (*file != '\0' && *skip_space(file) != '\0')
 	{
 		if (pl->material.pat.type == UV && pl->material.pat.uvpat.type == IMAGE)
 			free(pl->material.pat.uvpat.file.canva);
+		if (pl->material.normal_map.type == UV)
+			free(pl->material.normal_map.uvpat.file.canva);
 		return (-1);
 	}
 	return (0);

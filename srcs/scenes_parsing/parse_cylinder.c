@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:48:24 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 16:48:37 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 15:38:35 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,8 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *cy)
 		shape_set_matrix(cy, matrix_mult(object_orientation(pos, dir,
 					vector(1, 0, 0)), matrix_scaling(d_h[0], 1, d_h[0])));
 	cy->material.color = rgb;
-	cy->cyl_max = d_h[1];
-	cy->cyl_min = 0;
-	return (0);
-}
-
-static int	parse_image_pattern(char *file, t_shape *cy)
-{
-	size_t	i;
-	char	backup;
-	t_canva	texture;
-
-	i = 0;
-	while (!ft_isspace(file[i]))
-		++i;
-	backup = file[i];
-	file[i] = '\0';
-	texture = ppm_to_canva(file);
-	if (texture.canva == NULL)
-		return (-1);
-	file[i] = backup;
-	cy->material.pat = texture_map(uv_image(texture), cylindrical_map);
+	cy->cyl_max = d_h[1] / 2.0;
+	cy->cyl_min = -(d_h[1] / 2.0);
 	return (0);
 }
 
@@ -71,21 +52,15 @@ static int	parse_bonus_value(char *file, char **endptr, t_shape *cy)
 	cy->material.transparency = ft_strtod(*endptr, endptr);
 	cy->material.refractive_index = ft_strtod(*endptr, endptr);
 	file = skip_space(*endptr);
-	if (ft_strncmp("checker", file, 7) == 0)
-		cy->material.pat = texture_map(
-				uv_checkers(16, 8, cy->material.color, color(1, 1, 1)),
-				cylindrical_map);
-	else if (*file == 'T')
-	{
-		if (parse_image_pattern(file + 1, cy) == -1)
-			return (-1);
-	}
-	while (*file != '\0' && !ft_isspace(*file))
-		++file;
+	if (parse_texture(file, endptr, cy, cylindrical_map) == -1)
+		return (-1);
+	file = *endptr;
 	if (*skip_space(file) != '\0')
 	{
 		if (cy->material.pat.type == UV && cy->material.pat.uvpat.type == IMAGE)
 			free(cy->material.pat.uvpat.file.canva);
+		if (cy->material.normal_map.type == UV)
+			free(cy->material.normal_map.uvpat.file.canva);
 		return (-1);
 	}
 	return (0);
