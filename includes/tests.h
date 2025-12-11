@@ -180,6 +180,7 @@ int	test_bounding_box_group_bounds_of(void);
 int	test_bounding_box_intersect(void);
 int	test_bounding_box_split_bounds(void);
 int	test_bounding_box_partition_children(void);
+int	test_bounding_box_divide(void);
 
 int	test_vector_create(void);
 int	test_vector_add(void);

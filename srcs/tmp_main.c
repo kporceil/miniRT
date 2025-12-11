@@ -6,10 +6,12 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:04:06 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/26 15:29:06 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 15:51:14 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "scenes_parsing.h"
+#include "bounding_box.h"
 #include "color.h"
 #include "matrix.h"
 #include "groups.h"
@@ -48,46 +50,24 @@ void	write_file(char	*name, char	*ppm)
 int	main(void)
 {
 	t_world	world = world_create();
-	t_obj_parsing	p;
 	struct timeval	tv_a = (struct timeval){0};
 	struct timeval	tv_b = (struct timeval){0};
+	t_obj_parsing	p;
+	t_shape	g;
 
 	world.lights_count = 1;
-	world.objs_count = 3;
-	world.objs = malloc(sizeof(t_shape) * world.objs_count);
-	world.lights = malloc(sizeof(t_plight) * world.lights_count);
-	world.objs[0] = sphere(300);
-	world.objs[1] = sphere(301);
-	world.objs[2] = sphere(302);
-	shape_set_matrix(world.objs, matrix_translation(-1, -1, -1));
-	shape_set_matrix(world.objs + 1, matrix_translation(1, -1, -1));
-	shape_set_matrix(world.objs + 2, matrix_translation(-1, -1, 1));
-	//group_add_shape(world.objs, sphere(2));
-	//double pi = M_PI;
-	//group_set_matrix(world.objs, matrix_x_rotation(M_PI/2));
-	//group_set_matrix(world.objs, matrix_scaling(2, 2, 2));
-	//group_set_material(world.objs, (t_material){(t_pattern){RING, color(1, 0, 0), color(0, 1, 0), identity_matrix(4), identity_matrix(4)}, (t_color){1, 0.1, 0.1}, 0.1, 0.9, 0.9, 200, 0.8, 0, 1});
-	//world.objs[1]->	
-	//shape_set_matrix(world.objs + 1, matrix_mult(matrix_translation(1, 1.5, 0), matrix_scaling(0.25, 0.25, 0.25)));
-	//shape_set_matrix(world.objs->child, matrix_translation(0, 0, 5));
-	//group_add_shape(world.objs, sphere(2));
-	//shape_set_matrix(world.objs->child, matrix_scaling(1, 2, 1));
-	//group_add_shape(world.objs, cylinder(3));
-	//world.objs->child[1].cyl_min = 0;
-	//world.objs->child[1].cyl_max = 1;
-	//shape_set_matrix(world.objs->child + 1, matrix_mult(matrix_translation(1, 0, 0), matrix_z_rotation(-M_PI/2)));
-	//group_set_matrix(world.objs, matrix_scaling(1.5, 1.5, 1.5));
-	world.lights[0] = point_light(point(0, 10, 0), color(1, 1, 1));
-	t_camera	cam = camera(WIDTH, HEIGHT, 70 * (M_PI / 180), point(4, 0, 0));
 	world.objs_count = 1;
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
-	printf("begin parsing\n");
-	p = obj_parser("./assets/teapot.obj");
-	world.objs[0] = parsed_to_group(&p);
-	free_obj_parsing(&p);
-	printf("finish parsing\n");
-	world.lights[0] = point_light(point(50, 50, 15), color(1, 1, 1));
+	world.lights[0] = point_light(point(10, 0, 0), color(1, 1, 1));
+	p = obj_parser("assets/teapot.obj");
+	g = parsed_to_group(&p);
+	printf("la commande 65\n");
+	divide(&g, 100);
+	world.objs[0] = g;
+	t_camera	cam = camera(WIDTH, HEIGHT, 70 * (M_PI / 180), point(7, 0, 0));
+	world.buf_inter = malloc(sizeof(t_inter) * count_possible_intersections(&world));
+	printf("la commande 66\n");
 	t_canva		image = render(cam, world, 1);
 	if (!image.canva)
 		return (1);
@@ -95,9 +75,6 @@ int	main(void)
 	display_mlx(image, &cam, world, 1000 * (tv_a.tv_sec - tv_b.tv_sec)
 			+ (tv_a.tv_usec - tv_b.tv_usec) / 1000);
 	gettimeofday(&tv_a, NULL);
-	//char		*ppm = canva_to_ppm(image);
-	//write_file("render/test.ppm", ppm);
-	//free(ppm);
 	free(image.canva);
 	free_world(&world);
 }

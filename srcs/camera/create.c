@@ -28,7 +28,7 @@ t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos)
 	double		aspect;
 
 	ret.pos = pos;
-	ret.look_at = point(0, 0, 0);
+	ret.look_at = point(-10, 0, 0);
 	ret.up = vector(0, 1, 0);
 	ret.hsize = hsize;
 	ret.vsize = vsize;
