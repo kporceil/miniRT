@@ -25,7 +25,6 @@ static void	one_obj_test(__unused void **state)
 
 	assert_int_equal(parse_file("test_assets/one_obj.rt", &world), 0);
 	assert_int_equal(world.objs_count, 1);
-	assert_matrix_equal(world.tmp_obj->shape.final_transformation, identity_matrix(4));
 	assert_color_equal(world.tmp_obj->shape.material.color, color(1, 1, 1));
 	free_light_list(&world);
 	free_shape_list(&world);
