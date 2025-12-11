@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:28:14 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/30 11:24:28 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/27 16:59:14 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DISPLAY_MLX_H
 
 # include "camera.h"
+# include "world.h"
 # include <stdbool.h>
 
 # define WINDOW_TITLE "miniRT"

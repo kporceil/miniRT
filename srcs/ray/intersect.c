@@ -26,7 +26,7 @@ void	ray_intersect(t_shape *s, t_ray r, t_intersections *inter)
 	else if (s->type == CUBE)
 		ray_cube_intersect(s, ray_transform(&r, &s->final_inverted), inter);
 	else if (s->type == TRIANGLE || s->type == SMOOTH_TRIANGLE)
-		ray_triangle_intersect(s, r, inter);
+		ray_triangle_intersect(s, ray_transform(&r, &s->final_inverted), inter);
 	else if (s->type == GROUP)
 		ray_group_intersect(s, r, inter);
 }

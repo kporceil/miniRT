@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:31:24 by kporceil          #+#    #+#             */
-/*   Updated: 2024/12/10 16:17:33 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2024/12/11 13:21:52 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,26 @@ bool	is_line_complete(t_buffer *buffer)
 	return (false);
 }
 
-void	*lst_clear(t_buffer **lst)
+void	*lst_clear(t_fd **lst)
 {
-	t_buffer	*tmp;
-	t_buffer	*tmp2;
+	t_fd		*fd_tmp;
+	t_fd		*fd_tmp2;
+	t_buffer	*buff_tmp;
+	t_buffer	*buff_tmp2;
 
-	tmp = *lst;
-	while (tmp)
+	fd_tmp = *lst;
+	while (fd_tmp)
 	{
-		tmp2 = tmp;
-		tmp = tmp->next;
-		free(tmp2);
+		buff_tmp = fd_tmp->buffer_lst;
+		while (buff_tmp)
+		{
+			buff_tmp2 = buff_tmp;
+			buff_tmp = buff_tmp->next;
+			free(buff_tmp2);
+		}
+		fd_tmp2 = fd_tmp;
+		fd_tmp = fd_tmp->next;
+		free(fd_tmp2);
 	}
 	*lst = NULL;
 	return (NULL);
@@ -90,4 +99,30 @@ ssize_t	ft_calc_len(t_buffer *lst)
 	if (i != lst->bytes_read)
 		++i;
 	return (len + i);
+}
+
+void	remove_unused_fd(t_fd **lst)
+{
+	t_fd	*current;
+	t_fd	*prev;
+	t_fd	*next;
+
+	current = *lst;
+	prev = NULL;
+	while (current)
+	{
+		if (!current->buffer_lst)
+		{
+			if (current == *lst)
+				*lst = current->next;
+			else
+				prev->next = current->next;
+			next = current->next;
+			free(current);
+			current = next;
+			continue ;
+		}
+		prev = current;
+		current = current->next;
+	}
 }

@@ -18,5 +18,6 @@ t_material	material(void)
 {
 	return ((t_material){(t_pattern){.type = NO, color(0, 0, 0), color(0, 0, 0),
 		identity_matrix(4), identity_matrix(4)},
+		(t_pattern){.type = NO},
 			(t_color){1, 1, 1}, 0.9, 0.9, 200, 0, 0, 1});
 }

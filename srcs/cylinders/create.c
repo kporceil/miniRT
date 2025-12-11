@@ -24,5 +24,6 @@ t_shape	cylinder(size_t id)
 		.cyl_closed = 0,
 		.cyl_min = -DBL_MAX,
 		.cyl_max = DBL_MAX,
-		.id = id});
+		.id = id,
+		.skybox = false});
 }

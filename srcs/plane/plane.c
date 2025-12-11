@@ -20,5 +20,6 @@ t_shape	plane(size_t id)
 		.final_inverted = identity_matrix(4),
 		.material = material(),
 		.parent = NULL,
-		.id = id});
+		.id = id,
+		.skybox = false});
 }

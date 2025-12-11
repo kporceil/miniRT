@@ -19,6 +19,7 @@
 typedef struct s_material
 {
 	t_pattern	pat;
+	t_pattern	normal_map;
 	t_color		color;
 	double		diffuse;
 	double		specular;

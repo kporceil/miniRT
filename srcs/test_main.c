@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:15:57 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/28 21:36:46 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/27 16:08:35 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,10 @@ int	main(void)
 	ret += test_triangle_create();
 	ret += test_triangle_normal();
 	ret += test_triangle_intersect();
+	ret += test_objs_count();
+	ret += test_lights_count();
+	ret += test_unique_identifier();
+	ret += test_ft_strtod();
 	ret += test_vector_create();
 	ret += test_vector_add();
 	ret += test_obj_parser_ignoring();

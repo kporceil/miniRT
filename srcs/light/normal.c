@@ -6,12 +6,13 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:31:22 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/27 18:07:36 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 13:41:46 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 #include "tuples.h"
+#include "light.h"
 #include "shape.h"
 #include "ray.h"
 #include <math.h>
@@ -90,6 +91,7 @@ t_tuple	normal_at(t_shape s, t_tuple p, t_inter *i)
 
 	normal = matrix_tuple_mult(matrix_transpose(s.final_inverted),
 			object_normal);
+	normal = map_normal(&s, object_point, normal);
 	normal.w = 0;
 	return (normalize(normal));
 }

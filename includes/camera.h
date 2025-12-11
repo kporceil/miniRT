@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:05:42 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/30 15:36:03 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/11/27 17:01:03 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "matrix.h"
 # include "ray.h"
-# include "world.h"
 # include "canvas.h"
 # include <stddef.h>
 # include <stdbool.h>
+
+typedef struct s_world	t_world;
 
 typedef struct s_camera
 {

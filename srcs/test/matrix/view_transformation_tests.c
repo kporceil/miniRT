@@ -21,19 +21,19 @@
 static void	view_transformation_test1(void **state)
 {
 	(void)state;
-	assert_matrix_equal(view_transform(point(0, 0, 0), point(0, 0, -1), vector(0, 1, 0)), identity_matrix(4));
+	assert_matrix_equal(view_transform_from_to(point(0, 0, 0), point(0, 0, -1), vector(0, 1, 0)), identity_matrix(4));
 }
 
 static void	view_transformation_test2(void **state)
 {
 	(void)state;
-	assert_matrix_equal(view_transform(point(0, 0, 0), point(0, 0, 1), vector(0, 1, 0)), matrix_scaling(-1, 1, -1));
+	assert_matrix_equal(view_transform_from_to(point(0, 0, 0), point(0, 0, 1), vector(0, 1, 0)), matrix_scaling(-1, 1, -1));
 }
 
 static void	view_transformation_test3(void **state)
 {
 	(void)state;
-	assert_matrix_equal(view_transform(point(0, 0, 8), point(0, 0, 0), vector(0, 1, 0)), matrix_translation(0, 0, -8));
+	assert_matrix_equal(view_transform_from_to(point(0, 0, 8), point(0, 0, 0), vector(0, 1, 0)), matrix_translation(0, 0, -8));
 }
 
 static void	view_transformation_test4(void **state)
@@ -57,7 +57,7 @@ static void	view_transformation_test4(void **state)
 	expected.matrix[3][2] = 0;
 	expected.matrix[3][3] = 1;
 	(void)state;
-	assert_matrix_equal(view_transform(point(1, 3, 2), point(4, -2, 8), vector(1, 1, 0)), expected);
+	assert_matrix_equal(view_transform_from_to(point(1, 3, 2), point(4, -2, 8), vector(1, 1, 0)), expected);
 }
 
 int	test_view_transformation(void)
