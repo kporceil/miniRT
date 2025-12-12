@@ -30,6 +30,8 @@ static double	calculate_inv_det(t_shape *tri, t_tuple dir_cross_e2)
 
 #include <stdio.h>
 
+extern size_t	g_test;
+
 void	ray_triangle_intersect(t_shape *tri, t_ray r, t_intersections *xs)
 {
 	t_tuple	p1_to_origin;
@@ -38,6 +40,7 @@ void	ray_triangle_intersect(t_shape *tri, t_ray r, t_intersections *xs)
 	double	u;
 	double	v;
 
+	++g_test;
 	//if (tri->parent)
 	//{
 	//	printf("%zu\n", tri->parent->id);

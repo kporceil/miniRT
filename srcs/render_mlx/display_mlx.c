@@ -18,6 +18,8 @@
 #include "canvas.h"
 #include "camera.h"
 
+#include <unistd.h> 
+
 int	display_mlx(t_canva canva, t_camera *camera, t_world world,
 				size_t render_time)
 {
@@ -28,6 +30,7 @@ int	display_mlx(t_canva canva, t_camera *camera, t_world world,
 		return (1);
 	params = (t_loop_params){canva, world, camera, display, render_time,
 		camera->vsize / 2, camera->hsize / 2, false, true, true};
+
 	mlx_loop_hook(display.mlx_ptr, render_loop, &params);
 	mlx_hook(display.window, KeyPress, KeyPressMask, &key_hooks, &params);
 	mlx_hook(display.window, DestroyNotify, StructureNotifyMask,
@@ -36,5 +39,9 @@ int	display_mlx(t_canva canva, t_camera *camera, t_world world,
 		&mouse_movement_hook, &params);
 	mlx_loop(display.mlx_ptr);
 	exit_mlx(display);
+	//canva_to_mlx_image(params.display, params.canva);
+	//mlx_put_image_to_window(params.display.mlx_ptr, params.display.window,
+	//	params.display.image, 0, 0);
+	//sleep(10);
 	return (0);
 }
