@@ -40,7 +40,6 @@ void	ray_triangle_intersect(t_shape *tri, t_ray r, t_intersections *xs)
 	double	u;
 	double	v;
 
-	++g_test;
 	//if (tri->parent)
 	//{
 	//	printf("%zu\n", tri->parent->id);

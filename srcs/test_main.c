@@ -13,6 +13,8 @@
 #include "tests.h"
 #include <stdio.h>
 
+size_t	g_test = 0;
+
 int	main(void)
 {
 	int	ret;
