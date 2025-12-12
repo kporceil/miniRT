@@ -28,6 +28,8 @@ static double	calculate_inv_det(t_shape *tri, t_tuple dir_cross_e2)
 	return (1.0 / det);
 }
 
+#include <stdio.h>
+
 void	ray_triangle_intersect(t_shape *tri, t_ray r, t_intersections *xs)
 {
 	t_tuple	p1_to_origin;
@@ -36,6 +38,10 @@ void	ray_triangle_intersect(t_shape *tri, t_ray r, t_intersections *xs)
 	double	u;
 	double	v;
 
+	//if (tri->parent)
+	//{
+	//	printf("%zu\n", tri->parent->id);
+	//}
 	cross_buffer = cross(r.dir, tri->tri_e2);
 	det_inv = calculate_inv_det(tri, cross_buffer);
 	if (det_inv == 0)

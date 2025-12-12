@@ -23,7 +23,7 @@ void	shape_set_matrix(t_shape *s, t_matrix m)
 	{
 		m = matrix_mult(s->parent->final_transformation, m);
 		if (s->parent->nb_members)
-			s->parent->group_bbox = bb_bounds_of(*s->parent);
+			bb_add(&s->parent->group_bbox, bb_parent_space_bounds_of(s));
 	}
 	s->final_transformation = m;
 	s->final_inverted = m;

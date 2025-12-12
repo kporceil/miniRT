@@ -30,6 +30,18 @@ static int	init_partitioning(size_t group_size, t_shape *left, t_shape *right)
 	return (0);
 }
 
+static void	fix_parent_pointers(t_shape *g)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < g->nb_members)
+	{
+		g->child[i].parent = g;
+		++i;
+	}
+}
+
 int	partition_children(t_shape *g)
 {
 	t_shape			left_g;
@@ -57,5 +69,7 @@ int	partition_children(t_shape *g)
 	}
 	group_add_shape(g, left_g);
 	group_add_shape(g, right_g);
+	fix_parent_pointers(&g->child[g->nb_members - 2]);
+	fix_parent_pointers(&g->child[g->nb_members - 1]);
 	return (0);
 }

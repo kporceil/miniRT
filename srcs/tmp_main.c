@@ -60,7 +60,7 @@ int	main(void)
 	world.objs = malloc(sizeof(t_shape) * world.objs_count);
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.lights[0] = point_light(point(10, 0, 0), color(1, 1, 1));
-	p = obj_parser("assets/teapot.obj");
+	p = obj_parser("assets/big_teapot.obj");
 	g = parsed_to_group(&p);
 	printf("la commande 65\n");
 	divide(&g, 100);
