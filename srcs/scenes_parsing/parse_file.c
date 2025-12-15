@@ -10,9 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "bounding_box.h"
 #include "get_next_line.h"
 #include "light.h"
 #include "world.h"
+#include "uid.h"
+#include "groups.h"
 #include "scenes_parsing.h"
 #include <unistd.h>
 #include <fcntl.h>
@@ -42,17 +45,20 @@ static void	copy_list_in_array(t_world *world)
 	t_lightlist	*light;
 	t_shapelist	*shape;
 	size_t		i_light;
-	size_t		i_shape;
 
 	shape = world->tmp_obj;
 	light = world->tmp_light;
-	i_shape = 0;
-	while (i_shape < world->objs_count)
+	world->objs_count = 1;
+	world->objs[0] = group(generate_uid(), world->objs_count);
+	while (shape)
 	{
-		world->objs[i_shape] = shape->shape;
+		if (shape->shape.type == PLANE)
+			world->objs[world->objs_count++] = shape->shape;
+		else
+			group_add_shape(world->objs, shape->shape);
 		shape = shape->next;
-		++i_shape;
 	}
+	divide(world->objs, 5);
 	i_light = 0;
 	while (i_light < world->lights_count)
 	{
