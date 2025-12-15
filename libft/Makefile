@@ -40,12 +40,14 @@ BASENAME := ft_isalpha \
 		   ft_atoi \
 		   ft_strtoul \
 		   ft_strtol \
+		   ft_strtod \
 		   ft_isupper \
 		   ft_substr \
 		   ft_putchar_fd \
 		   ft_putstr_fd \
 		   ft_putendl_fd \
 		   ft_putnbr_fd \
+		   ft_putdouble_fd \
 		   ft_strmapi \
 		   ft_striteri \
 		   ft_itoa \
@@ -150,6 +152,9 @@ fclean: clean
 	$(RM) $(NAME) $(SONAME)
 
 re: fclean all
+
+norm:
+	@norminette $(SRCS)
 
 -include $(DEPS)
 

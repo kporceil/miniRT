@@ -17,7 +17,7 @@
 # include "shape.h"
 
 # ifndef MAX_RECU
-#  define MAX_RECU 5
+#  define MAX_RECU 50
 # endif
 
 # ifndef T_RAY

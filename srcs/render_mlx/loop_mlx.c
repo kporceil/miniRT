@@ -17,7 +17,6 @@
 #include "display_mlx.h"
 #include "camera.h"
 #include "matrix.h"
-#include "tuples.h"
 #include "visual_settings.h"
 
 static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
@@ -57,8 +56,8 @@ static void	should_render(t_loop_params *p, size_t frame,
 	{
 		if (p->moving)
 		{
-			camera_set_transform(p->camera, view_transform(p->camera->pos,
-					p->camera->look_at, p->camera->up));
+			camera_set_transform(p->camera, view_transform_from_to(
+					p->camera->pos, p->camera->look_at, p->camera->up));
 			moving_pixel_size = optimal_pixel_size(TARGET_FPS, last_render_time,
 					moving_pixel_size);
 			pixel_size = moving_pixel_size;
@@ -66,8 +65,8 @@ static void	should_render(t_loop_params *p, size_t frame,
 		else
 			pixel_size = 1;
 		render_on_canva(&p->canva, *p->camera, p->world, pixel_size);
-		p->should_render = false;
 	}
+	p->should_render = false;
 	canva_to_mlx_image(p->display, p->canva);
 	mlx_put_image_to_window(p->display.mlx_ptr, p->display.window,
 		p->display.image, 0, 0);

@@ -16,6 +16,7 @@
 #include "matrix.h"
 #include "groups.h"
 #include "patterns.h"
+#include "scenes_parsing.h"
 #include "shape.h"
 #include "tuples.h"
 #include "canvas.h"
@@ -31,8 +32,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/time.h>
-
-void	tick(t_tuple *env, t_tuple *proj);
 
 void	write_file(char	*name, char	*ppm)
 {

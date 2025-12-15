@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 17:08:19 by kporceil          #+#    #+#             */
-/*   Updated: 2025/10/20 12:22:49 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/04 15:52:11 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ t_color		pattern_at_object(t_pattern pat, t_shape obj, t_tuple p);
 void		spherical_map(t_tuple p, double *u, double *v);
 void		planar_map(t_tuple p, double *u, double *v);
 void		cylindrical_map(t_tuple p, double *u, double *v);
+void		conical_map(t_tuple p, double *u, double *v);
 int			face_from_point(t_tuple p);
 void		cubic_map_front(t_tuple p, double *u, double *v);
 void		cubic_map_back(t_tuple p, double *u, double *v);

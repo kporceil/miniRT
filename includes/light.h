@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 12:36:20 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/26 18:18:26 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 13:12:23 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ t_color		shade_hit(t_world world, t_precomp comps, size_t remaining);
 int			color_at(t_world w, t_ray r, t_color *c, size_t remaining);
 bool		is_shadowed(t_world w, t_tuple p, size_t i);
 t_color		reflected_color(t_world world, t_precomp comps, size_t remaining);
+void		compute_tbn(t_shape *sh, t_tuple o_p, t_tuple o_n, t_tuple *tb[2]);
+t_tuple		map_normal(t_shape *sh, t_tuple o_p, t_tuple o_n);
 
 #endif

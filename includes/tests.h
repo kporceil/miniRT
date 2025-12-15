@@ -164,9 +164,15 @@ int		test_mapping(void);
 int		test_ppm_parsing(void);
 int		test_uv_file(void);
 
-int	test_triangle_create(void);
-int	test_triangle_normal(void);
-int	test_triangle_intersect(void);
+int		test_triangle_create(void);
+int		test_triangle_normal(void);
+int		test_triangle_intersect(void);
+
+int		test_lights_count(void);
+int		test_objs_count(void);
+int		test_unique_identifier(void);
+
+int		test_ft_strtod(void);
 
 int	test_bounding_box_create(void);
 int	test_bounding_box_add_point(void);

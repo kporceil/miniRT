@@ -103,6 +103,12 @@ int	main(void)
 	ret += test_triangle_create();
 	ret += test_triangle_normal();
 	ret += test_triangle_intersect();
+	ret += test_objs_count();
+	ret += test_lights_count();
+	ret += test_unique_identifier();
+	ret += test_ft_strtod();
+	ret += test_vector_create();
+	ret += test_vector_add();
 	ret += test_obj_parser_ignoring();
 	ret += test_obj_parser_vertices();
 	ret += test_obj_parser_triangle();

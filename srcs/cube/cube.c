@@ -19,5 +19,6 @@ t_shape	cube(size_t id)
 		.final_transformation = identity_matrix(4),
 		.final_inverted = identity_matrix(4),
 		.parent = NULL,
-		.id = id, .material = material()});
+		.id = id, .material = material(),
+		.skybox = false});
 }

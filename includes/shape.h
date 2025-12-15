@@ -68,6 +68,7 @@ typedef struct s_shape
 	double			cyl_min;
 	double			cyl_max;
 	size_t			id;
+  bool		skybox;
 }				t_shape;
 
 t_shape		plane(size_t id);
