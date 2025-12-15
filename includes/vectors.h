@@ -31,6 +31,6 @@ void			*vec_create(size_t el_size, size_t vec_size);
 t_vector_head	*vec_get_header(void *vec);
 void			vec_free(void *vec);
 int				vec_add(void **vector, void *el);
-int	vec_delete_index(void *vec, size_t index);
+int				vec_delete_index(void *vec, size_t index);
 
 #endif

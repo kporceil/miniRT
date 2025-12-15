@@ -15,6 +15,6 @@
 _Bool	bb_contains_point(t_bounding_box b, t_tuple p)
 {
 	return (b.min.x <= p.x && p.x <= b.max.x
-			&& b.min.y <= p.y && p.y <= b.max.y
-			&& b.min.z <= p.z && p.z <= b.max.z);
+		&& b.min.y <= p.y && p.y <= b.max.y
+		&& b.min.z <= p.z && p.z <= b.max.z);
 }

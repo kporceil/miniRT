@@ -42,33 +42,47 @@ static void	fix_parent_pointers(t_shape *g)
 	}
 }
 
-int	partition_children(t_shape *g)
+static int	place_childrens(t_shape *left, t_shape *right, t_shape *g)
 {
-	t_shape			left_g;
-	t_shape			right_g;
-	size_t			i;
+	size_t	i;
 
-	if (init_partitioning(g->nb_members / 2, &left_g, &right_g))
-		return (1);
-	bb_split_bounds(g->group_bbox, &left_g.group_bbox, &right_g.group_bbox);
 	i = 0;
 	while (i < g->nb_members)
 	{
-		if (bb_contains_box(left_g.group_bbox, bb_parent_space_bounds_of(g->child + i)))
+		if (bb_contains_box(left->group_bbox,
+				bb_parent_space_bounds_of(g->child + i)))
 		{
-			group_add_shape(&left_g, g->child[i]);
+			if (group_add_shape(left, g->child[i]))
+				return (1);
 			group_delete_index(g, i);
 		}
-		else if (bb_contains_box(right_g.group_bbox, bb_parent_space_bounds_of(g->child + i)))
+		else if (bb_contains_box(right->group_bbox,
+				bb_parent_space_bounds_of(g->child + i)))
 		{
-			group_add_shape(&right_g, g->child[i]);
+			if (group_add_shape(right, g->child[i]))
+				return (1);
 			group_delete_index(g, i);
 		}
 		else
 			++i;
 	}
-	group_add_shape(g, left_g);
-	group_add_shape(g, right_g);
+	return (0);
+}
+
+int	partition_children(t_shape *g)
+{
+	t_shape			left_g;
+	t_shape			right_g;
+
+	if (init_partitioning(g->nb_members / 2, &left_g, &right_g))
+		return (1);
+	bb_split_bounds(g->group_bbox, &left_g.group_bbox, &right_g.group_bbox);
+	if (place_childrens(&left_g, &right_g, g))
+		return (1);
+	if (group_add_shape(g, left_g))
+		return (1);
+	if (group_add_shape(g, right_g))
+		return (1);
 	fix_parent_pointers(&g->child[g->nb_members - 2]);
 	fix_parent_pointers(&g->child[g->nb_members - 1]);
 	return (0);

@@ -18,5 +18,5 @@ t_bounding_box	bounding_box(_Bool points, t_tuple min, t_tuple max)
 	if (points)
 		return ((t_bounding_box){.min = min, .max = max});
 	return ((t_bounding_box){.max = point(-INFINITY, -INFINITY, -INFINITY),
-							.min = point(INFINITY, INFINITY, INFINITY)});
+		.min = point(INFINITY, INFINITY, INFINITY)});
 }

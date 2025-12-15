@@ -23,7 +23,7 @@ static t_bounding_box	bounds_of_cone(t_shape *cone)
 	else
 		limit = b;
 	return ((t_bounding_box){.min = point(-limit, cone->cyl_min, -limit),
-							.max = point(limit, cone->cyl_max, limit)});
+		.max = point(limit, cone->cyl_max, limit)});
 }
 
 static t_bounding_box	bounds_of_triangle(t_shape *triangle)

@@ -50,7 +50,8 @@ _Bool			bb_contains_box(t_bounding_box b1, t_bounding_box b2);
 t_bounding_box	bb_transform(t_bounding_box b, t_matrix m);
 t_bounding_box	bb_parent_space_bounds_of(t_shape *s);
 _Bool			bb_intersect(t_bounding_box b, t_ray r);
-void			bb_split_bounds(t_bounding_box b, t_bounding_box *left, t_bounding_box *right);
+void			bb_split_bounds(t_bounding_box b, t_bounding_box *left,
+					t_bounding_box *right);
 int				partition_children(t_shape *g);
 int				divide(t_shape *g, size_t threshold);
 

@@ -15,15 +15,17 @@
 
 int	vec_delete_index(void *vec, size_t index)
 {
-	t_vector_head * const	header = vec_get_header(vec);
-	void				*dest;
+	t_vector_head	*header;
+	void			*dest;
 
+	header = vec_get_header(vec);
 	if (index >= header->nb_elems)
 	{
 		return (1);
 	}
 	dest = vec + header->el_size * index;
-	ft_memmove(dest, dest + header->el_size, header->el_size * (header->nb_elems - index - 1));
+	ft_memmove(dest, dest + header->el_size, header->el_size
+		* (header->nb_elems - index - 1));
 	--header->nb_elems;
 	return (0);
 }
