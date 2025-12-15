@@ -41,7 +41,6 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix bounding_box/, create_tests add_point_tests bounds_of_tests add_tests contains_point_tests contains_box_tests transform_tests parent_space_bounds_of_tests group_bounds_of_tests intersect_tests split_bounds_tests partition_children_tests divide_tests) \
 					$(addprefix vectors/, create_tests add_tests delete_index_tests) \
 					$(addprefix scenes_parsing/, unique_identifier_tests objs_count_tests lights_count_tests ft_strtod_tests) \
-					$(addprefix vectors/, create_tests add_tests) \
 					$(addprefix obj_parser/, ignoring_tests vertices_tests triangle_tests group_tests parsed_to_group_tests smooth_triangle_tests faces_normal_tests) \
 					$(addprefix smooth_triangles/, create_tests uv_tests normal_tests precomp_tests))
 endif
@@ -71,9 +70,7 @@ BASENAME := $(MAIN) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
 			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material free copy delete_index) \
-			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern) \
 			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cube_texture parse_cylinder parse_cone parse_point parse_vector parse_color new_light_node free_light_list new_shape_node free_shape_list get_shape_id parse_normalized_vector count_possible_intersections parse_model parse_texture) \
-			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material free copy) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern conical_map) \
 			$(addprefix triangles/, create intersect) \
 			$(addprefix bounding_box/, create add_point bounds_of add contains_point contains_box transform parent_space_bounds_of intersect split_bounds partition_children divide) \
@@ -81,7 +78,6 @@ BASENAME := $(MAIN) \
 			$(addprefix uid/, generate_uid) \
 			$(addprefix obj_parser/, obj_parser parse_obj_line free add_vertice add_face change_group parsed_to_group add_vertice_normal add_smooth_polygon add_polygon) \
 			$(addprefix smooth_triangles/, create) \
-			$(addprefix scenes_parsing/, count_possible_intersections) \
 			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \

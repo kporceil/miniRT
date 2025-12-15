@@ -25,6 +25,6 @@ t_shape	cylinder(size_t id)
 		.cyl_closed = 0,
 		.cyl_min = -INFINITY,
 		.cyl_max = INFINITY,
-		.id = id},
-		.skybox = false);
+		.id = id,
+		.skybox = false});
 }

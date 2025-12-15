@@ -60,12 +60,11 @@ int	main(void)
 	world.ambient = color(0.3, 0.3, 0.3);
 	p = obj_parser("assets/Satellite.obj");
 	g = parsed_to_group(&p);
-
 	shape_set_matrix(&g, matrix_y_rotation(M_PI_2));
 	divide(&g, 10);
 	t_camera	cam = camera(WIDTH, HEIGHT, 70 * (M_PI / 180), point(30, 5, 0));
 	cam.look_at = vector(0, 5, 0);
-	camera_set_transform(&cam, view_transform(cam.pos, cam.look_at, cam.up));
+	camera_set_transform(&cam, view_transform_from_to(cam.pos, cam.look_at, cam.up));
 
 	world.objs[0] = g;
 	world.buf_inter = malloc(sizeof(t_inter) * count_possible_intersections(&world));
