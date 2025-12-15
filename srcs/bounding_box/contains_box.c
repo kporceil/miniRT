@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   contains_box.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/01 18:30:13 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/12/02 09:45:56 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/12/02 09:48:33 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "float_limits.h"
-#include <math.h>
+#include "bounding_box.h"
 
-t_shape	cylinder(size_t id)
+_Bool	bb_contains_box(t_bounding_box b1, t_bounding_box b2)
 {
-	return ((t_shape){.type = CYLINDER,
-		.local_transformation = identity_matrix(3),
-		.final_transformation = identity_matrix(3),
-		.final_inverted = identity_matrix(4),
-		.material = material(),
-		.parent = NULL,
-		.cyl_closed = 0,
-		.cyl_min = -INFINITY,
-		.cyl_max = INFINITY,
-		.id = id,
-		.skybox = false});
+	return (bb_contains_point(b1, b2.min) && bb_contains_point(b1, b2.max));
 }

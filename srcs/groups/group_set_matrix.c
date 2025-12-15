@@ -6,12 +6,13 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 11:45:19 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/23 15:39:12 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/08 14:33:07 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
 #include "matrix.h"
+#include "bounding_box.h"
 
 static void	group_member_shape_set_matrix(t_shape *s, t_matrix m)
 {
@@ -48,7 +49,10 @@ void	group_set_matrix(t_shape *g, t_matrix m)
 
 	g->local_transformation = m;
 	if (g->parent)
+	{
 		m = matrix_mult(g->parent->final_transformation, m);
+		g->parent->group_bbox = bb_bounds_of(*g->parent);
+	}
 	g->final_transformation = m;
 	g->final_inverted = m;
 	if (is_matrix_invertible(m))

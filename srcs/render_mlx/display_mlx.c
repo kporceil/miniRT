@@ -18,6 +18,8 @@
 #include "canvas.h"
 #include "camera.h"
 
+#include <unistd.h> 
+
 int	display_mlx(t_canva canva, t_camera *camera, t_world world,
 				size_t render_time)
 {

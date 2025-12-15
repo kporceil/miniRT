@@ -12,15 +12,21 @@
 
 #include "shape.h"
 #include "ray.h"
+#include "bounding_box.h"
+
+#include <stdio.h>
 
 void	ray_group_intersect(t_shape *g, t_ray r, t_intersections *xs)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < g->nb_members)
+	if (bb_intersect(bb_transform(g->group_bbox, g->final_transformation), r))
 	{
-		ray_intersect(g->child + i, r, xs);
-		++i;
+		while (i < g->nb_members)
+		{
+			ray_intersect(g->child + i, r, xs);
+			++i;
+		}
 	}
 }
