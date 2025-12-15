@@ -30,22 +30,28 @@ void	camera_init_orientation(t_camera *cam, t_tuple direction)
 	cam->yaw = atan2(dir.x, dir.z);
 }
 
+static void	init_base_camera_values(t_camera *c, size_t hsize, size_t vsize,
+									t_tuple pos)
+{
+	c->pos = pos;
+	c->look_at = point(0, 0, 0);
+	c->up = vector(0, 1, 0);
+	c->hsize = hsize;
+	c->vsize = vsize;
+	c->transform = identity_matrix(4);
+	c->inverted_transform = identity_matrix(4);
+	c->yaw = 0.0;
+	c->pitch = 0.0;
+}
+
 t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos)
 {
 	t_camera	ret;
 	double		half_view;
 	double		aspect;
 
-	ret.pos = pos;
-	ret.look_at = point(0, 0, 0);
-	ret.up = vector(0, 1, 0);
-	ret.hsize = hsize;
-	ret.vsize = vsize;
+	init_base_camera_values(&ret, hsize, vsize, pos);
 	ret.fov = fov;
-	ret.transform = identity_matrix(4);
-	ret.inverted_transform = identity_matrix(4);
-	ret.yaw = 0.0;
-	ret.pitch = 0.0;
 	half_view = tan(fov / 2);
 	aspect = (double)hsize / vsize;
 	if (aspect >= 1)

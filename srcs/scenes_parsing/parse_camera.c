@@ -34,10 +34,9 @@ static int	parse_camera_value(char *file, t_world *world)
 		return (-1);
 	file = skip_space(sptr);
 	if (*file != '\0')
-	{
 		ft_putendl_fd("Extra character after camera declaration", 2);
+	if (*file != '\0')
 		return (-1);
-	}
 	world->cam = camera(WIDTH, HEIGHT, fov, pos);
 	world->cam.look_at = tuple_add(forward, pos);
 	camera_init_orientation(&world->cam, forward);
