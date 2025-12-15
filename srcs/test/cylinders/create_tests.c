@@ -6,7 +6,7 @@
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 12:46:17 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/10/02 12:12:47 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/01 18:30:52 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	create_cylinder_1_test(__unused void **state)
 {
 	t_shape	cyl = cylinder(1);
 
-	assert_double_equal(cyl.cyl_min, -DBL_MAX, EPSILON);
-	assert_double_equal(cyl.cyl_max, DBL_MAX, EPSILON);
+	assert_double_equal(cyl.cyl_min, -INFINITY, EPSILON);
+	assert_double_equal(cyl.cyl_max, INFINITY, EPSILON);
 }
 
 static void	closed_cylinder_1_test(__unused void **state)

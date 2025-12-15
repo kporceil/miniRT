@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_shape.c                                        :+:      :+:    :+:   */
+/*   divide.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 13:44:21 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/03 14:41:36 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/12/09 14:39:43 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/12/09 15:46:55 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
 #include "groups.h"
-#include "vectors.h"
 #include "bounding_box.h"
 
-int	group_add_shape(t_shape *g, t_shape s)
+int	divide(t_shape *g, size_t threshold)
 {
-	t_vector_head	*head;
+	size_t	i;
 
-	s.parent = g;
-	if (s.type == GROUP)
-		group_set_matrix(&s, s.local_transformation);
-	else
-		shape_set_matrix(&s, s.local_transformation);
-	if (vec_add((void **)&g->child, &s))
-		return (1);
-	bb_add(&g->group_bbox, bb_parent_space_bounds_of(&s));
-	head = vec_get_header(g->child);
-	g->nb_members = head->nb_elems;
-	g->group_size = head->max_elems;
+	if (g->type == GROUP)
+	{
+		if (g->nb_members >= threshold)
+		{
+			if (partition_children(g))
+				return (1);
+		}
+		i = 0;
+		while (i < g->nb_members)
+		{
+			if (divide(g->child + i, threshold))
+				return (1);
+			++i;
+		}
+	}
 	return (0);
 }

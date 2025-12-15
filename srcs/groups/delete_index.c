@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   delete_index.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcesbron <lcesbron@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 21:51:03 by lcesbron          #+#    #+#             */
-/*   Updated: 2025/12/01 18:30:13 by lcesbron         ###   ########lyon.fr   */
+/*   Created: 2025/12/08 11:07:24 by lcesbron          #+#    #+#             */
+/*   Updated: 2025/12/08 11:10:11 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "float_limits.h"
-#include <math.h>
+#include "vectors.h"
+#include "groups.h"
 
-t_shape	cylinder(size_t id)
+int	group_delete_index(t_shape *group, size_t index)
 {
-	return ((t_shape){.type = CYLINDER,
-		.local_transformation = identity_matrix(3),
-		.final_transformation = identity_matrix(3),
-		.final_inverted = identity_matrix(4),
-		.material = material(),
-		.parent = NULL,
-		.cyl_closed = 0,
-		.cyl_min = -INFINITY,
-		.cyl_max = INFINITY,
-		.id = id,
-		.skybox = false});
+	if (vec_delete_index(group->child, index))
+		return (1);
+	--group->nb_members;
+	return (0);
 }

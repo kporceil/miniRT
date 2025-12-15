@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:20:40 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/26 16:31:20 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/02 13:33:24 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,22 @@
 #  define MAX_RECU 50
 # endif
 
+# ifndef T_RAY
+#  define T_RAY
+
 typedef struct s_ray
 {
 	t_tuple	origin;
 	t_tuple	dir;
 }				t_ray;
+
+# endif
+
+typedef struct s_one_d_ray
+{
+	double	origin;
+	double	dir;
+}				t_one_d_ray;
 
 typedef struct s_inter
 {

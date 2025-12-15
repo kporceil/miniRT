@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:49:15 by kporceil          #+#    #+#             */
-/*   Updated: 2025/11/26 15:42:12 by lcesbron         ###   ########lyon.fr   */
+/*   Updated: 2025/12/08 11:28:36 by lcesbron         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,22 @@
 # define SHAPE_H
 
 # include <stddef.h>
+# include <stdbool.h>
 # include "matrix.h"
 # include "material.h"
-# include "stdbool.h"
+
+# ifndef T_BOUNDING_BOX
+#  define T_BOUNDING_BOX
+
+typedef struct s_bounding_box	t_bounding_box;
+
+struct s_bounding_box
+{
+	t_tuple	min;
+	t_tuple	max;
+};
+
+# endif
 
 typedef enum e_tshape
 {
@@ -27,34 +40,35 @@ typedef enum e_tshape
 	CONE,
 	GROUP,
 	TRIANGLE,
-	SMOOTH_TRIANGLE
+	SMOOTH_TRIANGLE,
 }				t_tshape;
 
 typedef struct s_shape
 {
-	t_tshape	type;
-	t_matrix	local_transformation;
-	t_matrix	final_transformation;
-	t_matrix	final_inverted;
-	t_material	material;
-	t_tuple		tri_p1;
-	t_tuple		tri_p2;
-	t_tuple		tri_p3;
-	t_tuple		tri_e1;
-	t_tuple		tri_e2;
-	t_tuple		tri_normal;
-	t_tuple		tri_n1;
-	t_tuple		tri_n2;
-	t_tuple		tri_n3;
-	t_shape		*parent;
-	t_shape		*child;
-	size_t		group_size;
-	size_t		nb_members;
-	int			cyl_closed;
-	double		cyl_min;
-	double		cyl_max;
-	size_t		id;
-	bool		skybox;
+	t_tshape		type;
+	t_matrix		local_transformation;
+	t_matrix		final_transformation;
+	t_matrix		final_inverted;
+	t_material		material;
+	t_tuple			tri_p1;
+	t_tuple			tri_p2;
+	t_tuple			tri_p3;
+	t_tuple			tri_e1;
+	t_tuple			tri_e2;
+	t_tuple			tri_normal;
+	t_tuple			tri_n1;
+	t_tuple			tri_n2;
+	t_tuple			tri_n3;
+	t_bounding_box	group_bbox;
+	t_shape			*parent;
+	t_shape			*child;
+	size_t			group_size;
+	size_t			nb_members;
+	int				cyl_closed;
+	double			cyl_min;
+	double			cyl_max;
+	size_t			id;
+	bool			skybox;
 }				t_shape;
 
 t_shape		plane(size_t id);

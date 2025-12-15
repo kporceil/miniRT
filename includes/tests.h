@@ -150,6 +150,8 @@ int		test_group_create(void);
 int		test_group_intersect(void);
 int		test_group_transform(void);
 int		test_group_normal(void);
+int		test_group_delete_index(void);
+
 int		test_uv_checker_pattern(void);
 int		test_mapping(void);
 
@@ -172,8 +174,23 @@ int		test_unique_identifier(void);
 
 int		test_ft_strtod(void);
 
+int	test_bounding_box_create(void);
+int	test_bounding_box_add_point(void);
+int	test_bounding_box_bounds_of(void);
+int	test_bounding_box_add(void);
+int	test_bounding_box_contains_point(void);
+int	test_bounding_box_contains_box(void);
+int	test_bounding_box_transform(void);
+int	test_bounding_box_parent_space_bounds_of(void);
+int	test_bounding_box_group_bounds_of(void);
+int	test_bounding_box_intersect(void);
+int	test_bounding_box_split_bounds(void);
+int	test_bounding_box_partition_children(void);
+int	test_bounding_box_divide(void);
+
 int	test_vector_create(void);
 int	test_vector_add(void);
+int	test_vector_delete_index(void);
 
 int	test_obj_parser_ignoring(void);
 int	test_obj_parser_vertices(void);
