@@ -34,17 +34,17 @@ int	key_hooks(int keycode, t_loop_params *p)
 	if (keycode == XK_Return)
 		toggle_moving_mode(p);
 	else if (p->moving && keycode == XK_w)
-		move_camera_forward(p->camera, vector(0.1, 0.1, 0.1));
+		move_camera_forward(p->camera, 0.2);
 	else if (p->moving && keycode == XK_s)
-		move_camera_forward(p->camera, vector(-0.1, -0.1, -0.1));
+		move_camera_forward(p->camera, -0.2);
 	else if (p->moving && keycode == XK_a)
-		move_camera_sideway(p->camera, vector(0.1, 0.1, 0.1));
+		move_camera_sideway(p->camera, -0.2);
 	else if (p->moving && keycode == XK_d)
-		move_camera_sideway(p->camera, vector(-0.1, -0.1, -0.1));
+		move_camera_sideway(p->camera, 0.2);
 	else if (p->moving && keycode == XK_q)
-		move_camera_upward(p->camera, vector(0.1, 0.1, 0.1));
+		move_camera_upward(p->camera, 0.2);
 	else if (p->moving && keycode == XK_e)
-		move_camera_upward(p->camera, vector(-0.1, -0.1, -0.1));
+		move_camera_upward(p->camera, -0.2);
 	p->should_render = true;
 	return (0);
 }
@@ -58,8 +58,7 @@ int	mouse_movement_hook(int x, int y, t_loop_params *p)
 	}
 	if (p->moving)
 	{
-		p->camera->look_at = rotate_camera(x - p->last_x, y - p->last_y,
-				p->camera);
+		rotate_camera(x - p->last_x, y - p->last_y, p->camera);
 		p->expect_moving_cursor = false;
 		mlx_mouse_move(p->display.mlx_ptr, p->display.window,
 			p->canva.width / 2, p->canva.height / 2);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "camera.h"
+#include "tuples.h"
 #include <math.h>
 
 void	camera_set_transform(t_camera *cam, t_matrix m)
@@ -19,6 +20,14 @@ void	camera_set_transform(t_camera *cam, t_matrix m)
 	cam->inverted_transform = m;
 	if (is_matrix_invertible(m))
 		cam->inverted_transform = matrix_invert(m);
+}
+
+void	camera_init_orientation(t_camera *cam, t_tuple direction)
+{
+	t_tuple const	dir = normalize(direction);
+
+	cam->pitch = asin(-dir.y);
+	cam->yaw = atan2(dir.x, dir.z);
 }
 
 t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos)
@@ -35,6 +44,8 @@ t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos)
 	ret.fov = fov;
 	ret.transform = identity_matrix(4);
 	ret.inverted_transform = identity_matrix(4);
+	ret.yaw = 0.0;
+	ret.pitch = 0.0;
 	half_view = tan(fov / 2);
 	aspect = (double)hsize / vsize;
 	if (aspect >= 1)

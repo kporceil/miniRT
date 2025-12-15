@@ -40,6 +40,7 @@ static int	parse_camera_value(char *file, t_world *world)
 	}
 	world->cam = camera(WIDTH, HEIGHT, fov, pos);
 	world->cam.look_at = tuple_add(forward, pos);
+	camera_init_orientation(&world->cam, forward);
 	camera_set_transform(&world->cam, view_transform_from_to(world->cam.pos,
 			world->cam.look_at, world->cam.up));
 	return (0);
