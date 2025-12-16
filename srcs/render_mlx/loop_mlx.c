@@ -19,12 +19,32 @@
 #include "matrix.h"
 #include "visual_settings.h"
 
+static size_t	calculate_good_ratio(size_t px)
+{
+	size_t	save;
+
+	if (px && px < WIDTH && px < HEIGHT && !(WIDTH % px) && !(HEIGHT % px))
+		return (px);
+	save = px;
+	while (px < WIDTH && px < HEIGHT
+		&& ((WIDTH % px) + (HEIGHT % px) > 0))
+		++px;
+	if (px < WIDTH && px < HEIGHT && !(WIDTH % px) && !(HEIGHT % px))
+		return (px);
+	while (save && ((WIDTH % save) + (HEIGHT % save) > 0))
+		--save;
+	if (save && !(WIDTH % save) && !(HEIGHT % save))
+		return (save);
+	return (1);
+}
+
 static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 								size_t last_pixel_size)
 {
 	size_t const	target_ms = (1.0 / target_fps) * 1000;
 	size_t			new_px_size;
 
+	last_pixel_size = calculate_good_ratio(last_pixel_size);
 	new_px_size = last_pixel_size;
 	if (render_time > target_ms * 2)
 	{
@@ -49,7 +69,7 @@ static size_t	optimal_pixel_size(size_t target_fps, size_t render_time,
 static void	should_render(t_loop_params *p, size_t frame,
 							size_t last_render_time)
 {
-	static size_t	moving_pixel_size = 1;
+	static size_t	moving_pixel_size = 10;
 	size_t			pixel_size;
 
 	if (frame)

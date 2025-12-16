@@ -12,44 +12,63 @@
 
 #include "camera.h"
 #include "tuples.h"
+#include <math.h>
 
-void	move_camera_forward(t_camera *c, t_tuple translation)
+#define MOUSE_SENSITIVITY 0.002
+#define PITCH_LIMIT 1.553343
+
+static double	clamp(double value, double min, double max)
+{
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
+}
+
+void	move_camera_forward(t_camera *c, double distance)
 {
 	t_tuple const	forward = normalize(tuple_substract(c->look_at, c->pos));
+	t_tuple const	translation = tuple_scalar_mult(forward, distance);
 
-	translation = tuple_mult(forward, translation);
 	c->pos = tuple_add(c->pos, translation);
 	c->look_at = tuple_add(c->look_at, translation);
 }
 
-void	move_camera_sideway(t_camera *c, t_tuple translation)
+void	move_camera_sideway(t_camera *c, double distance)
 {
 	t_tuple const	forward = normalize(tuple_substract(c->look_at, c->pos));
-	t_tuple const	right = normalize(cross(forward, c->up));
+	t_tuple const	right = normalize(cross(c->up, forward));
+	t_tuple const	translation = tuple_scalar_mult(right, distance);
 
-	translation = tuple_mult(right, translation);
 	c->pos = tuple_add(c->pos, translation);
 	c->look_at = tuple_add(c->look_at, translation);
 }
 
-void	move_camera_upward(t_camera *c, t_tuple translation)
+void	move_camera_upward(t_camera *c, double distance)
 {
-	translation = tuple_mult(normalize(c->up), translation);
+	t_tuple const	translation = tuple_scalar_mult(normalize(c->up), distance);
+
 	c->pos = tuple_add(c->pos, translation);
 	c->look_at = tuple_add(c->look_at, translation);
 }
 
-t_tuple	rotate_camera(int dx, int dy, t_camera *c)
+void	rotate_camera(int dx, int dy, t_camera *c)
 {
-	t_tuple			ret;
-	t_tuple const	forward = normalize(tuple_substract(c->look_at, c->pos));
+	t_tuple	direction;
+	t_tuple	right;
 
-	ret = tuple_substract(c->look_at, c->pos);
-	ret.w = 1;
-	ret = matrix_tuple_mult(matrix_z_rotation(0.001 * dy), ret);
-	ret = matrix_tuple_mult(matrix_y_rotation(0.001 * dx), ret);
-	c->up = normalize(cross(normalize(cross(forward, vector(0, 1, 0))),
-				forward));
-	ret = tuple_add(ret, c->pos);
-	return (ret);
+	c->yaw += dx * MOUSE_SENSITIVITY;
+	c->pitch -= dy * MOUSE_SENSITIVITY;
+	c->pitch = clamp(c->pitch, -PITCH_LIMIT, PITCH_LIMIT);
+	direction.x = cos(c->pitch) * sin(c->yaw);
+	direction.y = -sin(c->pitch);
+	direction.z = cos(c->pitch) * cos(c->yaw);
+	direction.w = 0;
+	right.x = cos(c->yaw);
+	right.y = 0;
+	right.z = -sin(c->yaw);
+	right.w = 0;
+	c->up = normalize(cross(direction, right));
+	c->look_at = tuple_add(c->pos, direction);
 }
