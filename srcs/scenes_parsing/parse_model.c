@@ -55,6 +55,18 @@ static int	parse_bonus_value(char *file, char **endptr, t_shape *ob)
 	return (0);
 }
 
+static int	parse_obj_file(char *file, t_obj_parsing *p, t_shape *model)
+{
+	*p = obj_parser(file);
+	if (p->status != NO_ERROR)
+		return (-1);
+	*model = parsed_to_group(p);
+	free_obj_parsing(p);
+	if (model->child == NULL)
+		return (-1);
+	return (0);
+}
+
 static int	parse_model_value(char *file, t_world *world)
 {
 	t_shape			model;
@@ -68,9 +80,8 @@ static int	parse_model_value(char *file, t_world *world)
 		++i;
 	backup = file[i];
 	file[i] = '\0';
-	p = obj_parser(file);
-	model = parsed_to_group(&p);
-	free_obj_parsing(&p);
+	if (parse_obj_file(file, &p, &model) == -1)
+		return (-1);
 	file[i] = backup;
 	file += i;
 	if (parse_mandatory_value(file, &endptr, &model) == -1)

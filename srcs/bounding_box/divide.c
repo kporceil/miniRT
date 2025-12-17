@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "groups.h"
 #include "bounding_box.h"
 
 int	divide(t_shape *g, size_t threshold)
