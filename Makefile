@@ -45,7 +45,7 @@ TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests
 					$(addprefix smooth_triangles/, create_tests uv_tests normal_tests precomp_tests))
 endif
 ifeq (no, $(TEST))
-MAIN := tmp_main
+MAIN := main
 TEST_BASENAME :=
 endif
 

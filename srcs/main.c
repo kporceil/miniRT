@@ -35,10 +35,10 @@ void	write_file(char	*name, char	*ppm)
 
 int	main(int argc, char **argv)
 {
-	t_world	world;
-	t_canva	image;
-	struct timeval	tv_a = (struct timeval){0};
-	struct timeval	tv_b = (struct timeval){0};
+	t_world			world;
+	t_canva			image;
+	struct timeval	tv_a;
+	struct timeval	tv_b;
 
 	if (argc != 2)
 		return (1);
@@ -48,11 +48,11 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Invalid Map", 2);
 		return (-1);
 	}
-	image = render(world.cam, world, 1);
 	gettimeofday(&tv_b, NULL);
-	display_mlx(image, &world.cam, world, 1000 * (tv_a.tv_sec - tv_b.tv_sec)
-			+ (tv_a.tv_usec - tv_b.tv_usec) / 1000);
+	image = render(world.cam, world, 1);
 	gettimeofday(&tv_a, NULL);
+	display_mlx(image, &world.cam, world, 1000 * (tv_a.tv_sec - tv_b.tv_sec)
+		+ (tv_a.tv_usec - tv_b.tv_usec) / 1000);
 	free(image.canva);
 	free_world(&world);
 }
