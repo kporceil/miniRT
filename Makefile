@@ -1,15 +1,8 @@
 NAME := miniRT
 
-TEST := no
-
 override SRCDIR := srcs/
 
-ifeq ($(TEST), yes)
-override BUILDDIR := .build/test/$(MODE)/
-endif
-ifeq ($(TEST), no)
 override BUILDDIR := .build/$(MODE)/
-endif
 
 override FLAGFILE := .build/.compile_flags
 
@@ -17,42 +10,12 @@ override OBJDIR := $(addprefix $(BUILDDIR), objs/)
 
 override DEPDIR := $(addprefix $(BUILDDIR), deps/)
 
-ifeq (yes, $(TEST))
-MAIN := test_main
-TEST_BASENAME :=  $(addprefix test/, $(addprefix tuples/, create_tests add_tests substract_tests negate_tests scalar_tests magnitude_tests normalizing_tests dot_product_tests cross_product_tests) \
-					$(addprefix color/, create_tests add_tests substract_tests scalar_tests mult_tests) \
-					$(addprefix canvas/, create_tests write_pixel_tests ppm_tests ppm_parsing_tests) \
-					$(addprefix matrix/, create_tests comparison_tests mult_tests transposing_tests determinant_tests submatrix_tests minors_tests cofactor_tests larger_determinant_tests inverting_tests translation_tests scaling_tests rotation_tests shearing_tests chaining_tests view_transformation_tests) \
-					$(addprefix ray/, create_tests position_tests sphere_intersect_tests hit_tests transform_tests) \
-					$(addprefix light/, normal_tests reflection_tests point_light_tests material_tests phong_tests) \
-					$(addprefix world/, create_tests intersect_tests precomps_tests shading_tests) \
-					$(addprefix camera/, create_tests ray_tests render_tests) \
-					$(addprefix plane/, intersect_tests) \
-					$(addprefix shadow/, in_shadow_tests is_shadowed_tests render_shadow_tests) \
-					$(addprefix cylinders/, intersect_tests normal_tests create_tests truncated_tests end_cap_intersect_tests end_cap_normal_tests) \
-					$(addprefix cones/, intersect_tests end_cap_cone_intersect_tests normal_tests) \
-					$(addprefix patterns/, striped_pattern_tests transform_pattern_tests ring_pattern_tests gradient_pattern_tests checker_pattern_tests) \
-					$(addprefix reflect/, precompute_reflect_tests reflection_tests) \
-					$(addprefix refraction/, determine_indices_tests compute_under_point_tests find_refractive_color_tests schlick_tests) \
-					$(addprefix cubes/, cube_intersect_tests normal_tests) \
-					$(addprefix groups/, create_tests intersect_tests transformation_tests delete_index_tests) \
-					$(addprefix mapping/, uv_checkers_tests mapping_tests uv_file_tests) \
-					$(addprefix triangles/, create_tests normal_tests intersect_tests) \
-					$(addprefix bounding_box/, create_tests add_point_tests bounds_of_tests add_tests contains_point_tests contains_box_tests transform_tests parent_space_bounds_of_tests group_bounds_of_tests intersect_tests split_bounds_tests partition_children_tests divide_tests) \
-					$(addprefix vectors/, create_tests add_tests delete_index_tests) \
-					$(addprefix scenes_parsing/, unique_identifier_tests objs_count_tests lights_count_tests ft_strtod_tests) \
-					$(addprefix obj_parser/, ignoring_tests vertices_tests triangle_tests group_tests parsed_to_group_tests smooth_triangle_tests faces_normal_tests) \
-					$(addprefix smooth_triangles/, create_tests uv_tests normal_tests precomp_tests))
-endif
-ifeq (no, $(TEST))
 MAIN := main
-TEST_BASENAME :=
-endif
 
 BASENAME := $(MAIN) \
 			$(addprefix tuples/, point vector add substract negate scalar magnitude normalize dot_product cross_product mult) \
 			$(addprefix color/, color add substract scalar mult) \
-			$(addprefix canvas/, canva write_pixel tmp_canva_to_ppm ppm_to_canva ppm_header ppm_io) \
+			$(addprefix canvas/, canva write_pixel ppm_to_canva ppm_header ppm_io) \
 			$(addprefix gnl/, get_next_line get_next_line_utils) \
 			$(addprefix matrix/, create compare mult identity transposing determinant submatrix minors cofactor is_invertible invert translation scaling rotation shearing view_transformation shape_set_matrix orientation) \
 			$(addprefix ray/, create position intersect hit transform precompute) \
@@ -78,7 +41,6 @@ BASENAME := $(MAIN) \
 			$(addprefix uid/, generate_uid) \
 			$(addprefix obj_parser/, obj_parser parse_obj_line free add_vertice add_face change_group parsed_to_group add_vertice_normal add_smooth_polygon add_polygon) \
 			$(addprefix smooth_triangles/, create) \
-			$(TEST_BASENAME)
 
 DIR := $(addprefix $(DEPDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))    \
        $(addprefix $(OBJDIR), $(sort $(filter-out ./, $(dir $(BASENAME)))))
@@ -120,12 +82,12 @@ CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=address -g3 -O1
 endif
 
 ifeq (msan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=memory
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=memory -g3 -O1
 #-Wstrict-prototypes
 endif
 
 ifeq (lsan, $(MODE))
-CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=leak
+CFLAGS := -Wall -Wextra -Werror -Wunreachable-code -fsanitize=leak -g3 -O1
 endif
 
 CPPFLAGS := -Iincludes -Ilibft/includes -Iminilibx-linux/
@@ -177,10 +139,6 @@ gprof:
 .PHONY: opti
 opti:
 	@$(MAKE) -j$(nproc) MODE="opti" TEST="$(TEST)" $(NAME)
-
-.PHONY: test
-test:
-	@$(MAKE) -j$(nproc) MODE="default" TEST="yes" $(NAME) && ./miniRT
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX) $(FLAGFILE)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME)
