@@ -40,8 +40,7 @@ static void	init_base_camera_values(t_camera *c, size_t hsize, size_t vsize,
 	c->vsize = vsize;
 	c->transform = identity_matrix(4);
 	c->inverted_transform = identity_matrix(4);
-	c->yaw = 0.0;
-	c->pitch = 0.0;
+	camera_init_orientation(c, tuple_substract(c->look_at, c->pos));
 }
 
 t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos)

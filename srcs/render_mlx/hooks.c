@@ -22,7 +22,13 @@ static void	toggle_moving_mode(t_loop_params *p)
 	p->last_x = p->canva.width / 2;
 	p->last_y = p->canva.height / 2;
 	if (p->moving)
+	{
+		p->expect_moving_cursor = false;
+		mlx_mouse_move(p->display.mlx_ptr, p->display.window,
+			p->last_x, p->last_y);
+		XFlush(((t_xvar *)p->display.mlx_ptr)->display);
 		mlx_mouse_hide(p->display.mlx_ptr, p->display.window);
+	}
 	else
 		mlx_mouse_show(p->display.mlx_ptr, p->display.window);
 }

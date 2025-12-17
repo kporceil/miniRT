@@ -12,10 +12,8 @@
 
 #include "camera.h"
 #include "tuples.h"
+#include "visual_settings.h"
 #include <math.h>
-
-#define MOUSE_SENSITIVITY 0.002
-#define PITCH_LIMIT 1.553343
 
 static double	clamp(double value, double min, double max)
 {
@@ -59,7 +57,7 @@ void	rotate_camera(int dx, int dy, t_camera *c)
 	t_tuple	right;
 
 	c->yaw += dx * MOUSE_SENSITIVITY;
-	c->pitch -= dy * MOUSE_SENSITIVITY;
+	c->pitch += dy * MOUSE_SENSITIVITY;
 	c->pitch = clamp(c->pitch, -PITCH_LIMIT, PITCH_LIMIT);
 	direction.x = cos(c->pitch) * sin(c->yaw);
 	direction.y = -sin(c->pitch);

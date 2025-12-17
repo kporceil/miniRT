@@ -58,7 +58,7 @@ int	main(void)
 	world.lights = malloc(sizeof(t_plight) * world.lights_count);
 	world.lights[0] = point_light(point(50, 0, 0), color(1, 1, 1));
 	world.ambient = color(0.3, 0.3, 0.3);
-	p = obj_parser("assets/Satellite.obj");
+	p = obj_parser("assets/teapot.obj");
 	g = parsed_to_group(&p);
 	shape_set_matrix(&g, matrix_y_rotation(M_PI_2));
 	divide(&g, 10);
