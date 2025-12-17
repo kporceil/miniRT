@@ -34,17 +34,20 @@ typedef struct s_camera
 	double		pixel_size;
 	double		half_width;
 	double		half_height;
+	double		yaw;
+	double		pitch;
 }				t_camera;
 
 t_camera	camera(size_t hsize, size_t vsize, double fov, t_tuple pos);
 void		camera_set_transform(t_camera *cam, t_matrix m);
+void		camera_init_orientation(t_camera *cam, t_tuple direction);
 t_ray		ray_for_pixel(t_camera cam, size_t px, size_t py);
 t_canva		render(t_camera cam, t_world w, size_t pixel_size);
 void		render_on_canva(t_canva *canva, t_camera cam, t_world w,
 				size_t pixel_size);
-void		move_camera_forward(t_camera *c, t_tuple translation);
-void		move_camera_sideway(t_camera *c, t_tuple translation);
-void		move_camera_upward(t_camera *c, t_tuple translation);
-t_tuple		rotate_camera(int dx, int dy, t_camera *c);
+void		move_camera_forward(t_camera *c, double distance);
+void		move_camera_sideway(t_camera *c, double distance);
+void		move_camera_upward(t_camera *c, double distance);
+void		rotate_camera(int dx, int dy, t_camera *c);
 
 #endif

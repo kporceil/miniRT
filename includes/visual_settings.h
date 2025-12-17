@@ -13,9 +13,20 @@
 #ifndef VISUAL_SETTINGS_H
 # define VISUAL_SETTINGS_H
 
-# define HEIGHT 1080
-# define WIDTH 1920
-# define TARGET_FPS 60
-# define SENSITIVITY 0.001
+# ifndef HEIGHT
+#  define HEIGHT 1080
+# endif
+# ifndef WIDTH
+#  define WIDTH 1920
+# endif
+# ifndef TARGET_FPS
+#  define TARGET_FPS 60
+# endif
+# ifndef MOUSE_SENSITIVITY
+#  define MOUSE_SENSITIVITY 0.002
+# endif
+# ifndef PITCH_LIMIT
+#  define PITCH_LIMIT 1.553343
+# endif
 
 #endif
