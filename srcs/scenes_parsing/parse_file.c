@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:48:17 by kporceil          #+#    #+#             */
-/*   Updated: 2025/12/05 17:51:52 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 15:04:34 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-static bool	check_world_health(t_world *world)
-{
-	if (world->had_ambient == false || world->had_cam == false)
-	{
-		free_world(world);
-		return (false);
-	}
-	return (true);
-}
-
 static void	error_clear(int fd, char *to_free, t_world *world)
 {
 	(void)get_next_line(fd, DELETE);
@@ -38,6 +28,20 @@ static void	error_clear(int fd, char *to_free, t_world *world)
 	free(to_free);
 	free_light_list(world);
 	free_shape_list(world);
+}
+
+static int	is_bvh_needed(t_world *world)
+{
+	t_shapelist	*shape;
+
+	shape = world->tmp_obj;
+	while (shape)
+	{
+		if (shape->shape.type != PLANE)
+			return (1);
+		shape = shape->next;
+	}
+	return (0);
 }
 
 static void	copy_list_in_array(t_world *world)
@@ -48,8 +52,9 @@ static void	copy_list_in_array(t_world *world)
 
 	shape = world->tmp_obj;
 	light = world->tmp_light;
-	world->objs_count = 1;
-	world->objs[0] = group(generate_uid(), world->objs_count);
+	world->objs_count = 0;
+	if (is_bvh_needed(world) == 1)
+		world->objs[0] = group(generate_uid(), world->objs_count++);
 	while (shape)
 	{
 		if (shape->shape.type == PLANE)

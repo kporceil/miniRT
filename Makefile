@@ -33,7 +33,7 @@ BASENAME := $(MAIN) \
 			$(addprefix refraction/, find_nx init_list add_or_delete_list refractive_color schlick) \
 			$(addprefix cube/, cube intersect) \
 			$(addprefix groups/, create intersect add_shape group_set_matrix group_set_material free copy delete_index) \
-			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cube_texture parse_cylinder parse_cone parse_point parse_vector parse_color new_light_node free_light_list new_shape_node free_shape_list get_shape_id parse_normalized_vector count_possible_intersections parse_model parse_texture) \
+			$(addprefix scenes_parsing/, parse_line parse_file parse_light parse_ambient parse_camera parse_sphere parse_plane parse_cube parse_cube_texture parse_cylinder parse_cone parse_point parse_vector parse_color new_light_node free_light_list new_shape_node free_shape_list get_shape_id parse_normalized_vector count_possible_intersections parse_model parse_texture check_world_health) \
 			$(addprefix mapping/, uv_pattern_at spherical_map planar_map cylindrical_map cubic_map_front cubic_map_back cubic_map_left cubic_map_right cubic_map_up cubic_map_down face_from_point uv_image uv_checker texture_map uv_align_check cube_pattern conical_map) \
 			$(addprefix triangles/, create intersect) \
 			$(addprefix bounding_box/, create add_point bounds_of add contains_point contains_box transform parent_space_bounds_of intersect split_bounds partition_children divide) \
