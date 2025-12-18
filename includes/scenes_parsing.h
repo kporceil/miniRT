@@ -6,7 +6,7 @@
 /*   By: kporceil <kporceil@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:55:38 by kporceil          #+#    #+#             */
-/*   Updated: 2025/12/09 15:15:27 by kporceil         ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 15:04:41 by kporceil         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ size_t	count_possible_intersections(t_world *world);
 int		parse_model(char *file, t_world *world);
 int		parse_texture(char *file, char **endptr, t_shape *sh,
 			void (*uvmapper)(t_tuple, double *, double *));
+bool	check_world_health(t_world *world);
 
 static inline char	*skip_space(char *str)
 {

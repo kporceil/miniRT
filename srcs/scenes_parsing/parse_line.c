@@ -18,7 +18,7 @@
 int	parse_line(char *file, t_world *world)
 {
 	file = skip_space(file);
-	if (*file == '\0')
+	if (*file == '\0' || *file == '#')
 		return (0);
 	if (*file == 'A')
 		return (parse_ambient(file + 1, world));

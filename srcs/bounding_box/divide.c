@@ -16,6 +16,8 @@ int	divide(t_shape *g, size_t threshold)
 {
 	size_t	i;
 
+	if (g == NULL)
+		return (0);
 	if (g->type == GROUP)
 	{
 		if (g->nb_members >= threshold)
