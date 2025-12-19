@@ -54,7 +54,7 @@ static void	copy_list_in_array(t_world *world)
 	light = world->tmp_light;
 	world->objs_count = 0;
 	if (is_bvh_needed(world) == 1)
-		world->objs[0] = group(generate_uid(), world->objs_count++);
+		world->objs[0] = group(generate_uid(), ++world->objs_count);
 	while (shape)
 	{
 		if (shape->shape.type == PLANE)
@@ -83,12 +83,12 @@ static int	convert_world_list(t_world *world)
 	}
 	if (world->objs_count != 0)
 	{
-		world->objs = malloc(sizeof(t_shape) * world->objs_count);
-		if (!world->objs)
-		{
-			free_world(world);
-			return (-1);
-		}
+	world->objs = malloc(sizeof(t_shape) * world->objs_count);
+	if (!world->objs)
+	{
+		free_world(world);
+		return (-1);
+	}
 	}
 	copy_list_in_array(world);
 	world->buf_inter = malloc(sizeof(t_inter)
