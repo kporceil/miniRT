@@ -54,7 +54,7 @@ static void	copy_list_in_array(t_world *world)
 	light = world->tmp_light;
 	world->objs_count = 0;
 	if (is_bvh_needed(world) == 1)
-		world->objs[0] = group(generate_uid(), world->objs_count++);
+		world->objs[0] = group(generate_uid(), ++world->objs_count);
 	while (shape)
 	{
 		if (shape->shape.type == PLANE)
