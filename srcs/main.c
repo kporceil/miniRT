@@ -40,8 +40,11 @@ int	main(int argc, char **argv)
 	struct timeval	tv_a;
 	struct timeval	tv_b;
 
-	if (argc != 2)
+	if (argc != 2 || ft_strncmp((argv[1] + ft_strlen(argv[1])) - 3, ".rt", 4))
+	{
+		ft_putendl_fd("Usage: ./miniRT [example].rt", 2);
 		return (1);
+	}
 	world = world_create();
 	if (parse_file(argv[1], &world) == -1)
 	{
