@@ -43,6 +43,7 @@ int		parse_model(char *file, t_world *world);
 int		parse_texture(char *file, char **endptr, t_shape *sh,
 			void (*uvmapper)(t_tuple, double *, double *));
 bool	check_world_health(t_world *world);
+int		convert_world_list(t_world *world);
 
 static inline char	*skip_space(char *str)
 {
