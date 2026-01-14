@@ -38,6 +38,8 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *sp)
 	return (0);
 }
 
+#ifdef BONUS
+
 static int	parse_bonus_value(char *file, char **endptr, t_shape *sp)
 {
 	if (*file == '\0')
@@ -59,6 +61,21 @@ static int	parse_bonus_value(char *file, char **endptr, t_shape *sp)
 	}
 	return (0);
 }
+
+#endif
+
+#ifdef MANDATORY
+
+static int	parse_bonus_value(char *file, char **endptr, t_shape *sp)
+{
+	(void)endptr;
+	(void)sp;
+	if (*skip_space(file) != '\0')
+		return (-1);
+	return (0);
+}
+
+#endif
 
 static int	parse_sphere_value(char *file, t_world *world)
 {

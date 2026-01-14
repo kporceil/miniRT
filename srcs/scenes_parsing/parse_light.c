@@ -40,6 +40,22 @@ static int	parse_light_value(char *file, t_world *world)
 	return (0);
 }
 
+#ifdef MANDATORY 
+
+int	parse_light(char *file, t_world *world)
+{
+	if (world->lights_count == 1)
+		return (-1);
+	if (parse_light_value(file, world) == -1)
+		return (-1);
+	++world->lights_count;
+	return (0);
+}
+
+#endif
+
+#ifdef BONUS
+
 int	parse_light(char *file, t_world *world)
 {
 	if (parse_light_value(file, world) == -1)
@@ -47,3 +63,5 @@ int	parse_light(char *file, t_world *world)
 	++world->lights_count;
 	return (0);
 }
+
+#endif
