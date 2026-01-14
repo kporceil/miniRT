@@ -14,7 +14,8 @@
 
 bool	check_world_health(t_world *world)
 {
-	if (world->had_ambient == false || world->had_cam == false)
+	if (world->had_ambient == false || world->had_cam == false
+		|| world->lights_count == 0 || world->objs_count)
 	{
 		free_world(world);
 		return (false);
