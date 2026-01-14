@@ -50,7 +50,7 @@ int	parse_file(char *file, t_world *world)
 	}
 	(void)get_next_line(fd, DELETE);
 	close(fd);
-	if (check_world_health(world) == false || convert_world_list(world) == -1)
+	if (convert_world_list(world) == -1 || check_world_health(world) == false)
 		return (-1);
 	return (0);
 }
