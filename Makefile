@@ -2,7 +2,7 @@ NAME := miniRT
 
 override SRCDIR := srcs/
 
-override BUILDDIR := .build/$(MODE)/
+override BUILDDIR := .build/$(MODE)/$(DEFINE)/
 
 override FLAGFILE := .build/.compile_flags
 
@@ -114,7 +114,12 @@ json:
 
 .PHONY: all
 all:
-	@$(MAKE) MODE="default" TEST="$(TEST)" $(NAME)
+	@$(MAKE) MODE="default" TEST="$(TEST)" $(NAME) DEFINE="MANDATORY"
+
+.PHONY: bonus
+bonus:
+	@$(MAKE) MODE="bonus" TEST="$(TEST")" $(NAME) DEFINE="BONUS"
+
 #-j$(nproc) 
 .PHONY: debug
 debug:
@@ -141,10 +146,10 @@ opti:
 	@$(MAKE) -j$(nproc) MODE="opti" TEST="$(TEST)" $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX) $(FLAGFILE)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -D$(DEFINE) -o $(NAME)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c | $(DIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(DEPDIR)$*.d -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPSFLAGS) $(DEPDIR)$*.d -D$(DEFINE) -c $< -o $@
 
 $(LIBFT): force
 	@$(MAKE) -j$(nproc) MODE="$(MODE)" -C libft/

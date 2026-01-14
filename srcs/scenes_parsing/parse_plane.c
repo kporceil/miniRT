@@ -37,6 +37,21 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *pl)
 	return (0);
 }
 
+#ifdef MANDATORY
+
+static int	parse_bonus_value(char *file, char **endptr, t_shape *pl)
+{
+	(void)endptr;
+	(void)pl;
+	if (*skip_space(file) != '\0')
+		return (-1);
+	return (0);
+}
+
+#endif
+
+#ifdef BONUS
+
 static int	parse_bonus_value(char *file, char **endptr, t_shape *pl)
 {
 	if (*file == '\0')
@@ -58,6 +73,8 @@ static int	parse_bonus_value(char *file, char **endptr, t_shape *pl)
 	}
 	return (0);
 }
+
+#endif
 
 static int	parse_plane_value(char *file, t_world *world)
 {

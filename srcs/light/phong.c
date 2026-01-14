@@ -24,6 +24,30 @@ static inline t_color	set_color(t_lighting l)
 	return (l.m.color);
 }
 
+#ifdef MANDATORY
+
+t_color	lighting(t_lighting l)
+{
+	t_color			ambient;
+	t_color			diffuse;
+	const t_color	obj_color = set_color(l);
+
+	l.eff_color = color_mult(obj_color, l.light.intensity);
+	ambient = color_mult(l.eff_color, l.ambient);
+	if (l.in_shadow)
+		return (ambient);
+	l.lightv = normalize(tuple_substract(l.light.pos, l.p));
+	l.light_dot_norm = dot(l.lightv, l.normalv);
+	l.ref_dot_eye = dot(reflect(tuple_negate(l.lightv), l.normalv), l.eyev);
+	diffuse = color_scalar_mult(color_scalar_mult(l.eff_color, l.m.diffuse),
+			l.light_dot_norm);
+	return (color_add(ambient, diffuse));
+}
+
+#endif
+
+#ifdef BONUS
+
 t_color	lighting(t_lighting l)
 {
 	t_color			ambient;
@@ -52,3 +76,5 @@ t_color	lighting(t_lighting l)
 	}
 	return (color_add(color_add(ambient, diffuse), specular));
 }
+
+#endif

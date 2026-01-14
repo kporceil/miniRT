@@ -44,6 +44,21 @@ static int	parse_mandatory_value(char *file, char **endptr, t_shape *cy)
 	return (0);
 }
 
+#ifdef MANDATORY
+
+static int	parse_bonus_value(char *file, char **endptr, t_shape *cy)
+{
+	(void)endptr;
+	(void)cy;
+	if (*skip_space(file) != '\0')
+		return (-1);
+	return (0);
+}
+
+#endif
+
+#ifdef BONUS
+
 static int	parse_bonus_value(char *file, char **endptr, t_shape *cy)
 {
 	if (*file == '\0')
@@ -65,6 +80,8 @@ static int	parse_bonus_value(char *file, char **endptr, t_shape *cy)
 	}
 	return (0);
 }
+
+#endif
 
 static int	parse_cylinder_value(char *file, t_world *world)
 {
