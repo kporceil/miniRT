@@ -24,5 +24,6 @@ void	free_group(t_shape *g)
 			free_group(g->child + i);
 		++i;
 	}
-	vec_free(g->child);
+	if (g->child)
+		vec_free(g->child);
 }
