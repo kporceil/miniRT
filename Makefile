@@ -1,5 +1,7 @@
 NAME := miniRT
 
+DEFINE ?= MANDATORY
+
 override SRCDIR := srcs/
 
 override BUILDDIR := .build/$(MODE)/$(DEFINE)/
@@ -100,7 +102,7 @@ MAKEFLAGS += --no-print-directory
 
 -include $(DEPS)
 
-CURRENT_FLAGS := $(MODE)$(CC)$(CFLAGS)$(CPPFLAGS)$(LDFLAGS)$(LDLIBS)$(TEST)
+CURRENT_FLAGS := $(MODE)$(DEFINE)$(CC)$(CFLAGS)$(CPPFLAGS)$(LDFLAGS)$(LDLIBS)$(TEST)
 
 ifneq ($(MODE),)
 ifneq ($(shell cat $(FLAGFILE) 2>/dev/null), $(CURRENT_FLAGS))
