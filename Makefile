@@ -57,7 +57,7 @@ override LIBFT := libft/libft.a
 
 override MLX := minilibx-linux/libmlx.a
 
-override LDFLAGS := -lmlx -lXext -lX11 -lft -lcmocka -lm
+override LDFLAGS := -lmlx -lXext -lX11 -lft -lm
 
 override LDLIBS := -L libft/ -L minilibx-linux/
 
@@ -120,7 +120,7 @@ all:
 
 .PHONY: bonus
 bonus:
-	@$(MAKE) MODE="bonus" TEST="$(TEST")" $(NAME) DEFINE="BONUS"
+	@$(MAKE) MODE="opti" TEST="$(TEST")" $(NAME) DEFINE="BONUS"
 
 #-j$(nproc) 
 .PHONY: debug
